@@ -1,0 +1,35 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- if $.Values.global.n6network.enabled}}
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+# [CNAD MOD]
+# Updated value for NAD name ({{ .Values.global.n6network.name }}-{{ include "free5gc-upf.fullname" $ }} > {{ .Values.global.n6network.name }})
+  name: {{ .Values.global.n6network.name }}
+spec:
+# [CNAD MOD]
+# host-device config added + macvlan/ipvlan config removed.
+# whereabouts config added.
+  config: '{
+        "cniVersion": "0.3.1",
+        "type": "{{ .Values.global.n6network.type }}",
+        "device": "{{ $.Values.global.n6network.masterIf }}",
+        "ipam": {
+          "type": "whereabouts",
+          "range": "{{ $.Values.global.n6network.subnetIP }}/{{ $.Values.global.n6network.cidr }}",
+          "range_start": "{{ $.Values.global.n6network.n6if.ipAddress }}",
+          "range_end": "{{ $.Values.global.n6network.n6if.ipAddress }}"
+      }
+    }'
+{{- end }}
