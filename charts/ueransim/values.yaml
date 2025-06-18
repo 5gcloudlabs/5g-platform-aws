@@ -1,0 +1,222 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for ueransim-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  # [MODIFIED by 5g-cloud-labs]
+  # Add hooks to delay application startup until the pod proxy is ready to accept traffic
+  # https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
+  proxy:
+    holdApplicationUntilProxyStarts: true
+  #Global network parametes
+  # [MODIFIED by 5g-cloud-labs]
+  # Renamed nested parameter group: 'n2network' > 'n2networkgNB'
+  # Updated 'n2networkgNB' configuration parameters.  
+  n2networkgNB:
+    enabled: true
+    name: n2networkgnb
+    type: ipvlan
+    masterIf: ens4 #ec2 network interface designated for gNB n2 interface 'ngap'
+    subnetIP: 100.64.0.0
+    cidr: 28
+    gatewayIP: 100.64.0.1
+    n2if:  # NGAP
+      ipAddress: 100.64.0.10
+    routeDST: 100.64.1.0/28 # route destination to AMF n2 subnet
+  # [MODIFIED by 5g-cloud-labs]
+  # Renamed nested parameter group: 'n3network' > 'n3networkgNB'
+  # Updated 'n3networkgNB' configuration parameters.
+  n3networkgNB:
+    enabled: true
+    name: n3networkgnb
+    type: host-device
+    masterIf: ens5 #ec2 network interface designated for gNB n3 interface 'gtp-u'
+    subnetIP: 100.64.2.0
+    cidr: 28
+    gatewayIP: 100.64.2.1
+    n3if:  # GTP-U
+      ipAddress: 100.64.2.10
+    routeDST: 100.64.3.0/28 # route destination to UPF n3 subnet
+
+
+projectName: ueransim
+
+initcontainers:
+  sctp_test:
+    image: towards5gs/sctp_test
+    tag: latest
+# [MODIFIED by 5g-cloud-labs]
+# Custom-built AWS IP Manager image published by 5g-cloud-labs to public ECR.
+# Source reference: https://github.com/aws-samples/eks-automated-ipmgmt-multus-pods
+  awsipmgmt:
+    registry: public.ecr.aws/g8c8r6q0
+    image: aws-ip-manager
+    tag: "0.1"    
+
+gnb:
+  enabled: true
+  name: gnb
+  replicaCount: 1
+  image:
+    name: towards5gs/ueransim-gnb
+    pullPolicy: IfNotPresent
+  configmap:
+    name: gnb-configmap
+  volume:
+    name: gnb-volume
+    mount: /ueransim/config
+  service:
+    name: gnb-service
+    type: ClusterIP
+    port: 4997
+    protocol: UDP
+
+
+  amf:
+    n2if:  # NGAP
+      ipAddress: 100.64.1.10 #  [MODIFIED by 5g-cloud-labs] Set N2 interface IP address for AMF.
+      port: 38412
+    service:
+      ngap:
+        enabled: false
+
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+# [MODIFIED by 5g-cloud-labs]
+# Updated nodeSelector to schedule gNB on 5guserplane node
+  nodeSelector:
+    userplane: "true"
+  tolerations: []
+  affinity: {}
+# [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+# 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings
+  configuration1: |-
+    mcc: '208' # Mobile Country Code value
+    mnc: '93'  # Mobile Network Code value (2 or 3 digits)
+  configuration2: |-
+    nci: '0x000000010'  # NR Cell Identity (36-bit)
+    idLength: 32        # NR gNB ID length in bits [22...32]
+    tac: 1     # Tracking Area Code
+    # List of supported S-NSSAIs by this gNB
+    slices:
+      - sst: 0x1
+        sd: 0x010203
+    # Indicates whether or not SCTP stream number errors should be ignored.
+    ignoreStreamIds: true
+ue:
+  enabled: true
+  name: ue
+  replicaCount: 1
+  image:
+    name: towards5gs/ueransim-ue
+    pullPolicy: IfNotPresent
+  configmap:
+    name: ue-configmap
+  volume:
+    name: ue-volume
+    mount: /ueransim/config
+  command: "./nr-ue -c ../config/ue-config.yaml"  # This is the command that will be launched in the UE container
+  # A script that will be run after the UE creation. It may be used to periodically generate traffic
+  script: ""
+  # script: |-
+  #   ping .....
+
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext:
+    capabilities:
+            add: ["NET_ADMIN"]
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+# [MODIFIED by 5g-cloud-labs]
+# Updated nodeSelector to schedule UE on 5guserplane node
+  nodeSelector:
+    userplane: "true"
+  tolerations: []
+  affinity: {}
+
+# [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+# 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings
+  configuration1: |-
+    supi: "imsi-208930000000003"  # IMSI number
+    mcc: '208' # Mobile Country Code value
+    mnc: '93' # Mobile Network Code value (2 or 3 digits)
+  configuration2: |-    
+    key: "8baf473f2f8fd09487cccbd7097c6862" # Operator code (OP or OPC) of the UE
+    op: "8e27b6af0e692e750f32667a3b14605d" # This value specifies the OP type and it can be either 'OP' or 'OPC'
+    opType: "OPC" # This value specifies the OP type and it can be either 'OP' or 'OPC'
+    amf: '8000' # Authentication Management Field (AMF) value
+    imei: '356938035643803' # IMEI number of the device
+    imeiSv: '4370816125816151'
+    # UAC Access Identities Configuration
+    uacAic:
+      mps: false
+      mcs: false
+    # UAC Access Control Class
+    uacAcc:
+      normalClass: 0
+      class11: false
+      class12: false
+      class13: false
+      class14: false
+      class15: false
+    sessions:
+      - type: "IPv4"
+        apn: "internet"
+        slice:
+          sst: 0x01
+          sd: 0x010203
+    # Configured NSSAI for this UE by HPLMN
+    configured-nssai:
+      - sst: 0x01
+        sd: 0x010203
+    # Default Configured NSSAI for this UE
+    default-nssai:
+      - sst: 1
+        sd: 1
+    # Supported encryption and integrity algorithms by this UE
+    integrity:
+      IA1: true
+      IA2: true
+      IA3: true
+    ciphering:
+      EA1: true
+      EA2: true
+      EA3: true
+    # Integrity protection maximum data rate for user plane
+    integrityMaxRate:
+      uplink: 'full'
+      downlink: 'full'
+
+  test:
+    connectivity:
+      name: ue-connectivity-test
+      image: bitnami/kubectl:1.22.0
+      configmap:
+        name: connectivity-test-configmap
+      volume:
+        name: connectivity-test-volume
+        mount: /scripts
+      ttlseconds: 50

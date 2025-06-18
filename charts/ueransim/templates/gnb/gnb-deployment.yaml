@@ -1,0 +1,106 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.gnb }}
+{{- if and .enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ueransim.fullname" $ }}-{{ .name }}
+  labels:
+    {{- include "ueransim.labels" $ | nindent 4 }}
+    app: {{ $.Values.projectName }}
+    component: {{ .name }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "ueransim.selectorLabels" $ | nindent 6 }}
+      app: {{ $.Values.projectName }}
+      component: {{ .name }}
+  replicas: {{ .replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "ueransim.selectorLabels" $ | nindent 8 }}
+        app: {{ $.Values.projectName }}
+        component: {{ .name }}
+      annotations:
+        {{- include "ueransim.gnbAnnotations" $ | nindent 8 }}
+        {{- if or $.Values.global.n2networkgNB.enabled $.Values.global.n3networkgNB.enabled}}
+        # [MODIFIED by 5g-cloud-labs]
+        # Removed static IP parameters – IP assignment now managed by Whereabouts via respective NADs.
+        # Updated network names for gNB N2 & N3 networks for gNB-specific configuration control         
+        k8s.v1.cni.cncf.io/networks: '[
+        {{- if $.Values.global.n2networkgNB.enabled }}
+            { "name": "{{ $.Values.global.n2networkgNB.name }}",
+              "interface": "n2"
+            },
+        {{- end }}
+            { "name": "{{ $.Values.global.n3networkgNB.name }}",
+              "interface": "n3"
+            }
+            ]'
+        {{- end }}
+        # [MODIFIED by 5g-cloud-labs]
+        # Added annotation to delay application startup until Istio sidecar proxy is ready.
+        # Ref: https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
+        {{- if $.Values.global.proxy.holdApplicationUntilProxyStarts }}
+        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+        {{- end }}        
+    spec:
+      imagePullSecrets:
+        {{- toYaml .imagePullSecrets | nindent 8 }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      initContainers:
+      # [MODIFIED by 5g-cloud-labs]     
+      # Removed init-container 'wait-amf' 
+      # Added initContainer for automated secondary IP assignment to the respective ENI on AWS.
+      # Ref: https://github.com/aws-samples/eks-automated-ipmgmt-multus-pods/tree/main
+      - name: aws-ip-mgmt
+        {{- with $.Values.initcontainers.awsipmgmt }}
+        image: {{ .registry }}/{{ .image }}:{{ .tag }}
+        {{- end }}
+        imagePullPolicy: IfNotPresent
+        args: [/bin/sh, -c, '/app/script.sh initContainers']        
+      containers:
+      - image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
+        name: {{ .name }}
+        ports:
+        - name: gnb-ue
+          containerPort: {{ .service.port }}
+          protocol: {{ .service.protocol }}
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        command: ["./nr-gnb"]
+        args: ["-c", "{{ .volume.mount }}/gnb-config.yaml"]
+        volumeMounts:
+        - mountPath: {{ .volume.mount }}
+          name: {{ .volume.name }}
+        resources:
+            {{- toYaml .resources | nindent 12 }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      nodeSelector:
+        {{- toYaml .nodeSelector | nindent 8 }}
+      affinity:
+        {{- toYaml .affinity | nindent 8 }}
+      tolerations:
+        {{- toYaml .tolerations | nindent 8 }}
+
+      volumes:
+      - name: {{ .volume.name }}
+        configMap:
+          name: {{ .configmap.name }}
+{{- end }}
+{{- end }}
