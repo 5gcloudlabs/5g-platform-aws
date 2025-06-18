@@ -1,0 +1,157 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5gc-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  name: free5gc
+  userPlaneArchitecture: single  # possible values are "single" and "ulcl"
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  sbi:
+    scheme: http
+  amf:
+# [MODIFIED by 5g-cloud-labs]
+# Moved parameter 'n2if' under the renamed parameter group 'n2networkAMF'.
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+  # [MODIFIED by 5g-cloud-labs]
+  # Add hooks to delay application startup until the pod proxy is ready to accept traffic
+  # https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
+  proxy:
+    holdApplicationUntilProxyStarts: true        
+  #Global network parametes
+  # [MODIFIED by 5g-cloud-labs]
+  # Renamed nested parameter group: 'n2network' > 'n2networkAMF'
+  # Updated 'n2networkAMF' configuration parameters.
+  n2networkAMF:
+    enabled: true
+    name: n2networkamf
+    type: ipvlan    
+    masterIf: ens6 #ec2 network interface designated for AMF n2 interface (5gcontrolplane node)
+    subnetIP: 100.64.1.0
+    cidr: 28
+    gatewayIP: 100.64.1.1
+    n2if:  # NGAP
+      ipAddress: 100.64.1.10
+    routeDST: 100.64.0.0/28 # route destination to gNB n2 subnet
+  # [MODIFIED by 5g-cloud-labs]
+  # Renamed nested paramter group name 'n4network' > 'n4networkSMF'
+  # Updated n4networkSMF configuration parameters.
+  n4networkSMF:
+    enabled: true
+    name: n4networksmf
+    type: ipvlan
+    masterIf: ens7 #ec2 network interface designated for UPF n3 interface (controlplane node)
+    subnetIP: 100.64.4.0
+    cidr: 28
+    gatewayIP: 100.64.4.1    
+    n4if:  # PFCP
+     ipAddress: 100.64.4.10
+    routeDST: 100.64.5.0/28 # route destination to smf n4 subnet
+  # [MODIFIED by 5g-cloud-labs]
+  # Renamed nested paramter group name 'n3network' > 'n3networkUPF'
+  # Updated 'n3networkUPF' configuration parameters.
+  n3networkUPF:
+    enabled: true
+    name: n3networkupf
+    type: host-device
+    masterIf: ens6 #ec2 network interface designated for UPF n3 interface (userplane node)
+    subnetIP: 100.64.3.0
+    cidr: 28
+    gatewayIP: 100.64.3.1
+    n3if:  # GTP-U
+      ipAddress: 100.64.3.10
+    routeDST: 100.64.2.0/28 # route destination to gNB n3 subnet
+  # [MODIFIED by 5g-cloud-labs]
+  # Renamed nested paramter group name 'n4network' > 'n4networkUPF'
+  # Updated 'n4networkUPF' configuration parameters.    
+  n4networkUPF:
+    enabled: true  
+    name: n4networkupf
+    type: ipvlan    
+    masterIf: ens7 #ec2 network interface designated for UPF n4 interface (userplane node)
+    subnetIP: 100.64.5.0
+    cidr: 28
+    gatewayIP: 100.64.5.1
+    n4if:  # PFCP
+      ipAddress: 100.64.5.10
+    routeDST: 100.64.4.0/28 # route destination to smf n4 subnet    
+  # [MODIFIED by 5g-cloud-labs] 
+  # Updated n6network configuration parameters.    
+  n6network:
+    enabled: true
+    name: n6network
+    type: host-device
+    masterIf: ens8 #ec2 network interface designated for UPF n6 interface (userplane node)
+    subnetIP: 100.64.6.0
+    cidr: 28
+    gatewayIP: 100.64.6.1
+    n6if:  # DN
+      ipAddress: 100.64.6.10
+  n9network:
+    enabled: true
+    name: n9network
+    type: ipvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.224
+    cidr: 29
+    gatewayIP: 10.100.50.230
+    excludeIP: 10.100.50.230
+
+
+# These parameters can be used to enable/disable deployment of subcharts
+deployMongoDb: true
+deployAmf: true
+deployAusf: true
+deployN3iwf: false
+deployNrf: true
+deployNssf: true
+deployPcf: true
+deploySmf: true
+deployUdm: true
+deployUdr: true
+deployUpf: true
+deployWebui: true
+deployDbPython: false # [MODIFIED by 5g-cloud-labs] disabled DBPython deployment.
+
+# Disable the deployment of mongodb as an NRF subchart
+free5gc-nrf:
+  db:
+    enabled: false
+
+# This section can be used to override the default values in the MongoDB chart
+mongodb:
+  fullnameOverride: "mongodb"
+  useStatefulSet: true
+  auth:
+    enabled: false
+  persistence:
+    size: 6Gi
+    mountPath: /bitnami/mongodb/data/db/
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
