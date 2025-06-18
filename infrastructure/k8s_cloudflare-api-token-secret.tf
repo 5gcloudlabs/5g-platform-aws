@@ -1,0 +1,12 @@
+resource "kubernetes_secret_v1" "cloudflare-api-token-secret" {
+  metadata {
+    name = "cloudflare-api-token-secret"
+    namespace = "kube-system"
+  }
+
+  data = {
+    cloudflare-api-token = var.cloudflare_api_token
+  }
+
+  type = "Opaque"
+}

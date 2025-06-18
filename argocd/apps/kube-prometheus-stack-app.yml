@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  #annotations:
+   # argocd.argoproj.io/sync-wave: "3"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: kube-prometheus-stack
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: "*"
+    helm:
+     skipCrds: true
+     values: |
+       alertmanager:
+         enabled: false
+       windowsMonitoring:
+          enabled: false
+       grafana:
+         additionalDataSources:
+           - name: Loki
+             type: loki
+             isDefault: false
+             url: http://loki.monitoring:3100/
+             basicAuth: false
+             access: proxy  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:    
+    automated:
+      prune: true
+      selfHeal: true
