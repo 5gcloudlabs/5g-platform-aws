@@ -26,8 +26,9 @@ resource "helm_release" "istio-gateway" {
   name       = "istio-gateway"
   namespace  = "istio-system"
 
-  set {
+  set = [ {
     name  = "service.type"
     value = "NodePort"
   }
+ ]
 }

@@ -7,29 +7,28 @@ resource "helm_release" "aws-load-balancer-controller" {
   namespace  = "kube-system"
   
 
-  set {
+  set = [
+  {
     name  = "clusterName"
     value = module.eks.cluster_name
-  }
+  },
 
-
-  set {
+  {
     name  = "replicaCount"
     value = 1
-  }
+  },
 
-
-  
-  set {
+  {
     name  = "serviceAccount.name"
     value = "aws-load-balancer-controller"
-  }
-
-
-  set {
+  },
+  
+  {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
     value = aws_iam_role.aws_load_balancer_controller_role.arn
   }
+]
+
 }
 
 resource "time_sleep" "wait_for_alb-controller" {

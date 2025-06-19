@@ -7,35 +7,32 @@ resource "helm_release" "aws-efs-csi-driver" {
   namespace  = "kube-system"
   
 
-  set {
+  set = [ {
     name  = "replicaCount"
     value = 1
-  }
+  },
 
-
-#create service account for controller pod and set the annotation using the created iam role
-  set {
-    name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+  {
+    name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn" #create service account for controller pod and set the annotation using the created iam role
     value = aws_iam_role.aws_efs_csi_driver_role.arn
-  }
-
-
-set {
+  },
+ 
+  {
     name  = "controller.logLevel"
     value = 5
-  }
+  },
 
-#create service account for node pod and set the annotation using the created iam role
-  set {
-    name  = "node.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+  {
+    name  = "node.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn" #create service account for node pod and set the annotation using the created iam role
     value = aws_iam_role.aws_efs_csi_driver_role.arn
-  }
+  },
 
-
-set {
+  {
     name  = "node.logLevel"
     value = 5
   }
+
+]
 
 }
 

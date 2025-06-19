@@ -10,7 +10,7 @@ resource "kubernetes_secret_v1" "git-repo-secret" {
 
   data = {
     type = "git"
-    url = "https://github.com/5g-cloud-labs/new-test.git" # https://github.com/amrbaraka/priv.git
+    url = "https://github.com/5g-cloud-labs/new-test-2.git" # https://github.com/amrbaraka/priv.git
     username = "5g" #test
     password = "REDACTED" # REDACTED
   }
