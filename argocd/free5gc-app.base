@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/5g-cloud-labs/new-test.git
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     targetRevision: main
-    path: 3-Free5gc/free5gc-chart
+    path: charts/free5gc
     helm:
       values: |        
         free5gc-amf:
