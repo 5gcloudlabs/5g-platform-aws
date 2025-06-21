@@ -1,6 +1,20 @@
 #!/bin/bash
 
+read -p "Enter the number of subscribers to provision (default: 10): " count_
+
+# Set environment variables
+
+count=$count_
+
+start_imsi="${mcc}${mnc}0000000001"
+
 end_imsi=$(($start_imsi + $count - 1))
+
+export count
+
+# Substitute variables:
+envsubst < ../argocd/ueransim-app.tmp > ../argocd/ueransim-app.yml
+
 
 echo -e "\n\n*** Starting provisioning of ($count) subscribers with IMSI range beginning at ($start_imsi) ***\n\nPlease wait..." 
 
@@ -36,7 +50,7 @@ curl -v -X POST "webui-service.free5gc.svc.cluster.local:5000/api/subscriber/ims
       "sequenceNumber": "16f3b3f70fc2"
     },
     "AccessAndMobilitySubscriptionData": {
-      "gpsis": ["msisdn-0900000000"],
+      "gpsis": ["msisdn-"],
       "nssai": {
         "defaultSingleNssais": [
           {"sst": 1, "sd": "010203", "isDefault": true},
