@@ -17,6 +17,7 @@ envsubst '$mcc,$mnc' < ./ueransim-cli.base > ./ueransim-cli.sh
 envsubst '$mcc,$mnc' < ../argocd/ueransim-app.base > ../argocd/ueransim-app.tmp
 
 # Add executable permissions to script:
+chmod u+x ./subscriber-provisioner.sh
 chmod u+x ./ueransim-cli.sh
 
 # Apply free5gc yml file:
