@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Apply ueransim yml file
-kubectl apply -f ../argocd/ueransim-app.yml
+kubectl apply -f ../../argocd/ueransim-app.yml
