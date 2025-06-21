@@ -14,4 +14,4 @@ chmod u+x /tmp/subscriber-provisioner.sh
 
 
 # Apply free5gc yml file:
-kubectl apply -f /tmp/argocd/free5gc-app.yml
+kubectl apply -f /tmp/free5gc-app.yml
