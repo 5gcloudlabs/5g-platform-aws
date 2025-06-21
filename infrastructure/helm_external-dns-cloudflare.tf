@@ -1,7 +1,7 @@
 
 
 resource "helm_release" "external-dns" {
-  depends_on = [aws_ssm_association.ssm_association_5gcp_node]
+  depends_on = [helm_release.aws-load-balancer-controller]
   name       = "external-dns"
   repository = "https://kubernetes-sigs.github.io/external-dns/"
   chart      = "external-dns"
