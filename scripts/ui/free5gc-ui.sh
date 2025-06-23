@@ -10,7 +10,7 @@ envsubst '$mcc,$mnc' < /git-repo/scripts/ui/subscriber-provisioner-ui.base > /tm
 envsubst '$mcc,$mnc' < /git-repo/argocd/ueransim-app.base > /tmp/ueransim-app.tmp
 
 # Add executable permissions to script:
-chmod u+x /tmp/subscriber-provisioner.sh
+chmod u+x /tmp/subscriber-provisioner-ui.sh
 
 
 # Apply free5gc yml file:
