@@ -10,6 +10,12 @@ start_imsi="${mcc}${mnc}0000000001"
 
 end_imsi=$(($start_imsi + $count - 1))
 
+export count
+
+# Substitute variables:
+envsubst < /tmp/ueransim-app.tmp > /tmp/ueransim-app.yml
+
+
 #echo -e "\n\n*** Starting provisioning of ($count) subscribers with IMSI range beginning at ($start_imsi) ***\n\nPlease wait..." 
 
 { for imsi in $(seq $start_imsi $end_imsi); do
