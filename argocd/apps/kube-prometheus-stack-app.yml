@@ -24,7 +24,11 @@ spec:
          sidecar:
            dashboards:
              enabled: true
-             label: grafana_dashboard       
+             label: grafana_dashboard
+         datasources:
+           enabled: true
+           defaultDatasourceEnabled: true
+           isDefaultDatasource: false        
          additionalDataSources:
            - name: Loki
              type: loki
