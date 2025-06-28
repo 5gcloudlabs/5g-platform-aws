@@ -27,12 +27,56 @@ spec:
              label: grafana_dashboard
          datasources:
            enabled: true
+
            defaultDatasourceEnabled: true
-           isDefaultDatasource: false        
+           isDefaultDatasource: false
+
+           name: Prometheus
+           uid: prometheus
+
+      ## URL of prometheus datasource
+      ##
+      # url: http://prometheus-stack-prometheus:9090/
+
+      ## Prometheus request timeout in seconds
+      # timeout: 30
+
+      # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
+      # defaultDatasourceScrapeInterval: 15s
+
+      ## Annotations for Grafana datasource configmaps
+      ##
+           annotations: {}
+
+      ## Set method for HTTP to send query to datasource
+           httpMethod: POST
+
+      ## Create datasource for each Pod of Prometheus StatefulSet;
+      ## this uses by default the headless service `prometheus-operated` which is
+      ## created by Prometheus Operator. In case you deployed your own Service for your
+      ## Prometheus instance, you can specifiy it with the field `prometheusServiceName`
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/0fee93e12dc7c2ea1218f19ae25ec6b893460590/pkg/prometheus/statefulset.go#L255-L286
+           createPrometheusReplicasDatasources: false
+           prometheusServiceName: prometheus-operated
+           label: grafana_datasource
+           labelValue: "1"
+
+      ## Field with internal link pointing to existing data source in Grafana.
+      ## Can be provisioned via additionalDataSources
+           exemplarTraceIdDestinations: {}
+        # datasourceUid: Jaeger
+        # traceIdLabelName: trace_id
+        # urlDisplayLabel: View traces
+           alertmanager:
+             enabled: true
+             name: Alertmanager
+             uid: alertmanager
+             handleGrafanaManagedAlerts: false
+             implementation: prometheus
          additionalDataSources:
            - name: Loki
              type: loki
-             isDefault: false
+             isDefault: true
              url: http://loki.monitoring:3100/
              basicAuth: false
              access: proxy  
