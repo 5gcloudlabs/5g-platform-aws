@@ -15,7 +15,7 @@ spec:
       values: |
         loki:
           enabled: true
-          isDefault: true
+          isDefault: false
           url: http://loki.monitoring:3100/    
           image:
            tag: 2.9.5
