@@ -16,7 +16,7 @@ spec:
         loki:
           enabled: true
           isDefault: true
-          url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}        
+          url: http://loki.monitoring:3100/    
           image:
            tag: 2.9.5
   destination:
