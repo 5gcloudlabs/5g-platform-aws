@@ -23,7 +23,7 @@ spec:
        grafana:
          sidecar:
            dashboards:
-             enabled: true
+             enabled: false
              label: grafana_dashboard
          additionalDataSources:
            - name: Loki
