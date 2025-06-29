@@ -23,15 +23,8 @@ spec:
        grafana:
          sidecar:
            dashboards:
-             enabled: false
+             enabled: true
              label: grafana_dashboard
-         #additionalDataSources:
-          # - name: Loki
-           #  type: loki
-            # isDefault: false
-             #url: http://loki.monitoring:3100/
-             #basicAuth: false
-             #access: proxy  
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
