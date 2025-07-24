@@ -78,7 +78,7 @@ spec:
         args: [/bin/sh, -c, '/app/script.sh initContainers']   
       containers:
       - name: {{ .name }}
-        image: {{ .image.name }}:{{ .image.tag default $.Chart.AppVersion }}
+        image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
         imagePullPolicy: {{ .image.pullPolicy }}
         securityContext:
             {{- toYaml .securityContext | nindent 12 }}
