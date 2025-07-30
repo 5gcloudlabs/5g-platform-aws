@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: console-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/amrbaraka/repo.git
+    targetRevision: main
+    path: console
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:    
+    automated:
+      prune: true

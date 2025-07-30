@@ -21,13 +21,10 @@ spec:
        windowsMonitoring:
           enabled: false
        grafana:
-         additionalDataSources:
-           - name: Loki
-             type: loki
-             isDefault: false
-             url: http://loki.monitoring:3100/
-             basicAuth: false
-             access: proxy  
+         sidecar:
+           dashboards:
+             enabled: true
+             label: grafana_dashboard
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
