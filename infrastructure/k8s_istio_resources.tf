@@ -272,18 +272,6 @@ spec:
   gateways:
   - istio-gw-frontend
   http:
-  # Route API requests to backend-service
-  - match:
-    - uri:
-        prefix: /api/
-    rewrite:
-      uri: /
-    route:
-    - destination:
-        host: backend-service
-        port:
-          number: 80
-  # All other requests go to the React frontend
   - match:
     - uri:
         prefix: /
