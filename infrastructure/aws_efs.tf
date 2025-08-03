@@ -1,6 +1,7 @@
 #create efs using "efs" module
 module "efs" {
   source = "terraform-aws-modules/efs/aws"
+  version = "1.8.0"
 
     name           = "efs"
     mount_targets = {
