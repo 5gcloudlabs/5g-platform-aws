@@ -12,7 +12,7 @@ azs = ["eu-central-1b", "eu-central-1c"]     # Define two Availability Zones ins
 
 ##EKS Parameters##
 eks_cluster_name = "cloud-5g-eks"
-ami_id = "ami-064c2479baf726e71"             #image list per region: https://cloud-images.ubuntu.com/docs/aws/eks/
+ami_id = "REDACTED_AMI_ID" #Focal Pro 1.29         #image list per region: https://cloud-images.ubuntu.com/docs/aws/eks/
 
 
 
