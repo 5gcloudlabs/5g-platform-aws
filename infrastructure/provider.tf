@@ -1,28 +1,43 @@
 terraform {
+
   required_version = ">= 1.0"
+
   required_providers {
+
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "5.100.0"
     }
+
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.38.0"
+    }
+
+    helm = {
+      source  = "hashicorp/helm"
+      version = "3.0.2"
+    }
+
     kubectl = {
       source  = "gavinbunney/kubectl"
+      version = "1.19.0"
     }
+
     cloudflare = {
       source  = "cloudflare/cloudflare"    
+      version = "5.7.1"
     }
+
   }
+
     backend "s3" {}
+
 }
 
 
 provider "aws" {
   region = var.region
-}
-
-
-provider "cloudflare" {
-  api_token = var.cloudflare_api_token
 }
 
 
@@ -60,4 +75,9 @@ provider "kubectl" {
       args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
       command     = "aws"
 }
+}
+
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
 }
