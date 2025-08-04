@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
-    targetRevision: prov
+    targetRevision: lean
     path: charts/ueransim
     helm:
       values: |
