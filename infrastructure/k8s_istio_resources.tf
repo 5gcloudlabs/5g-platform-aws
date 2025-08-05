@@ -231,13 +231,13 @@ EOF
 ################
 
 #create gw listening on port 80 
-resource "kubectl_manifest" "istio-gw-frontend" {
+resource "kubectl_manifest" "istio-gw-console" {
   depends_on = [helm_release.istio-gateway]
     yaml_body = <<EOF
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: istio-gw-frontend
+  name: istio-gw-console
   namespace: default 
 spec:
   # The selector matches the ingress gateway pod labels.
@@ -250,7 +250,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "frontend.${var.domain_name}"
+    - "console.${var.domain_name}"
     EOF
 }
 
@@ -258,26 +258,26 @@ spec:
 
 
 #create virtual service pointing to frontend service 
-resource "kubectl_manifest" "istio-vs-frontend" {
+resource "kubectl_manifest" "istio-vs-console" {
   depends_on = [helm_release.istio-gateway]
     yaml_body = <<EOF
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: istio-vs-frontend
+  name: istio-vs-console
   namespace: default
 spec:
   hosts:
-  - "frontend.${var.domain_name}"
+  - "console.${var.domain_name}"
   gateways:
-  - istio-gw-frontend
+  - istio-gw-console
   http:
   - match:
     - uri:
         prefix: /
     route:
     - destination:
-        host: frontend-service
+        host: console-service
         port:
           number: 80
 EOF

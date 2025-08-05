@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     targetRevision: lean
-    path: argocd/apps
+    path: argocd/required-apps
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

@@ -176,7 +176,7 @@ resource "kubernetes_ingress_v1" "ingress-prometheus" {
 resource "kubernetes_ingress_v1" "ingress-frontend" {
   depends_on = [kubernetes_namespace_v1.istio-system, time_sleep.wait_for_alb-controller, module.acm, module.eks, module.vpc]
   metadata {
-    name = "ingress-frontend"
+    name = "ingress-console"
 	  namespace = kubernetes_namespace_v1.istio-system.metadata[0].name
     annotations = {
       "kubernetes.io/ingress.class" = "alb"
@@ -192,7 +192,7 @@ resource "kubernetes_ingress_v1" "ingress-frontend" {
 
   spec {
     rule {
- 	  host = "frontend.${var.domain_name}"
+ 	  host = "console.${var.domain_name}"
       http {
         path {
           backend {
