@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: free5gc-variables-cm
+data:
+  vars.env: |
+    mcc=208
+    mnc=93

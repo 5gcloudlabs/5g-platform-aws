@@ -1,0 +1,11 @@
+replicaCount: 1
+
+initContainer:
+  image: alpine/git
+
+container:
+  image: bitnami/kubectl:latest
+
+serviceAccount:
+  name: executor-sa
+

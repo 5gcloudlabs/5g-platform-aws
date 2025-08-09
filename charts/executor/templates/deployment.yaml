@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: executor
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: executor
+  template:
+    metadata:
+      labels:
+        app: executor
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      restartPolicy: Always
+      initContainers:
+        - name: git-cloner
+          image: {{ .Values.initContainer.image }}
+          command:
+            - /bin/sh
+            - -c
+          #args:
+          #  - git clone -b ui https://github.com/amrbaraka/priv.git /test
+          args:
+           - |
+             git config --global credential.helper store && \
+             echo "https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com" > ~/.git-credentials && \
+             git clone -b ui ${GIT_URL} /git-repo
+          env:
+            - name: GIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: git-repo-secret-def-ns
+                  key: username
+            - name: GIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: git-repo-secret-def-ns
+                  key: password
+            - name: GIT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: git-repo-secret-def-ns
+                  key: url
+          volumeMounts:
+            - name: git-repo-volume
+              mountPath: /git-repo
+      containers:
+        - name: deployer
+          image: {{ .Values.container.image }}
+          command: ["/bin/sh", "-c", "sleep infinity"]
+          volumeMounts:
+            - name: git-repo-volume
+              mountPath: /git-repo
+            - name: free5gc-variables-volume
+              mountPath: /free5gc-variables
+            - name: subs-prov-variables-volume
+              mountPath: /subs-prov-variables
+      volumes:
+        - name: git-repo-volume
+          emptyDir: {}
+        - name: free5gc-variables-volume
+          configMap:
+            name: free5gc-variables-cm
+        - name: subs-prov-variables-volume
+          configMap:
+            name: subs-prov-variables-cm

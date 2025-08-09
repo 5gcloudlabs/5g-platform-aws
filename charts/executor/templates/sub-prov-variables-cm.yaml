@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: subs-prov-variables-cm
+data:
+  vars.env: |
+    count=2
