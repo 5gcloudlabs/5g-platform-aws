@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
-    targetRevision: lean
+    targetRevision: charts
     path: argocd/required-apps
   destination:
     server: https://kubernetes.default.svc
