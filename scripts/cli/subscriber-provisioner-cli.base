@@ -200,8 +200,8 @@ curl -v -X POST "webui-service.free5gc.svc.cluster.local:5000/api/subscriber/ims
   }'
 EOF
 
-done } > output.log 2>&1
+done } > subs-prov-output.log 2>&1
 
 
 echo -e "\n\n===== Provisioned IMSI List =====\n"
-grep "imsi-" output.log | awk -F'imsi-|/' '{print $5}'
+grep "imsi-" subs-prov-output.log | awk -F'imsi-|/' '{print $5}'
