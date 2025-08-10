@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: multus
-    repoURL: https://amrbaraka.github.io/helm-charts/
-    targetRevision: 0.1.2
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    targetRevision: charts
+    path: charts/multus
   destination:
     server: https://kubernetes.default.svc
     namespace: default
