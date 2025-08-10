@@ -4,6 +4,7 @@ resource "helm_release" "aws-efs-csi-driver" {
   name = "aws-efs-csi-driver"
   repository = "https://kubernetes-sigs.github.io/aws-efs-csi-driver/"
   chart      = "aws-efs-csi-driver"
+  version    = "3.2.1"
   namespace  = "kube-system"
   
 

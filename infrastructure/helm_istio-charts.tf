@@ -4,8 +4,8 @@ resource "helm_release" "istio-base" {
   repository       = "https://istio-release.storage.googleapis.com/charts"
   chart            = "base"
   name             = "istio-base"
+  version          = "1.26.3"
   namespace        = kubernetes_namespace_v1.istio-system.metadata[0].name
-  #create_namespace = true
 }
 
 #Install Istio discovery chart
@@ -14,6 +14,7 @@ resource "helm_release" "istiod" {
   repository       = "https://istio-release.storage.googleapis.com/charts"
   chart            = "istiod"
   name             = "istiod"
+  version          = "1.26.3"
   namespace        = "istio-system"
   timeout          = 300
 }
@@ -24,6 +25,7 @@ resource "helm_release" "istio-gateway" {
   repository = "https://istio-release.storage.googleapis.com/charts"
   chart      = "gateway"
   name       = "istio-gateway"
+  version    = "1.26.3"
   namespace  = "istio-system"
 
   set = [ {
