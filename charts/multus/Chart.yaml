@@ -1,0 +1,10 @@
+apiVersion: v2
+name: multus
+description: Helm chart for deploying Multus CNI, derived from AWS EKS manifest (Apache License 2.0).
+type: application
+version: 0.1.0
+appVersion: "v3.7.2-eksbuild.1"
+
+annotations:
+  artifacthub.io/license: Apache-2.0
+
