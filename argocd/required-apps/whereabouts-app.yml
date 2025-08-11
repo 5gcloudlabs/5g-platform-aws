@@ -9,12 +9,14 @@ spec:
   project: default
   source:
     repoURL: https://github.com/k8snetworkplumbingwg/whereabouts.git
-    targetRevision: HEAD
+    targetRevision: 0.1.1
     path: deployment/whereabouts-chart
     helm:
      parameters:
      - name: "nodeSliceController.enabled"
        value: "false"
+     - name: "image.tag"
+       value: "v0.8.0"
   destination:
     server: https://kubernetes.default.svc
     namespace: default
