@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/k8snetworkplumbingwg/whereabouts.git
-    targetRevision: 0.1.1
+    #targetRevision: 0.1.1
     path: deployment/whereabouts-chart
     helm:
      parameters:
