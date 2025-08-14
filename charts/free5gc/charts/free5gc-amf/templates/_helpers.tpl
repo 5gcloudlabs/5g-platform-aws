@@ -11,27 +11,35 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 {{/*
-Return the name of the chart
+Expand the name of the chart.
 */}}
 {{- define "free5gc-amf.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
-Return the fully qualified app name.
-If fullnameOverride is set, this is used directly.
-Otherwise it uses the release name and chart name.
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If fullnameOverride is set, use it directly.
 */}}
 {{- define "free5gc-amf.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- if .Values.nameOverride -}}
-{{- printf "%s-%s" .Release.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s" .Release.Name .Chart.Name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
+{{- if .Values.fullnameOverride }}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- if contains $name .Release.Name }}
+{{- .Release.Name | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "free5gc-amf.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -39,24 +47,28 @@ Common labels
 */}}
 {{- define "free5gc-amf.labels" -}}
 helm.sh/chart: {{ include "free5gc-amf.chart" . }}
-app.kubernetes.io/name: {{ include "free5gc-amf.name" . }}
-app.kubernetes.io/instance: {{ include "free5gc-amf.fullname" . }}
-app.kubernetes.io/version: {{ .Chart.AppVersion }}
+{{ include "free5gc-amf.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Selector labels — now tied to fullnameOverride to ensure Services match Pods
+Selector labels
 */}}
 {{- define "free5gc-amf.selectorLabels" -}}
-app.kubernetes.io/instance: {{ include "free5gc-amf.fullname" . }}
-nf: {{ .Values.amf.name | default "amf" }}
-project: {{ .Values.global.projectName | default "free5gc" }}
+app.kubernetes.io/name: {{ include "free5gc-amf.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Chart label
+AMF Pod Annotations
 */}}
-{{- define "free5gc-amf.chart" -}}
-{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+{{- define "free5gc-amf.amfAnnotations" -}}
+{{- with .Values.amf }}
+{{- if .podAnnotations }}
+{{- toYaml .podAnnotations }}
+{{- end }}
+{{- end }}
 {{- end }}
