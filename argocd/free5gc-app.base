@@ -83,17 +83,17 @@ spec:
                         sd: 1
                       - sst: 2
                         sd: 2
-        free5gc-pcf:
+        #free5gc-pcf:
           #fullnameOverride: 5gcloudlabs-free5gc-pcf
 
-        free5gc-udm:
+        #free5gc-udm:
           #fullnameOverride: 5gcloudlabs-free5gc-udm
 
-        free5gc-udr:
+        #free5gc-udr:
           #fullnameOverride: 5gcloudlabs-free5gc-udr
 
 
-        free5gc-upf:
+        #free5gc-upf:
           #fullnameOverride: 5gcloudlabs-free5gc-upf
 
 
@@ -108,7 +108,7 @@ spec:
                     mnc: $mnc
 
 
-        free5gc-webui:
+        #free5gc-webui:
           #fullnameOverride: 5gcloudlabs-free5gc-webui
 
 
