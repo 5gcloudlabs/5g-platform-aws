@@ -25,7 +25,6 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      #{{- include "free5gc-amf.selectorLabels" $ | nindent 6 }}
       project: {{ $.Values.global.projectName }}
       nf: {{ .name }}
   template:
