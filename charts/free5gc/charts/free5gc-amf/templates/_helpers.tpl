@@ -58,8 +58,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "free5gc-amf.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "free5gc-amf.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+test.label: true
+#app.kubernetes.io/name: {{ include "free5gc-amf.name" . }}
+#app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
