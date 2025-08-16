@@ -59,8 +59,8 @@ Selector labels
 */}}
 {{- define "free5gc-amf.selectorLabels" -}}
 test.label: true
-#app.kubernetes.io/name: {{ include "free5gc-amf.name" . }}
-#app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/name: {{ include "free5gc-amf.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
