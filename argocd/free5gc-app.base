@@ -9,12 +9,12 @@ spec:
   project: default
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
-    targetRevision: charts
+    targetRevision: trims
     path: charts/free5gc
     helm:
+      releaseName: aws-5gcloudlabs
       values: |        
         free5gc-amf:
-          #fullnameOverride: 5gcloudlabs-free5gc-amf
           amf:
             name: amf
             configuration:
@@ -40,8 +40,8 @@ spec:
                       sd: 112233
                 supportDnnList:
                 - internet
+
         free5gc-ausf:
-          #fullnameOverride: 5gcloudlabs-free5gc-ausf
           ausf:      
             name: ausf
             configuration:
@@ -49,17 +49,17 @@ spec:
                 plmnSupportList:
                   - mcc: $mcc
                     mnc: $mnc                
+
         free5gc-nrf:
-          #fullnameOverride: 5gcloudlabs-free5gc-nrf
           nrf:
             name: nrf
             configuration:
               configuration: |-
                 DefaultPlmnId:
                   mcc: $mcc
-                  mnc: $mnc      
+                  mnc: $mnc  
+    
         free5gc-nssf:
-          #fullnameOverride: 5gcloudlabs-free5gc-nssf
           nssf:
             name: nssf
             configuration:
@@ -83,22 +83,8 @@ spec:
                         sd: 1
                       - sst: 2
                         sd: 2
-        #free5gc-pcf:
-          #fullnameOverride: 5gcloudlabs-free5gc-pcf
-
-        #free5gc-udm:
-          #fullnameOverride: 5gcloudlabs-free5gc-udm
-
-        #free5gc-udr:
-          #fullnameOverride: 5gcloudlabs-free5gc-udr
-
-
-        #free5gc-upf:
-          #fullnameOverride: 5gcloudlabs-free5gc-upf
-
 
         free5gc-smf:
-          #fullnameOverride: 5gcloudlabs-free5gc-smf
           smf:
             name: smf
             configuration:
@@ -106,11 +92,6 @@ spec:
                 plmnList:
                   - mcc: $mcc
                     mnc: $mnc
-
-
-        #free5gc-webui:
-          #fullnameOverride: 5gcloudlabs-free5gc-webui
-
 
   destination:
     server: https://kubernetes.default.svc
