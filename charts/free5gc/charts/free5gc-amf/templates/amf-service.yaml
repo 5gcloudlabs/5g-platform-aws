@@ -27,6 +27,7 @@ spec:
       protocol: TCP
       name: http
   selector:
+    {{- include "free5gc-amf.selectorLabels" $ | nindent 4 }}
     project: {{ $.Values.global.projectName }}
     nf: {{ .name }}
 
