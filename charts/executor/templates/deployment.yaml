@@ -26,7 +26,7 @@ spec:
            - |
              git config --global credential.helper store && \
              echo "https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com" > ~/.git-credentials && \
-             git clone -b ui ${GIT_URL} /git-repo
+             git clone -b {{ .Values.git.branch }} ${GIT_URL} /git-repo
           env:
             - name: GIT_USERNAME
               valueFrom:
