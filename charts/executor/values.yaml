@@ -9,3 +9,6 @@ container:
 serviceAccount:
   name: executor-sa
 
+git:
+  branch: trims
+
