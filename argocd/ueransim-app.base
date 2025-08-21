@@ -12,6 +12,7 @@ spec:
     targetRevision: trims
     path: charts/ueransim
     helm:
+      releaseName: aws-5gcloudlabs
       values: |
           gnb:
             name: gnb
