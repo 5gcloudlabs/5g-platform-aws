@@ -1,14 +1,14 @@
-# Curl Chart
+# curl
 
-This chart deploys a lightweight `curl` pod into the cluster.  
+The `curl` pod is used by **5g-cloud-labs** for subscriber provisioning workflows.  
 
 ## Purpose
 
-The `curl` pod is used by **5g-cloud-labs** for Subscriber provisioning workflows.
-
+This chart deploys a lightweight `curl` pod that supports automation scripts 
+for subscriber provisioning operations within the 5G network deployment process.
 
 ## Notes
 
-- This chart is maintained locally as part of the 5G Cloud Labs automation.
-- Deployment is managed automatically through Argo CD (`curl-app.yml`).
+- Maintained locally in the `aws-5g-cloud-labs` repository.  
+- Deployment is managed via Argo CD (`argocd/curl-app.yml`).  
 - The pod uses the [curlimages/curl](https://hub.docker.com/r/curlimages/curl) container image.
