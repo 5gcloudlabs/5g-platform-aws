@@ -4,7 +4,7 @@ This chart deploys a lightweight `curl` pod into the cluster.
 
 ## Purpose
 
-The `curl` pod is used in **5g-cloud-labs** for Subscriber provisioning workflows.
+The `curl` pod is used by **5g-cloud-labs** for Subscriber provisioning workflows.
 
 
 ## Notes
