@@ -12,11 +12,6 @@
 #
 # -------------------------------------------------------------------------
 # [MODIFIED by 5g-cloud-labs]
-# This file has been adapted and is maintained in the aws-5g-cloud-labs repo.
-# Changes:
-#   - Removed "free5gc-n3iwf" dependency
-#   - Removed "free5gc-dbpython" dependency
-#   - Corresponding chart folders deleted
 # -------------------------------------------------------------------------
 apiVersion: v2
 name: free5gc
