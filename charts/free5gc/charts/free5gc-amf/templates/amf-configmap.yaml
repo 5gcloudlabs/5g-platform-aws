@@ -10,6 +10,9 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
+# -------------------------------------------------------------------------
+# [MODIFIED by 5g-cloud-labs]
+# -------------------------------------------------------------------------
 {{- with .Values.amf }}
 apiVersion: v1
 kind: ConfigMap
