@@ -13,6 +13,11 @@
 # Default values for free5gcControlPlane chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+#
+# -------------------------------------------------------------------------
+# [MODIFIED by 5g-cloud-labs]
+# -------------------------------------------------------------------------
+#
 
 nameOverride: ""
 fullnameOverride: ""
