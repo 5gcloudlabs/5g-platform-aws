@@ -1,0 +1,12 @@
+CNAD LTD 5G Cloud Labs
+
+Copyright © 2025 CNAD LTD.
+
+This project is licensed under the Apache License, Version 2.0
+(see the LICENSE file for details).
+
+This project includes components derived from the
+towards5gs-helm project (https://github.com/Orange-OpenSource/towards5gs-helm),
+licensed under the Apache License, Version 2.0.
+
+All modifications and original work are © 2025 CNAD LTD.
