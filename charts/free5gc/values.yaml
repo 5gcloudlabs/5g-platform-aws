@@ -125,7 +125,6 @@ global:
 deployMongoDb: true
 deployAmf: true
 deployAusf: true
-deployN3iwf: false
 deployNrf: true
 deployNssf: true
 deployPcf: true
@@ -134,7 +133,6 @@ deployUdm: true
 deployUdr: true
 deployUpf: true
 deployWebui: true
-deployDbPython: false # [MODIFIED by 5g-cloud-labs] disabled DBPython deployment.
 
 # Disable the deployment of mongodb as an NRF subchart
 free5gc-nrf:
