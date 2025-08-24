@@ -10,53 +10,14 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-# Default values for free5gcUserPlane chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-
+# [MODIFIED by 5g-cloud-labs]
+# This values.yaml has been customized for aws-5gcloudlabs.
+# Networking parametes values are inherited from the customized global values.yaml.
+#
 global:
   projectName: free5gc
   userPlaneArchitecture: single  # possible values are "single" and "ulcl"
   uesubnet: 10.1.0.0/16
-#Global network parametes
-  n4network:
-    enabled: true
-    name: n4network
-    type: ipvlan
-    masterIf: eth0
-    subnetIP: 10.100.50.240
-    cidr: 29
-    gatewayIP: 10.100.50.246
-    excludeIP: 10.100.50.246
-  n3network:
-    enabled: true
-    name: n3network
-    type: ipvlan
-    masterIf: eth0
-    subnetIP: 10.100.50.232
-    cidr: 29
-    gatewayIP: 10.100.50.238
-    excludeIP: 10.100.50.238
-  n6network:
-    enabled: true
-    name: n6network
-    type: ipvlan
-    masterIf: eth1
-    subnetIP: 10.100.100.0
-    cidr: 24
-    gatewayIP: 10.100.100.1
-    excludeIP: 10.100.100.254
-  n9network:
-    enabled: true
-    name: n9network
-    type: ipvlan
-    masterIf: eth0
-    subnetIP: 10.100.50.224
-    cidr: 29
-    gatewayIP: 10.100.50.230
-    excludeIP: 10.100.50.230
-
 # [MODIFIED by 5g-cloud-labs]
 # Custom-built AWS IP Manager image published by 5g-cloud-labs to public ECR.
 # Source reference: https://github.com/aws-samples/eks-automated-ipmgmt-multus-pods
@@ -78,14 +39,6 @@ upf:
     #   echo "123" > /tmp/123
   volume:
     mount: /free5gc/config/
-
-  # network paramters
-  n3if:  # GTP-U
-    ipAddress: 10.100.50.233
-  n4if:  # PFCP
-    ipAddress: 10.100.50.241
-  n6if:  # DN
-    ipAddress: 10.100.100.12
 
   podAnnotations: {}
     # additional annotations
