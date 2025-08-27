@@ -12,12 +12,14 @@ The AMF is responsible for:
 
 ## 🔧 Customizations in this Chart
 
-Compared to the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) chart, this version includes the following modifications:  
+This chart has been adapted from the upstream towards5gs-helm project.
+The primary customizations focus on networking configuration to enable deployment on Amazon EKS in the public cloud.
 
-- Updated container images from `towards5gs/*` to `<your-registry>/free5gc-amf`  
-- Changed default `values.yaml` to align with CNAD LTD’s 5G Cloud Labs environment  
-- Default `global.amf.service.ngap.enabled = true` to use a Kubernetes Service instead of Multus for N2  
-- Simplified initContainer logic for NRF readiness  
+Customizations can be found in:
+
+./templates/
+./values.yaml
+../../values.yaml
 
 👉 See [values.yaml](./values.yaml) for full parameter details.  
 
