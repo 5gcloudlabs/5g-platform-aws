@@ -18,10 +18,10 @@ The primary customizations focus on networking configuration to enable deploymen
 Customizations can be found in:
 
 ./templates/
-./values.yaml
+[values.yaml](./values.yaml)
 ../../values.yaml
 
-👉 See [values.yaml](./values.yaml) for full parameter details.  
+ for full parameter details.  
 
 ---
 
