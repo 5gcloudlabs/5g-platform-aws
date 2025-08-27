@@ -12,28 +12,25 @@ The AMF is responsible for:
 
 ## 🔧 Customizations in this Chart
 
-This chart has been adapted from the upstream towards5gs-helm project.
-The primary customizations focus on networking configuration to enable deployment on Amazon EKS in the public cloud.
+This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project.  
+The primary customizations focus on networking configuration to enable deployment on public cloud, namely Amazon EKS.  
 
-Customizations can be found in:
-
-[templates](./templates/), 
-[AMF chart values.yaml](./values.yaml), 
-[global values.yaml](../../values.yaml)
-
- for full parameter details.  
+Customizations can be found in:  
+- [`templates/`](./templates/)  
+- [`values.yaml`](./values.yaml)  
+- [`global values.yaml`](../../values.yaml)  
 
 ---
 
 ## 📖 References
 
+- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm)  
 - [free5GC project](https://github.com/free5gc/free5gc)  
 - [3GPP TS 23.501](https://www.3gpp.org/DynaReport/23501.htm) – 5G System Architecture  
-- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm)  
 
 ---
 
 ## ⚖️ License & Attribution
 
 This chart is based on **towards5gs-helm** (Apache 2.0).  
-Modifications and integrations are © 2025 CNAD LTD.
+Modifications and integrations are owned by © 2025 CNAD LTD.  
