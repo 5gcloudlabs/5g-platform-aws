@@ -17,9 +17,9 @@ The primary customizations focus on networking configuration to enable deploymen
 
 Customizations can be found in:
 
-[templates](./templates/)
-[values.yaml](./values.yaml)
-../../values.yaml
+[templates](./templates/), 
+[AMF chart values.yaml](./values.yaml), 
+[global values.yaml](../../values.yaml)
 
  for full parameter details.  
 
