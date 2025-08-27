@@ -33,4 +33,4 @@ Customizations can be found in:
 ## ⚖️ License & Attribution
 
 This chart is based on **towards5gs-helm** (Apache 2.0).  
-Modifications and integrations are owned by © 2025 CNAD LTD.  
+Modifications and integrations are owned by © 2025 5g-cloud-labs (a project by CNAD LTD.).
