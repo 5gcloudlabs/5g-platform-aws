@@ -1,8 +1,8 @@
 # free5GC AMF Helm Chart
 
-This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) Access and Mobility Management Function (AMF) on a public cloud environment, specifically optimized for Amazon EKS. It provides the core control-plane functionality in a 5G Standalone (SA) network.  
+This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) Access and Mobility Management Function (AMF) on a public cloud environment, specifically optimized for Amazon EKS.  
 
-The AMF is responsible for:  
+The AMF provides the core control-plane functionality in a 5G Standalone (SA) network and is responsible for:  
 - Registration management  
 - Connection and reachability management  
 - Mobility and handover control  
@@ -24,9 +24,10 @@ Customizations can be found in:
 
 ## References
 
-- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm)  
-- [free5GC project](https://github.com/free5gc/free5gc)  
-- [3GPP TS 23.501](https://www.3gpp.org/DynaReport/23501.htm) – 5G System Architecture  
+- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – The upstream open-source Helm charts project used as the basis for deploying 5GC network functions on Kubernetes.  
+- [free5GC project](https://github.com/free5gc/free5gc) – The official open-source 5G core network implementation providing the actual network function binaries and configurations.  
+- [3GPP TS 23.501](https://www.3gpp.org/DynaReport/23501.htm) – 5G System Architecture technical specification defining the architecture, interfaces, and protocols for 5G standalone networks.  
+
 
 ---
 
