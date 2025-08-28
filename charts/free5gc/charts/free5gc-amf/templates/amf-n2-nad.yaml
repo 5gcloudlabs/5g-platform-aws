@@ -13,9 +13,7 @@
 # -------------------------------------------------------------------------
 # [MODIFIED by 5g-cloud-labs]
 # -------------------------------------------------------------------------
-
-
-
+#
 # [MODIFIED by 5g-cloud-labs]
 # Renamed nested parameter group: 'n2network' > 'n2networkAMF'        
 {{- if and $.Values.isNgapNeeded $.Values.global.n2networkAMF.enabled}}
