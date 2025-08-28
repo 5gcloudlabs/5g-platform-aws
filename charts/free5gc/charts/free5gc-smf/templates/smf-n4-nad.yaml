@@ -10,6 +10,12 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
+# -------------------------------------------------------------------------
+# [MODIFIED by 5g-cloud-labs]
+# This file is customized for aws-5gcloudlabs.
+# -------------------------------------------------------------------------
+#
+
 # [MODIFIED by 5g-cloud-labs]
 # Modified nested paramter group name (n4network > n4networkSMF)        
 {{- if and $.Values.isPfcpNeeded $.Values.global.n4networkSMF.enabled}}
