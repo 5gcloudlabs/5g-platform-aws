@@ -17,7 +17,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
 # [CNAD MOD]
-# Updated value for NAD name '{{ .Values.global.n4network.name }}-{{ include "free5gc-upf.fullname" $ }}' > '{{ .Values.global.n4networkUPF.name }}'
+# Updated value for NAD name.
   name: {{ .Values.global.n4networkUPF.name }}
 spec:
 # [CNAD MOD]
