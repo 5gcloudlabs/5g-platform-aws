@@ -17,7 +17,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
 # [MODIFIED by 5g-cloud-labs]
-# Updated value for NAD name '{{ .Values.global.n3network.name }}-{{ include "free5gc-amf.fullname" $ }}' > '{{ .Values.global.n3networkUPF.name }}'
+# Updated value for NAD name.
   name: {{ .Values.global.n3networkUPF.name }}
 spec:
 # [MODIFIED by 5g-cloud-labs]
