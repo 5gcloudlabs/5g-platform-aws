@@ -14,11 +14,11 @@
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-# [CNAD MOD]
-# Updated value for NAD name ({{ .Values.global.n6network.name }}-{{ include "free5gc-upf.fullname" $ }} > {{ .Values.global.n6network.name }})
+# [MODIFIED by 5g-cloud-labs]
+# Updated value for NAD name.
   name: {{ .Values.global.n6network.name }}
 spec:
-# [CNAD MOD]
+# [MODIFIED by 5g-cloud-labs]
 # host-device config added + macvlan/ipvlan config removed.
 # whereabouts config added.
   config: '{
