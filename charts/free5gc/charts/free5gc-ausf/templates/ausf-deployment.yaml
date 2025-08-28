@@ -12,7 +12,10 @@
 #
 # -------------------------------------------------------------------------
 # [MODIFIED by 5g-cloud-labs]
+# This file is customized for aws-5gcloudlabs.
 # -------------------------------------------------------------------------
+#
+
 {{- with .Values.ausf }}
 apiVersion: apps/v1
 kind: Deployment
