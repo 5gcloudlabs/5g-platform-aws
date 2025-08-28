@@ -10,17 +10,17 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-# [CNAD MOD]
+# [MODIFIED by 5g-cloud-labs]
 # Modified nested paramter group name (n4network > n4networkSMF)        
 {{- if and $.Values.isPfcpNeeded $.Values.global.n4networkSMF.enabled}}
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-# [CNAD MOD]
-# Updated value for NAD name ({{ .Values.global.n4network.name }}-{{ include "free5gc-smf.fullname" $ }} > {{ .Values.global.n4networkSMF.name }})
+# [MODIFIED by 5g-cloud-labs]
+# Updated value for NAD name.
   name: {{ .Values.global.n4networkSMF.name }}
 spec:
-# [CNAD MOD]
+# [MODIFIED by 5g-cloud-labs]
 # IPVLAN config updated + MACVLAN config removed.
 # whereabouts config added.
   config: '{
