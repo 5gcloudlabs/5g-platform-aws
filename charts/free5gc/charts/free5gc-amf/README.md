@@ -24,9 +24,8 @@ Customizations can be found in:
 
 ## References
 
-- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Upstream Helm charts for deploying free5GC on Kubernetes.  
+- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Helm charts for deploying free5GC on Kubernetes.  
 - [free5GC project](https://github.com/free5gc/free5gc) – Open-source implementation of the 5G Core network functions.  
-- [3GPP TS 23.501](https://www.3gpp.org/DynaReport/23501.htm) – Specification defining the 5G System Architecture.  
   
 
 
