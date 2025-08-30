@@ -13,8 +13,10 @@
 # -------------------------------------------------------------------------
 # [MODIFIED by 5g-cloud-labs]
 # This file is customized for aws-5gcloudlabs.
+# Networking parameters are inherited from the customized global values.yaml.
 # -------------------------------------------------------------------------
 #
+
 {{- with .Values.amf }}
 apiVersion: apps/v1
 kind: Deployment
