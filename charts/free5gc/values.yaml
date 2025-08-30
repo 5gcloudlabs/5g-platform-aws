@@ -132,7 +132,7 @@ mongodb:
   auth:
     enabled: false
   persistence:
-    size: 6Gi
+    size: 7Gi
     storageClass: efs-sc
     mountPath: /bitnami/mongodb/data/db/
     accessModes:
