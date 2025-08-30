@@ -10,9 +10,11 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-# Default values for free5gc-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# -------------------------------------------------------------------------
+# [MODIFIED by 5g-cloud-labs]
+# This file is customized for aws-5gcloudlabs.
+# -------------------------------------------------------------------------
+#
 
 global:
   name: free5gc
@@ -110,18 +112,11 @@ global:
     gatewayIP: 100.64.6.1
     n6if:  # DN
       ipAddress: 100.64.6.10
-  n9network:
-    enabled: true
-    name: n9network
-    type: ipvlan
-    masterIf: eth0
-    subnetIP: 10.100.50.224
-    cidr: 29
-    gatewayIP: 10.100.50.230
-    excludeIP: 10.100.50.230
-
 
 # These parameters can be used to enable/disable deployment of subcharts
+# [MODIFIED by 5g-cloud-labs]
+# 
+
 deployMongoDb: true
 deployAmf: true
 deployAusf: true
