@@ -8,7 +8,7 @@ The WEBUI provides a graphical interface for managing free5GC subscribers, inclu
 
 ## Customizations in this Chart
 
-This chart has been customized to support deployment on Amazon EKS.  
+This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, to enable deployment on Amazon EKS.
 
 Customizations can be found in:  
 
