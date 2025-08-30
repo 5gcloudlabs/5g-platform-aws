@@ -12,15 +12,14 @@ This chart has been customized to support deployment on Amazon EKS.
 Customizations can be found in:  
 
 - [templates](./templates/)  
-- [WEBUI chart values.yaml](./values.yaml)  
+- [values.yaml](./values.yaml)  
 
 ---
 
 ## References
 
 - [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Helm charts for deploying free5GC on Kubernetes.  
-- [free5GC project](https://github.com/free5gc/free5gc) – Open-source implementation of the 5G Core network functions.  
-- [UERANSIM](https://github.com/aligungr/UERANSIM) – Open-source RAN and UE simulator for 5G testing and validation.  
+- [free5GC project](https://github.com/free5gc/free5gc) – Open-source implementation of the 5G Core network functions.   
 
 ---
 
