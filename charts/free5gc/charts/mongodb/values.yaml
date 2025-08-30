@@ -458,11 +458,11 @@ persistence:
   ##
   # [MODIFIED by 5g-cloud-labs]
   # Updated to use Amazon Elastic File System (EFS) via pre-created StorageClass 'efs-sc'
-  storageClass: efs-sc
+  #storageClass: efs-sc
   ## PV Access Mode
   ##
-  accessModes:
-    - ReadWriteOnce
+  #accessModes:
+  #  - ReadWriteOnce
   ## PVC size
   ##
   size: 8Gi
