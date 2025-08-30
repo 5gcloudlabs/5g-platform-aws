@@ -1,6 +1,7 @@
 # free5GC WEBUI Helm Chart
 
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) Web-based User Interface (WEBUI) on a public cloud environment, specifically optimized for Amazon EKS.
+
 The WEBUI provides a graphical interface for managing free5GC subscribers, including provisioning new ones and monitoring the status of existing subscribers.
 
 ---
