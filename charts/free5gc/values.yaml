@@ -133,7 +133,10 @@ mongodb:
     enabled: false
   persistence:
     size: 6Gi
+    storageClass: efs-sc
     mountPath: /bitnami/mongodb/data/db/
+    accessModes:
+     - ReadWriteOnce
   service:
     name: mongodb
     type: ClusterIP
