@@ -12,7 +12,10 @@
 #
 # -------------------------------------------------------------------------
 # [MODIFIED by 5g-cloud-labs]
+# Charts "free5gc-n3iwf" & "free5gc-dbpython" are removed. 
 # -------------------------------------------------------------------------
+#
+
 apiVersion: v2
 name: free5gc
 description: A Helm chart to deploy Free5gc
