@@ -13,7 +13,8 @@
 # -------------------------------------------------------------------------
 # [MODIFIED by 5g-cloud-labs]
 # This file is customized for aws-5gcloudlabs.
-# Charts "free5gc-n3iwf" & "free5gc-dbpython" were removed. 
+# Charts "free5gc-n3iwf" & "free5gc-dbpython" have been removed.
+# The original "maintainers" section has been removed.
 # -------------------------------------------------------------------------
 #
 
