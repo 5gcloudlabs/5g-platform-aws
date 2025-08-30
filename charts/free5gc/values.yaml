@@ -115,7 +115,7 @@ global:
 
 # These parameters can be used to enable/disable deployment of subcharts
 # [MODIFIED by 5g-cloud-labs]
-# 
+# N3iwf & dbpython have been removed.
 
 deployMongoDb: true
 deployAmf: true
