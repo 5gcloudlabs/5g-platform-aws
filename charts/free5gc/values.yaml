@@ -27,22 +27,13 @@ global:
       nodePort: "30800"
   sbi:
     scheme: http
-  amf:
-# [MODIFIED by 5g-cloud-labs]
-# Moved parameter 'n2if' under the renamed parameter group 'n2networkAMF'.
-    service:
-      ngap:
-        enabled: false
-        name: amf-n2
-        port: 38412
-        nodeport: 31412
-        protocol: SCTP
-        type: NodePort
+
   # [MODIFIED by 5g-cloud-labs]
   # Add hooks to delay application startup until the pod proxy is ready to accept traffic
   # https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
   proxy:
-    holdApplicationUntilProxyStarts: true        
+    holdApplicationUntilProxyStarts: true   
+    
   #Global network parametes
   # [MODIFIED by 5g-cloud-labs]
   # Renamed nested parameter group: 'n2network' > 'n2networkAMF'
