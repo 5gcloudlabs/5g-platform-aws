@@ -16,8 +16,8 @@ This chart has been adapted from the upstream [towards5gs-helm](https://github.c
 The primary customizations focus on networking configuration to enable deployment on Amazon EKS.  
 
 Customizations can be found in:  
-- [`upf-configmap.yaml`](./templates/upf-configmap.yaml)
-- [`upf-deployment.yaml`](./templates/upf-deployment.yaml)
+- [`upf-configmap.yaml`](./templates/upf/upf-configmap.yaml)
+- [`upf-deployment.yaml`](./templates/upf/upf-deployment.yaml)
 - [`upf-n3-nad.yaml`](./templates/upf-n3-nad.yaml)
 - [`upf-n4-nad.yaml`](./templates/upf-n4-nad.yaml)
 - [`upf-n6-nad.yaml`](./templates/upf-n6-nad.yaml)
