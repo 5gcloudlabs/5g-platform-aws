@@ -17,6 +17,8 @@ The primary customizations focus on networking configuration to enable deploymen
 
 Customizations can be found in:  
 - [`amf-configmap.yaml`](./templates/amf-configmap.yaml)
+- [`amf-deployment.yaml`](./templates/amf-deployment.yaml)
+- [`amf-deployment.yaml`](./templates/amf-deployment.yaml)
 - [`AMF values file`](./values.yaml)  
 - [`free5GC global values file`](../../values.yaml)  
 
