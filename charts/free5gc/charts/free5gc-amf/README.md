@@ -19,7 +19,7 @@ Customizations can be found in:
 - [`amf-configmap.yaml`](./templates/amf-configmap.yaml)
 - [`amf-deployment.yaml`](./templates/amf-deployment.yaml)
 - [`amf-n2-nad.yaml`](./templates/amf-n2-nad.yaml)
-- [`AMF values file`](./values.yaml)  
+- [`AMF values.yaml`](./values.yaml)  
 - [`free5GC global values file`](../../values.yaml)  
 
 ---
