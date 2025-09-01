@@ -16,9 +16,11 @@ This chart has been adapted from the upstream [towards5gs-helm](https://github.c
 The primary customizations focus on networking configuration to enable deployment on Amazon EKS.  
 
 Customizations can be found in:  
-- [`templates/`](./templates/)  
-- [`values.yaml`](./values.yaml)  
-- [`global values.yaml`](../../values.yaml)  
+- [`smf-configmap.yaml`](./templates/smf-configmap.yaml)
+- [`smf-deployment.yaml`](./templates/smf-deployment.yaml)
+- [`smf-n4-nad.yaml`](./templates/smf-n4-nad.yaml)
+- [`SMF values.yaml`](./values.yaml)  
+- [`free5GC global values.yaml`](../../values.yaml)   
 
 ---
 
