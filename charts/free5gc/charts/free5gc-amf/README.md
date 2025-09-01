@@ -20,7 +20,7 @@ Customizations can be found in:
 - [`amf-deployment.yaml`](./templates/amf-deployment.yaml)
 - [`amf-n2-nad.yaml`](./templates/amf-n2-nad.yaml)
 - [`AMF values.yaml`](./values.yaml)  
-- [`free5GC global values file`](../../values.yaml)  
+- [`free5GC global values.yaml`](../../values.yaml)  
 
 ---
 
