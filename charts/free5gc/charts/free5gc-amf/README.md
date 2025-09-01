@@ -17,7 +17,7 @@ The primary customizations focus on networking configuration to enable deploymen
 
 Customizations can be found in:  
 - [`templates/`](./templates/)  
-- [`values.yaml`](./values.yaml)  
+- [`AMF values file`](./values.yaml)  
 - [`free5GC global values file`](../../values.yaml)  
 
 ---
