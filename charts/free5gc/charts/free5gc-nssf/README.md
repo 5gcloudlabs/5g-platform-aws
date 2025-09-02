@@ -15,8 +15,9 @@ The NSSF is a core control-plane network function in a 5G Standalone (SA) networ
 This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, to enable deployment on Amazon EKS.
 
 Customizations can be found in:  
-- [`templates/`](./templates/)  
-- [`values.yaml`](./values.yaml)  
+- [`nssf-configmap.yaml`](./templates/nssf-configmap.yaml)
+- [`nssf-deployment.yaml`](./templates/nssf-deployment.yaml)
+- [`NSSF values.yaml`](./values.yaml)   
 
 ---
 
