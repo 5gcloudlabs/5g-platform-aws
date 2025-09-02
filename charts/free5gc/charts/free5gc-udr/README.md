@@ -15,8 +15,8 @@ The UDR is a core control-plane network function in a 5G Standalone (SA) network
 This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, to enable deployment on Amazon EKS.
 
 Customizations can be found in:  
-- [`templates/`](./templates/)  
-- [`values.yaml`](./values.yaml)  
+- [`udr-deployment.yaml`](./templates/udr-deployment.yaml)
+- [`UDR values.yaml`](./values.yaml)  
 
 ---
 
