@@ -14,7 +14,6 @@ The PCF is a core control-plane network function in a 5G Standalone (SA) network
 This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, to enable deployment on Amazon EKS. 
 
 Customizations can be found in:  
-- [`pcf-configmap.yaml`](./templates/pcf-configmap.yaml)
 - [`pcf-deployment.yaml`](./templates/pcf-deployment.yaml)
 - [`PCF values.yaml`](./values.yaml)  
 
