@@ -1,4 +1,4 @@
-# 5G Cloud Labs Console UI Helm Chart
+# Console UI Helm Chart
 
 This Helm chart deploys the **5G Cloud Labs Console UI**, a web-based interface for the [aws-5gcloudlabs](https://github.com/5g-cloud-labs/aws-5gcloudlabs) project.  
 
@@ -6,7 +6,7 @@ This Helm chart deploys the **5G Cloud Labs Console UI**, a web-based interface 
 
 ---
 
-## 🌐 Overview
+## Overview
 
 The Console UI provides an interactive **web interface** to simplify the end-to-end deployment and testing of a **5G Core Network (free5GC)** and **RAN/UE simulation (UERANSIM)** on **Amazon EKS**. It enables users to:
 
