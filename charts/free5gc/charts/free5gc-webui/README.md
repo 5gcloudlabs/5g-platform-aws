@@ -12,8 +12,9 @@ This chart has been adapted from the upstream [towards5gs-helm](https://github.c
 
 Customizations can be found in:  
 
-- [templates](./templates/)  
-- [values.yaml](./values.yaml)  
+- [`webui-deployment.yaml`](./templates/webui-deployment.yaml)
+- [`WEBUI values.yaml`](./values.yaml)  
+ 
 
 ---
 
