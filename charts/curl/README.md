@@ -9,5 +9,5 @@ This chart deploys a lightweight `curl` pod that supports automation scripts for
 ## Notes
 
 - Maintained locally in the `aws-5g-cloud-labs` repository.  
-- Deployment is managed via Argo CD (`argocd/curl-app.yml`).  
+Deployment is managed via Argo CD Application [`curl-app.yml`](../argocd/curl-app.yml) .
 - The pod uses the `curlimages/curl` container image.  
