@@ -7,8 +7,11 @@
 # the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
 # or see the "LICENSE" file for more details.
 #
-# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
-# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+# -------------------------------------------------------------------------
+# [MODIFIED by 5g-cloud-labs]
+# This file is customized for aws-5gcloudlabs.
+# Networking parameters are inherited from the customized global values.yaml.
+# -------------------------------------------------------------------------
 #
 # [MODIFIED by 5g-cloud-labs]
 # Renamed nested parameter group: 'n3network' > 'n3networkgNB'
