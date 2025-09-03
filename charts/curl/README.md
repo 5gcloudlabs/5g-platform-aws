@@ -16,6 +16,6 @@ This chart deploys a lightweight `curl` pod that supports automation scripts for
 
 ### Notes
 
-This chart is maintained locally in the `aws-5g-cloud-labs` repository.  
+This chart is maintained locally in the `aws-5gcloudlabs` repository by 5g-cloud-labs.
 
 
