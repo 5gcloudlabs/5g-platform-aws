@@ -2,9 +2,9 @@
 
 ### Purpose
 
-This Helm chart deploys the **Executor** component of the [aws-5gcloudlabs](https://github.com/5g-cloud-labs/aws-5gcloudlabs) project on Amazon EKS.  
+This Helm chart deploys the **Executor** pod on Amazon EKS.  
 
-The Executor runs inside the Kubernetes cluster and is responsible for executing deployment scripts and handling provisioning workflows triggered by the Console UI.  
+The Executor runs is responsible for executing deployment scripts and handling provisioning workflows triggered by the Console UI.  
 
 ---
 
