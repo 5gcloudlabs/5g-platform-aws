@@ -27,3 +27,5 @@ It is managed as an Argo CD Application, enabling GitOps-based deployment and li
 
 
 ### Notes
+
+This chart is maintained locally in the `aws-5gcloudlabs` repository, by 5g-cloud-labs.
