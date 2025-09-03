@@ -8,7 +8,7 @@ The Executor runs inside the Kubernetes cluster and is responsible for executing
 
 ---
 
-## Overview
+### Overview
 
 The Executor acts as the backend execution engine for the 5G Cloud Labs environment:  
 
@@ -19,6 +19,6 @@ The Executor acts as the backend execution engine for the 5G Cloud Labs environm
 
 ---
 
-## Deployment
+### Deployment
 
 The Executor is packaged as a Docker container and deployed on Amazon EKS via this Helm chart. It is managed as an Argo CD Application, enabling GitOps-based deployment and lifecycle management.
