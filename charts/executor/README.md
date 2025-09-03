@@ -1,4 +1,4 @@
-# Executor Helm Chart
+## Executor Helm Chart
 
 ### Purpose
 
