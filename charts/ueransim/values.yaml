@@ -10,10 +10,11 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-# Default values for ueransim-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
+# -------------------------------------------------------------------------
+# [MODIFIED by 5g-cloud-labs]
+# This file is customized for aws-5gcloudlabs.
+# -------------------------------------------------------------------------
+#
 global:
   # [MODIFIED by 5g-cloud-labs]
   # Add hooks to delay application startup until the pod proxy is ready to accept traffic
