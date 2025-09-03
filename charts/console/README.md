@@ -21,4 +21,4 @@ It enables users to:
 ## Deployment
 
 The Console UI is packaged as a Docker container and deployed on Amazon EKS via this Helm chart.
-It is typically managed as an Argo CD Application, enabling GitOps-based deployment and lifecycle management.
+It is managed as an Argo CD Application, enabling GitOps-based deployment and lifecycle management.
