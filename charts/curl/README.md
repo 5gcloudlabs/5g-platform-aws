@@ -1,4 +1,4 @@
-# curl
+# Curl Helm Chart
 
 The `curl` pod is used by **5g-cloud-labs** for subscriber provisioning workflows.  
 
