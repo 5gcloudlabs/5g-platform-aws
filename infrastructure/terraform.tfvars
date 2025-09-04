@@ -19,8 +19,8 @@ ami_id = "REDACTED_AMI_ID" #Focal Pro 1.29         #image list per region: https
 
 ##DNS Parameters##
 cloudflare_api_token = "REDACTED_CLOUDFLARE_API_TOKEN"
-domain_name = "tclouds.co.uk" #"cloud-5g.io"
-zone_id = "6245dceda9757a901b9e034520802b74" #"f13499d719a8bddb157a500c487ba064"
+domain_name = "cloud-5g.io"
+zone_id = "f13499d719a8bddb157a500c487ba064"
 
 
 ##S3 Bucket Parameters##
