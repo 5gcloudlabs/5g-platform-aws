@@ -1,10 +1,10 @@
 # free5GC AMF Helm Chart
 
-### Purpose
+## Purpose
 
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) Access and Mobility Management Function (AMF) on a public cloud environment, specifically optimized for Amazon EKS.  
 
-### Overview
+## Overview
 
 The AMF provides the core control-plane functionality in a 5G Standalone (SA) network and is responsible for:  
 - Registration management  
@@ -13,7 +13,7 @@ The AMF provides the core control-plane functionality in a 5G Standalone (SA) ne
 - Routing signaling messages between the UE and the 5GC  
 
 
-### Customizations in this Chart
+## Customizations in this Chart
 
 This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project.  
 The primary customizations focus on networking configuration to enable deployment on Amazon EKS.  
