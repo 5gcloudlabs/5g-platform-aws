@@ -26,9 +26,9 @@ Customizations can be found in:
 - [`free5GC global values.yaml`](../../values.yaml)  
 
 
-### Deployment
+## Deployment
 
-- Deployment is managed via Argo CD Application [`curl-app.yml`](../../argocd/required-apps/curl-app.yml).
+Deployment is managed via Argo CD Application [`curl-app.yml`](../../argocd/required-apps/curl-app.yml).
 
 
 
