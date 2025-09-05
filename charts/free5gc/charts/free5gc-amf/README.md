@@ -12,7 +12,6 @@ The AMF provides the core control-plane functionality in a 5G Standalone (SA) ne
 - Mobility and handover control  
 - Routing signaling messages between the UE and the 5GC  
 
----
 
 ### Customizations in this Chart
 
@@ -26,7 +25,6 @@ Customizations can be found in:
 - [`AMF values.yaml`](./values.yaml)  
 - [`free5GC global values.yaml`](../../values.yaml)  
 
----
 
 ### Deployment
 
@@ -40,7 +38,6 @@ Customizations can be found in:
   
 
 
----
 
 ## License & Attribution
 
