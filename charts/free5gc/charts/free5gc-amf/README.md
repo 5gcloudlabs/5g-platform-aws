@@ -28,6 +28,11 @@ Customizations can be found in:
 
 ---
 
+### Deployment
+
+- Deployment is managed via Argo CD Application [`curl-app.yml`](../../argocd/required-apps/curl-app.yml).
+
+
 ## References
 
 - [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Helm charts for deploying free5GC on Kubernetes.  
