@@ -31,7 +31,7 @@ Customizations can be found in:
 
 Deployment is managed via Argo CD Application [`free5gc-app.base`](../../../../argocd/free5gc-app/free5gc-app.base).
 
---
+---
 
 ## References
 
