@@ -9,33 +9,19 @@ The chart follows an **Argo CD GitOps-style workflow** for lifecycle management.
 
 ## Overview
 The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation, including the following network functions (as subcharts):
- - [free5gc-amf](./charts/free5gc-amf) - **Access and Mobility Management Function**
+ - [free5gc-amf](./charts/free5gc-amf) - Access and Mobility Management Function
  - [free5gc-ausf](./charts/free5gc-ausf) - Authentication Server Function
- - [free5gc-nrf](./charts/free5gc-nrf)
- - [free5gc-nssf](./charts/free5gc-nssf)
- - [free5gc-pcf](./charts/free5gc-pcf)
- - [free5gc-smf](./charts/free5gc-smf)
- - [free5gc-udm](./charts/free5gc-udm)
- - [free5gc-udr](./charts/free5gc-udr)
- - [free5gc-upf](./charts/free5gc-upf)
- - [free5gc-webui](./charts/free5gc-webui)
- - [mongodb](./charts/mongodb) 
+ - [free5gc-nrf](./charts/free5gc-nrf) - Network Repository Function
+ - [free5gc-nssf](./charts/free5gc-nssf) Network Slice Selection Function
+ - [free5gc-pcf](./charts/free5gc-pcf) - Policy Control Function
+ - [free5gc-smf](./charts/free5gc-smf) - Session Management Function
+ - [free5gc-udm](./charts/free5gc-udm) - Unified Data Management
+ - [free5gc-udr](./charts/free5gc-udr) - Unified Data Repository
+ - [free5gc-upf](./charts/free5gc-upf) - User Plane Function
+ - [free5gc-webui](./charts/free5gc-webui) - used as GUI for subscriber provisioning and realtime status check
+ - [mongodb](./charts/mongodb) - used as database backend for free5GC
 
 
-
-
-
-- **AMF** – Access and Mobility Management Function  
-- **SMF** – Session Management Function  
-- **UPF** – User Plane Function  
-- **AUSF** – Authentication Server Function  
-- **UDM** – Unified Data Management  
-- **NRF** – NF Repository Function  
-- **PCF** – Policy Control Function  
-- **NSSF** – Network Slice Selection Function  
-- **BSF** – Binding Support Function  
-- **UDR** – Unified Data Repository  
-- **MongoDB** – Database backend for free5GC  
 
 Each subchart can be customized individually via `values.yaml`, and global configuration is centralized in `values.yaml` at the top level.
 
