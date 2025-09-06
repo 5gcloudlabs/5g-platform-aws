@@ -1,9 +1,13 @@
 # free5GC SMF Helm Chart
 
+## Purpose
+
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) Session Management Function (SMF) on a public cloud environment, specifically optimized for Amazon EKS.
 
-The SMF is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
+---
+## Overview
 
+The SMF is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
 - Session management for PDU sessions of UEs  
 - Allocating and managing IP addresses for UEs  
 - Interfacing with UPF for traffic forwarding and QoS enforcement  
@@ -29,8 +33,6 @@ Customizations can be found in:
 - [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Helm charts for deploying free5GC on Kubernetes.  
 - [free5GC](https://github.com/free5gc/free5gc) – Open-source implementation of the 5G Core network functions.  
   
-
-
 ---
 
 ## License & Attribution
