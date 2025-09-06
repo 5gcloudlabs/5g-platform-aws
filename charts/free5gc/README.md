@@ -35,7 +35,7 @@ Deployment of the free5GC chart can be triggered in two ways:
    The UI can be accessed at: `https://console.$domain_name`.
 
 2. **CLI script** – A Bash script that performs the deployment from the command line.  
-   The script is available at: [free5gc-amf](../../scripts/cli/free5gc-cli.sh).
+   The script is available at: [free5gc-cli.sh](../../scripts/cli/free5gc-cli.sh).
 
 ---
 
