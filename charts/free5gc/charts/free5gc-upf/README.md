@@ -1,9 +1,14 @@
 # free5GC UPF Helm Chart
 
+## Purpose
+
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) User Plane Function (UPF) on a public cloud environment, specifically optimized for Amazon EKS.
 
-The UPF is a core user-plane network function in a 5G Standalone (SA) network and is responsible for:
+---
 
+## Overview
+
+The UPF is a core user-plane network function in a 5G Standalone (SA) network and is responsible for:
 - Forwarding user-plane traffic between RAN and data networks  
 - Applying QoS policies and traffic shaping  
 - Supporting PDU session management in coordination with SMF  
@@ -26,12 +31,17 @@ Customizations can be found in:
 
 ---
 
+## Deployment
+
+Deployment is managed via Argo CD Application [`free5gc-app.base`](../../../../argocd/free5gc-app/free5gc-app.base).
+
+---
+
 ## References
 
 - [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Helm charts for deploying free5GC on Kubernetes.  
 - [free5GC](https://github.com/free5gc/free5gc) – Open-source implementation of the 5G Core network functions.  
   
-
 
 ---
 
