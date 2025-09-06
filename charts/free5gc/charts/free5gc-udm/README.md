@@ -1,9 +1,14 @@
 # free5GC UDM Helm Chart
 
+## Purpose
+
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) Unified Data Management (UDM) function on a public cloud environment, specifically optimized for Amazon EKS.
 
-The UDM is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
+---
 
+## Overview
+
+The UDM is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
 - Storing and managing subscriber profile and authentication data  
 - Supporting authentication and authorization procedures  
 - Serving as the primary data source for AUSF and other network functions  
@@ -16,7 +21,8 @@ This chart has been adapted from the upstream [towards5gs-helm](https://github.c
 
 Customizations can be found in:  
 - [`udm-deployment.yaml`](./templates/udm-deployment.yaml)
-- [`UDM values.yaml`](./values.yaml)  
+- [`UDM values.yaml`](./values.yaml)
+
 ---
 
 ## References
@@ -24,8 +30,6 @@ Customizations can be found in:
 - [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Helm charts for deploying free5GC on Kubernetes.  
 - [free5GC](https://github.com/free5gc/free5gc) – Open-source implementation of the 5G Core network functions.  
   
-
-
 ---
 
 ## License & Attribution
