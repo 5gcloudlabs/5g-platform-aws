@@ -28,7 +28,7 @@ Customizations can be found in:
 
 ## Deployment
 
-Deployment is managed via Argo CD Application [`curl-app.yml`](../../argocd/required-apps/curl-app.yml).
+Deployment is managed via Argo CD Application [`free5gc-app.base`](../../argocd/free5gc-app/free5gc-app.base).
 
 
 
