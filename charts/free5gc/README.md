@@ -10,7 +10,7 @@ The chart follows an **Argo CD GitOps-style workflow** for lifecycle management.
 ## Overview
 The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation, including the following network functions (as subcharts):
  - [free5gc-amf](./charts/free5gc-amf) - **Access and Mobility Management Function**
- - [free5gc-ausf](./charts/free5gc-ausf)
+ - [free5gc-ausf](./charts/free5gc-ausf) - Authentication Server Function
  - [free5gc-nrf](./charts/free5gc-nrf)
  - [free5gc-nssf](./charts/free5gc-nssf)
  - [free5gc-pcf](./charts/free5gc-pcf)
@@ -19,6 +19,7 @@ The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation, i
  - [free5gc-udr](./charts/free5gc-udr)
  - [free5gc-upf](./charts/free5gc-upf)
  - [free5gc-webui](./charts/free5gc-webui)
+ - [mongodb](./charts/mongodb) 
 
 
 
