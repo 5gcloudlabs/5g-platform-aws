@@ -2,8 +2,7 @@
 
 ## Purpose
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the complete free5GC 5G Core network on a public cloud environment, specifically optimized for Amazon EKS.  
-It provides a centralized umbrella chart that manages all free5GC network functions as subcharts, enabling streamlined configuration and deployment.
-
+It organizes all free5GC network functions as subcharts and manages their configuration for deployment.
 
 ---
 
@@ -40,9 +39,13 @@ Deployment of the free5GC chart can be triggered in two ways:
 
 In both cases, Argo CD manages reconciliation against the Helm charts in this repository, ensuring consistent and repeatable deployments.
 
+---
+
 ## References
 - [free5GC](https://free5gc.org/) – Open-source 5G Core implementation  
 - [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – Helm charts for free5GC (reference project)
+
+---
 
 ## License & Attribution
 This chart is based on upstream projects licensed under Apache 2.0.  
