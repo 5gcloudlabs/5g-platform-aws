@@ -1,9 +1,14 @@
 # MongoDB Helm Chart
 
-This MongoDB Helm chart is derived from the upstream [Bitnami MongoDB chart](https://github.com/bitnami/charts/tree/main/bitnami/mongodb).  
-Within this solution, MongoDB serves as the **database backend** for free5GC, storing subscriber profiles and session data.
+## Purpose
+
+This Helm chart, derived from the upstream [Bitnami MongoDB chart](https://github.com/bitnami/charts/tree/main/bitnami/mongodb), deploys the [free5GC](https://github.com/free5gc/free5gc) MongoDB on a public cloud environment, specifically optimized for Amazon EKS.
+
+## Overview
+Within this solution, MongoDB serves as the **database backend** for free5GC, storing subscriber profiles, network functions profiles & session data.
 
 ---
+
 ## Customizations in this Chart
 
 This chart has been adapted to enable deployment on Amazon EKS.
@@ -17,6 +22,13 @@ Customizations can be found in:
 
 ---
 
+## Deployment
+
+Deployment is managed via Argo CD Application [`free5gc-app.base`](../../../../argocd/free5gc-app/free5gc-app.base).
+
+---
+
+
 ## References
 
 - [Bitnami MongoDB Chart](https://github.com/bitnami/charts/tree/main/bitnami/mongodb)  
@@ -25,7 +37,7 @@ Customizations can be found in:
 
 ---
 
-## ⚖️ License & Attribution
+## License & Attribution
 
 This chart is based on the Bitnami MongoDB chart (Apache 2.0).  
 Modifications and integrations are owned by © 2025 5g-cloud-labs (a project by CNAD LTD.).
