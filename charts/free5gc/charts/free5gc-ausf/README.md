@@ -1,14 +1,17 @@
 # free5GC AUSF Helm Chart
 
+
+## Purpose
+
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the [free5GC](https://github.com/free5gc/free5gc) Authentication Server Function (AUSF) on a public cloud environment, specifically optimized for Amazon EKS.  
 
-The AUSF is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:  
+## Overview
 
+The AUSF is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:  
 - Authentication of User Equipment (UE)  
 - Supporting primary authentication procedures with the Unified Data Management (UDM)  
 - Delivering authentication results to other 5GC network functions  
 
----
 
 ## Customizations in this Chart
 
@@ -19,7 +22,11 @@ Customizations can be found in:
 - [`ausf-deployment.yaml`](./templates/ausf-deployment.yaml)
 - [`AUSF values.yaml`](./values.yaml)   
 
----
+
+## Deployment
+
+Deployment is managed via Argo CD Application [`free5gc-app.base`](../../../../argocd/free5gc-app/free5gc-app.base).
+
 
 ## References
 
@@ -28,7 +35,6 @@ Customizations can be found in:
   
 
 
----
 
 ## License & Attribution
 
