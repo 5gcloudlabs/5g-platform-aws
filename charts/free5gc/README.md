@@ -1,9 +1,9 @@
 # free5gc Helm chart
 
 ## Purpose
-This Helm chart deploys the complete [free5GC](https://github.com/free5gc/free5gc) 5G Core network on Kubernetes.  
-It is designed to run in a **public cloud environment** and has been optimized for **Amazon EKS** deployments.  
-The chart follows an **Argo CD GitOps-style workflow** for lifecycle management.
+This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the complete free5GC 5G Core network on a public cloud environment, specifically optimized for Amazon EKS.  
+It provides a centralized umbrella chart that manages all free5GC network functions as subcharts, enabling streamlined configuration and deployment.
+
 
 ---
 
@@ -21,18 +21,13 @@ The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation, i
  - [free5gc-webui](./charts/free5gc-webui) - used as GUI for subscriber provisioning and realtime status check
  - [mongodb](./charts/mongodb) - used as database backend for free5GC
 
-
-
-Each subchart can be customized individually via `values.yaml`, and global configuration is centralized in `values.yaml` at the top level.
+---
 
 ## Customizations in this Chart
-This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project.
+This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project. Each subchart has been customized for this deployment, with the details of those customizations documented in the respective subchart README files.  
+In addition, a global `values.yaml` at the top level provides centralized configuration across the full free5GC deployment, including detailed networking configuration for cloud environment compatibility.
 
-Key customizations include:
-- Adjusted networking configuration for compatibility with **Amazon EKS CNI**.  
-- Integration with **Argo CD Applications** for GitOps-driven deployments.  
-- Simplified configuration structure via a unified `values.yaml`.  
-- Updates for compatibility with the latest `free5GC` release and dependencies.
+---
 
 ## Deployment
 Deployment of the free5GC chart can be triggered in two ways:
