@@ -22,8 +22,12 @@ It enables users to:
 
 ### Deployment
 
-The Console UI is packaged as a Docker container and deployed on Amazon EKS via this Helm chart.
-It is managed as an Argo CD Application, enabling GitOps-based deployment and lifecycle management.
+- This chart is deployed and managed via Argo CD.
+- The corresponding Argo CD Application manifest is defined in
+  [`curl-app.yml`](../../argocd/required-apps/console-app.yml).
+- The application manifest is included in the **required apps** set and is deployed automatically by Argo CD during cluster bootstrap.
+- The Console UI is packaged as a Docker container
+
 
 
 ### Notes
