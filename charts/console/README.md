@@ -24,7 +24,7 @@ It enables users to:
 
 - This chart is deployed and managed via Argo CD.
 - The corresponding Argo CD Application manifest is defined in
-  [`curl-app.yml`](../../argocd/required-apps/console-app.yml).
+  [`console-app.yml`](../../argocd/required-apps/console-app.yml).
 - The application manifest is included in the **required apps** set and is deployed automatically by Argo CD during cluster bootstrap.
 - The Console UI is packaged as a Docker container
 
