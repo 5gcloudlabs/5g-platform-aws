@@ -26,7 +26,9 @@ It enables users to:
 - The corresponding Argo CD Application manifest is defined in
   [`console-app.yml`](../../argocd/required-apps/console-app.yml).
 - The application manifest is included in the **required apps** set and is deployed automatically by Argo CD during cluster bootstrap.
-- The Console UI is packaged as a Docker container
+- The pod runs the container image `ghcr.io/5g-cloud-labs/console-ui:<tag>`.
+- The source code repository is available at [https://github.com/5g-cloud-labs/console-ui](https://github.com/5g-cloud-labs/console-ui), using the **aws** branch for builds.
+
 
 
 
