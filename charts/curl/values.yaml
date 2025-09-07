@@ -2,6 +2,6 @@ replicaCount: 1
 
 image:
   repository: curlimages/curl
-  tag: latest
+  tag: 8.15.0
   pullPolicy: IfNotPresent
 
