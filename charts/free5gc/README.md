@@ -35,7 +35,7 @@ Deployment of the free5GC chart can be triggered in two ways:
    After the infrastructure is created with OpenTofu, the UI can be accessed at: <br>`https://console.$domain_name`.
 
 3. **CLI script** – A Bash script that performs the deployment from the command line.  
-   After cloning the repository to your local machine, the CLI script is available at: `./aws-5gcloudlabs/scripts/cli/free5gc-cli.sh`
+   After cloning the repository to your local machine, the CLI script is available at: <br>`./aws-5gcloudlabs/scripts/cli/free5gc-cli.sh`
 
 ---
 
