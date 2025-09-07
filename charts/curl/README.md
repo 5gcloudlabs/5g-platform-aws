@@ -12,10 +12,15 @@ This chart deploys a lightweight `curl` pod that supports automation scripts for
 
 ---
 
+
 ## Deployment
 
-- Deployment is managed via Argo CD Application [`curl-app.yml`](../../argocd/required-apps/curl-app.yml).
-- The pod uses the `curlimages/curl` container image tag 8.15.0.
+- This chart is deployed and managed via Argo CD.
+- The corresponding Argo CD Application manifest is defined in
+  [`curl-app.yml`](../../argocd/required-apps/curl-app.yml).
+- The application manifest is included in the **required apps** set and is deployed automatically by Argo CD during cluster bootstrap.
+- The pod runs the container image `curlimages/curl:8.15.0`.
+
 
 ---
 
