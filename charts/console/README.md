@@ -1,12 +1,12 @@
-## Console UI Helm Chart
+# Console UI Helm Chart
 
-### Purpose
+## Purpose
 
 This Helm chart deploys the **5G Cloud Labs Console UI**, a web-based interface for the [aws-5gcloudlabs](https://github.com/5g-cloud-labs/aws-5gcloudlabs) project.  
 
 ---
 
-### Overview
+## Overview
 
 The Console UI provides an interactive **web interface** to simplify the end-to-end deployment and testing of a **5G Core Network (free5GC)** and **RAN/UE simulation (UERANSIM)** on **Amazon EKS**. 
 
@@ -20,7 +20,7 @@ It enables users to:
 
 ---
 
-### Deployment
+## Deployment
 
 - This chart is deployed and managed via Argo CD.
 - The corresponding Argo CD Application manifest is defined in
@@ -29,9 +29,16 @@ It enables users to:
 - The pod runs the container image `ghcr.io/5g-cloud-labs/console-ui:<tag>`.
 - The source code repository is available at [https://github.com/5g-cloud-labs/console-ui](https://github.com/5g-cloud-labs/console-ui), using the **aws** branch for builds.
 
+---
 
+## References
 
+https://github.com/curl/curl-container
 
-### Notes
+---
 
-This chart is maintained locally in the `aws-5gcloudlabs` repository, by 5g-cloud-labs.
+## License & Attribution
+
+This chart was created and is maintained by © 2025 5g-cloud-labs (a project by CNAD LTD.).
+<br>Licensed under the Apache License 2.0.
+
