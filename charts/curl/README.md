@@ -26,7 +26,7 @@ This chart deploys a lightweight `curl` pod that supports automation scripts for
 
 ## References
 
-
+https://github.com/curl/curl-container
 
 ---
 
