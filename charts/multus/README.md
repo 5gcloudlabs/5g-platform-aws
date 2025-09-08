@@ -30,6 +30,8 @@ Key features include:
 
 ## References
 
+- https://github.com/k8snetworkplumbingwg/multus-cni
+- https://github.com/aws/amazon-vpc-cni-k8s/blob/master/config/multus/v3.7.2-eksbuild.1/aws-k8s-multus.yaml
 
 ---
 
