@@ -1,17 +1,16 @@
 # Curl Helm Chart
 
-## Purpose:
+## Purpose
 
-The `curl` pod is used by **5g-cloud-labs** for subscriber provisioning workflows.  
+This Helm chart deploys a lightweight `curl` deployment on Amazon EKS.
 
 ---
 
 ## Overview
 
-This chart deploys a lightweight `curl` pod that supports automation scripts for subscriber provisioning operations within the 5G network deployment process.  
+The `curl` pod enables subscriber provisioning workflow.
 
 ---
-
 
 ## Deployment
 
