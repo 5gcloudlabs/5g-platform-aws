@@ -4,7 +4,7 @@
 
 This Helm chart deploys the **Executor** pod on Amazon EKS.  
 
-The Executor runs is responsible for executing deployment scripts and handling provisioning workflows triggered by the Console UI.  
+The Executor pod is responsible for executing deployment scripts and handling provisioning workflows triggered by the Console UI.  
 
 ---
 
