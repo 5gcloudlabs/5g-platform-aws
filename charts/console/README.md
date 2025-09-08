@@ -35,8 +35,9 @@ It enables users to:
 
 ## References
 
-[https://flask.palletsprojects.com](https://flask.palletsprojects.com/en/stable/)
-
+- [https://flask.palletsprojects.com](https://flask.palletsprojects.com/en/stable/)
+- [https://docs.docker.com/build](https://docs.docker.com/build/)
+  
 ---
 
 ## License & Attribution
