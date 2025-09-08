@@ -8,7 +8,8 @@ This Helm chart deploys a lightweight `curl` deployment on Amazon EKS. The curl 
 
 ## Overview
 
-The `curl` pod supports subscriber provisioning workflow.
+The `curl` Deployment is used by automation scripts to provision subscribers into the 5G Core Network (free5GC).  
+Provisioning scripts run `kubectl exec` inside the `curl` pod, which then issues REST API calls to the free5GC WebUI service containing the subscriber’s subscription information.
 
 ---
 
