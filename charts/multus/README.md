@@ -2,24 +2,29 @@
 
 ## Purpose
 
-This Helm chart, derived from the official AWS Multus CNI manifest (https://github.com/aws/amazon-vpc-cni-k8s/blob/master/config/multus/v3.7.2-eksbuild.1/aws-k8s-multus.yaml), deploys the Multus DaemonSet on Amazon EKS.
+This Helm chart is derived from the official AWS Multus CNI manifest (https://github.com/aws/amazon-vpc-cni-k8s/blob/master/config/multus/v3.7.2-eksbuild.1/aws-k8s-multus.yaml).  
+It deploys the Multus DaemonSet on Amazon EKS.
 
 ---
 
 ## Overview
 
-Multus CNI is a Container Network Interface plugin that enables Kubernetes pods to attach to multiple networks simultaneously.  
-It allows pods to use secondary interfaces in addition to the primary cluster network.
+Multus CNI enables Kubernetes pods to connect to multiple networks, adding secondary interfaces alongside the default cluster network.
 
 Key features include:
 
-- Supports multiple network attachments per pod.
+- Supports multiple network attachments per pod, providing flexibility for advanced networking scenarios such as multi-homed pods.
 - Integrates with other CNI plugins, such as AWS VPC CNI, IPVLAN, and Host-Device.
-- Provides flexibility for complex networking scenarios, including multi-homed pods.
 
 ---
 
 ## Deployment
+
+- This chart is deployed and managed via Argo CD.
+- The corresponding Argo CD Application manifest is defined in
+  [`multus-app.yml`](../../argocd/required-apps/multus-app.yml).
+- The application manifest is included in the "required-apps" set and is deployed automatically by Argo CD post EKS cluster creation.
+- The pod runs the container image `602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/multus-cni:v3.7.2-eksbuild.1`
 
 ---
 
