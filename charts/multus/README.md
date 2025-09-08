@@ -37,5 +37,9 @@ Key features include:
 
 ## License & Attribution
 
-- **Original license:** Apache License 2.0 (see [LICENSE](./LICENSE))
+This Helm chart was created by restructuring and packaging content from the  
+[AWS Multus CNI manifest](https://github.com/aws/amazon-vpc-cni-k8s/blob/master/config/multus/v3.7.2-eksbuild.1/aws-k8s-multus.yaml).  
+The original manifest is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
+
+This chart was created and is maintained by © 2025 5G Cloud Labs (a project by CNAD LTD.).
 
