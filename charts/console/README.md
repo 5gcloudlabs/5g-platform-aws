@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This Helm chart deploys the 5G Cloud Labs Console UI on Amazon EKS.
+This Helm chart deploys the 5G Cloud Labs Console UI on Amazon EKS. The Console UI serves as the user-facing interface for interacting with the 5G Cloud Labs environment.
 
 ---
 
@@ -13,7 +13,7 @@ The Console UI provides an interactive web interface to simplify the end-to-end 
 It enables users to:
 - Deploy the 5G Core Network ([free5GC](https://github.com/free5gc/free5gc) network functions such as AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR, UPF).
 - Provision Subscribers
-- Simulate gNBs and UEs using [UERANSIM](https://github.com/aligungr/UERANSIM).  
+- Deploy UE & gNB and simulators using [UERANSIM](https://github.com/aligungr/UERANSIM).  
 - Monitor Pod Readiness & Logs for both network functions and simulations.
 - Test the 5G network Latency & Bandwidth.
 
