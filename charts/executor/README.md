@@ -1,6 +1,6 @@
-## Executor Helm Chart
+# Executor Helm Chart
 
-### Purpose
+## Purpose
 
 This Helm chart deploys the **Executor** pod on Amazon EKS.  
 
@@ -8,7 +8,7 @@ The Executor runs is responsible for executing deployment scripts and handling p
 
 ---
 
-### Overview
+## Overview
 
 The Executor acts as the backend execution engine for the 5G Cloud Labs environment:  
 
@@ -19,6 +19,23 @@ The Executor acts as the backend execution engine for the 5G Cloud Labs environm
 
 ---
 
-### Deployment
+## Deployment
 
-The Executor is packaged as a Docker container and deployed on Amazon EKS via this Helm chart. It is managed as an Argo CD Application, enabling GitOps-based deployment and lifecycle management.
+- This chart is deployed and managed via Argo CD.
+- The corresponding Argo CD Application manifest is defined in
+  [`console-app.yml`](../../argocd/required-apps/console-app.yml).
+- The application manifest is included in the "required-apps" set and is deployed automatically by Argo CD during cluster bootstrap.
+- The pod runs the container image 
+
+---
+
+## References
+
+
+
+---
+
+## License & Attribution
+
+This chart was created and is maintained by © 2025 5g-cloud-labs (a project by CNAD LTD.).
+<br>Licensed under the Apache License 2.0.
