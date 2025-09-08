@@ -28,7 +28,8 @@ It enables users to:
   [`console-app.yml`](../../argocd/required-apps/console-app.yml).
 - The application manifest is included in the "required-apps" set and is deployed automatically by Argo CD post EKS cluster creation.
 - The pod runs the container image `ghcr.io/5g-cloud-labs/console-ui:<tag>`.
-- The source code repository is available at [https://github.com/5g-cloud-labs/console-ui](https://github.com/5g-cloud-labs/console-ui), using the "aws" branch for builds.
+- The source code repository (Flask + HTML templates) is available at [https://github.com/5g-cloud-labs/console-ui](https://github.com/5g-cloud-labs/console-ui).
+
 
 ---
 
