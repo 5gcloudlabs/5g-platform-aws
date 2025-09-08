@@ -25,7 +25,7 @@ The Executor acts as the backend execution engine for the 5G Cloud Labs environm
 - The corresponding Argo CD Application manifest is defined in
   [`executor-app.yml`](../../argocd/required-apps/executor-app.yml).
 - The application manifest is included in the "required-apps" set and is deployed automatically by Argo CD post EKS cluster creation.
-- The pod runs the container image 
+- The pod runs alpine/git:v2.49.1 as its init container and bitnami/kubectl:1.33.4 as its main container.
 
 ---
 
