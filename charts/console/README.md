@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This Helm chart deploys the 5G Cloud Labs Console UI, a web-based interface for the [aws-5gcloudlabs](https://github.com/5g-cloud-labs/aws-5gcloudlabs) project.  
+This Helm chart deploys the 5G Cloud Labs Console UI, specifically optimized for Amazon EKS..  
 
 ---
 
