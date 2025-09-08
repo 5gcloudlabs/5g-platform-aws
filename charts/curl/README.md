@@ -8,7 +8,7 @@ This Helm chart deploys a lightweight `curl` deployment on Amazon EKS.
 
 ## Overview
 
-The `curl` pod enables subscriber provisioning workflow.
+The `curl` pod supports subscriber provisioning workflow.
 
 ---
 
