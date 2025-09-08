@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This Helm chart deploys a lightweight `curl` deployment on Amazon EKS.
+This Helm chart deploys a lightweight `curl` deployment on Amazon EKS. The curl pod supports subscriber provisioning workflow.
 
 ---
 
