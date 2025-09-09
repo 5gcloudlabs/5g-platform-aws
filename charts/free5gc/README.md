@@ -20,6 +20,9 @@ The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation, i
  - [free5gc-webui](./charts/free5gc-webui) - used as GUI for subscriber provisioning and realtime status check
  - [mongodb](./charts/mongodb) - used as database backend for free5GC
 
+<img width="1176" height="508" alt="5g Core" src="https://github.com/user-attachments/assets/196b6477-6a7a-4e8c-b7d9-a4817727803b" />
+
+
 ---
 
 ## Customizations in this Chart
