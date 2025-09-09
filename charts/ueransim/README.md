@@ -24,6 +24,8 @@ Customizations can be found in:
 - [`gnb-deployment.yaml`](./templates/gnb/gnb-deployment.yaml)
 - [`gnb-n2-nad.yaml`](./templates/gnb/gnb-n2-nad.yaml)
 - [`gnb-n3-nad.yaml`](./templates/gnb/gnb-n3-nad.yaml)
+- [`ue-configmap.yaml`](./templates/ue/ue-configmap.yaml)
+- [`ue-deployment.yaml`](./templates/ue/ue-deployment.yaml)
   
 ---
 
