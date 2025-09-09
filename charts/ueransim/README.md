@@ -10,8 +10,8 @@ It organizes the UERANSIM components as subcharts (`gnb` and `ue`) and manages t
 The UERANSIM Helm chart provides a complete simulation of a 5G Radio Access Network (gNB) and User Equipment (UE), enabling realistic testing of 5G Core deployments.  
 It includes the following subcharts:
 
-- [ueransim-gnb](./charts/ueransim-gnb) – Simulates a 5G base station (gNB) that connects to the free5GC Core.  
-- [ueransim-ue](./charts/ueransim-ue) – Simulates User Equipment (UE) devices that register, establish sessions, and exchange traffic with the Core via the gNB.  
+- [gnb](./charts/templates/gnb) – Simulates a 5G base station (gNB) that connects to the free5GC Core.  
+- [ue](./charts/templates/ue) – Simulates User Equipment (UE) devices that register, establish sessions, and exchange traffic with the Core via the gNB.  
 
 ---
 
