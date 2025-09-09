@@ -21,7 +21,10 @@ This chart has been adapted from the upstream [towards5gs-helm](https://github.c
 Customizations can be found in:
 
 - [`gnb-configmap.yaml`](./templates/gnb/gnb-configmap.yaml)
-- 
+- [`gnb-deployment.yaml`](./templates/gnb/gnb-deployment.yaml)
+- [`gnb-n2-nad.yaml`](./templates/gnb/gnb-n2-nad.yaml)
+- [`gnb-n3-nad.yaml`](./templates/gnb/gnb-n3-nad.yaml)
+  
 ---
 
 ## Deployment
