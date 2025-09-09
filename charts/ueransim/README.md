@@ -16,8 +16,9 @@ It includes the following subcharts:
 ---
 
 ## Customizations in this Chart
-This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project. Both subcharts have been customized for cloud deployment, with the details of those customizations documented in their respective README files.  
-In addition, a top-level `values.yaml` provides centralized configuration to align UERANSIM with the free5GC Core and the target cloud networking environment.
+This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project. Both subcharts, together with the top-level values.yaml, have been customized to integrate UERANSIM with the free5GC Core and enable deployment on Amazon EKS.
+
+Customizations can be found in:
 
 ---
 
