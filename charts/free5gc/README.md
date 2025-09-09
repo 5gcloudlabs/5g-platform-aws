@@ -7,7 +7,10 @@ It organizes all free5GC network functions as subcharts and manages their config
 ---
 
 ## Overview
-The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation, including the following network functions (as subcharts):
+The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation:
+<img width="1176" height="508" alt="5g Core" src="https://github.com/user-attachments/assets/196b6477-6a7a-4e8c-b7d9-a4817727803b" />
+
+Including the following network functions (as subcharts):
  - [free5gc-amf](./charts/free5gc-amf) - Access and Mobility Management Function
  - [free5gc-ausf](./charts/free5gc-ausf) - Authentication Server Function
  - [free5gc-nrf](./charts/free5gc-nrf) - Network Repository Function
@@ -19,9 +22,6 @@ The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation, i
  - [free5gc-upf](./charts/free5gc-upf) - User Plane Function
  - [free5gc-webui](./charts/free5gc-webui) - used as GUI for subscriber provisioning and realtime status check
  - [mongodb](./charts/mongodb) - used as database backend for free5GC
-
-<img width="1176" height="508" alt="5g Core" src="https://github.com/user-attachments/assets/196b6477-6a7a-4e8c-b7d9-a4817727803b" />
-
 
 ---
 
