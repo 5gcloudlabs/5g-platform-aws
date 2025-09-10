@@ -16,7 +16,7 @@ It includes the following subcharts:
 ---
 
 ## Customizations in this Chart
-This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project. Both subcharts, together with the top-level values.yaml, have been customized to integrate UERANSIM with the free5GC Core and enable deployment on Amazon EKS.
+This chart has been adapted from the upstream [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project. Both subcharts, together with the top-level `values.yaml`, have been customized to integrate UERANSIM with the free5GC Core and enable deployment on Amazon EKS.
 
 Customizations can be found in:
 
@@ -26,6 +26,7 @@ Customizations can be found in:
 - [`gnb-n3-nad.yaml`](./templates/gnb/gnb-n3-nad.yaml)
 - [`ue-configmap.yaml`](./templates/ue/ue-configmap.yaml)
 - [`ue-deployment.yaml`](./templates/ue/ue-deployment.yaml)
+- [`ueransim global values.yaml`](./values.yaml)
   
 ---
 
