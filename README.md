@@ -1,4 +1,4 @@
-# Welcome to aws-5gcloudlabs !
+<h1 align="center"># Welcome to aws-5gcloudlabs !</h1>
 An opensource project that helps you deploy an end-to-end 5g network on AWS cloud
 
 <p align="center">
