@@ -8,7 +8,8 @@ This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-Op
 
 ## Overview
 
-<img width="2412" height="1519" alt="5G Core_UPF" src="https://github.com/user-attachments/assets/5ad6fc49-7b33-4c4d-8233-a78b17d54497" />
+<img width="2412" height="1519" alt="5G Core_UPF" src="https://github.com/user-attachments/assets/27746de0-aaa7-4925-aa15-33413b5da9e4" />
+
 
 
 The UPF is a core user-plane network function in a 5G Standalone (SA) network and is responsible for:
