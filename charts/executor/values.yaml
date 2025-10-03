@@ -4,7 +4,7 @@ initContainer:
   image: alpine/git:v2.49.1
 
 container:
-  image: bitnami/kubectl:1.33.4
+  image: bitnamilegacy/kubectl:1.33.4
 
 serviceAccount:
   name: executor-sa
