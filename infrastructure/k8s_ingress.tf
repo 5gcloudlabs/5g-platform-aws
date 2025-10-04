@@ -1,8 +1,8 @@
 resource "kubernetes_ingress_v1" "ingress-argocd" {
-  depends_on = [kubernetes_namespace_v1.argocd, time_sleep.wait_for_alb-controller, module.acm, module.eks, module.vpc]
+  depends_on = [kubernetes_namespace_v1.istio-system, time_sleep.wait_for_alb-controller, module.acm, module.eks, module.vpc]
   metadata {
     name = "ingress-argocd"
-    namespace = kubernetes_namespace_v1.argocd.metadata[0].name
+    namespace = kubernetes_namespace_v1.istio-system.metadata[0].name
     annotations = {
       "kubernetes.io/ingress.class" = "alb"
       "alb.ingress.kubernetes.io/scheme" =  "internet-facing"
@@ -22,7 +22,7 @@ resource "kubernetes_ingress_v1" "ingress-argocd" {
         path {
           backend {
             service {
-              name = "argocd-server"
+              name = "istio-gateway"
               port {
                 number = 80
               }
