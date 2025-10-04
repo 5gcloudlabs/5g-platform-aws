@@ -161,74 +161,9 @@ EOF
 }
 
 
-################
-
-
 
 ################
 
-##create gw listening on port 443 
-#resource "kubectl_manifest" "istio-gw-argocd" {
-#  depends_on = [helm_release.istio-ingress]
-#    yaml_body = <<EOF
-#apiVersion: networking.istio.io/v1alpha3
-#kind: Gateway
-#metadata:
-#  name: istio-gw-argocd
-#  namespace: argocd #kubernetes_namespace_v1.argocd.metadata[0].name
-#spec:
-#  # The selector matches the ingress gateway pod labels.
-#  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
-#  selector:
-#    istio: gateway #ingress
-#  servers:
-#  - port:
-#      number: 443
-#     name: https
-#      protocol: HTTPS
-#    hosts:
-#    - "argocd.tclouds.co.uk"
-#    EOF
-#}
-#
-#
-#
-##create virtual service pointing to argocd service 
-#resource "kubectl_manifest" "istio-vs-argocd" {
-#  depends_on = [helm_release.istio-ingress]
-#    yaml_body = <<EOF
-#apiVersion: networking.istio.io/v1alpha3
-#kind: VirtualService
-#metadata:
-#  name: istio-vs-argocd
-#  namespace: argocd #kubernetes_namespace_v1.argocd.metadata[0].name
-#spec:
-#  hosts:
-#  - "argocd.tclouds.co.uk"
-#  gateways:
-#  - istio-gw-argocd
-#  http:
-#  - match:
-#    - uri:
-#        prefix: /
-#    route:
-#    - destination:
-#        port:
-#          number: 443
-#        host: argocd-server
-#EOF
-#}
-
-
-
-
-
-
-
-
-
-
-################
 
 #create gw listening on port 80 
 resource "kubectl_manifest" "istio-gw-console" {
@@ -285,3 +220,57 @@ EOF
 
 
 ################
+
+
+#create gw listening on port 80 
+resource "kubectl_manifest" "istio-gw-argocd" {
+  depends_on = [helm_release.istio-gateway]
+    yaml_body = <<EOF
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-gw-argocd
+  namespace: argocd
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
+  selector:
+    istio: gateway #ingress
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "argocd.${var.domain_name}"
+    EOF
+}
+
+
+
+
+#create virtual service pointing to frontend service 
+resource "kubectl_manifest" "istio-vs-argocd" {
+  depends_on = [helm_release.istio-gateway]
+    yaml_body = <<EOF
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: istio-vs-argocd
+  namespace: argocd
+spec:
+  hosts:
+  - "argocd.${var.domain_name}"
+  gateways:
+  - istio-gw-argocd
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: argocd-server
+        port:
+          number: 80
+EOF
+}
