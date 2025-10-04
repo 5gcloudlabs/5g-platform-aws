@@ -12,7 +12,6 @@ resource "kubernetes_ingress_v1" "ingress-argocd" {
       "alb.ingress.kubernetes.io/certificate-arn" = module.acm.acm_certificate_arn
       "alb.ingress.kubernetes.io/target-type" = "ip"
       "alb.ingress.kubernetes.io/group.name" = "apps"
-      "alb.ingress.kubernetes.io/backend-protocol" = "HTTPS"
     }
   }
 
@@ -25,7 +24,7 @@ resource "kubernetes_ingress_v1" "ingress-argocd" {
             service {
               name = "argocd-server"
               port {
-                number = 443
+                number = 80
               }
             }
           }
