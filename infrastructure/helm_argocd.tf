@@ -5,4 +5,10 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
   version    = "8.2.5"
   namespace  = kubernetes_namespace_v1.argocd.metadata[0].name
+
+  set = [{
+    name  = "configs.params.server\\.insecure"
+    value = "true"
+  }]
+
 }
