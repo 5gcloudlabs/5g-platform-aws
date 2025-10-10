@@ -12,6 +12,7 @@ The PCF is a core control-plane network function in a 5G Standalone (SA) network
 - Providing policy rules for session management and QoS  
 - Enforcing charging and access policies for UEs  
 - Communicating with SMF and other network functions to maintain compliance with operator policies  
+<img width="2412" height="1519" alt="5G Core_pcf" src="https://github.com/user-attachments/assets/daedbd54-194b-4b37-8bb2-08fcd69b9837" />
 
 ---
 
