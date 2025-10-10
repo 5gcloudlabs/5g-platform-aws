@@ -46,3 +46,14 @@ resource "kubernetes_namespace_v1" "istio-system" {
     
     }
 }
+
+
+
+
+resource "kubernetes_namespace_v1" "cert-manager" {
+    depends_on       = [module.eks]
+    metadata {
+        name = "cert-manager"
+
+    }
+}
