@@ -14,6 +14,8 @@ The AUSF is a core control-plane network function in a 5G Standalone (SA) networ
 - Supporting primary authentication procedures with the Unified Data Management (UDM)  
 - Delivering authentication results to other 5GC network functions  
 
+<img width="2412" height="1519" alt="5G Core_ausf" src="https://github.com/user-attachments/assets/8bc1271a-0600-4366-84fb-52fd7f5ee604" />
+
 ---
 
 ## Customizations in this Chart
