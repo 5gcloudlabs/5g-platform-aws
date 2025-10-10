@@ -11,7 +11,9 @@ This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-Op
 The NSSF is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
 - Selecting the appropriate network slice for a UE based on subscription and policy  
 - Providing slice information to other network functions (e.g., AMF)  
-- Supporting slice-aware session management and routing decisions  
+- Supporting slice-aware session management and routing decisions
+  
+<img width="2412" height="1519" alt="5G Core_nssf" src="https://github.com/user-attachments/assets/f0be22b8-5f61-4736-bf4a-adaad8cedca3" />
 
 ---
 
