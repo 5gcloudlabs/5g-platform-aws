@@ -11,7 +11,9 @@ This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-Op
 The UDR is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
 - Storing subscription data, policies, and other user-related information  
 - Providing data to UDM, PCF, and other network functions  
-- Supporting database queries in accordance with 3GPP-defined interfaces  
+- Supporting database queries in accordance with 3GPP-defined interfaces
+
+<img width="2412" height="1519" alt="5G Core_udr" src="https://github.com/user-attachments/assets/b45d3764-d0e5-4817-bbc9-e08c17ae1f08" />
 
 ---
 
