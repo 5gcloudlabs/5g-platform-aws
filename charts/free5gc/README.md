@@ -8,7 +8,8 @@ It organizes all free5GC network functions as subcharts and manages their config
 
 ## Overview
 The free5GC Helm chart provides a full 5G Core Standalone (SA) implementation:
-<img width="1176" height="508" alt="5g Core" src="https://github.com/user-attachments/assets/196b6477-6a7a-4e8c-b7d9-a4817727803b" />
+<img width="2412" height="1518" alt="5G Core (1)" src="https://github.com/user-attachments/assets/4fb7c70b-9e27-4116-871d-945a719c3471" />
+
 
 Including the following network functions (as subcharts):
  - [free5gc-amf](./charts/free5gc-amf) - Access and Mobility Management Function
