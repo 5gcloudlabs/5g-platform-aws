@@ -1,13 +1,12 @@
-
-#create gw listening on port 80 
-resource "kubectl_manifest" "istio-gw-grafana" {
+#create gw listening on port 443
+resource "kubectl_manifest" "istio-gw" {
   depends_on = [helm_release.istio-gateway]
     yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: Gateway
 metadata:
-  name: istio-gw-grafana
-  namespace: monitoring #kubernetes_namespace_v1.monitoring.metadata[0].name
+  name: istio-gw
+  namespace: istio-system
 spec:
   # The selector matches the ingress gateway pod labels.
   # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
@@ -15,13 +14,46 @@ spec:
     istio: gateway #ingress
   servers:
   - port:
-      number: 80
-      name: http
-      protocol: HTTP
+      number: 443
+      name: https
+      protocol: HTTPS
     hosts:
-    - "grafana.${var.domain_name}"
+    - "*"
+    tls:
+      mode: SIMPLE
+      credentialName: "tls-cert-secret"
     EOF
 }
+
+
+
+#create virtual service pointing to console service
+resource "kubectl_manifest" "istio-vs-console" {
+  depends_on = [helm_release.istio-gateway]
+    yaml_body = <<EOF
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: istio-vs-console
+  namespace: default
+spec:
+  hosts:
+  - "console.${var.domain_name}"
+  gateways:
+  - istio-system/istio-gw
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: console-service
+        port:
+          number: 80
+EOF
+}
+
+
 
 
 
@@ -29,7 +61,7 @@ spec:
 resource "kubectl_manifest" "istio-vs-grafana" {
   depends_on = [helm_release.istio-gateway]
     yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: istio-vs-grafana
@@ -38,7 +70,7 @@ spec:
   hosts:
   - "grafana.${var.domain_name}"
   gateways:
-  - istio-gw-grafana
+  - istio-system/istio-gw
   http:
   - match:
     - uri:
@@ -51,39 +83,13 @@ spec:
 EOF
 }
 
-################
-
-#create gw listening on port 80 
-resource "kubectl_manifest" "istio-gw-prometheus" {
-  depends_on = [helm_release.istio-gateway]
-    yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: istio-gw-prometheus
-  namespace: monitoring #kubernetes_namespace_v1.monitoring.metadata[0].name
-spec:
-  # The selector matches the ingress gateway pod labels.
-  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
-  selector:
-    istio: gateway #ingress
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "prometheus.${var.domain_name}"
-    EOF
-}
-
 
 
 #create virtual service pointing to prometheus service 
 resource "kubectl_manifest" "istio-vs-prometheus" {
   depends_on = [helm_release.istio-gateway]
     yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: istio-vs-prometheus
@@ -92,7 +98,7 @@ spec:
   hosts:
   - "prometheus.${var.domain_name}"
   gateways:
-  - istio-gw-prometheus
+  - istio-system/istio-gw
   http:
   - match:
     - uri:
@@ -105,40 +111,13 @@ spec:
 EOF
 }
 
-################
-
-#create gw listening on port 80 
-resource "kubectl_manifest" "istio-gw-free5gc" {
-  depends_on = [helm_release.istio-gateway]
-    yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: istio-gw-free5gc
-  namespace: free5gc #kubernetes_namespace_v1.free5gc.metadata[0].name
-spec:
-  # The selector matches the ingress gateway pod labels.
-  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
-  selector:
-    istio: gateway #ingress
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "webui.${var.domain_name}"
-    EOF
-}
-
-
 
 
 #create virtual service pointing to free5gc webui service 
 resource "kubectl_manifest" "istio-vs-free5gc" {
   depends_on = [helm_release.istio-gateway]
     yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: istio-vs-free5gc
@@ -147,7 +126,7 @@ spec:
   hosts:
   - "webui.${var.domain_name}"
   gateways:
-  - istio-gw-free5gc
+  - istio-system/istio-gw
   http:
   - match:
     - uri:
@@ -162,98 +141,13 @@ EOF
 
 
 
-################
 
 
-#create gw listening on port 80 
-resource "kubectl_manifest" "istio-gw-console" {
-  depends_on = [helm_release.istio-gateway]
-    yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: istio-gw-console
-  namespace: default 
-spec:
-  # The selector matches the ingress gateway pod labels.
-  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
-  selector:
-    istio: gateway #ingress
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "console.${var.domain_name}"
-    EOF
-}
-
-
-
-
-#create virtual service pointing to frontend service 
-resource "kubectl_manifest" "istio-vs-console" {
-  depends_on = [helm_release.istio-gateway]
-    yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: istio-vs-console
-  namespace: default
-spec:
-  hosts:
-  - "console.${var.domain_name}"
-  gateways:
-  - istio-gw-console
-  http:
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: console-service
-        port:
-          number: 80
-EOF
-}
-
-
-################
-
-
-#create gw listening on port 80 
-resource "kubectl_manifest" "istio-gw-argocd" {
-  depends_on = [helm_release.istio-gateway]
-    yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: istio-gw-argocd
-  namespace: argocd
-spec:
-  # The selector matches the ingress gateway pod labels.
-  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
-  selector:
-    istio: gateway #ingress
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "argocd.${var.domain_name}"
-    EOF
-}
-
-
-
-
-#create virtual service pointing to frontend service 
+#create virtual service pointing to argocd service 
 resource "kubectl_manifest" "istio-vs-argocd" {
   depends_on = [helm_release.istio-gateway]
     yaml_body = <<EOF
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: istio-vs-argocd
@@ -262,7 +156,7 @@ spec:
   hosts:
   - "argocd.${var.domain_name}"
   gateways:
-  - istio-gw-argocd
+  - istio-system/istio-gw
   http:
   - match:
     - uri:
@@ -274,3 +168,5 @@ spec:
           number: 80
 EOF
 }
+
+
