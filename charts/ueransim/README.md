@@ -13,6 +13,8 @@ It includes the following subcharts:
 - [gnb](./templates/gnb) – Simulates a 5G base station (gNB) that connects to the free5GC Core.  
 - [ue](./templates/ue) – Simulates User Equipment (UE) devices that register, establish sessions, and exchange traffic with the Core via the gNB.  
 
+<img width="2412" height="1519" alt="5G Core_ueransim" src="https://github.com/user-attachments/assets/05729a55-c26d-4e45-b48c-8570e8c1ee97" />
+
 ---
 
 ## Customizations in this Chart
