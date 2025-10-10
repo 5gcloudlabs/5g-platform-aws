@@ -13,7 +13,6 @@ The AMF provides the core control-plane functionality in a 5G Standalone (SA) ne
 - Connection and reachability management  
 - Mobility and handover control  
 - Routing signaling messages between the UE and the 5GC  
-
 <img width="2412" height="1519" alt="5G Core_AMF_1" src="https://github.com/user-attachments/assets/4c39a48a-b577-491b-bdbe-ee48fc4a820b" />
  
 ---
