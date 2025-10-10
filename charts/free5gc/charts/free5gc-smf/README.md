@@ -10,7 +10,9 @@ This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-Op
 The SMF is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
 - Session management for PDU sessions of UEs  
 - Allocating and managing IP addresses for UEs  
-- Interfacing with UPF for traffic forwarding and QoS enforcement  
+- Interfacing with UPF for traffic forwarding and QoS enforcement
+  
+<img width="2412" height="1519" alt="5G Core_smf" src="https://github.com/user-attachments/assets/38a9ae3f-8adc-41e5-801f-10200a57df69" />
 
 ---
 
@@ -25,6 +27,7 @@ Customizations can be found in:
 - [`smf-n4-nad.yaml`](./templates/smf-n4-nad.yaml)
 - [`SMF values.yaml`](./values.yaml)  
 - [`free5GC global values.yaml`](../../values.yaml)   
+
 
 ---
 
