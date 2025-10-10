@@ -11,7 +11,9 @@ This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-Op
 The UDM is a core control-plane network function in a 5G Standalone (SA) network and is responsible for:
 - Storing and managing subscriber profile and authentication data  
 - Supporting authentication and authorization procedures  
-- Serving as the primary data source for AUSF and other network functions  
+- Serving as the primary data source for AUSF and other network functions
+  
+<img width="2412" height="1519" alt="5G Core_udm" src="https://github.com/user-attachments/assets/d89a218b-e8ae-43e5-87ce-c6befc338028" />
 
 ---
 
