@@ -13,6 +13,8 @@ The NRF is a core control-plane network function in a 5G Standalone (SA) network
 - Supporting service discovery for other 5GC network functions  
 - Facilitating interactions between network functions via the Service-Based Architecture (SBA)  
 
+<img width="2412" height="1519" alt="5G Core_nrf" src="https://github.com/user-attachments/assets/a4164841-3bae-4049-aff1-d4cee58a34e5" />
+
 ---
 
 ## Customizations in this Chart
