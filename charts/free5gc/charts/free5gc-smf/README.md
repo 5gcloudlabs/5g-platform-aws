@@ -11,9 +11,7 @@ The SMF is a core control-plane network function in a 5G Standalone (SA) network
 - Session management for PDU sessions of UEs  
 - Allocating and managing IP addresses for UEs  
 - Interfacing with UPF for traffic forwarding and QoS enforcement
-  
 <img width="2412" height="1519" alt="5G Core_smf" src="https://github.com/user-attachments/assets/38a9ae3f-8adc-41e5-801f-10200a57df69" />
-
 ---
 
 ## Customizations in this Chart
