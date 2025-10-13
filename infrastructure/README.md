@@ -5,7 +5,7 @@ All infrastructure is deployed using **OpenTofu** — an open-source Infrastruct
 
 ---
 
-## 🏗️ AWS Resources
+## AWS Resources
 
 These files define the core AWS infrastructure for hosting the EKS-based 5G environment.
 
@@ -28,7 +28,7 @@ These files define the core AWS infrastructure for hosting the EKS-based 5G envi
 
 ---
 
-## ☸️ Kubernetes Resources
+## Kubernetes Resources
 
 These files configure Kubernetes objects deployed into the EKS cluster.
 
@@ -50,7 +50,7 @@ These files configure Kubernetes objects deployed into the EKS cluster.
 
 ---
 
-## ☁️ Helm Releases
+## Helm Releases
 
 These files deploy critical cluster add-ons via Helm charts.
 
@@ -65,7 +65,7 @@ These files deploy critical cluster add-ons via Helm charts.
 
 ---
 
-## 🧩 Supporting Files
+## Supporting Files
 
 | File | Description |
 |------|--------------|
@@ -77,7 +77,7 @@ These files deploy critical cluster add-ons via Helm charts.
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 To initialize and deploy the infrastructure:
 
