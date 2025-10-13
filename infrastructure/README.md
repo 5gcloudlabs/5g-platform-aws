@@ -70,7 +70,6 @@ These files deploy critical cluster add-ons via Helm charts.
 | File | Description |
 |------|--------------|
 | `argocd_required_apps.tf` | Ensures core Argo CD Applications (e.g., Executor, Console UI) are pre-registered. |
-| `nginx.tf` | Configures an NGINX utility pod or ingress for testing. |
 | `provider.tf` | Defines provider configurations (AWS, Kubernetes, Helm). |
 | `variable.tf` | Declares reusable variables for the infrastructure stack. |
 | `terraform.tfvars` | Contains environment-specific variable values. |
