@@ -75,12 +75,3 @@ These files deploy critical cluster add-ons via Helm charts.
 | `terraform.tfvars` | Contains environment-specific variable values. |
 
 ---
-
-## Deployment
-
-To initialize and deploy the infrastructure:
-
-```bash
-tofu init
-tofu plan
-tofu apply
