@@ -11,12 +11,12 @@ export mnc=$mnc_
 
 
 # Substitute variables
-envsubst < ../../argocd/free5gc-app/free5gc-app.base > ../../argocd/free5gc-app/free5gc-app.yml
+envsubst < ../../argocd-apps/free5gc-app/free5gc-app.base > ../../argocd-apps/free5gc-app/free5gc-app.yml
 envsubst '$mcc,$mnc' < ./subscriber-provisioner-cli.base > ./subscriber-provisioner-cli.sh
-envsubst '$mcc,$mnc' < ../../argocd/ueransim-app/ueransim-app.base > ../../argocd/ueransim-app/ueransim-app.tmp
+envsubst '$mcc,$mnc' < ../../argocd-apps/ueransim-app/ueransim-app.base > ../../argocd-apps/ueransim-app/ueransim-app.tmp
 
 # Add executable permissions to script:
 chmod u+x ./subscriber-provisioner-cli.sh
 
 # Apply free5gc yml file:
-kubectl apply -f ../../argocd/free5gc-app/free5gc-app.yml
+kubectl apply -f ../../argocd-apps/free5gc-app/free5gc-app.yml
