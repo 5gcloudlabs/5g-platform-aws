@@ -2,7 +2,7 @@
 
 ## Purpose
 This Argo CD `Application` manifest defines the deployment of the [free5GC Helm chart](../../charts/free5gc) on Amazon EKS.  
-It enables GitOps-based management of the full free5GC 5G Core network, ensuring that configuration and lifecycle are declaratively controlled from source.
+It provides a declarative way to deploy and manage the **free5GC 5G Core Network** through Argo CD, using the Git repository as the source of truth for configuration.
 
 ---
 
@@ -10,22 +10,22 @@ It enables GitOps-based management of the full free5GC 5G Core network, ensuring
 The manifest registers a free5GC deployment as an Argo CD `Application`.  
 Key details include:
 
-- **Source** – Pulls the Helm chart from the `charts/free5gc` path of the `trims` branch in the Git repository.  
+- **Source** – Pulls the Helm chart from the `charts/free5gc` path in the Git repository.  
 - **Release** – Deploys under the release name `aws-5gcloudlabs`.  
 - **Namespace** – Installs all free5GC components into the `free5gc` namespace.  
-- **Sync Policy** – Uses automated synchronization with pruning and self-healing enabled to keep workloads in the desired state.  
+- **Sync Policy** – Configured for on-demand synchronization rather than continuous GitOps-based reconciliation.  
 
-Configuration is customized for 5G Core network functions (AMF, AUSF, NRF, NSSF, SMF), with key parameters such as **MCC (Mobile Country Code)** and **MNC (Mobile Network Code)** templated as `$mcc` and `$mnc`.  
-These values are dynamically patched by higher-level workflows (e.g., the Console UI or CLI) to align the deployment with the target operator profile.
+The deployment includes key 5G Core network functions such as **AMF**, **AUSF**, **NRF**, **NSSF**, **SMF**, and **UPF**.  
+Configuration parameters like **MCC (Mobile Country Code)** and **MNC (Mobile Network Code)** are templated as `$mcc` and `$mnc`, and can be patched by higher-level workflows (e.g., the Console UI or automation scripts) prior to deployment.
 
 ---
 
 ## Deployment Flow
-- This `Application` manifest is part of the **required apps** automatically synchronized by Argo CD.  
-- When applied, Argo CD continuously monitors the Git repository and ensures the free5GC Helm release matches the declared state.  
-- Updates to MCC/MNC values are injected into the manifest, and Argo CD reconciles the deployment accordingly.  
+- This `Application` manifest is applied via Argo CD after cluster provisioning.  
+- When triggered, Argo CD deploys the free5GC Helm chart into the target namespace using the declared chart path and values.  
+- The repository serves as the centralized source for manifests, but there is **no continuous synchronization** from Git — updates are applied manually or through controlled automation workflows.  
 
-This approach provides a fully automated, GitOps-driven deployment pipeline for the free5GC 5G Core on Amazon EKS.
+This approach provides a **reproducible and consistent** deployment process for the free5GC 5G Core on Amazon EKS without relying on continuous GitOps reconciliation.
 
 ---
 
@@ -38,4 +38,4 @@ This approach provides a fully automated, GitOps-driven deployment pipeline for 
 
 ## License & Attribution
 This manifest is maintained by © 2025 5g-cloud-labs (a project by CNAD LTD.).  
-The free5GC chart is adapted from [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm), licensed under Apache 2.0.  
+The free5GC chart is adapted from [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm), licensed under Apache 2.0.
