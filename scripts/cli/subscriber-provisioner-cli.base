@@ -13,7 +13,7 @@ end_imsi=$(($start_imsi + $count - 1))
 export count
 
 # Substitute variables:
-envsubst < ../../argocd/ueransim-app/ueransim-app.tmp > ../../argocd/ueransim-app/ueransim-app.yml
+envsubst < ../../argocd-apps/ueransim-app/ueransim-app.tmp > ../../argocd-apps/ueransim-app/ueransim-app.yml
 
 
 echo -e "\n\n*** Starting provisioning of ($count) subscribers with IMSI range beginning at ($start_imsi) ***\n\nPlease wait..." 
