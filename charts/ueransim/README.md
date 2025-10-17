@@ -35,11 +35,11 @@ Customizations can be found in:
 ## Deployment
 Deployment of the UERANSIM chart can be triggered in two ways:
 
-1. **Console UI** – Provides an interface to deploy and simulate UEs and gNBs through interactive workflows.  
-   The Console UI is available at: <br>`https://console.$domain_name`.
+1. **CLI script** – A Bash script that performs the deployment from the command line.  
+   After cloning the repository to your local machine, the CLI script is available at: <br>`../../scripts/cli/ueransim-cli.sh`
 
-2. **CLI script** – A Bash script that performs the deployment from the command line.  
-   After cloning the repository to your local machine, the CLI script is available at: <br>`./aws-5gcloudlabs/scripts/cli/ueransim-cli.sh`
+2. **Console UI** – Provides an interface to deploy and simulate UEs and gNBs through interactive workflows.  
+   The Console UI is available at: <br>`https://console.$domain_name`.
 
 ---
 
