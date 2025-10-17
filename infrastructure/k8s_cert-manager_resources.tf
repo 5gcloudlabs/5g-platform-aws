@@ -35,7 +35,7 @@ spec:
   secretName: tls-cert-secret
   commonName: cloud-5g.io
   dnsNames:
-    - "cloud-5g.io"
-    - "*.cloud-5g.io"
+    - "${var.domain_name}"
+    - "*.${var.domain_name}"
 EOF
 }
