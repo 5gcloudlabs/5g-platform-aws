@@ -52,7 +52,9 @@ These files configure Kubernetes objects deployed into the EKS cluster.
 
 ## Helm Releases
 
-These files deploy critical cluster add-ons via Helm charts.
+These files deploy cluster add-ons directly using the **`helm_release`** resource in **OpenTofu**, rather than through Argo CD.  
+This approach ensures tighter integration between these system-level components and the underlying infrastructure during the initial provisioning phase.
+
 
 | File | Description |
 |------|--------------|
