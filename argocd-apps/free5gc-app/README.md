@@ -15,7 +15,7 @@ Key details include:
 - **Namespace** – Installs all free5GC components into the `free5gc` namespace.  
 - **Sync Policy** – Configured for on-demand synchronization rather than continuous GitOps-based reconciliation.  
 
-The deployment includes key 5G Core network functions such as **AMF**, **AUSF**, **NRF**, **NSSF**, **SMF**, and **UPF**.  
+The deployment includes key 5G Core network functions such as **AMF**, **AUSF**, **NRF**, **NSSF**, **UDM**, **UDR**, **SMF**, and **UPF**.  
 Configuration parameters like **MCC (Mobile Country Code)** and **MNC (Mobile Network Code)** are templated as `$mcc` and `$mnc`, and can be patched by higher-level workflows (e.g., the Console UI or automation scripts) prior to deployment.
 
 ---
