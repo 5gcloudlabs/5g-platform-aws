@@ -23,7 +23,7 @@ Configuration parameters like **MCC (Mobile Country Code)** and **MNC (Mobile Ne
 ## Deployment Flow
 - This `Application` manifest is applied via Argo CD after cluster provisioning.  
 - When triggered, Argo CD deploys the free5GC Helm chart into the target namespace using the declared chart path and values.  
-- The repository serves as the centralized source for manifests, with Argo CD automatically synchronizing the latest stable state for short-lived deployments.
+- The repository serves as the centralized source for manifests, with Argo CD automatically synchronizing the latest stable state.
 
 This approach provides a **reproducible and consistent** deployment process for the free5GC 5G Core on Amazon EKS without relying on continuous GitOps reconciliation.
 
