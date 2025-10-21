@@ -13,8 +13,7 @@ Key details include:
 - **Source** – Pulls the Helm chart from the `charts/free5gc` path in the Git repository.  
 - **Release** – Deploys under the release name `aws-5gcloudlabs`.  
 - **Namespace** – Installs all free5GC components into the `free5gc` namespace.  
-- **Sync Policy** – Uses automated synchronization with pruning and self-healing enabled.
-While Argo CD continuously reconciles resources with the Git repository, this repository serves as a stable reference deployment rather than a continuously changing source.
+- **Sync Policy** – The repository provides a stable reference state; Argo CD syncs automatically, but deployments are typically short-lived and based on the latest commit.
 
 The deployment includes key 5G Core network functions such as **AMF**, **AUSF**, **NRF**, **NSSF**, **UDM**, **UDR**, **SMF**, and **UPF**.  
 Configuration parameters like **MCC (Mobile Country Code)** and **MNC (Mobile Network Code)** are templated as `$mcc` and `$mnc`, and can be patched by higher-level workflows (e.g., the Console UI or automation scripts) prior to deployment.
@@ -24,7 +23,7 @@ Configuration parameters like **MCC (Mobile Country Code)** and **MNC (Mobile Ne
 ## Deployment Flow
 - This `Application` manifest is applied via Argo CD after cluster provisioning.  
 - When triggered, Argo CD deploys the free5GC Helm chart into the target namespace using the declared chart path and values.  
-- The repository serves as the centralized source for manifests, but there is **no continuous synchronization** from Git — updates are applied manually or through controlled automation workflows.  
+- The repository serves as the centralized source for manifests, with Argo CD automatically synchronizing the latest stable state for short-lived deployments.
 
 This approach provides a **reproducible and consistent** deployment process for the free5GC 5G Core on Amazon EKS without relying on continuous GitOps reconciliation.
 
