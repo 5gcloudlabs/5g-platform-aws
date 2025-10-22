@@ -10,7 +10,7 @@ These applications provide networking, observability and user interface for the 
 The manifest defines an app of apps in Argo CD named required-apps, which coordinates the deployment of multiple supporting applications.
 
 - **multus-app** and **whereabouts-app** – Extend Kubernetes networking with multi-interface and IPAM capabilities.
-- **Executor-app** and **Console-app** – Provide automation and a UI interface for deployment workflows.
+- **Executor-app** and **Console-app** – Provide a UI interface for deployment automation workflows.
 - **curl-app** – Utility pod enables subscriber provisioning. 
 - **kube-prometheus-stack-crd** and **kube-prometheus-stack-app** – Provide monitoring, metrics, and alerting for cluster resources.  
 - **loki-stack-app** – Enables centralized log aggregation and querying.  
