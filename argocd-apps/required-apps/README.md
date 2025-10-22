@@ -22,3 +22,19 @@ These applications are deployed under the `argocd` namespace using Argo CD’s *
 ## Deployment Flow
 The `required-apps` manifest is triggered automatically at the **end of infrastructure provisioning**, defined as a `kubectl_manifest` resource in the OpenTofu configuration.
 
+---
+
+## References
+
+Argo CD Applications
+ – Official documentation for declarative app management.
+
+Helm Charts Repository
+ – Underlying Helm charts used by the sub-applications.
+
+---
+
+## License & Attribution
+
+This manifest is maintained by © 2025 5g-cloud-labs (a project by CNAD LTD.).
+All referenced Helm charts and manifests are open source under their respective licenses.
