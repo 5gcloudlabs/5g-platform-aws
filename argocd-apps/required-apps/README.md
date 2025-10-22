@@ -9,12 +9,11 @@ These applications provide networking, observability and user interface for the 
 ## Overview
 The manifest defines an app of apps in Argo CD named required-apps, which coordinates the deployment of multiple supporting applications.
 
-- **console-app** – Console UI for free5gc & ueransim deployment and validation.
+- **multus-app** and **whereabouts-app** – Extend Kubernetes networking with multi-interface and IPAM capabilities.
+- **Executor-app** and **Console-app** – Provide automation and a UI interface for deployment workflows.
 - **curl-app** – Utility pod enables subscriber provisioning. 
-- **executor-app** – Executes backend provisioning and deployment scripts.  
 - **kube-prometheus-stack-crd** and **kube-prometheus-stack-app** – Provide monitoring, metrics, and alerting for cluster resources.  
 - **loki-stack-app** – Enables centralized log aggregation and querying.  
-- **multus-app** and **whereabouts-app** – Extend Kubernetes networking with multi-interface and IPAM capabilities.
 
 These applications are deployed under the `argocd` namespace using Argo CD’s **Application of Applications** pattern, allowing unified management of all the required apps as a single logical entity.
 
