@@ -2,7 +2,7 @@
 
 ## Purpose
 This Argo CD `Application` manifest deploys a collection of **supporting applications** required for running the main workloads (**free5GC** and **UERANSIM**) on Amazon EKS.  
-These applications provide observability, networking, and control-plane functionality essential for the end-to-end 5G deployment workflow.
+These applications provide networking, observability and user interface for the end-to-end 5G deployment workflow.
 
 ---
 
