@@ -1,11 +1,11 @@
-# 5G Deployment CLI Scripts
+# 5G Deployment via CLI Scripts
 
 This directory contains automation scripts that streamline the full deployment of the 5G Core Network, subscriber provisioning, and RAN/UE simulation on Amazon EKS.  
 Each script leverages Argo CD `Applications` and Helm charts stored in this repository to ensure reproducible, declarative deployments.
 
 ---
 
-## 🧩 Script Overview
+## Script Overview
 
 | Script | Description |
 |--------|-------------|
@@ -15,7 +15,7 @@ Each script leverages Argo CD `Applications` and Helm charts stored in this repo
 
 ---
 
-## 🚀 Deployment Flow
+## Deployment Flow
 
 1. **Run `free5gc-cli.sh`**  
    - Set MCC and MNC.  
@@ -31,7 +31,7 @@ Each step builds upon the previous one, enabling a fully functional 5G testbed f
 
 ---
 
-## 🧾 Notes
+## Notes
 
 - All deployments are short-lived and intended for test or trial environments.  
 - The scripts interact directly with **Argo CD** to trigger application deployments and with **Kubernetes** resources via `kubectl`.  
