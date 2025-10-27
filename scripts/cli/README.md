@@ -18,7 +18,7 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 
 ## Deployment Workflow
 
-### Deploying free5GC via CLI Script (`free5gc-cli.sh`)
+- ### Deploying free5GC via CLI Script (`free5gc-cli.sh`)
 
 <img width="860" height="508" alt="CLI Flow" src="https://github.com/user-attachments/assets/b0d33e97-1979-4221-b498-51959555ec55" />
 
