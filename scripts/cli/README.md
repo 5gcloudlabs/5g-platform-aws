@@ -13,8 +13,6 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 - **`ueransim-cli.sh`**  
   Deploys the UERANSIM Argo CD application using the previously defined MCC, MNC, and subscriber count to simulate gNB and UE connections.
 
-Each script builds on the previous one, forming a sequential workflow for end-to-end 5G network deployment and testing.
-
 ---
 
 © 2025 5g-cloud-labs (a project by CNAD LTD.)
