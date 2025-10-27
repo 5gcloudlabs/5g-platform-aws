@@ -1,6 +1,6 @@
 # Free5GC & UERANSIM Deployment via CLI Scripts
 
-This directory contains automation scripts used to deploy and manage the 5G Core (Free5GC) and UE/RAN simulation (UERANSIM) components.
+This directory contains automation scripts used to deploy the 5G Core (Free5GC), provision 5G Core subscribers and deploy the  UE/RAN simulation (UERANSIM) components.
 
 ## Scripts Overview
 
