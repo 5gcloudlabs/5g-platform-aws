@@ -49,20 +49,20 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 
 
 
-When executed, the script performs the following actions step-by-step:
+When executed, the script performs the following operations:
 
-1. **Applies the UERANSIM Argo CD Application manifest**  
+- **Applies the UERANSIM Argo CD Application manifest**  
    The script runs `kubectl apply` to deploy the UERANSIM Argo CD `Application` resource located at  
    `../../argocd-apps/ueransim-app/ueransim-app.yml`.
 
-2. **Triggers the Argo CD deployment process**  
+- **Triggers the Argo CD deployment process**  
    Once applied, Argo CD detects the new `ueransim-app` definition and begins deploying the corresponding Helm chart (`charts/ueransim`) into the cluster.
 
-3. **Leverages previously configured variables**  
+- **Leverages previously configured variables**  
    The UERANSIM deployment automatically uses MCC, MNC, and subscriber count values set earlier by the  
    `free5gc-cli.sh` and `subscriber-provisioner-cli.sh` scripts to ensure consistent configuration between the 5G Core and UE/RAN simulation.
 
-4. **Launches UE and gNB simulations**  
+- **Launches UE and gNB simulations**  
    After synchronization, the UERANSIM pods (UE and gNB) start within the designated namespace, connecting to the deployed free5GC core to complete end-to-end 5G registration and session setup testing.
 
 
