@@ -43,6 +43,11 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
    - **Applies the Argo CD Application manifest**  
      Executes `kubectl apply -f free5gc-app.yml` to register the **free5GC Application** in Argo CD, which then automatically deploys the free5GC 5G Core components.
 
-Before running this script, ensure that the repository is cloned locally and the **infrastructure has been successfully deployed and validated** — including the EKS cluster, Argo CD, and supporting add-ons.
+
+
+
+
+
+Before running these scripts, ensure that the repository is cloned locally and the **infrastructure has been successfully deployed and validated** — including the EKS cluster, Argo CD, and supporting add-ons.
 
 © 2025 5g-cloud-labs (a project by CNAD LTD.)
