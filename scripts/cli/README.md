@@ -6,7 +6,7 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 ## Scripts Overview
 
 - **`free5gc-cli.sh`**  
-  Prompts for MCC and MNC values, updates dependent scripts with these variables, and deploys the Free5GC Argo CD application, which installs the 5G Core Helm chart.
+  Prompts for MCC and MNC values, updates dependent scripts with these variables, and deploys the Free5GC Argo CD application, which installs the 5G Core Helm chart. This script automates the setup and deployment of the **free5GC 5G Core** via Argo CD.  
 
 - **`subscriber-provisioner-cli.sh`**  
   Provisions the requested number of subscribers based on variables provided by the first script.
@@ -22,19 +22,10 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 
 <img width="860" height="508" alt="CLI Flow" src="https://github.com/user-attachments/assets/b0d33e97-1979-4221-b498-51959555ec55" />
 
-Before running this script, ensure that the **infrastructure has been successfully deployed and validated** — including the EKS cluster, Argo CD, and supporting add-ons.
-
-#### Steps:
-
-1. **Clone the repository locally**  
-   Ensure you have the latest version of the `5g-cloud-labs` repository cloned onto your local machine.
-
-2. **Navigate to the CLI scripts directory**  
-   Move into the directory containing the CLI deployment scripts.
-
-3. **Run the `free5gc-cli.sh` script**  
-   This script automates the setup and deployment of the **free5GC 5G Core** via Argo CD.  
-   Under the hood, it performs the following operations:
+Before running this script, ensure that the repository is cloned locally and the **infrastructure has been successfully deployed and validated** — including the EKS cluster, Argo CD, and supporting add-ons.
+  
+    
+   Under the hood, **`free5gc-cli.sh` script** performs the following operations:
 
    - **Prompts for PLMN configuration**  
      Requests the **MCC** (Mobile Country Code) and **MNC** (Mobile Network Code) that define the 5G Core’s PLMN ID.
@@ -54,7 +45,7 @@ Before running this script, ensure that the **infrastructure has been successful
    - **Applies the Argo CD Application manifest**  
      Executes `kubectl apply -f free5gc-app.yml` to register the **free5GC Application** in Argo CD, which then automatically deploys the free5GC 5G Core components.
 
-4. **Verify deployment**  
+3. **Verify deployment**  
    Monitor the `free5gc` namespace to confirm that all 5G Core pods (e.g., AMF, SMF, NRF, UDM, UPF) are successfully created and running.
 
 
