@@ -47,6 +47,7 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 
 - ### `ueransim-cli.sh`
 
+<img width="824" height="508" alt="ueransim-cli-flow" src="https://github.com/user-attachments/assets/517ac857-1f7e-43bb-8fb7-702f5d451336" />
 
 
 When executed, the script performs the following operations:
