@@ -20,7 +20,8 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 
 - ### `free5gc-cli.sh`
 
-<img width="860" height="508" alt="CLI Flow" src="https://github.com/user-attachments/assets/b0d33e97-1979-4221-b498-51959555ec55" />
+
+<img width="857" height="508" alt="free5gc-cli-flow" src="https://github.com/user-attachments/assets/837cb596-174a-4bdc-9a6e-8b788e259629" />
 
       
    Under the hood, **`free5gc-cli.sh` script** performs the following operations:
