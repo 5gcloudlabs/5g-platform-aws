@@ -22,9 +22,7 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 
 <img width="860" height="508" alt="CLI Flow" src="https://github.com/user-attachments/assets/b0d33e97-1979-4221-b498-51959555ec55" />
 
-Before running this script, ensure that the repository is cloned locally and the **infrastructure has been successfully deployed and validated** — including the EKS cluster, Argo CD, and supporting add-ons.
-  
-    
+      
    Under the hood, **`free5gc-cli.sh` script** performs the following operations:
 
    - **Prompts for PLMN configuration**  
@@ -45,8 +43,6 @@ Before running this script, ensure that the repository is cloned locally and the
    - **Applies the Argo CD Application manifest**  
      Executes `kubectl apply -f free5gc-app.yml` to register the **free5GC Application** in Argo CD, which then automatically deploys the free5GC 5G Core components.
 
-3. **Verify deployment**  
-   Monitor the `free5gc` namespace to confirm that all 5G Core pods (e.g., AMF, SMF, NRF, UDM, UPF) are successfully created and running.
-
+Before running this script, ensure that the repository is cloned locally and the **infrastructure has been successfully deployed and validated** — including the EKS cluster, Argo CD, and supporting add-ons.
 
 © 2025 5g-cloud-labs (a project by CNAD LTD.)
