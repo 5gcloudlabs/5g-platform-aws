@@ -6,7 +6,7 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 ## Scripts Overview
 
 - **`free5gc-cli.sh`**  
-  Prompts for MCC and MNC values, updates dependent scripts with these variables, and deploys the Free5GC Argo CD application, which installs the 5G Core Helm chart. This script automates the setup and deployment of the **free5GC 5G Core** via Argo CD.  
+ This script automates the setup and deployment of the **free5GC 5G Core** via Argo CD.  
 
 - **`subscriber-provisioner-cli.sh`**  
   Provisions the requested number of subscribers based on variables provided by the first script.
