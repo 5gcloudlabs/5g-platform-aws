@@ -49,9 +49,7 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
 
 - ### `subscriber-provisioner-cli.sh`
 
-  ### Under the Hood
-
-When executed, the script performs the following operations step-by-step:
+Under the Hood, the script performs the following operations:
 
 1. **Prompts for subscriber count**  
    The user specifies how many 5G subscribers to provision (default: 10).
@@ -83,7 +81,7 @@ When executed, the script performs the following operations step-by-step:
 <img width="824" height="508" alt="ueransim-cli-flow" src="https://github.com/user-attachments/assets/517ac857-1f7e-43bb-8fb7-702f5d451336" />
 
 
-When executed, the script performs the following operations:
+Under the Hood, the script performs the following operations:
 
 - **Applies the UERANSIM Argo CD Application manifest**  
    The script runs `kubectl apply` to deploy the UERANSIM Argo CD `Application` resource located at  
