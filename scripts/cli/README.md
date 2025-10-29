@@ -1,4 +1,4 @@
-# Free5GC & UERANSIM Deployment via CLI Scripts
+# Deployment via CLI Scripts
 
 This directory contains automation scripts used to deploy the 5G Core (Free5GC), provision 5G Core subscribers and deploy the  UE/RAN simulation (UERANSIM) components.
 
@@ -45,6 +45,38 @@ This directory contains automation scripts used to deploy the 5G Core (Free5GC),
    - **Applies the Argo CD Application manifest**  
      Executes `kubectl apply -f free5gc-app.yml` to register the **free5GC Application** in Argo CD, which then automatically deploys the free5GC 5G Core components.
 
+---
+
+- ### `subscriber-provisioner-cli.sh`
+
+  ### Under the Hood
+
+When executed, the script performs the following operations step-by-step:
+
+1. **Prompts for subscriber count**  
+   The user specifies how many 5G subscribers to provision (default: 10).
+
+2. **Generates IMSI range dynamically**  
+   Using the previously defined `mcc` and `mnc` values (from the `free5gc-cli.sh` script), the script calculates a sequential IMSI range beginning at `${mcc}${mnc}0000000001` and ending at `start_imsi + count - 1`.
+
+3. **Exports environment variables**  
+   The subscriber count and IMSI values are stored as environment variables to be used in later commands.
+
+4. **Updates the UERANSIM application manifest**  
+   The temporary Argo CD manifest `ueransim-app.tmp` is converted into the final `ueransim-app.yml` file using `envsubst` to inject the current MCC, MNC, and subscriber variables.
+
+5. **Provisions subscribers in the free5GC core**  
+   For each generated IMSI, the script runs a `curl` command inside the `curl-deployment` pod to send a POST request to the free5GC WebUI API (`webui-service.free5gc.svc.cluster.local:5000`).  
+   Each request creates a subscriber entry with preconfigured authentication, mobility, and session management data.
+
+6. **Logs provisioning output**  
+   All API responses are captured in `subs-prov-output.log` for reference and troubleshooting.
+
+7. **Displays the provisioned IMSI list**  
+   At completion, the script parses the log file to extract and print all successfully provisioned IMSI values for user confirmation.
+
+
+---
 
 - ### `ueransim-cli.sh`
 
