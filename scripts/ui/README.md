@@ -31,6 +31,8 @@ These scripts are not executed directly by users — they are triggered by the *
 
 ### `free5gc-ui.sh`
 
+<img width="1157" height="940" alt="free5gc-gui-flow" src="https://github.com/user-attachments/assets/bb2840bd-2afd-491d-ab89-4db2be09f464" />
+
 Under the Hood, this script performs the following operations:
 
 1. **Loads environment variables from ConfigMap**  
