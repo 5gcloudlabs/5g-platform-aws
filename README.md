@@ -12,8 +12,8 @@
 It combines Infrastructure-as-Code, GitOps automation, and lightweight simulation tools to help you:
 
 - Deploy a **Free5GC 5G Core** on Kubernetes.
+- Provision 5G subscribers.
 - Simulate **gNBs and UEs** using **UERANSIM**.
-- Provision subscribers through either **CLI scripts** or a **web-based Console UI**.
 - Validate connectivity, latency, and performance — all within AWS Cloud.
 
 ---
