@@ -5,7 +5,8 @@
 <img width="1831" height="2178" alt="aws-5g-cloud-lab-updated" src="https://github.com/user-attachments/assets/acf98f12-a974-4cb5-b622-9bc9b7b7523b" />
 </p>
 
-## 🌐 Overview
+---
+## Overview
 
 **aws-5GCloudLabs** provides a complete, modular environment for deploying and managing a **cloud-native 5G core network** on **Amazon EKS**.  
 It combines Infrastructure-as-Code, GitOps automation, and lightweight simulation tools to help you:
