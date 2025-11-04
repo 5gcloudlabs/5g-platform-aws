@@ -29,3 +29,7 @@ It includes:
 - Validate connectivity, latency, and performance.
 
 ---
+
+
+Solution components?
+Automation for infra, Compute, Networking, storage, security, DNS, obeservability, 5g core & simulation.
