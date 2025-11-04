@@ -9,20 +9,23 @@
 
 ## 🎯 Project Mission
 
-Deploying a 5G Core network traditionally involves managing complex on-premise infrastructure and manual setup processes.  
+Deploying a 5G Core network traditionally involves managing on-premise infrastructure and manual setup processes.  
 **aws-5GCloudLabs** simplifies this by enabling engineers and researchers to deploy a fully functional **5G Core (Free5GC)** on **Amazon EKS** within minutes.
 
-The project provides an automated, reproducible, and cloud-native framework for building and testing 5G environments — without the need for dedicated hardware or complex local configuration.
+The project provides an automated, reproducible, and cloud-native framework for building and testing 5G environments — without the need for dedicated hardware or local setups.
 
 ---
 ## Overview
 
-**aws-5GCloudLabs** provides a complete, modular environment for deploying and managing a **cloud-native 5G core network** on **Amazon EKS**.  
-It combines Infrastructure-as-Code, GitOps automation, and lightweight simulation tools to help you:
+**aws-5GCloudLabs** combines Infrastructure-as-Code (IaC), GitOps, and Kubernetes automation to create an end-to-end 5G lab environment on AWS.
+
+It includes:
 
 - Deploy a **Free5GC 5G Core** on Kubernetes.
 - Provision 5G subscribers.
 - Simulate **gNBs and UEs** using **UERANSIM**.
-- Validate connectivity, latency, and performance — all within AWS Cloud.
+- Integrated **monitoring and observability** stack  
+- Applications lifecycle management through **Argo CD**
+- Validate connectivity, latency, and performance.
 
 ---
