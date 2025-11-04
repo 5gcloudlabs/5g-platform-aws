@@ -6,6 +6,15 @@
 </p>
 
 ---
+
+## 🎯 Project Mission
+
+Deploying a 5G Core network traditionally involves managing complex on-premise infrastructure and manual setup processes.  
+**aws-5GCloudLabs** simplifies this by enabling engineers and researchers to deploy a fully functional **5G Core (Free5GC)** on **Amazon EKS** within minutes.
+
+The project provides an automated, reproducible, and cloud-native framework for building and testing 5G environments — without the need for dedicated hardware or complex local configuration.
+
+---
 ## Overview
 
 **aws-5GCloudLabs** provides a complete, modular environment for deploying and managing a **cloud-native 5G core network** on **Amazon EKS**.  
