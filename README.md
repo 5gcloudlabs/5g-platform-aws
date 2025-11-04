@@ -21,8 +21,8 @@ The project provides an automated, reproducible, and cloud-native framework for 
 
 It includes:
 
-- Deploy a **Free5GC 5G Core** on Kubernetes.
-- Provision 5G subscribers.
+- Deploying **Free5GC 5G Core** on AWS EKS
+- Provisioning 5G subscribers.
 - Simulate **gNBs and UEs** using **UERANSIM**.
 - Integrated **monitoring and observability** stack  
 - Applications lifecycle management through **Argo CD**
