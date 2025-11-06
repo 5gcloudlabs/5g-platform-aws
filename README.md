@@ -15,7 +15,7 @@ Deploying a 5G Core network typically requires complex on-premise infrastructure
 
 
 ---
-## 
+## Solution Description
 
 **aws-5GCloudLabs** combines Infrastructure-as-Code (IaC), GitOps, and Kubernetes automation to create an end-to-end 5G lab environment on AWS.
 
