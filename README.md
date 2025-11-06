@@ -10,7 +10,7 @@
 ## Project Mission
 
 Deploying a 5G Core network typically requires complex on-premise infrastructure and manual configuration.
-aws-5GCloudLabs provides an automated and reproducible environment for deploying and testing the Free5GC 5G Core on Amazon EKS, eliminating the need for dedicated hardware or local setup.
+**aws-5GCloudLabs** provides an automated and reproducible environment for deploying and testing the Free5GC 5G Core on Amazon EKS, eliminating the need for dedicated hardware or local setup.
 
 
 
