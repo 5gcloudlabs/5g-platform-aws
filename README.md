@@ -76,6 +76,33 @@ To understand how these components interact to deliver the full 5G deployment wo
 
 Before starting, ensure the following are set up on your workstation:
 
+# 1. Prerequisites
+
+Before starting, ensure the following are set up on your workstation:
+
+| Requirement | Description |
+|-------------|-------------|
+| **AWS Account** | With permissions to create EC2, VPC, IAM, S3, Route53, and EKS resources |
+| **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
+| **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
+| **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
+| **Helm** | [Install guide](https://helm.sh/docs/intro/install/) |
+| **Argo CD CLI (optional)** | For inspecting/managing Argo CD applications locally |
+| **Configured AWS credentials** | Run `aws configure` or set `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` environment variables |
+| **SSH key (optional)** | Public key for EC2 worker nodes if SSH access is needed |
+| **Domain name (optional)** | For ingress or virtual hosts (e.g., `tclouds.co.uk`) if exposing services externally |
+
+## Verify installs & versions
+
+Run the following to confirm tools are installed:
+
+```bash
+aws --version
+tofu version
+kubectl version --client --short
+helm version --short
+# argocd --version   # optional
+
 
 
 - Deploying **Free5GC 5G Core** on AWS EKS
