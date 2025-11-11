@@ -70,9 +70,13 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 To understand how these components interact to deliver the full 5G deployment workflow, refer to the **[Architecture & Design](./architecture/README.md)** section.
 
 
+## Installation Instructions
+
+### 1. Prerequisites
+
+Before starting, ensure the following are set up on your workstation:
 
 
-It includes:
 
 - Deploying **Free5GC 5G Core** on AWS EKS
 - Provisioning 5G subscribers.
