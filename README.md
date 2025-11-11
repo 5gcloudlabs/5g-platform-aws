@@ -85,8 +85,7 @@ Before starting, ensure the following are set up on your workstation:
 | **Helm** | [Install guide](https://helm.sh/docs/intro/install/) |
 | **Argo CD CLI (optional)** | For inspecting/managing Argo CD applications locally |
 | **Configured AWS credentials** | Run `aws configure` or set `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` environment variables |
-| **SSH key (optional)** | Public key for EC2 worker nodes if SSH access is needed |
-| **Domain name (optional)** | For ingress or virtual hosts (e.g., `tclouds.co.uk`) if exposing services externally |
+| **Domain name on Cloudflare** | For ingress or virtual hosts (e.g., `tclouds.co.uk`) if exposing services externally |
 
 ## Verify installs & versions
 
