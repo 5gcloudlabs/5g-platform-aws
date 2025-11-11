@@ -14,14 +14,59 @@ Deploying a 5G Core network typically requires complex on-premise infrastructure
 
 
 
+---## 🧱 Project Components / Building Blocks
+
+The **aws-5GCloudLabs** environment brings together automated infrastructure provisioning, Kubernetes orchestration, observability, and 5G Core deployment — forming a complete and reproducible 5G lab on AWS.
+
 ---
-## Project Description
 
-high level, TLS, Networking, obervability
+### **Infrastructure Automation**
 
-Automation for infra, Compute, Networking, storage, security, DNS, obeservability, 5g core & simulation.
+- **OpenTofu** – Automates infrastructure provisioning using Infrastructure-as-Code (IaC) principles.
 
-**aws-5GCloudLabs** combines Infrastructure-as-Code (IaC), GitOps, and Kubernetes automation to create an end-to-end 5G lab environment on AWS.
+---
+
+### **AWS Services**
+
+- **S3** – Stores the OpenTofu state file. Must be preconfigured before running the infrastructure deployment.  
+- **VPC** – Defines networking components including subnets, NAT gateways, internet gateways, and CIDR segmentation for infrastructure, Multus networks, and applications.  
+- **EKS** – Managed Kubernetes cluster (CaaS), including node groups, compute nodes, kernel configuration, and user-data bootstrapping.  
+- **EC2** – Compute resources, ENIs, security groups (virtual firewalls), and ALB integration points.  
+- **SSM** – Secure node access and automation via SSM documents.  
+- **EFS** – Shared persistent storage used by MongoDB (storing UDR subscriber data and NRF NF profiles).  
+- **IAM / STS** – Authentication, authorization, and role management (including IRSA for EKS).  
+- **Certificate Management** – Domain validation and TLS certificate provisioning for secure communications.
+
+---
+
+### **Kubernetes Add-ons and Integrations**
+
+- **Argo CD** – Application lifecycle management via GitOps; syncs Helm charts from the repository.  
+- **cert-manager** – Automates TLS certificate issuance and renewal to support end-to-end encryption.  
+- **ExternalDNS** – Updates DNS records dynamically based on Kubernetes resources.  
+- **Istio** – Ingress gateway and service-mesh capabilities for traffic management and observability.  
+- **AWS Load Balancer Controller (ALB)** – Watches Ingress resources and provisions AWS ALBs accordingly.  
+- **Multus** – CNI meta-plugin enabling multiple network interfaces per pod; used for 3GPP interface separation.  
+- **Whereabouts** – IPAM provider assigning `/32` IPs as defined in NetworkAttachmentDefinitions (NADs).  
+- **Prometheus, Grafana, Loki** – Monitoring, visualization, and centralized logging stack.
+
+---
+
+### **External Integrations**
+
+- **Let’s Encrypt** – Certificate authority used (via cert-manager) for automated certificate issuance and renewal.  
+- **Cloudflare** – DNS provider for domain records and validation; requires an externally managed domain.
+
+---
+
+### **Core 5G Applications**
+
+- **Free5GC** – Open-source 5G Core implementation deployed via Argo CD.  
+- **UERANSIM** – Open-source UE and gNodeB simulator for end-to-end validation and testing.
+
+---
+
+To understand how these components interact to deliver the full 5G deployment workflow, refer to the **[Architecture & Design](./architecture/README.md)** section.
 
 
 
