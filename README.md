@@ -76,10 +76,6 @@ To understand how these components interact to deliver the full 5G deployment wo
 
 Before starting, ensure the following are set up on your workstation:
 
-# 1. Prerequisites
-
-Before starting, ensure the following are set up on your workstation:
-
 | Requirement | Description |
 |-------------|-------------|
 | **AWS Account** | With permissions to create EC2, VPC, IAM, S3, Route53, and EKS resources |
@@ -104,6 +100,7 @@ helm version --short
 # argocd --version   # optional
 
 
+---
 
 - Deploying **Free5GC 5G Core** on AWS EKS
 - Provisioning 5G subscribers.
@@ -111,6 +108,3 @@ helm version --short
 - Integrated **monitoring and observability** stack  
 - Applications lifecycle management through **Argo CD**
 - Validate connectivity, latency, and performance.
-
----
-
