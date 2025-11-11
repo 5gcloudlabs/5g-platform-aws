@@ -30,7 +30,6 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 ### **AWS Services**
 
-- **S3** – Stores the OpenTofu state file. Must be preconfigured before running the infrastructure deployment.  
 - **VPC** – Defines networking components including subnets, NAT gateways, internet gateways, and CIDR segmentation for infrastructure, Multus networks, and applications.  
 - **EKS** – Managed Kubernetes cluster (CaaS), including node groups, compute nodes, kernel configuration, and user-data bootstrapping.  
 - **EC2** – Compute resources, ENIs, security groups (virtual firewalls), and ALB integration points.  
@@ -38,7 +37,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **EFS** – Shared persistent storage used by MongoDB (storing UDR subscriber data and NRF NF profiles).  
 - **IAM / STS** – Authentication, authorization, and role management (including IRSA for EKS).  
 - **Certificate Management** – Domain validation and TLS certificate provisioning for secure communications.
-
+- **S3** – Stores the OpenTofu state file. Must be preconfigured before running the infrastructure deployment.  
 ---
 
 ### **Kubernetes Add-ons and Integrations**
