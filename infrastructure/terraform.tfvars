@@ -3,7 +3,7 @@ region = "eu-central-1"
 
 
 ##S3 Bucket Parameters##
-bucket = "cloud-5g-terraform-state-s3"
+bucket = "REDACTED_STATE_BUCKET" #cloud-5g-terraform-state-s3
 key = "terraform.tfstate"
 
 
