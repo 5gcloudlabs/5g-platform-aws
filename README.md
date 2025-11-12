@@ -22,7 +22,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 ---
 
-### **Infrastructure Automation**
+#### **Infrastructure Automation**
 
 - **OpenTofu** – Automates infrastructure provisioning using Infrastructure-as-Code (IaC) principles.
 
