@@ -2,6 +2,11 @@
 region = "eu-central-1"
 
 
+##S3 Bucket Parameters##
+bucket = "cloud-5g-terraform-state-s3"
+key = "terraform.tfstate"
+
+
 ##VPC Parameters##
 vpc_name = "cloud-5g-vpc"
 vpc_cidr = "192.168.0.0/16"                  # "192.168.0.0/16" or "172.16.0.0/12" or "10.0.0.0/8" https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
@@ -21,8 +26,3 @@ ami_id = "REDACTED_AMI_ID" #Focal Pro 1.29         #image list per region: https
 cloudflare_api_token = "REDACTED_CLOUDFLARE_API_TOKEN"
 domain_name = "cloud-5g.io"
 zone_id = "f13499d719a8bddb157a500c487ba064"
-
-
-##S3 Bucket Parameters##
-bucket = "cloud-5g-terraform-state-s3"
-key = "terraform.tfstate"
