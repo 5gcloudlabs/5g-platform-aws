@@ -28,7 +28,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 --
 
-### **AWS Services**
+#### **AWS Services**
 
 - **VPC** – Defines networking components including subnets, NAT gateways, internet gateways, and CIDR segmentation for infrastructure, Multus networks, and applications.  
 - **EKS** – Managed Kubernetes cluster (CaaS), including node groups, compute nodes, kernel configuration, and user-data bootstrapping.  
@@ -40,7 +40,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **S3** – Stores the OpenTofu state file. Must be preconfigured before running the infrastructure deployment.  
 ---
 
-### **Kubernetes Add-ons and Integrations**
+#### **Kubernetes Add-ons and Integrations**
 
 - **Argo CD** – Application lifecycle management via GitOps; syncs Helm charts from the repository.  
 - **cert-manager** – Automates TLS certificate issuance and renewal to support end-to-end encryption.  
@@ -53,14 +53,14 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 ---
 
-### **External Integrations**
+#### **External Integrations**
 
 - **Let’s Encrypt** – Certificate authority used (via cert-manager) for automated certificate issuance and renewal.  
 - **Cloudflare** – DNS provider for domain records and validation; requires an externally managed domain.
 
 ---
 
-### **Core 5G Applications**
+#### **Core 5G Applications**
 
 - **Free5GC** – Open-source 5G Core implementation deployed via Argo CD.  
 - **UERANSIM** – Open-source UE and gNodeB simulator for end-to-end validation and testing.
