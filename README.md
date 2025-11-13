@@ -79,14 +79,13 @@ Before starting, ensure the following are set up on your workstation and cloud a
 | Requirement | Description |
 |-------------|-------------|
 | **AWS Account** | With permissions to create EC2, VPC, IAM, S3, Route53, and EKS resources |
-| **Cloudflare Account & Domain** | A Cloudflare account with a registered domain (e.g., `tclouds.co.uk`) under your management. Required to access the Web UI and Argo CD dashboard through secure ingress routes. |
+| **Cloudflare Account & Domain** | A Cloudflare account with a registered domain under your management. |
 | **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
 | **Helm (optional)** | [Install guide](https://helm.sh/docs/intro/install/) |
 | **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) |
 | **Configured AWS credentials** | Run `aws configure` or set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables |
-| **SSH key (optional)** | Public key for EC2 worker nodes if SSH access is needed |
 
 ---
 #### Verify installs & versions
