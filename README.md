@@ -83,7 +83,7 @@ Before starting, ensure the following are set up on your workstation and cloud a
 | **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
-| **Helm** | [Install guide](https://helm.sh/docs/intro/install/) |
+| **Helm (optional)** | [Install guide](https://helm.sh/docs/intro/install/) |
 | **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) — useful for inspecting and managing Argo CD Applications locally |
 | **Configured AWS credentials** | Run `aws configure` or set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables |
 | **SSH key (optional)** | Public key for EC2 worker nodes if SSH access is needed |
