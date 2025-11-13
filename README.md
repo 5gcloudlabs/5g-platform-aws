@@ -74,20 +74,22 @@ To understand how these components interact to deliver the full 5G deployment wo
 
 ### 1. Prerequisites
 
-Before starting, ensure the following are set up on your workstation:
+Before starting, ensure the following are set up on your workstation and cloud accounts:
 
 | Requirement | Description |
 |-------------|-------------|
 | **AWS Account** | With permissions to create EC2, VPC, IAM, S3, Route53, and EKS resources |
+| **Cloudflare Account & Domain** | A Cloudflare account with a registered domain (e.g., `tclouds.co.uk`) under your management. Required to access the Web UI and Argo CD dashboard through secure ingress routes. |
 | **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
 | **Helm** | [Install guide](https://helm.sh/docs/intro/install/) |
-| **Argo CD CLI (optional)** | For inspecting/managing Argo CD applications locally |
-| **Configured AWS credentials** | Run `aws configure` or set `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` environment variables |
-| **Domain name on Cloudflare** | For ingress or virtual hosts (e.g., `tclouds.co.uk`) if exposing services externally |
+| **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) — useful for inspecting and managing Argo CD Applications locally |
+| **Configured AWS credentials** | Run `aws configure` or set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables |
+| **SSH key (optional)** | Public key for EC2 worker nodes if SSH access is needed |
 
-## Verify installs & versions
+---
+#### Verify installs & versions
 
 Run the following to confirm tools are installed:
 
