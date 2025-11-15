@@ -33,7 +33,7 @@ terraform {
 
     backend "s3" {
       region = var.region
-      bucket = var.bucket
+      bucket = var.bucket-name
       key = var.key
 }
 
