@@ -85,7 +85,6 @@ Before starting, ensure the following are set up on your workstation and cloud a
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
 | **Helm (optional)** | [Install guide](https://helm.sh/docs/intro/install/) |
 | **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) |
-| **Configured AWS credentials** | Run `aws configure` or set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables |
 
 
 #### Verify installs & versions
