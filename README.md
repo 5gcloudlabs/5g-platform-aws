@@ -97,7 +97,5 @@ aws --version
 tofu version
 kubectl version --client --short
 helm version --short
-# argocd --version   # optional
+argocd --version   
 
-
----
