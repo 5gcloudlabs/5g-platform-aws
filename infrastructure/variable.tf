@@ -1,7 +1,23 @@
+##Global Parameters##
+
 variable "region" {
   description = "AWS Region where resources will be created"
   type = string
   default = "eu-central-1"
+}
+
+
+##S3 Parameters##
+
+variable "bucket-name" {
+  description = "Name of the S3 bucket hosting state file"
+  type = string
+}
+
+
+variable "key" {
+  description = "Name & Path of the state file"
+  type = string
 }
 
 
@@ -65,16 +81,3 @@ variable "zone_id" {
   type = string
 }
 
-
-##S3 Parameters##
-
-variable "bucket" {
-  description = "The name of the S3 bucket hosting state file"
-  type = string
-}
-
-
-variable "key" {
-  description = "The name of the state file"
-  type = string
-}
