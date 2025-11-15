@@ -78,7 +78,7 @@ Before starting, ensure the following are set up on your workstation and cloud a
 
 | Requirement | Description |
 |-------------|-------------|
-| **AWS Account** | With permissions to create EC2, VPC, IAM, S3, Route53, and EKS resources |
+| **AWS Account** | With permissions to create VPC, EKS, EC2, IAM, and S3 resources |
 | **Cloudflare Account & Domain** | A Cloudflare account with a registered domain under your management. |
 | **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
