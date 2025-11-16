@@ -84,7 +84,7 @@ Before deploying any infrastructure, these must be available:
 
 
 #### Local Workstation Requirements
-Ensure the following are set up on your workstation:
+Install the following tools locally:
 
 | Requirement | Description |
 |-------------|-------------|
@@ -96,8 +96,7 @@ Ensure the following are set up on your workstation:
 
 
 ##### Verify installs & versions
-
-Install the following tools locally:
+Run the following to confirm tools are installed:
 
 ```bash
 aws --version
