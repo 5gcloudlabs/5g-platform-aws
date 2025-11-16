@@ -75,7 +75,7 @@ To understand how these components interact to deliver the full 5G deployment wo
 
 #### Cloud Account Requirements
 
-These must be set up **before deploying any infrastructure**:
+Before starting, these must be set up **before deploying any infrastructure**:
 
 | Requirement | Description |
 |------------|-------------|
@@ -83,12 +83,10 @@ These must be set up **before deploying any infrastructure**:
 | **Cloudflare Account** | With a **registered domain** and an **API Token** with **DNS Edit** permissions for the respective zone. |
 
 
-Before starting, ensure the following are set up on your workstation and cloud accounts:
+Ensure the following are set up on your workstation:
 
 | Requirement | Description |
 |-------------|-------------|
-| **AWS Account** | With permissions to create VPC, EKS, EC2, IAM, and S3 resources |
-| **Cloudflare Account & Domain** | A Cloudflare account with a registered domain under your management. |
 | **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
