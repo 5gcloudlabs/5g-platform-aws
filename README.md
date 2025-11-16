@@ -26,7 +26,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 - **OpenTofu** – Automates infrastructure provisioning using Infrastructure-as-Code (IaC) principles.
 
---
+
 
 #### **AWS Services**
 
@@ -38,7 +38,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **IAM / STS** – Authentication, authorization, and role management (including IRSA for EKS).  
 - **Certificate Management** – Domain validation and TLS certificate provisioning for secure communications.
 - **S3** – Stores the OpenTofu state file. Must be preconfigured before running the infrastructure deployment.  
----
+
 
 #### **Kubernetes Add-ons and Integrations**
 
@@ -51,24 +51,23 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **Whereabouts** – IPAM provider assigning `/32` IPs as defined in NetworkAttachmentDefinitions (NADs).  
 - **Prometheus, Grafana, Loki** – Monitoring, visualization, and centralized logging stack.
 
----
+
 
 #### **External Integrations**
 
 - **Let’s Encrypt** – Certificate authority used (via cert-manager) for automated certificate issuance and renewal.  
 - **Cloudflare** – DNS provider for domain records and validation; requires an externally managed domain.
 
----
+
 
 #### **Core 5G Applications**
 
 - **Free5GC** – Open-source 5G Core implementation deployed via Argo CD.  
 - **UERANSIM** – Open-source UE and gNodeB simulator for end-to-end validation and testing.
 
----
-
 To understand how these components interact to deliver the full 5G deployment workflow, refer to the **[Architecture & Design](./architecture/README.md)** section.
 
+---
 
 ## Installation Instructions
 
