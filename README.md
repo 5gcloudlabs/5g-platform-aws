@@ -79,7 +79,7 @@ These must be set up **before deploying any infrastructure**:
 
 | Requirement | Description |
 |------------|-------------|
-| **AWS Account** | With permissions to create the required AWS services as described in the [AWS Services](#aws-services) section. |
+| **AWS Account** | With permissions to create the required **AWS services** as described in the [AWS Services](#aws-services) section. |
 | **Cloudflare Account** | With a **registered domain** and **API Token** with **DNS Edit** permissions for the respective DNS zone. |
 
 
