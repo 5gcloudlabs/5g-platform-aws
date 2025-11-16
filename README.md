@@ -80,7 +80,7 @@ These must be set up **before deploying any infrastructure**:
 | Requirement | Description |
 |------------|-------------|
 | **AWS Account** | With permissions to create the required AWS services as described in the [AWS Services](#aws-services) section. |
-| **Cloudflare Account** | A Cloudflare account with a **registered domain**, its **Zone ID**, and a **Cloudflare API Token** with **DNS Edit** permissions for that zone. <br><br> Follow Cloudflare’s official guide to create an API token: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/ |
+| **Cloudflare Account** | A Cloudflare account with a **registered domain**, its **Zone ID**, and a **Cloudflare API Token** with **DNS Edit** permissions for that zone. |
 
 
 Before starting, ensure the following are set up on your workstation and cloud accounts:
