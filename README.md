@@ -20,7 +20,7 @@ Deploying a 5G Core network typically requires complex on-premise infrastructure
 
 The **aws-5GCloudLabs** environment brings together automated infrastructure provisioning, Kubernetes orchestration, observability, and 5G Core deployment — forming a complete and reproducible 5G lab on AWS.
 
----
+
 
 #### **Infrastructure Automation**
 
