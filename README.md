@@ -95,7 +95,7 @@ Install the following tools locally:
 | **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) |
 
 
-##### Verify installs & versions
+Verify installs & versions
 Run the following to confirm tools are installed:
 
 ```bash
