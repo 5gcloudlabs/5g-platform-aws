@@ -83,6 +83,7 @@ These must be set up **before deploying any infrastructure**:
 | **Cloudflare Account** | With a **registered domain** and **API Token** with Edit permissions for the respective DNS zone. |
 
 
+#### Local Workstation Requirements
 Ensure the following are set up on your workstation:
 
 | Requirement | Description |
@@ -94,9 +95,9 @@ Ensure the following are set up on your workstation:
 | **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) |
 
 
-#### Verify installs & versions
+##### Verify installs & versions
 
-Run the following to confirm tools are installed:
+Install the following tools locally:
 
 ```bash
 aws --version
