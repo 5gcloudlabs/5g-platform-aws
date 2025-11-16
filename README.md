@@ -75,7 +75,7 @@ To understand how these components interact to deliver the full 5G deployment wo
 
 #### Cloud Account Requirements
 
-Before starting, these must be set up **before deploying any infrastructure**:
+These must be set up **before deploying any infrastructure**:
 
 | Requirement | Description |
 |------------|-------------|
