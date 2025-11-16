@@ -96,8 +96,8 @@ Install the following tools locally:
 
 
 Verify installs & versions
-Run the following to confirm tools are installed:
 
+Run the following to confirm tools are installed:
 ```bash
 aws --version
 tofu version
