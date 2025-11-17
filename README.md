@@ -123,3 +123,5 @@ export AWS_REGION=" "
 
 ### 3. Install Infrastucture using OpenTofu
 
+validation:
+aws eks update-kubeconfig --region $region --name cloud-5g-eks
