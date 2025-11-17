@@ -123,5 +123,26 @@ export AWS_REGION=" "
 
 ### 3. Install Infrastucture using OpenTofu
 
+navigate into directory.
+opentofu init/plan/apply
+
+some charts are deployed via helm_resource
+
+trigger argocd required-apps
+
+
+
 validation:
-aws eks update-kubeconfig --region $region --name cloud-5g-eks
+
+EKS cluster creation:
+aws eks update-kubeconfig --region $region --name $eks_cluster_name
+
+kubectl -n argocd get app required-apps
+
+kubectl get pods
+console UI
+
+kubectl -n istio-system get ingress
+
+
+### 4. Deploy 5G Core via CLI
