@@ -148,7 +148,7 @@ Applies the Argo CD required-apps Application using a kubectl_manifest resource,
 #### b) Validate the Deployment
 Once opentofu apply completes, perform the checks below to confirm the EKS cluster, Argo CD bootstrap, add-ons and ingress are healthy and reachable.
 
-##### Update kubeconfig and verify EKS connectivity
+##### - Update kubeconfig and verify EKS connectivity
 
 Configure `kubectl` for the new cluster and verify node readiness:
 
@@ -156,12 +156,13 @@ Configure `kubectl` for the new cluster and verify node readiness:
 aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
 kubectl get nodes --no-headers
 ```
-Expected: worker nodes listed and in Ready state, for example:
+Expected: You should see 2 worker nodes in Ready state.
+
+##### - Confirm Argo CD applications are synced
+Check that Argo CD has successfully deployed the required-apps Application and its child applications:
 
 ```bash
-
-ip-10-0-1-12.ec2.internal   Ready    <roles>   <age>   <version>
-ip-10-0-2-34.ec2.internal   Ready    <roles>   <age>   <version>
+kubectl -n argocd get app required-apps
 ```
 
 ### 4. Deploy 5G Core via CLI
