@@ -71,9 +71,9 @@ To understand how these components interact to deliver the full 5G deployment wo
 
 ## Installation Instructions
 
-### 1. Prerequisites
+### Prerequisites
 
-#### Cloud Account Requirements
+#### 1. Cloud Account Requirements
 
 Before deploying any infrastructure, these must be available:
 
@@ -83,7 +83,7 @@ Before deploying any infrastructure, these must be available:
 | **Cloudflare Account** | With a **registered domain** + **API Token** with respective domain zone "DNS:Edit" permissions. |
 
 
-#### Local Workstation Requirements
+#### 2. Local Workstation Requirements
 Install the following tools locally:
 
 | Requirement | Description |
@@ -106,10 +106,13 @@ helm version --short
 argocd --version   
 ```
 
-#### Configure AWS credentials
+#### 3. Configure AWS credentials
 
 export AWS_ACCESS_KEY_ID=" "
 
 export AWS_SECRET_ACCESS_KEY=" "
 
 export AWS_REGION=" "
+
+
+#### 4. S3 creation 
