@@ -148,7 +148,7 @@ Applies the Argo CD required-apps Application using a kubectl_manifest resource,
 #### b) Validate the Deployment
 Once opentofu apply completes, perform the checks below to confirm the EKS cluster, Argo CD bootstrap, add-ons and ingress are healthy and reachable.
 
-## 2.1 Update kubeconfig and verify EKS connectivity
+##### Update kubeconfig and verify EKS connectivity
 
 Configure `kubectl` for the new cluster and verify node readiness:
 
