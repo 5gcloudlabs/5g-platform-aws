@@ -80,7 +80,7 @@ Before deploying any infrastructure, these must be available:
 | Requirement | Description |
 |------------|-------------|
 | **AWS Account** | With permissions to create the required **AWS services** as described in the [AWS Services](#aws-services) section. |
-| **Cloudflare Account** | With a **registered domain** and **API Token** with respective domain zone "DNS:Edit" permissions. |
+| **Cloudflare Account** | With a **registered domain** + **API Token** with respective domain zone "DNS:Edit" permissions. |
 
 
 #### Local Workstation Requirements
