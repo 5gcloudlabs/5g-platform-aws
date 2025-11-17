@@ -124,29 +124,44 @@ export AWS_REGION=" "
 ### 2. Clone repository on your local workstation
 
 
+### 3. Install Infrastructure Using OpenTofu
 
-### 3. Install Infrastucture using OpenTofu
+After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
 
-navigate into directory.
-opentofu init/plan/apply
+#### a) Initialize and Deploy Infrastructure
 
-some charts are deployed via helm_resource
+Navigate to the root directory of the infrastructure project and run:
 
-trigger argocd required-apps
+```bash
+opentofu init
+opentofu plan
+opentofu apply
+```
+The OpenTofu configuration performs the following:
 
+Provisions all AWS resources (VPC, EKS, EC2 bastion, IAM roles, S3 backend, Route53 zone, etc.).
 
+Deploys several Kubernetes add-ons directly using helm_release resources.
 
-validation:
+Applies the Argo CD required-apps Application using a kubectl_manifest resource, which triggers Argo CD to fetch all remaining add-ons from the Git repository.
 
-EKS cluster creation:
-aws eks update-kubeconfig --region $region --name $eks_cluster_name
+#### b) Validate the Deployment
+Once opentofu apply completes, perform the checks below to confirm the EKS cluster, Argo CD bootstrap, add-ons and ingress are healthy and reachable.
 
-kubectl -n argocd get app required-apps
+## 2.1 Update kubeconfig and verify EKS connectivity
 
-kubectl get pods
-console UI
+Configure `kubectl` for the new cluster and verify node readiness:
 
-kubectl -n istio-system get ingress
+```bash
+aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
+kubectl get nodes --no-headers
+```
+Expected: worker nodes listed and in Ready state, for example:
 
+```bash
+
+ip-10-0-1-12.ec2.internal   Ready    <roles>   <age>   <version>
+ip-10-0-2-34.ec2.internal   Ready    <roles>   <age>   <version>
+```
 
 ### 4. Deploy 5G Core via CLI
