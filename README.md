@@ -156,13 +156,22 @@ Configure `kubectl` for the new cluster and verify node readiness:
 aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
 kubectl get nodes --no-headers
 ```
-Expected: You should see 2 worker nodes in Ready state.
+You should see 2 worker nodes in Ready state.
+
+```bash
+example
+```
 
 ##### - Confirm Argo CD applications are synced
 Check that Argo CD has successfully deployed the required-apps Application and its child applications:
 
 ```bash
 kubectl -n argocd get app required-apps
+```
+
+The status should show Synced and Healthy.
+```bash
+example
 ```
 
 ### 4. Deploy 5G Core via CLI
