@@ -118,7 +118,11 @@ export AWS_REGION=" "
 #### d) S3 creation 
 
 
+
+
+
 ### 2. Clone repository on your local workstation
+
 
 
 ### 3. Install Infrastucture using OpenTofu
