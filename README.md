@@ -153,7 +153,7 @@ Download the `aws-5GCloudLabs` project to your local workstation:
 ```bash
 git clone https://github.com/5g-cloud-labs/aws-5gcloudlabs.git
 cd aws-5GCloudLabs
-
+```
 
 ### 3. Install Infrastructure Using OpenTofu
 
