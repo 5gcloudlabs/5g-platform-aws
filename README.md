@@ -108,12 +108,12 @@ argocd --version
 
 #### c) Configure AWS credentials
 
-**Option 1 — Using AWS CLI:**
+Option 1 — AWS CLI:
 ```bash
 aws configure
 ```
 
-environment variables:
+Option 2 — Environment Variables:
 
 ```bash
 export AWS_ACCESS_KEY_ID="<access-key>"
