@@ -111,6 +111,9 @@ argocd --version
 Option 1 — AWS CLI:
 ```bash
 aws configure
+AWS Access Key ID: 
+AWS Secret Access Key:
+Default region name: 
 ```
 
 Option 2 — Environment Variables:
