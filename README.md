@@ -130,11 +130,21 @@ export AWS_REGION="<region>"
 ```
 
 
-#### d) S3 creation 
+#### d) Create an S3 Bucket for the OpenTofu State
 
-aws s3api create-bucket --bucket $bucket-name --create-bucket-configuration LocationConstraint=$AWS_REGION
+aws s3api create-bucket --bucket $bucket-name --create-bucket-configuration LocationConstraint=$region
 
+OpenTofu requires an S3 bucket to store its remote state file.  
+Create the bucket using one of the following commands:
 
+For `us-east-1` (no LocationConstraint required):
+```bash
+aws s3api create-bucket --bucket <bucket-name>
+```
+For all other AWS regions:
+```bash
+aws s3api create-bucket --bucket <bucket-name> --create-bucket-configuration LocationConstraint=$AWS_REGION
+```
 
 ### 2. Clone repository on your local workstation
 
