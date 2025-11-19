@@ -108,11 +108,18 @@ argocd --version
 
 #### c) Configure AWS credentials
 
-export AWS_ACCESS_KEY_ID=" "
+**Option 1 — Using AWS CLI:**
+```bash
+aws configure
+```
 
-export AWS_SECRET_ACCESS_KEY=" "
+environment variables:
 
-export AWS_REGION=" "
+```bash
+export AWS_ACCESS_KEY_ID="<access-key>"
+export AWS_SECRET_ACCESS_KEY="<secret-key>"
+export AWS_REGION="<region>"
+```
 
 
 #### d) S3 creation 
