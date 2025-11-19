@@ -146,7 +146,13 @@ For all other AWS regions:
 aws s3api create-bucket --bucket <bucket-name> --create-bucket-configuration LocationConstraint=$AWS_REGION
 ```
 
-### 2. Clone repository on your local workstation
+### 2. Clone repository 
+
+Download the `aws-5GCloudLabs` project to your local workstation:
+
+```bash
+git clone https://github.com/5g-cloud-labs/aws-5gcloudlabs.git
+cd aws-5GCloudLabs
 
 
 ### 3. Install Infrastructure Using OpenTofu
