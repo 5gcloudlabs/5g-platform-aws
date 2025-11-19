@@ -108,12 +108,17 @@ argocd --version
 
 #### c) Configure AWS credentials
 
+Generate AWS Access Keys from your AWS IAM console:  
+https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
+
+Then configure the credentials using one of the following methods:
+
 Option 1 — AWS CLI:
 ```bash
 aws configure
-AWS Access Key ID: 
-AWS Secret Access Key:
-Default region name: 
+AWS Access Key ID: "<access-key>"
+AWS Secret Access Key: "<secret-key>"
+Default region name: "<region>"
 ```
 
 Option 2 — Environment Variables:
@@ -127,7 +132,7 @@ export AWS_REGION="<region>"
 
 #### d) S3 creation 
 
-
+aws s3api create-bucket --bucket $bucket-name --create-bucket-configuration LocationConstraint=$AWS_REGION
 
 
 
