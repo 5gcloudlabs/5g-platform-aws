@@ -210,4 +210,19 @@ The status should show Synced and Healthy.
 example
 ```
 
-### 4. Deploy 5G Core via CLI
+### 4.Deploy 5G Core
+
+You can deploy the 5G Core using one of two methods, depending on your workflow preference:
+
+#### **Option 1 — Deploy via CLI**
+
+Use the command-line tools provided in the repository to trigger the 5G Core deployment.  
+
+
+### **Option 2 — Deploy via Console UI**
+
+Use the web-based Console UI to input configuration parameters (MCC, MNC, subscribers, etc.)  
+and trigger the deployment interactively.  
+
+
+
