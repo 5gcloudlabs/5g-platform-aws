@@ -152,7 +152,7 @@ Download the `aws-5GCloudLabs` project to your local workstation, either via SSH
 
 SSH:
 ```bash
-git@github.com:5g-cloud-labs/aws-5gcloudlabs.git
+git clone git@github.com:5g-cloud-labs/aws-5gcloudlabs.git
 ```
 HTTPS:
 ```bash
