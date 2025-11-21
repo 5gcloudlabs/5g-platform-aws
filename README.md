@@ -175,7 +175,7 @@ opentofu apply
 ```
 The OpenTofu configuration performs the following:
 
-Provisions all AWS resources (VPC, EKS, EC2 bastion, IAM roles, S3 backend, Route53 zone, etc.).
+Provisions all AWS resources (VPC, EKS, EC2, EFS, TLS Certificate, IAM roles, etc.).
 
 Deploys several Kubernetes add-ons directly using helm_release resources.
 
