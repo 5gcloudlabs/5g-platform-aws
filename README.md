@@ -226,3 +226,19 @@ and trigger the deployment interactively.
 
 
 
+
+Validation (k8s, helm, argo-cli, argo-ui)
+
+### 5. 5G Subscribers 
+
+validation
+
+### 6. UERAMSIM
+
+validation (reg & PDU est automatically)
+
+ping
+
+grafana
+
+
