@@ -219,7 +219,7 @@ You can deploy the 5G Core using one of two methods, depending on your workflow 
 Use the command-line tools provided in the repository to trigger the 5G Core deployment.  
 
 
-### **Option 2 — Deploy via Console UI**
+#### **Option 2 — Deploy via Console UI**
 
 Use the web-based Console UI to input configuration parameters (MCC, MNC, subscribers, etc.)  
 and trigger the deployment interactively.  
