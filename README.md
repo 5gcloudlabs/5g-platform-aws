@@ -150,9 +150,13 @@ aws s3api create-bucket --bucket <bucket-name> --create-bucket-configuration Loc
 
 Download the `aws-5GCloudLabs` project to your local workstation:
 
+SSH:
+```bash
+git@github.com:5g-cloud-labs/aws-5gcloudlabs.git
+```
+HTTPS:
 ```bash
 git clone https://github.com/5g-cloud-labs/aws-5gcloudlabs.git
-cd aws-5GCloudLabs
 ```
 
 ### 3. Install Infrastructure Using OpenTofu
@@ -164,6 +168,7 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 Navigate to the root directory of the infrastructure project and run:
 
 ```bash
+cd aws-5gcloudlabs/infrastructure
 opentofu init
 opentofu plan
 opentofu apply
