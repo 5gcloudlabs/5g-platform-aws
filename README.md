@@ -223,7 +223,7 @@ Navigate to the `scripts/cli` directory and run the deployment script:
 ```bash
 cd aws-5gcloudlabs/scripts/cli
 ./free5gc-cli.sh
-
+```
 
 
 #### **Option 2 — Deploy via Console UI**
