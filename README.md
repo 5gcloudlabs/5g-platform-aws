@@ -225,6 +225,22 @@ cd aws-5gcloudlabs/scripts/cli
 ./free5gc-cli.sh
 ```
 
+You will be prompted to enter: 
+MCC – Mobile Country Code (3 digits), default: 208 
+MNC – Mobile Network Code (2 digits), default: 93 
+
+Example prompt: 
+```bash
+Configure the PLMN-ID for your 5G Core Network (MCC + MNC).
+
+1. Enter a 3-digit Mobile Country Code (MCC) [default: 208]:
+2. Enter a 2-digit Mobile Network Code (MNC) [default: 93]:
+```
+
+Expected output After running the script, you should see output similar to: 
+```bash
+application.argoproj.io/free5gc-app created
+```
 
 #### **Option 2 — Deploy via Console UI**
 
