@@ -165,7 +165,7 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 
 #### a) Initialize and Deploy Infrastructure
 
-Go to the infrastructure folder and run the required OpenTofu commands:
+Navigate to the infrastructure folder and run the required OpenTofu commands:
 
 ```bash
 cd aws-5gcloudlabs/infrastructure
