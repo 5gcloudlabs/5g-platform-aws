@@ -216,14 +216,19 @@ You can deploy the 5G Core using one of two methods, depending on your workflow 
 
 #### **Option 1 — Deploy via CLI**
 
-Use the provided **bash script** in the repository to trigger the 5G Core deployment.  
+Use the provided **bash script** in the repository to trigger the 5G Core deployment.
+
+Navigate to the `scripts/cli` directory and run the deployment script:
+
+```bash
+cd aws-5gcloudlabs/scripts/cli
+./free5gc-cli.sh
 
 
 
 #### **Option 2 — Deploy via Console UI**
 
-Use the web-based Console UI to input configuration parameters (MCC, MNC, subscribers, etc.)  
-and trigger the deployment interactively.  
+Use the web-based Console UI to input configuration parameters and trigger the deployment interactively.  
 
 
 
