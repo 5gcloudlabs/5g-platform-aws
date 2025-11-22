@@ -216,7 +216,8 @@ You can deploy the 5G Core using one of two methods, depending on your workflow 
 
 #### **Option 1 — Deploy via CLI**
 
-Use the command-line tools provided in the repository to trigger the 5G Core deployment.  
+Use the provided **bash script** in the repository to trigger the 5G Core deployment.  
+
 
 
 #### **Option 2 — Deploy via Console UI**
