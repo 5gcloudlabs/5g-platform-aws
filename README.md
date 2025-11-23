@@ -242,16 +242,41 @@ Expected output After running the script, you should see output similar to:
 application.argoproj.io/free5gc-app created
 ```
 
+
+
 #### **Option 2 — Deploy via Console UI**
 
 Use the web-based Console UI to input configuration parameters and trigger the deployment interactively.  
 
+Validate the 5G Core Deployment
 
+After triggering the deployment, you can verify that the 5G Core components are running using several methods.
 
+**1. Verify using kubectl**
 
-Validation (k8s, helm, argo-cli, argo-ui)
+Check that all Free5GC pods are starting correctly:
 
-### 5. 5G Subscribers 
+```bash
+kubectl -n free5gc get pods
+```
+Pods should show a Running or Completed status.
+
+```bash
+example
+```
+
+**2. Verify using Argo CD Web UI**
+Open the Argo CD dashboard in your browser:
+```bash
+https://argocd.<your-domain-name>
+```
+From the UI, verify that:
+
+free5gc-app is in a Synced and Healthy state
+All child applications (e.g., nrf, amf, smf, etc.) are green
+No errors appear in the application tree
+
+### 5. 5G Subscribers Creation
 
 validation
 
