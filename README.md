@@ -246,7 +246,7 @@ Validate the 5G Core Deployment
 
 After triggering the deployment, you can verify that the 5G Core components are running using several methods.
 
-**1. Verify using kubectl**
+1. Verify using kubectl
 
 Check that all Free5GC pods are starting correctly:
 
@@ -259,7 +259,7 @@ Pods should show a Running or Completed status.
 example
 ```
 
-**2. Verify using Argo CD Web UI**
+2. Verify using Argo CD Web UI
 Open the Argo CD dashboard in your browser:
 ```bash
 https://argocd.<your-domain-name>
