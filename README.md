@@ -278,7 +278,15 @@ No errors appear in the application tree.
 
 #### **Option 2 — Deploy via Console UI**
 
-Use the web-based Console UI to input configuration parameters and trigger the deployment interactively.  
+You can deploy the 5G Core using the AWS 5G Cloud Labs Web Console, which provides an interactive UI for entering MCC/MNC values and triggering the deployment pipeline.
+
+Steps
+
+Open the Console UI in your browser:
+
+```bash
+https://console-ui.<your-domain>
+```
 
 
 
