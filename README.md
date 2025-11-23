@@ -268,7 +268,9 @@ Replace <your-domain-name> with the domain configured in your Cloudflare zone.
 From the UI, verify that:
 
 free5gc-app is in a Synced and Healthy state.
+
 All child applications (e.g., nrf, amf, smf, etc.) are green.
+
 No errors appear in the application tree.
 
 
