@@ -282,13 +282,21 @@ You can deploy the 5G Core using the AWS 5G Cloud Labs Web Console, which provid
 
 Steps
 
-Open the Console UI in your browser:
+1. Open the Console UI in your browser:
 
 ```bash
 https://console-ui.<your-domain>
 ```
 
+2. Navigate to the 5G Core Deployment page.
 
+3. Enter the required PLMN values:
+
+MCC – Mobile Country Code (3 digits), example: 602
+
+MNC – Mobile Network Code (2 digits), example: 02
+
+4. Click Deploy 5G Core.
 
 
 ### 5. 5G Subscribers Creation
