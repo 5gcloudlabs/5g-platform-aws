@@ -110,9 +110,6 @@ argocd --version
 
 Generate AWS **[Access Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)** from your AWS IAM console.
 
-Generate AWS Access Keys from your AWS IAM console:  
-https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
-
 Then configure the credentials using one of the following methods:
 
 Option 1 — AWS CLI:
