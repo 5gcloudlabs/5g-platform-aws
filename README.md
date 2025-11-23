@@ -225,15 +225,17 @@ cd aws-5gcloudlabs/scripts/cli
 ```
 
 You will be prompted to enter: 
-MCC – Mobile Country Code (3 digits), default: 208 
-MNC – Mobile Network Code (2 digits), default: 93 
+
+MCC – Mobile Country Code (3 digits), e.g. 602:
+
+MNC – Mobile Network Code (2 digits), e.g. 02:
 
 Example prompt: 
 ```bash
 Configure the PLMN-ID for your 5G Core Network (MCC + MNC).
 
-1. Enter a 3-digit Mobile Country Code (MCC) [e.g: 602]:
-2. Enter a 2-digit Mobile Network Code (MNC) [e.g: 02]:
+1. Enter a 3-digit Mobile Country Code (MCC) , e.g. 602:
+2. Enter a 2-digit Mobile Network Code (MNC) , e.g. 02:
 ```
 
 Expected output After running the script, you should see output similar to: 
