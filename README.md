@@ -212,7 +212,7 @@ example
 
 
 
-### 5G Network Deployment:  
+### 4. 5G Network Deployment:  
 Deploy all 5G network components, including the Free5GC Core, subscribers creation, and UERANSIM either via CLI or via Console-UI.
 
 #### 1. End-to-End 5G Deployment via CLI:
