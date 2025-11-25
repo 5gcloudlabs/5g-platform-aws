@@ -285,7 +285,7 @@ Steps
 1. Open the Console UI in your browser:
 
 ```bash
-https://console-ui.<your-domain>
+https://console.<your-domain>
 ```
 
 2. Navigate to the 5G Core Deployment page.
