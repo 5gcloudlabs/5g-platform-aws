@@ -301,6 +301,37 @@ MNC – Mobile Network Code (2 digits), example: 02
 
 ### 5. 5G Subscribers Creation
 
+#### **Option 1 — Create 5G Subscribers via CLI**
+
+After validating that your 5G Core has been successfully deployed, you can proceed to create 5G subscribers using the command-line provisioning tool.
+
+This step uses the generated script:
+
+```bash
+subscriber-provisioner-cli.sh
+```
+
+1. Navigate to the CLI directory
+
+Make sure you are in the same directory where the scripts were generated:
+
+```bash
+cd scripts/cli
+```
+2. Run the Subscriber Provisioning Script
+
+Execute the script:
+
+```bash
+./subscriber-provisioner-cli.sh
+
+```
+
+##### note:
+This script is automatically created when you run free5gc-cli.sh.
+The original template file, subscriber-provisioner-cli.base, contains placeholder variables ($mcc, $mnc) which are replaced during the environment substitution step.
+
+
 validation
 
 ### 6. UERAMSIM
