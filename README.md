@@ -278,35 +278,7 @@ All child applications (e.g., nrf, amf, smf, etc.) are green.
 
 No errors appear in the application tree.
 
-
-#### 2. End-to-End 5G Deployment via Console-UI
-
-#### **Option 2 — Deploy via Console UI**
-
-You can deploy the 5G Core using the AWS 5G Cloud Labs Web Console, which provides an interactive UI for entering MCC/MNC values and triggering the deployment pipeline.
-
-Steps
-
-1. Open the Console UI in your browser:
-
-```bash
-https://console.<your-domain>
-```
-
-2. Navigate to the 5G Core Deployment page.
-
-3. Enter the required PLMN values:
-
-MCC – Mobile Country Code (3 digits), example: 602
-
-MNC – Mobile Network Code (2 digits), example: 02
-
-4. Click Deploy 5G Core.
-
-
-### 5. 5G Subscribers Creation
-
-#### **Option 1 — Create 5G Subscribers via CLI**
+##### b) 5G Subscribers Creation
 
 After validating that your 5G Core has been successfully deployed, you can proceed to create 5G subscribers using the command-line provisioning tool.
 
@@ -338,6 +310,34 @@ The original template file, subscriber-provisioner-cli.base, contains placeholde
 
 
 validation
+
+
+
+#### 2. End-to-End 5G Deployment via Console-UI
+
+#### **Option 2 — Deploy via Console UI**
+
+You can deploy the 5G Core using the AWS 5G Cloud Labs Web Console, which provides an interactive UI for entering MCC/MNC values and triggering the deployment pipeline.
+
+Steps
+
+1. Open the Console UI in your browser:
+
+```bash
+https://console.<your-domain>
+```
+
+2. Navigate to the 5G Core Deployment page.
+
+3. Enter the required PLMN values:
+
+MCC – Mobile Country Code (3 digits), example: 602
+
+MNC – Mobile Network Code (2 digits), example: 02
+
+4. Click Deploy 5G Core.
+
+
 
 ### 6. UERAMSIM
 
