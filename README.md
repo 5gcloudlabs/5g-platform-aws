@@ -209,11 +209,15 @@ The status should show Synced and Healthy.
 example
 ```
 
-### 4.Deploy 5G Core
 
-You can deploy the 5G Core using one of two methods, depending on your workflow preference:
 
-#### **Option 1 — Deploy via CLI**
+
+### 5G Network Deployment:  
+Deploy all 5G network components, including the Free5GC Core, subscribers creation, and UERANSIM either via CLI or via Console-UI.
+
+#### 1. End-to-End 5G Deployment via CLI:
+
+##### A) Deploy 5G Core
 
 Use the provided **bash script** in the repository to trigger the 5G Core deployment.
 
@@ -275,6 +279,7 @@ All child applications (e.g., nrf, amf, smf, etc.) are green.
 No errors appear in the application tree.
 
 
+#### 2. End-to-End 5G Deployment via Console-UI
 
 #### **Option 2 — Deploy via Console UI**
 
