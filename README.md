@@ -215,9 +215,9 @@ example
 ### 4. 5G Network Deployment:  
 Deploy all 5G network components, including the Free5GC Core, subscribers creation, and UERANSIM either via CLI or via Console-UI.
 
-#### 1. End-to-End 5G Deployment via CLI:
+#### A) End-to-End 5G Deployment via CLI:
 
-##### A) Deploy 5G Core
+##### 1. Deploy 5G Core
 
 Use the provided **bash script** in the repository to trigger the 5G Core deployment.
 
@@ -278,7 +278,7 @@ All child applications (e.g., nrf, amf, smf, etc.) are green.
 
 No errors appear in the application tree.
 
-##### b) 5G Subscribers Creation
+##### 2. 5G Subscribers Creation
 
 After validating that your 5G Core has been successfully deployed, you can proceed to create 5G subscribers using the command-line provisioning tool.
 
@@ -313,7 +313,7 @@ validation
 
 
 
-#### 2. End-to-End 5G Deployment via Console-UI
+#### B) End-to-End 5G Deployment via Console-UI
 
 #### **Option 2 — Deploy via Console UI**
 
