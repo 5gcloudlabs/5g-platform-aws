@@ -215,9 +215,9 @@ example
 ### 4. End-to-End 5G Network Deployment:  
 Deploy all 5G network components, including the Free5GC Core, subscribers creation, and UERANSIM either via CLI or via Console-UI.
 
-#### A) Deployment via CLI:
+#### A) 5G Network Deployment via CLI:
 
-##### 1. Deploy 5G Core
+##### 1. Deploy 5G Core via CLI
 
 Use the provided **bash script** in the repository to trigger the 5G Core deployment.
 
@@ -246,6 +246,8 @@ Expected output After running the script, you should see output similar to:
 ```bash
 application.argoproj.io/free5gc-app created
 ```
+
+# validate
 
 Validate the 5G Core Deployment
 
@@ -278,7 +280,7 @@ All child applications (e.g., nrf, amf, smf, etc.) are green.
 
 No errors appear in the application tree.
 
-##### 2. 5G Subscribers Creation
+##### 2. 5G Subscribers Creation via CLI
 
 After validating that your 5G Core has been successfully deployed, you can proceed to create 5G subscribers using the command-line provisioning tool.
 
@@ -312,7 +314,32 @@ The original template file, subscriber-provisioner-cli.base, contains placeholde
 # validation
 
 
-##### 3. Deploy UERANSIM for UE & gNB Simulation
+##### 3. Deploy UERANSIM (UE + gNB) Simulation via CLI
+
+After deploying the 5G Core and creating subscribers, you can deploy **UERANSIM** using the provided CLI script.
+
+Navigate to the `scripts/cli` directory and run:
+
+```bash
+cd aws-5gcloudlabs/scripts/cli
+./ueransim-cli.sh
+```
+Expected output
+
+```bash
+application.argoproj.io/ueransim-app created
+```
+
+Validate UERANSIM Deployment
+
+Use kubectl to confirm the gNB and UE pods are running:
+```bash
+kubectl -n ueransim get pods
+```
+
+You should see the following pods in Running state:
+
+# validate
 
 
 #### B) Deployment via Console-UI
@@ -339,7 +366,7 @@ MNC – Mobile Network Code (2 digits), example: 02
 
 
 
-### 6. UERAMSIM
+
 
 validation (reg & PDU est automatically)
 
