@@ -212,10 +212,10 @@ example
 
 
 
-### 4. 5G Network Deployment:  
+### 4. End-to-End 5G Network Deployment:  
 Deploy all 5G network components, including the Free5GC Core, subscribers creation, and UERANSIM either via CLI or via Console-UI.
 
-#### A) End-to-End 5G Deployment via CLI:
+#### A) Deployment via CLI:
 
 ##### 1. Deploy 5G Core
 
@@ -309,13 +309,13 @@ This script is automatically created when you run free5gc-cli.sh.
 The original template file, subscriber-provisioner-cli.base, contains placeholder variables ($mcc, $mnc) which are replaced during the environment substitution step.
 
 
-validation
+# validation
 
 
+##### 3. Deploy UERANSIM for UE & gNB Simulation
 
-#### B) End-to-End 5G Deployment via Console-UI
 
-#### **Option 2 — Deploy via Console UI**
+#### B) Deployment via Console-UI
 
 You can deploy the 5G Core using the AWS 5G Cloud Labs Web Console, which provides an interactive UI for entering MCC/MNC values and triggering the deployment pipeline.
 
