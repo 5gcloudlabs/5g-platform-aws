@@ -13,7 +13,7 @@ spec:
     path: charts/multus
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: kube-system
   syncPolicy:    
     automated:
       prune: true
