@@ -208,7 +208,7 @@ argocd                      	        argocd      	        deployed       	argo-c
 aws-efs-csi-driver          	        kube-system 	        deployed       	aws-efs-csi-driver-3.2.1           	     2.1.10     
 aws-load-balancer-controller	        kube-system 	        deployed       	aws-load-balancer-controller-1.13.4	     v2.13.4    
 cert-manager                 	        cert-manager	        deployed       	cert-manager-v1.18.2               	     v1.18.2    
-external-dns                	        kube-system 	    	  deployed       	external-dns-1.19.0                	     0.19.0     
+external-dns                	        kube-system 	    	  deployed      external-dns-1.19.0                	     0.19.0     
 istio-base                  	        istio-system	        deployed       	base-1.26.3                        	     1.26.3     
 istio-gateway               	        istio-system	        deployed       	gateway-1.26.3                     	     1.26.3     
 istiod                      	        istio-system	        deployed       	istiod-1.26.3                      	     1.26.3     
