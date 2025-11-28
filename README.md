@@ -200,7 +200,7 @@ ip-192-168-119-14.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
 ```
 
-##### - Confirm the below helm charts are deployed successfully OpenTofu:
+##### - Confirm the below helm charts are deployed successfully via OpenTofu:
 ```bash
 helm list -A
 NAME                        	        NAMESPACE               STATUS         	CHART                                  	 APP VERSION
