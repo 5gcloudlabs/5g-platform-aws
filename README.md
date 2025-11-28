@@ -188,7 +188,7 @@ Once opentofu apply completes, perform the checks below to confirm the EKS clust
 Configure `kubectl` for the new cluster and verify node readiness:
 
 ```bash
-aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
+aws eks update-kubeconfig --region "$AWS_REGION" --name "<EKS_CLUSTER_NAME>"
 Updated context arn:aws:eks:eu-central-1:**********:cluster/cloud-5g-eks in /home/barakota/.kube/config
 ```
 You should see 2 worker nodes in Ready state.
