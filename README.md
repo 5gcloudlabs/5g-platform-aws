@@ -204,7 +204,7 @@ ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 ```bash
 helm list -A
 NAME                        	        NAMESPACE               STATUS         	CHART                                  	 APP VERSION
-argocd                      	        argocd      	        	deployed       	argo-cd-8.2.5                      	     v3.0.12    
+argocd                      	        argocd      	     deployed       	argo-cd-8.2.5                      	     v3.0.12    
 aws-efs-csi-driver          	        kube-system 	            deployed       	aws-efs-csi-driver-3.2.1           	     2.1.10     
 aws-load-balancer-controller	        kube-system 	            deployed       	aws-load-balancer-controller-1.13.4	     v2.13.4    
 cert-manager                 	        cert-manager	        	deployed       	cert-manager-v1.18.2               	     v1.18.2    
