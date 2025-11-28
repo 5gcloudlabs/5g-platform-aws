@@ -189,12 +189,15 @@ Configure `kubectl` for the new cluster and verify node readiness:
 
 ```bash
 aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
-kubectl get nodes --no-headers
+Updated context arn:aws:eks:eu-central-1:**********:cluster/cloud-5g-eks in /home/barakota/.kube/config
 ```
 You should see 2 worker nodes in Ready state.
 
 ```bash
-example
+kubectl get nodes
+NAME                                              STATUS   ROLES    AGE   VERSION
+ip-192-168-119-14.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
+ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
 ```
 
 ##### - Confirm Argo CD applications are synced
