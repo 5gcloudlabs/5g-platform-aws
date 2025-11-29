@@ -180,7 +180,7 @@ Deploys several Kubernetes add-ons directly using helm_release resources.
 
 Applies the Argo CD required-apps Application using a kubectl_manifest resource, which triggers Argo CD to fetch all remaining add-ons from the Git repository.
 
-#### b) Validate the Deployment
+#### b) Validate infrastructure creation
 Once opentofu apply completes, perform the checks below to confirm the EKS cluster, Argo CD bootstrap, add-ons and ingress are healthy and reachable.
 
 ##### - Update kubeconfig and verify EKS connectivity
@@ -217,7 +217,7 @@ istiod                      	        istio-system	        deployed       	istiod
 
 
 ##### - Confirm Argo CD applications are synced
-Check that Argo CD has successfully deployed the required-apps Application and its child applications:
+Check that Argo CD has successfully deployed the required-apps Application and its child applications on EKS cluster:
 
 The status should show Synced and Healthy.
 
@@ -230,6 +230,8 @@ kubectl -n argocd get app required-apps
 NAME            SYNC STATUS   HEALTH STATUS
 required-apps   Synced        Healthy
 ```
+
+Login 
 
 
 ### 4. End-to-End 5G Network Deployment:  
