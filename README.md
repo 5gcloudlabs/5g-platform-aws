@@ -277,30 +277,24 @@ After triggering the deployment, you can verify that the 5G Core components are 
 
 1. Verify using kubectl
 
-Check that all Free5GC pods are starting correctly:
+Check that all Free5GC pods are starting correctly and reaching a Running status.
 
 ```bash
 kubectl -n free5gc get pods
+NAME                                                   READY   STATUS    
+aws-5gcloudlabs-free5gc-amf-amf-f69db95f-f6csq         2/2     Running   
+aws-5gcloudlabs-free5gc-ausf-ausf-585956b99c-zn82d     2/2     Running   
+aws-5gcloudlabs-free5gc-nrf-nrf-549dd59dc4-xwxq7       2/2     Running   
+aws-5gcloudlabs-free5gc-nssf-nssf-778f45f96c-zrqcn     2/2     Running   
+aws-5gcloudlabs-free5gc-pcf-pcf-68b4f8fb7c-cs6lq       2/2     Running   
+aws-5gcloudlabs-free5gc-smf-smf-cb7944cc5-24nth        2/2     Running   
+aws-5gcloudlabs-free5gc-udm-udm-7476888578-s896f       2/2     Running   
+aws-5gcloudlabs-free5gc-udr-udr-cb876bdf6-5f9f5        2/2     Running   
+aws-5gcloudlabs-free5gc-upf-upf-67dd5464f4-975zp       2/2     Running   
+aws-5gcloudlabs-free5gc-webui-webui-6876d69c77-8bldv   2/2     Running   
+mongodb-0                                              2/2     Running   
 ```
-Pods should show a Running or Completed status.
 
-```bash
-example
-```
-
-2. Verify using Argo CD Web UI
-Open the Argo CD dashboard in your browser:
-```bash
-https://argocd.<your-domain-name>
-```
-Replace <your-domain-name> with the domain configured in your Cloudflare zone.
-From the UI, verify that:
-
-free5gc-app is in a Synced and Healthy state.
-
-All child applications (e.g., nrf, amf, smf, etc.) are green.
-
-No errors appear in the application tree.
 
 ##### 2. 5G Subscribers Creation via CLI
 
