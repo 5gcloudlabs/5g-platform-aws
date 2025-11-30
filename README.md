@@ -200,7 +200,7 @@ ip-192-168-119-14.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
 ```
 
-##### - Confirm the below helm charts are deployed successfully via OpenTofu:
+##### - Verify the below helm charts are deployed successfully via OpenTofu:
 ```bash
 helm list -A
 NAME                        	        NAMESPACE               STATUS         	CHART                                  	 APP VERSION
@@ -216,8 +216,8 @@ istiod                      	        istio-system	        deployed       	istiod
 
 
 
-##### - Confirm Argo CD applications are synced
-Check that Argo CD has successfully deployed the required-apps Application and its child applications on EKS cluster:
+##### - Verify Argo CD applications are synced
+Check that Argo CD has successfully deployed the `required-apps` Application and its child applications on EKS cluster:
 
 The status should show Synced and Healthy.
 
