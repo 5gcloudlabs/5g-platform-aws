@@ -164,24 +164,24 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 
 #### a) Initialize and Deploy Infrastructure
 
-Navigate to the infrastructure directory: 
+**Navigate to the infrastructure directory:** 
 
 ```bash
 cd aws-5gcloudlabs/infrastructure
 ```
-Run tofu init for 
+**Initializes infrastructure directory by downloading the required plugins and modules:**
 ```bash
 tofu init
 .
 .
 ```
 
-Run tofu plan command for 
+**Create the execution plan:**
 ```bash
 tofu plan
 Plan: 178 to add, 0 to change, 0 to destroy.
 ```
-Run tofu apply for 
+**Plan execution:**
 
 ```bash
 tofu apply
