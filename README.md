@@ -173,7 +173,7 @@ cd aws-5gcloudlabs/infrastructure
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu init
 ```
-Expected output after execution:
+Expected Output:
 ```bash
 ...
 ```
@@ -181,9 +181,8 @@ Expected output after execution:
 **Create execution plan:**
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu plan
-Plan: 178 to add, 0 to change, 0 to destroy.
 ```
-Expected output after execution:
+Expected Output:
 ```bash
 Plan: 178 to add, 0 to change, 0 to destroy.
 ```
@@ -193,7 +192,7 @@ Plan: 178 to add, 0 to change, 0 to destroy.
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu apply
 ```
-Expected output after execution:
+Expected Output:
 ```bash
 Apply complete! Resources: 178 added, 0 changed, 0 destroyed.
 ```
