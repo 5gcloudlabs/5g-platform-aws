@@ -33,7 +33,7 @@ spec:
     name: cluster-issuer
     kind: ClusterIssuer
   secretName: tls-cert-secret
-  commonName: cloud-5g.io
+  commonName: "${var.domain_name}"
   dnsNames:
     - "${var.domain_name}"
     - "*.${var.domain_name}"
