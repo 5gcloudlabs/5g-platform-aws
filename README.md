@@ -169,14 +169,14 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 ```bash
 cd aws-5gcloudlabs/infrastructure
 ```
-**Initializes infrastructure directory by downloading the required plugins and modules:**
+**Initialize infrastructure directory:**
 ```bash
 tofu init
 .
 .
 ```
 
-**Create the execution plan:**
+**Create execution plan:**
 ```bash
 tofu plan
 Plan: 178 to add, 0 to change, 0 to destroy.
