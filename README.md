@@ -171,20 +171,20 @@ cd aws-5gcloudlabs/infrastructure
 ```
 **Initialize infrastructure directory:**
 ```bash
-tofu init
+/aws-5gcloudlabs/infrastructure$ tofu init
 .
 .
 ```
 
 **Create execution plan:**
 ```bash
-tofu plan
+/aws-5gcloudlabs/infrastructure$ tofu plan
 Plan: 178 to add, 0 to change, 0 to destroy.
 ```
 **Plan execution:**
 
 ```bash
-tofu apply
+/aws-5gcloudlabs/infrastructure$ tofu apply
 .
 .
 Do you want to perform these actions?
