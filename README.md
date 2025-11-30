@@ -164,28 +164,40 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 
 #### a) Initialize and Deploy Infrastructure
 
-Navigate to the infrastructure directory and run the required OpenTofu commands:
+Navigate to the infrastructure directory: 
 
 ```bash
 cd aws-5gcloudlabs/infrastructure
-opentofu init
+```
+Run tofu init for 
+```bash
+tofu init
+.
+.
 ```
 
+Run tofu plan command for 
 ```bash
-opentofu plan
-Plan: 69 to add, 0 to change, 0 to destroy.
+tofu plan
+Plan: 178 to add, 0 to change, 0 to destroy.
+```
+Run tofu apply for 
 
+```bash
+tofu apply
+.
+.
 Do you want to perform these actions?
   OpenTofu will perform the actions described above.
   Only 'yes' will be accepted to approve.
 
   Enter a value: yes
+.
+.
+
+Apply complete! Resources: 178 added, 0 changed, 0 destroyed.
 ```
 
-```bash
-opentofu apply
-Apply complete! Resources: 69 added, 0 changed, 0 destroyed.
-```
 The OpenTofu configuration performs the following:
 
 Provisions all AWS resources (VPC, EKS, EC2, EFS, TLS Certificate, IAM roles, etc.).
