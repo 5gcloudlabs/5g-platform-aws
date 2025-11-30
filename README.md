@@ -181,6 +181,7 @@ Expected output after execution:
 **Create execution plan:**
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu plan
+Plan: 178 to add, 0 to change, 0 to destroy.
 ```
 Expected output after execution:
 ```bash
