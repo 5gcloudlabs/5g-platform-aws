@@ -91,7 +91,7 @@ Install the following tools locally:
 | **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
-| **Helm (optional)** | [Install guide](https://helm.sh/docs/intro/install/) |
+| **Helm** | [Install guide](https://helm.sh/docs/intro/install/) |
 | **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) |
 
 
