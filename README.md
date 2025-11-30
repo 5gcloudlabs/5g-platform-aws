@@ -217,21 +217,13 @@ istiod                      	        istio-system	        deployed       	istiod
 
 
 ##### - Verify Argo CD applications are synced
-Check that Argo CD has successfully deployed the `required-apps` Application and its child applications on EKS cluster:
-
-The status should show Synced and Healthy.
+Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications to your EKS cluster.
+The status should display Synced and Healthy:
 
 ```bash
 kubectl -n argocd get apps
+...........................
 ```
-
-```bash
-kubectl -n argocd get app required-apps
-NAME            SYNC STATUS   HEALTH STATUS
-required-apps   Synced        Healthy
-```
-
-Login 
 
 
 ### 4. End-to-End 5G Network Deployment:  
@@ -250,11 +242,7 @@ cd aws-5gcloudlabs/scripts/cli
 ./free5gc-cli.sh
 ```
 
-You will be prompted to enter: 
-
-MCC – Mobile Country Code (3 digits), example 602
-
-MNC – Mobile Network Code (2 digits), example 02
+You will be prompted to enter the PLMN-ID for your Network:
 
 Example prompt: 
 ```bash
@@ -269,9 +257,9 @@ Expected output After running the script, you should see output similar to:
 application.argoproj.io/free5gc-app created
 ```
 
-# validate
 
-Validate the 5G Core Deployment
+
+###### Validate the 5G Core Deployment
 
 After triggering the deployment, you can verify that the 5G Core components are running using several methods.
 
