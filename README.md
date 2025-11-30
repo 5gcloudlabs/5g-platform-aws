@@ -277,7 +277,7 @@ Configure the PLMN-ID for your 5G Core Network (MCC + MNC).
 2. Enter a 2-digit Mobile Network Code (MNC), example: 02
 ```
 
-Expected output After running the script, you should see output similar to: 
+Expected Output. you should see output similar to: 
 ```bash
 application.argoproj.io/free5gc-app created
 ```
@@ -328,15 +328,26 @@ cd scripts/cli
 ```
 2. Run the Subscriber Provisioning Script
 
-Execute the script:
+Execute the script*:
 
 ```bash
 ./subscriber-provisioner-cli.sh
 
 ```
 
-##### note:
-This script is automatically created when you run free5gc-cli.sh.
+You will be prompted to enter the number of test subscribers you would like to create:
+
+Example prompt: 
+```bash
+Enter the number of subscribers to provision
+```
+
+Expected Output:
+```bash
+===== Provisioned IMSI List =====
+```
+
+*This script is automatically created when you run free5gc-cli.sh.
 The original template file, subscriber-provisioner-cli.base, contains placeholder variables ($mcc, $mnc) which are replaced during the environment substitution step.
 
 
