@@ -172,29 +172,28 @@ cd aws-5gcloudlabs/infrastructure
 **Initialize infrastructure directory:**
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu init
-.
-.
+```
+Expected output after execution:
+```bash
+...
 ```
 
 **Create execution plan:**
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu plan
+```
+Expected output after execution:
+```bash
 Plan: 178 to add, 0 to change, 0 to destroy.
 ```
+
 **Plan execution:**
 
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu apply
-.
-.
-Do you want to perform these actions?
-  OpenTofu will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-.
-.
-
+```
+Expected output after execution:
+```bash
 Apply complete! Resources: 178 added, 0 changed, 0 destroyed.
 ```
 
