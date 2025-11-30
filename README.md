@@ -169,8 +169,22 @@ Navigate to the infrastructure directory and run the required OpenTofu commands:
 ```bash
 cd aws-5gcloudlabs/infrastructure
 opentofu init
+```
+
+```bash
 opentofu plan
+Plan: 69 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  OpenTofu will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+```
+
+```bash
 opentofu apply
+Apply complete! Resources: 69 added, 0 changed, 0 destroyed.
 ```
 The OpenTofu configuration performs the following:
 
