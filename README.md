@@ -239,11 +239,16 @@ istio-gateway               	        istio-system	        deployed       	gatewa
 istiod                      	        istio-system	        deployed       	istiod-1.26.3                      	     1.26.3     
 ```
 
+These Helm charts are deployed automatically through OpenTofu using the `helm_release` resource as part of the cluster bootstrapping process. Certain add-ons require tight integration with AWS, such as:
+IAM Roles for Service Accounts (IRSA) for the AWS Load Balancer Controller and EFS CSI Driver
+ExternalDNS and cert-manager, which use runtime variables like var.domain_name to create DNS records and TLS certificates
+Argo CD, which is deployed early to take over application lifecycle management for the rest of the Git-based deployments
 
 
 ##### - Verify Argo CD applications are synced
-Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications to your EKS cluster.
+Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications, completing the cluster bootstrapping process.
 The status should display **Synced** and **Healthy**:
+
 
 ```bash
 kubectl -n argocd get apps
