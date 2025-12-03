@@ -255,7 +255,7 @@ kube-prometheus-stack        Synced        Healthy
 kube-prometheus-stack-crds   Synced        Healthy
 loki                         Synced        Healthy
 multus                       Synced        Healthy
-**required-apps**                **Synced**        **Healthy**
+**required-apps**                _Synced_        **Healthy**
 whereabouts                  Synced        Healthy
 
 ```
