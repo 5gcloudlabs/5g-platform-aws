@@ -247,7 +247,17 @@ The status should display Synced and Healthy:
 
 ```bash
 kubectl -n argocd get apps
-...........................
+NAME                         SYNC STATUS   HEALTH STATUS
+console-app                  Synced        Healthy
+curl-app                     Synced        Healthy
+executor-app                 Synced        Healthy
+kube-prometheus-stack        Synced        Healthy
+kube-prometheus-stack-crds   Synced        Healthy
+loki                         Synced        Healthy
+multus                       Synced        Healthy
+required-apps                Synced        Healthy
+whereabouts                  Synced        Healthy
+
 ```
 
 
