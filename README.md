@@ -243,7 +243,7 @@ istiod                      	        istio-system	        deployed       	istiod
 
 ##### - Verify Argo CD applications are synced
 Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications to your EKS cluster.
-The status should display Synced and Healthy:
+The **status** should display Synced and Healthy:
 
 ```bash
 kubectl -n argocd get apps
@@ -255,7 +255,7 @@ kube-prometheus-stack        Synced        Healthy
 kube-prometheus-stack-crds   Synced        Healthy
 loki                         Synced        Healthy
 multus                       Synced        Healthy
-**required-apps**                _Synced_        **Healthy**
+required-apps                Synced        Healthy
 whereabouts                  Synced        Healthy
 
 ```
