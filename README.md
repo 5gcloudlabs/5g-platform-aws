@@ -286,8 +286,6 @@ Configure the PLMN-ID for your 5G Core Network (MCC + MNC).
 1. Enter a 3-digit Mobile Country Code (MCC), example: 602
 2. Enter a 2-digit Mobile Network Code (MNC), example: 02
 
-Expected Output
-application.argoproj.io/free5gc-app created
 ```
 
 Expected Output. you should see output similar to: 
