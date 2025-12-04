@@ -245,7 +245,7 @@ These Helm charts are deployed automatically through **OpenTofu** using the `hel
 - **ExternalDNS** and **cert-manager**, which use runtime variables such as `var.domain_name` to create DNS records and TLS certificates  
 - **Argo CD**, which is deployed early to manage the lifecycle of all remaining Git-based application deployments  
 
-
+<sub><strong>IAM Roles for Service Accounts (IRSA)</strong></sub>
 
 ##### - Verify Argo CD applications are synced
 Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications, completing the cluster bootstrapping process.
