@@ -225,7 +225,7 @@ ip-192-168-119-14.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
 ```
 
-##### - Verify the below helm charts are deployed successfully via OpenTofu:
+##### - Verify the below helm charts and respective pods are deployed successfully via OpenTofu:
 ```bash
 helm list -A
 NAME                        	        NAMESPACE               STATUS         	CHART                                  	 APP VERSION
@@ -244,8 +244,20 @@ These Helm charts are deployed automatically through **OpenTofu** using the `hel
 - **ExternalDNS** and **cert-manager**, which use runtime variables such as `var.domain_name` to create DNS records and TLS certificates  
 - **Argo CD**, which is deployed early to manage the lifecycle of all remaining Git-based application deployments
 
-- A Helm release showing STATUS: deployed only confirms that manifests were applied successfully. It does not guarantee that the underlying pods are healthy. Always verify pod readiness
+- A Helm release showing STATUS: deployed only confirms that manifests were applied successfully. It does not guarantee that the underlying pods are healthy. Always verify pod readiness:
 
+Check aws-load-balancer-controller & aws-efs-csi-driver pods are deployed successfully in kube-system namespace. You can also validate the rest of the system pods deployed in kube-system namespace
+
+```bash
+  kubectl -n kube-system get pods
+```  
+Expected Outcome:
+
+```bash
+example
+```
+
+Check cert-manager pod
 
 
 ##### - Verify Argo CD applications are synced
