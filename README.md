@@ -240,11 +240,9 @@ istiod                      	        istio-system	        deployed       	istiod
 ```
 
 These Helm charts are deployed automatically through **OpenTofu** using the `helm_release` resource as part of the **cluster bootstrapping** process. Some add-ons require tight integration with AWS, including:
-
-- <sub><strong>IAM Roles for Service Accounts (IRSA)</strong></sub> for the AWS Load Balancer Controller and EFS CSI Driver  
-- <sub><strong>ExternalDNS</strong></sub> and <sub><strong>cert-manager</strong></sub>, which use runtime variables such as `var.domain_name` to create DNS records and TLS certificates  
-- <sub><strong>Argo CD</strong></sub>, which is deployed early to manage the lifecycle of all remaining Git-based application deployments  
-
+- **IAM Roles for Service Accounts (IRSA)** for the AWS Load Balancer Controller and EFS CSI Driver  
+- **ExternalDNS** and **cert-manager**, which use runtime variables such as `var.domain_name` to create DNS records and TLS certificates  
+- **Argo CD**, which is deployed early to manage the lifecycle of all remaining Git-based application deployments  
 
 
 ##### - Verify Argo CD applications are synced
