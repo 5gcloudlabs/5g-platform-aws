@@ -243,10 +243,7 @@ These Helm charts are deployed automatically through **OpenTofu** using the `hel
 - **IAM Roles for Service Accounts (IRSA)** for the AWS Load Balancer Controller and EFS CSI Driver  
 - **ExternalDNS** and **cert-manager**, which use runtime variables such as `var.domain_name` to create DNS records and TLS certificates  
 - **Argo CD**, which is deployed early to manage the lifecycle of all remaining Git-based application deployments
-
-- A Helm release showing STATUS: deployed only confirms that manifests were applied successfully. It does not guarantee that the underlying pods are healthy. Always verify pod readiness:
-
-Check aws-load-balancer-controller & aws-efs-csi-driver pods are deployed successfully in kube-system namespace. You can also validate the rest of the system pods deployed in kube-system namespace
+-  Ensure that the `aws-load-balancer-controller` and `aws-efs-csi-driver` pods are running as expected in the kube-system namespace. Additionally, you may validate the health of the remaining system components deployed in this namespace.
 
 ```bash
   kubectl -n kube-system get pods
@@ -257,7 +254,16 @@ Expected Outcome:
 example
 ```
 
-Check cert-manager pod
+- Ensure that all cert-manager components (including the controller, webhook, and CA injector) are running as expected in the cert-manager namespace. These services are required for issuing TLS certificates for cluster services and ingress resources.
+
+```bash
+  kubectl -n kube-system get pods
+```  
+Expected Outcome:
+
+```bash
+example
+```
 
 
 ##### - Verify Argo CD applications are synced
