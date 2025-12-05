@@ -314,11 +314,17 @@ whereabouts                  Synced        Healthy
 
 ```
 
+##### - Ensure the respective pods are deployed successfully
+
+```bash
+kubectl -n monitoring get pods
+```
+
 
 ### 4. End-to-End 5G Network Deployment:  
-Deploy all 5G network components, including the Free5GC Core, subscribers creation, and UERANSIM either via CLI or via Console-UI.
+Deploy the 5G Core, provision test subscribers, and launch the UE & gNB simulation — either via CLI or Console-UI.
 
-#### A) 5G Network Deployment via CLI:
+#### A) Deployment via CLI:
 
 ##### 1. Deploy 5G Core via CLI
 
