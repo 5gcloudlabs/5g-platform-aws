@@ -225,7 +225,7 @@ ip-192-168-119-14.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
 ```
 
-##### - Verify the below helm charts and respective pods are deployed successfully via OpenTofu:
+##### - Verify the below helm charts are deployed successfully via OpenTofu*: 
 ```bash
 helm list -A
 NAME                        	        NAMESPACE               STATUS         	CHART                                  	 APP VERSION
@@ -239,10 +239,16 @@ istio-gateway               	        istio-system	        deployed       	gatewa
 istiod                      	        istio-system	        deployed       	istiod-1.26.3                      	     1.26.3     
 ```
 
-These Helm charts are deployed automatically through **OpenTofu** using the `helm_release` resource as part of the **cluster bootstrapping** process. Some add-ons require tight integration with AWS, including:
-- **IAM Roles for Service Accounts (IRSA)** for the AWS Load Balancer Controller and EFS CSI Driver  
-- **ExternalDNS** and **cert-manager**, which use runtime variables such as `var.domain_name` to create DNS records and TLS certificates  
-- **Argo CD**, which is deployed early to manage the lifecycle of all remaining Git-based application deployments
+These Helm charts are deployed during cluster bootstrapping using `helm_release` in OpenTofu. While not the typical recommendation for managing Helm charts, it’s required because:
+
+AWS Load Balancer Controller and EFS CSI Driver need the AWS IAM role ARNs created by OpenTofu so their service accounts can be annotated for IRSA.
+
+ExternalDNS and cert-manager rely on runtime variable `var.domain_name` to create DNS records and TLS certificate.
+
+Argo CD must be installed early so it can manage all remaining Git-based deployments.
+
+##### - Ensure the respective pods are deployed successfully
+
 -  Verify that the `aws-load-balancer-controller` and `aws-efs-csi-driver` pods are running as expected in the kube-system namespace. Additionally, you may validate the health of the remaining system components deployed in this namespace.
 
 ```bash
