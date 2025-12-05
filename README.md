@@ -243,7 +243,7 @@ These Helm charts are deployed automatically through **OpenTofu** using the `hel
 - **IAM Roles for Service Accounts (IRSA)** for the AWS Load Balancer Controller and EFS CSI Driver  
 - **ExternalDNS** and **cert-manager**, which use runtime variables such as `var.domain_name` to create DNS records and TLS certificates  
 - **Argo CD**, which is deployed early to manage the lifecycle of all remaining Git-based application deployments
--  Ensure that the `aws-load-balancer-controller` and `aws-efs-csi-driver` pods are running as expected in the kube-system namespace. Additionally, you may validate the health of the remaining system components deployed in this namespace.
+-  Verify that the `aws-load-balancer-controller` and `aws-efs-csi-driver` pods are running as expected in the kube-system namespace. Additionally, you may validate the health of the remaining system components deployed in this namespace.
 
 ```bash
   kubectl -n kube-system get pods
@@ -254,7 +254,7 @@ Expected Outcome:
 example
 ```
 
-- Ensure that all cert-manager components (including the controller, webhook, and CA injector) are running as expected in the cert-manager namespace. These services are required for issuing TLS certificates for cluster services and ingress resources.
+- Verfiy that all cert-manager components (including the controller, webhook, and CA injector) are running as expected in the cert-manager namespace. These services are required for issuing TLS certificates for cluster services and ingress resources.
 
 ```bash
   kubectl -n kube-system get pods
@@ -265,6 +265,28 @@ Expected Outcome:
 example
 ```
 
+- Verify that the Istio control plane components—such as istiod, the ingress gateway, and base system pods—are running properly in the istio-system namespace. These components provide the service mesh foundation and ingress routing for the platform.
+
+```bash
+  kubectl -n kube-system get pods
+```  
+Expected Outcome:
+
+```bash
+example
+```
+
+Confirm that all Argo CD components (API server, repository server, application controller, and Redis) are running and healthy in the argocd namespace. A fully functional Argo CD installation is required for managing GitOps-driven application deployments.
+
+
+```bash
+  kubectl -n kube-system get pods
+```  
+Expected Outcome:
+
+```bash
+example
+```
 
 ##### - Verify Argo CD applications are synced
 Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications, completing the cluster bootstrapping process.
