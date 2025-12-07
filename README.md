@@ -316,6 +316,8 @@ whereabouts                  Synced        Healthy
 
 ##### - Ensure the respective pods are deployed successfully
 
+**- Monitoring stack:**
+
 ```bash
 kubectl -n monitoring get pods
 ```
