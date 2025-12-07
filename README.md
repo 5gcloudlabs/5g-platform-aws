@@ -241,11 +241,11 @@ istiod                      	        istio-system	        deployed       	istiod
 
 These Helm charts are deployed during cluster bootstrapping using `helm_release` in OpenTofu. While not the typical recommendation for managing Helm charts, it’s required because:
 
-AWS Load Balancer Controller and EFS CSI Driver need the AWS IAM role ARNs created by OpenTofu so their service accounts can be annotated for IRSA.
+**AWS Load Balancer** Controller and **EFS CSI Driver** need the AWS `IAM role ARNs` created by OpenTofu so their service accounts can be annotated for IRSA.
 
-ExternalDNS and cert-manager rely on runtime variable `var.domain_name` to create DNS records and TLS certificate.
+**ExternalDNS** and cert-manager rely on runtime variable `var.domain_name` to create DNS records and TLS certificate.
 
-Argo CD must be installed early so it can manage all remaining Git-based deployments.
+**Argo CD** must be installed early so it can manage all remaining Git-based deployments.
 
 ##### - Ensure the respective pods are deployed successfully
 
