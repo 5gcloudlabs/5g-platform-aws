@@ -316,7 +316,7 @@ whereabouts                  Synced        Healthy
 
 ##### - Ensure the respective pods are deployed successfully
 
-**- Monitoring & Observability stack:**
+- **Monitoring & Observability stack:**
 
 ```bash
 kubectl -n monitoring get pods
@@ -327,7 +327,7 @@ Expected Output:
 example
 ```
 
-**- Console UI, executor, and curl helper pods:**
+- **Console UI, executor, and curl helper pods:**
 ```bash
 kubectl get pods
 ```
@@ -346,6 +346,62 @@ Expected Output:
 example
 ```
 
+##### Validate Ingress and DNS Resolution
+
+As a final validation step, ensure the Ingress resource is deployed correctly, the CNAME records exist, and DNS resolves to the ALB IPs.
+
+###### 1. Verify the ALB Ingress configuration
+Check that the Ingress resource is created with the correct hosts, annotations including ACM TLS certificate ARN:
+
+```bash
+kubectl -n istio-system describe ingress ingress
+```
+
+Expected Output:
+```bash
+Name:             ingress
+Labels:           <none>
+Namespace:        istio-system
+Address:          k8s-istiosys-ingress-9190591614-1233209419.eu-central-1.elb.amazonaws.com
+Ingress Class:    <none>
+Default backend:  <default>
+Rules:
+  Host                    Path  Backends
+  ----                    ----  --------
+  console.$domain_name     
+                          /   istio-gateway:443 (192.168.41.38:443)
+  argocd.$domain_name      
+                          /   istio-gateway:443 (192.168.41.38:443)
+  grafana.$domain_name     
+                          /   istio-gateway:443 (192.168.41.38:443)
+  webui.$domain_name       
+                          /   istio-gateway:443 (192.168.41.38:443)
+  prometheus.$domain_name  
+                          /   istio-gateway:443 (192.168.41.38:443)
+Annotations:              alb.ingress.kubernetes.io/backend-protocol: HTTPS
+                          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:************:certificate/f7b0eeb2-bd46-464e-8bc1-be02c18797fd
+                          alb.ingress.kubernetes.io/healthcheck-interval-seconds: 30
+                          alb.ingress.kubernetes.io/healthcheck-path: /healthz
+                          alb.ingress.kubernetes.io/listen-ports: [{"HTTP": 80}, {"HTTPS":443}]
+                          alb.ingress.kubernetes.io/scheme: internet-facing
+                          alb.ingress.kubernetes.io/target-type: ip
+                          kubernetes.io/ingress.class: alb
+Events:                   <none>
+```
+
+###### 2. Validate that DNS resolves to the ALB
+Run `dig` against the ALB hostname shown under the **Address** field:
+
+```bash
+dig k8s-istiosys-ingress-9190591614-1233209419.eu-central-1.elb.amazonaws.com
+```
+
+Expected Output:
+```bash
+ANSWER SECTION:
+k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 3.126.96.223
+k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 18.194.188.63
+```
 
 ### 4. End-to-End 5G Network Deployment:  
 Deploy the 5G Core, provision test subscribers, and launch the UE & gNB simulation — either via CLI or Console-UI.
