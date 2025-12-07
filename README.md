@@ -316,10 +316,34 @@ whereabouts                  Synced        Healthy
 
 ##### - Ensure the respective pods are deployed successfully
 
-**- Monitoring stack:**
+**- Monitoring & Observability stack:**
 
 ```bash
 kubectl -n monitoring get pods
+```
+
+Expected Output:
+```bash
+example
+```
+
+**- Console UI, executor, and curl helper pods:**
+```bash
+kubectl get pods
+```
+Expected Output:
+```bash
+example
+```
+
+- **Multus and Whereabouts:**
+Already validated in an earlier step, but you can re-check if needed:
+```bash
+kubectl -n kube-system get pods
+```
+Expected Output:
+```bash
+example
 ```
 
 
