@@ -324,7 +324,7 @@ kubectl -n monitoring get pods
 ### 4. End-to-End 5G Network Deployment:  
 Deploy the 5G Core, provision test subscribers, and launch the UE & gNB simulation — either via CLI or Console-UI.
 
-#### A) Deployment via CLI:
+#### A) 5G Network Deployment via CLI:
 
 ##### 1. Deploy 5G Core via CLI
 
