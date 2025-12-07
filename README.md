@@ -263,7 +263,7 @@ example
 - Verfiy that all cert-manager components (including the controller, webhook, and CA injector) are running as expected in the cert-manager namespace. These services are required for issuing TLS certificates for cluster services and ingress resources.
 
 ```bash
-  kubectl -n kube-system get pods
+  kubectl -n cert-manager get pods
 ```  
 Expected Outcome:
 
@@ -274,7 +274,7 @@ example
 - Verify that the Istio control plane components—such as istiod, the ingress gateway, and base system pods—are running properly in the istio-system namespace. These components provide the service mesh foundation and ingress routing for the platform.
 
 ```bash
-  kubectl -n kube-system get pods
+  kubectl -n istio-system get pods
 ```  
 Expected Outcome:
 
@@ -286,7 +286,7 @@ Confirm that all Argo CD components (API server, repository server, application 
 
 
 ```bash
-  kubectl -n kube-system get pods
+  kubectl -n argocd get pods
 ```  
 Expected Outcome:
 
