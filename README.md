@@ -419,7 +419,7 @@ cd aws-5gcloudlabs/scripts/cli
 ./free5gc-cli.sh
 ```
 
-You will be prompted to enter the PLMN-ID for your Network:
+You will be prompted to enter the PLMN-ID for your Network, here we input 602 as value for mcc and 02 as value for mnc
 
 Example prompt: 
 ```bash
@@ -464,21 +464,14 @@ mongodb-0                                              2/2     Running
 
 ##### 2. 5G Subscribers Creation via CLI
 
-After validating that your 5G Core has been successfully deployed, you can proceed to create 5G subscribers using the command-line provisioning tool.
+After validating that your 5G Core has been successfully deployed, you can proceed to provision 5G subscribers via script.
 
-This step uses the generated script:
-
-```bash
-subscriber-provisioner-cli.sh
-```
-
-1. Navigate to the CLI directory
-
-Make sure you are in the same directory where the scripts were generated:
+1. Make sure you are in the same `cli` directory:
 
 ```bash
-cd scripts/cli
+cd aws-5gcloudlabs/scripts/cli
 ```
+
 2. Run the Subscriber Provisioning Script
 
 Execute the script*:
@@ -488,23 +481,53 @@ Execute the script*:
 
 ```
 
-You will be prompted to enter the number of test subscribers you would like to create:
+You will be prompted to enter how many test subscribers you want to provision. In this example, we use 2.
 
 Example prompt: 
 ```bash
-Enter the number of subscribers to provision
+Enter the number of subscribers to provision (e.g: 10): 2
 ```
 
 Expected Output:
 ```bash
+*** Starting provisioning of (2) subscribers with IMSI range beginning at (602020000000001) ***
+
+Please wait...
+
+
 ===== Provisioned IMSI List =====
+
+602020000000001
+602020000000002
 ```
+IMSI numbering starts at $mcc.$mnc.0000000001.
 
 *This script is automatically created when you run free5gc-cli.sh.
 The original template file, subscriber-provisioner-cli.base, contains placeholder variables ($mcc, $mnc) which are replaced during the environment substitution step.
 
 
-# validation
+###### Validate subscriber provisioning:
+
+To validate subscriber provisioning via CLI, check the script output file `subs-prov-output.log`
+
+```bash
+more subs-prov-output.log
+```
+Expected Output:
+
+Find the POST request and scroll down to the HTTP/1.1 201 Created line — this indicates successful subscriber creation.
+
+```bash
+> POST /api/subscriber/imsi-602020000000001/60202 HTTP/1.1
+> 
+> 
+< HTTP/1.1 201 Created
+...
+> POST /api/subscriber/imsi-602020000000002/60202 HTTP/1.1
+> 
+> 
+< HTTP/1.1 201 Created
+```
 
 
 ##### 3. Deploy UERANSIM (UE + gNB) Simulation via CLI
