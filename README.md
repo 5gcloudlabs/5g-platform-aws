@@ -257,7 +257,23 @@ These Helm charts are deployed during cluster bootstrapping using `helm_release`
 Expected Outcome:
 
 ```bash
-example
+NAME                                            READY   STATUS    
+aws-load-balancer-controller-7896c5c598-8dbxq   1/1     Running   
+aws-node-5p9hs                                  2/2     Running   
+aws-node-6k54j                                  2/2     Running   
+coredns-54d96d77bc-9gv6m                        1/1     Running   
+coredns-54d96d77bc-dt88g                        1/1     Running   
+efs-csi-controller-649b9665d7-6xwtv             3/3     Running   
+efs-csi-controller-649b9665d7-sz6vz             3/3     Running   
+efs-csi-node-gpq99                              3/3     Running   
+efs-csi-node-wdc49                              3/3     Running   
+external-dns-549fbd7b7-r5pp2                    1/1     Running   
+kube-multus-ds-8bb6q                            1/1     Running   
+kube-multus-ds-m7rrk                            1/1     Running   
+kube-proxy-ccr8q                                1/1     Running   
+kube-proxy-dsmqv                                1/1     Running   
+whereabouts-whereabouts-chart-2mr5j             1/1     Running   
+whereabouts-whereabouts-chart-sdsbq             1/1     Running   
 ```
 
 - Verfiy that all cert-manager components (including the controller, webhook, and CA injector) are running as expected in the cert-manager namespace. These services are required for issuing TLS certificates for cluster services and ingress resources.
@@ -268,7 +284,10 @@ example
 Expected Outcome:
 
 ```bash
-example
+NAME                                      READY   STATUS  
+cert-manager-595b985855-scchf             1/1     Running 
+cert-manager-cainjector-dd577f84c-zgl95   1/1     Running 
+cert-manager-webhook-79cd9bf9d-kz86t      1/1     Running
 ```
 
 - Verify that the Istio control plane components—such as istiod, the ingress gateway, and base system pods—are running properly in the istio-system namespace. These components provide the service mesh foundation and ingress routing for the platform.
@@ -279,7 +298,10 @@ example
 Expected Outcome:
 
 ```bash
-example
+NAME                             READY   STATUS   
+istio-gateway-5dcdfc6df6-m2bps   1/1     Running  
+istiod-556bf8849c-7qfs4          1/1     Running  
+
 ```
 
 Confirm that all Argo CD components (API server, repository server, application controller, and Redis) are running and healthy in the argocd namespace. A fully functional Argo CD installation is required for managing GitOps-driven application deployments.
@@ -291,7 +313,14 @@ Confirm that all Argo CD components (API server, repository server, application 
 Expected Outcome:
 
 ```bash
-example
+NAME                                                READY   STATUS  
+argocd-application-controller-0                     1/1     Running 
+argocd-applicationset-controller-56c9b5889f-lhb9l   1/1     Running 
+argocd-dex-server-659554d859-82zsb                  1/1     Running 
+argocd-notifications-controller-67c4db49fd-7p77m    1/1     Running 
+argocd-redis-7c5f9cbc5b-5cpqq                       1/1     Running 
+argocd-repo-server-549b88f9f-cvspp                  1/1     Running 
+argocd-server-6b896f4dcc-2rqmh                      1/1     Running 
 ```
 
 ##### - Verify Argo CD applications are synced
@@ -324,7 +353,16 @@ kubectl -n monitoring get pods
 
 Expected Output:
 ```bash
-example
+NAME                                                        READY   STATUS  
+kube-prometheus-stack-grafana-7bc5ccb655-864lt              3/3     Running 
+kube-prometheus-stack-kube-state-metrics-668f8bbd5f-f95tr   1/1     Running 
+kube-prometheus-stack-operator-7fd5b447b-hjpx6              1/1     Running 
+kube-prometheus-stack-prometheus-node-exporter-57vjf        1/1     Running 
+kube-prometheus-stack-prometheus-node-exporter-qgbf9        1/1     Running 
+loki-0                                                      1/1     Running 
+loki-promtail-568m2                                         1/1     Running 
+loki-promtail-84cm6                                         1/1     Running 
+prometheus-kube-prometheus-stack-prometheus-0               2/2     Running 
 ```
 
 - **Console UI, executor, and curl helper pods:**
@@ -333,7 +371,10 @@ kubectl get pods
 ```
 Expected Output:
 ```bash
-example
+NAME                               READY   STATUS  
+console-8c88b9cf9-h9vzx            1/1     Running 
+curl-deployment-5db9cb8c57-hjdkc   1/1     Running 
+executor-9f5589868-qp9gq           1/1     Running 
 ```
 
 - **Multus and Whereabouts:**
@@ -343,7 +384,23 @@ kubectl -n kube-system get pods
 ```
 Expected Output:
 ```bash
-example
+NAME                                            READY   STATUS    
+aws-load-balancer-controller-7896c5c598-8dbxq   1/1     Running   
+aws-node-5p9hs                                  2/2     Running   
+aws-node-6k54j                                  2/2     Running   
+coredns-54d96d77bc-9gv6m                        1/1     Running   
+coredns-54d96d77bc-dt88g                        1/1     Running   
+efs-csi-controller-649b9665d7-6xwtv             3/3     Running   
+efs-csi-controller-649b9665d7-sz6vz             3/3     Running   
+efs-csi-node-gpq99                              3/3     Running   
+efs-csi-node-wdc49                              3/3     Running   
+external-dns-549fbd7b7-r5pp2                    1/1     Running   
+kube-multus-ds-8bb6q                            1/1     Running   
+kube-multus-ds-m7rrk                            1/1     Running   
+kube-proxy-ccr8q                                1/1     Running   
+kube-proxy-dsmqv                                1/1     Running   
+whereabouts-whereabouts-chart-2mr5j             1/1     Running   
+whereabouts-whereabouts-chart-sdsbq             1/1     Running   
 ```
 
 ##### Validate Ingress and DNS Resolution
@@ -532,30 +589,50 @@ Find the POST request and scroll down to the HTTP/1.1 201 Created line — this 
 
 ##### 3. Deploy UERANSIM (UE + gNB) Simulation via CLI
 
-After deploying the 5G Core and creating subscribers, you can deploy **UERANSIM** using the provided CLI script.
+After validating that your 5G test subscribers have been provisioned successfully, you can proceed to deploy **UERANSIM** via script.
 
-Navigate to the `scripts/cli` directory and run:
+1. Make sure you are in the same `cli` directory:
 
 ```bash
 cd aws-5gcloudlabs/scripts/cli
-./ueransim-cli.sh
 ```
-Expected output
+
+2. Run the script `ueransim-cli.sh`:
 
 ```bash
-application.argoproj.io/ueransim-app created
+./ueransim-cli.sh
+
 ```
 
-Validate UERANSIM Deployment
+Expected Output. 
 
-Use kubectl to confirm the gNB and UE pods are running:
+you should see output similar to: 
+
+```bash
+application.argoproj.io/free5gc-app created
+```
+
+###### Validate UERANSIM Deployment
+
+After triggering the deployment, you can verify that the UE and gNB simulation components are running:
+1. Verify using kubectl
+
+Check that all Free5GC pods are starting correctly and reaching a Running status.
+
+
 ```bash
 kubectl -n ueransim get pods
 ```
 
 You should see the following pods in Running state:
 
-# validate
+
+kubectl -n ueransim get pods
+NAME                                           READY   STATUS    RESTARTS  
+aws-5gcloudlabs-ueransim-gnb-c4f64d998-5868p   2/2     Running   0    
+aws-5gcloudlabs-ueransim-ue-5685b847d7-vhmn7   2/2     Running   0  
+
+
 
 
 #### B) Deployment via Console-UI
