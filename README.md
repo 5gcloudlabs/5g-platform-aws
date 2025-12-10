@@ -530,6 +530,8 @@ kubectl -n free5gc exec -it mongodb-0 --   mongo free5gc --eval 'db.NfProfile.fi
 ```
 
 Expected Output:
+
+
 You only need to verify the key fields shown below (your real output will contain many more details):
 
 ```bash
@@ -542,11 +544,19 @@ You only need to verify the key fields shown below (your real output will contai
   "ipv4Addresses": [
     "aws-5gcloudlabs-free5gc-amf-service"
   ],
+  "amfInfo": {
+    "amfSetId": "3f8",
+    "amfRegionId": "ca"
+  },
   "nfServices": [
     { "serviceName": "namf-comm", "nfServiceStatus": "REGISTERED" },
-    { "serviceName": "namf-mt",   "nfServiceStatus": "REGISTERED" }
+    { "serviceName": "namf-evts", "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "namf-mt",   "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "namf-loc",  "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "namf-oam",  "nfServiceStatus": "REGISTERED" }
   ]
 }
+
 ```
 
 ##### 2. 5G Subscribers Creation via CLI
