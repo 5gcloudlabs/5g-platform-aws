@@ -498,7 +498,7 @@ application.argoproj.io/free5gc-app created
 
 After triggering the deployment, you can verify that the 5G Core components are running using several methods.
 
-1. Verify using kubectl
+1. Validate 5G Core Pod Status
 
 Check that all Free5GC pods are starting correctly and reaching a Running status.
 
@@ -518,6 +518,36 @@ aws-5gcloudlabs-free5gc-webui-webui-6876d69c77-8bldv   2/2     Running
 mongodb-0                                              2/2     Running   
 ```
 
+2. Validate SBI Registration (NF Registration Check)
+
+
+Free5GC network functions (AMF, SMF, UDM, AUSF, etc.) register with the NRF over the Service-Based Interface (SBI).
+
+You can verify AMF registration by running the command below:
+
+```bash
+kubectl -n free5gc exec -it mongodb-0 --   mongo free5gc --eval 'db.NfProfile.find({ nfType: "AMF" }).pretty()'
+```
+
+Expected Output:
+You only need to verify the key fields shown below (your real output will contain many more details):
+
+```bash
+{
+  "nfType": "AMF",
+  "nfStatus": "REGISTERED",
+  "plmnList": [
+    { "mcc": "602", "mnc": "02" }
+  ],
+  "ipv4Addresses": [
+    "aws-5gcloudlabs-free5gc-amf-service"
+  ],
+  "nfServices": [
+    { "serviceName": "namf-comm", "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "namf-mt",   "nfServiceStatus": "REGISTERED" }
+  ]
+}
+```
 
 ##### 2. 5G Subscribers Creation via CLI
 
