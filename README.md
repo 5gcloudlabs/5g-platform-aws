@@ -538,24 +538,18 @@ You only need to verify the key fields shown below (your real output will contai
 
 ```bash
 {
-  "nfType": "AMF",
+  "nfType": "UDM",
   "nfStatus": "REGISTERED",
   "plmnList": [
-    { "mcc": "602", "mnc": "02" }
-  ],
-  "ipv4Addresses": [
-    "aws-5gcloudlabs-free5gc-amf-service"
-  ],
-  "amfInfo": {
-    "amfSetId": "3f8",
-    "amfRegionId": "ca"
-  },
+     { "mcc": "602", "mnc": "02" }
+    ],
+  "ipv4Addresses": ["aws-5gcloudlabs-free5gc-udm-service"],
   "nfServices": [
-    { "serviceName": "namf-comm", "nfServiceStatus": "REGISTERED" },
-    { "serviceName": "namf-evts", "nfServiceStatus": "REGISTERED" },
-    { "serviceName": "namf-mt",   "nfServiceStatus": "REGISTERED" },
-    { "serviceName": "namf-loc",  "nfServiceStatus": "REGISTERED" },
-    { "serviceName": "namf-oam",  "nfServiceStatus": "REGISTERED" }
+    { "serviceName": "nudm-ee",   "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "nudm-pp",   "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "nudm-sdm",  "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "nudm-uecm", "nfServiceStatus": "REGISTERED" },
+    { "serviceName": "nudm-ueau", "nfServiceStatus": "REGISTERED" }
   ]
 }
 
