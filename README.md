@@ -523,7 +523,9 @@ mongodb-0                                              2/2     Running
 
 Free5GC network functions (AMF, SMF, UDM, AUSF, etc.) register with the NRF over the Service-Based Interface (SBI).
 
-You can verify AMF registration by running the command below:
+You can verify that a Network Function is successfully registered by checking its entry in the NRF database. The NRF stores its registrations inside MongoDB (along with other Free5GC databases).
+
+You can verify e.g AMF registration by running the command below:
 
 ```bash
 kubectl -n free5gc exec -it mongodb-0 --   mongo free5gc --eval 'db.NfProfile.find({ nfType: "AMF" }).pretty()'
