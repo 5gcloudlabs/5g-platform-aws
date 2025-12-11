@@ -681,9 +681,9 @@ You should see the following pods in Running state:
 
 ```bash
 kubectl -n ueransim get pods
-NAME                                           READY   STATUS    RESTARTS  
-aws-5gcloudlabs-ueransim-gnb-c4f64d998-5868p   2/2     Running   0    
-aws-5gcloudlabs-ueransim-ue-5685b847d7-vhmn7   2/2     Running   0  
+NAME                                           READY   STATUS    
+aws-5gcloudlabs-ueransim-gnb-c4f64d998-5868p   2/2     Running       
+aws-5gcloudlabs-ueransim-ue-5685b847d7-vhmn7   2/2     Running     
 ```
 
 
