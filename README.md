@@ -579,7 +579,7 @@ After validating that your 5G Core has been successfully deployed, you can proce
 1. Make sure you are in the same `cli` directory:
 
 ```bash
-cd aws-5gcloudlabs/scripts/cli
+aws-5gcloudlabs/scripts/cli
 ```
 
 2. Run the Subscriber Provisioning Script
@@ -647,7 +647,7 @@ After validating that your 5G test subscribers have been provisioned successfull
 1. Make sure you are in the same `cli` directory:
 
 ```bash
-cd aws-5gcloudlabs/scripts/cli
+aws-5gcloudlabs/scripts/cli
 ```
 
 2. Run the script `ueransim-cli.sh`:
