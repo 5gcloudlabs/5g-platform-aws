@@ -521,14 +521,14 @@ mongodb-0                                              2/2     Running
 2. Validate SBI Registration (NF Registration Check)
 
 
-Free5GC network functions (AMF, SMF, UDM, AUSF, etc.) register with the NRF over the Service-Based Interface (SBI).
+Free5GC network functions (AMF, SMF, AUSF, UDM, etc.) register with the NRF over the Service-Based Interface (SBI).
 
 You can verify that a Network Function is successfully registered by checking its entry in the NRF database. The NRF stores its registrations inside MongoDB (along with other Free5GC databases).
 
-You can verify e.g AMF registration by running the command below:
+Specify nfType (e.g UDM) in the command below to verify the NF registration:
 
 ```bash
-kubectl -n free5gc exec -it mongodb-0 --   mongo free5gc --eval 'db.NfProfile.find({ nfType: "AMF" }).pretty()'
+kubectl -n free5gc exec -it mongodb-0 -- mongo free5gc --eval 'db.NfProfile.find({ nfType: "UDM" }).pretty()'
 ```
 
 Expected Output:
@@ -554,6 +554,23 @@ You only need to verify the key fields shown below (your real output will contai
 }
 
 ```
+
+3. Validate the N4 interface by checking the SMF logs. 
+
+```bash
+kubectl -n free5gc logs $(kubectl -n free5gc get pod -l nf=smf -o name)
+```
+Expected Output
+
+You should see the PFCP Association Request and the corresponding ‘Association Setup Accepted’ response from the UPF, using IP addresses allocated automatically by the Whereabouts IPAM from the designated Multus subnet.
+
+
+```bash
+[INFO][SMF][PFCP] Listen on 100.64.4.10:8805
+[INFO][SMF][Main] Sending PFCP Association Request to UPF[100.64.5.10]
+[INFO][SMF][Main] Received PFCP Association Setup Accepted Response from UPF[100.64.5.10]
+```
+
 
 ##### 2. 5G Subscribers Creation via CLI
 
