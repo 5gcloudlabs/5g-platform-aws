@@ -633,12 +633,13 @@ Expected output:
 
 You should see the following collections, which are created during subscriber provisioning and are not present by default:
 
-`policyData.ues.amData`
-`policyData.ues.smData`
-`subscriptionData.authenticationData.authenticationSubscription`
-`subscriptionData.provisionedData.amData`
-`subscriptionData.provisionedData.smData`
-`subscriptionData.provisionedData.smfSelectionSubscriptionData`
+- `policyData.ues.amData`
+- `policyData.ues.smData`
+- `subscriptionData.authenticationData.authenticationSubscription`
+- `subscriptionData.provisionedData.amData`
+- `subscriptionData.provisionedData.smData`
+- `subscriptionData.provisionedData.smfSelectionSubscriptionData`
+
 
 The presence of these collections confirms that subscribers were added successfully.
 
