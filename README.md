@@ -555,14 +555,14 @@ You only need to verify the key fields shown below (your real output will contai
 
 ```
 
-3. Validate the N4 interface by checking the SMF logs. 
+3. Validate the N4 interface state is up, by checking the SMF logs. 
 
 ```bash
 kubectl -n free5gc logs $(kubectl -n free5gc get pod -l nf=smf -o name)
 ```
 Expected Output
 
-You should see the PFCP Association Request and the corresponding ‘Association Setup Accepted’ response from the UPF, using IP addresses allocated automatically by the Whereabouts IPAM from the designated Multus subnet.
+You should see the PFCP Association Request and the corresponding ‘Association Setup Accepted’ response from the UPF, using IP addresses allocated automatically by the Whereabouts IPAM from the designated Multus subnets.
 
 
 ```bash
@@ -618,25 +618,59 @@ The original template file, subscriber-provisioner-cli.base, contains placeholde
 
 ###### Validate subscriber provisioning:
 
-To validate subscriber provisioning via CLI, check the script output file `subs-prov-output.log`
+The MongoDB instance used by Free5GC stores both NF registration data and the subscriber profile database.
+
+To verify that subscribers were provisioned successfully:
+
+1- list all collections in the free5gc database:
 
 ```bash
-more subs-prov-output.log
+kubectl -n free5gc exec -it mongodb-0 -- mongo free5gc --eval 'db.getCollectionNames()'
 ```
-Expected Output:
 
-Find the POST request and scroll down to the HTTP/1.1 201 Created line — this indicates successful subscriber creation.
+Expected output:
+
+
+You should see the following collections, which are created during subscriber provisioning and are not present by default:
+
+`policyData.ues.amData`
+`policyData.ues.smData`
+`subscriptionData.authenticationData.authenticationSubscription`
+`subscriptionData.provisionedData.amData`
+`subscriptionData.provisionedData.smData`
+`subscriptionData.provisionedData.smfSelectionSubscriptionData`
+
+The presence of these collections confirms that subscribers were added successfully.
+
+2- Validate an individual subscriber by querying one of these collections.
+For example, to inspect the SM policy data for a specific IMSI
 
 ```bash
-> POST /api/subscriber/imsi-602020000000001/60202 HTTP/1.1
-> 
-> 
-< HTTP/1.1 201 Created
-...
-> POST /api/subscriber/imsi-602020000000002/60202 HTTP/1.1
-> 
-> 
-< HTTP/1.1 201 Created
+kubectl -n free5gc exec -it mongodb-0 -- mongo free5gc --eval 'db.policyData.ues.smData.find({ ueId: "imsi-602020000000001" }).pretty()'
+```
+
+Expected Output (key fields):
+
+```bash
+{
+  "ueId": "imsi-602020000000001",
+  "smPolicySnssaiData": {
+    "01010203": {
+      "snssai": { "sst": 1, "sd": "010203" },
+      "smPolicyDnnData": {
+        "internet": { "dnn": "internet" },
+        "internet2": { "dnn": "internet2" }
+      }
+    },
+    "01112233": {
+      "snssai": { "sst": 1, "sd": "112233" },
+      "smPolicyDnnData": {
+        "internet": { "dnn": "internet" },
+        "internet2": { "dnn": "internet2" }
+      }
+    }
+  }
+}
 ```
 
 
