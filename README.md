@@ -86,14 +86,13 @@ Before deploying any infrastructure, these must be available:
 #### b) Local Workstation Requirements
 Install the following tools locally:
 
-| Tool | Required | Installation |
-|------|----------|--------------|
-| **AWS CLI** | Yes | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
-| **OpenTofu** | Yes | [Install guide](https://opentofu.org/docs/intro/install/) |
-| **kubectl** | Yes | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
-| **Helm** | No | [Install guide](https://helm.sh/docs/intro/install/) |
-| **istioctl** | No | [Install guide](https://istio.io/latest/docs/ops/diagnostic-tools/istioctl/) |
-| **Argo CD CLI** | No | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) |
+| Tool | Installation |
+|------|--------------|
+| **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
+| **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
+| **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
+| **Helm** (optional) | [Install guide](https://helm.sh/docs/intro/install/) |
+| **istioctl** (optional) | [Install guide](https://istio.io/latest/docs/ops/diagnostic-tools/istioctl/) |
 
 
 Verify installs & versions
