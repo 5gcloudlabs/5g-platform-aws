@@ -92,6 +92,7 @@ Install the following tools locally:
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
 | **Helm** | [Install guide](https://helm.sh/docs/intro/install/) |
+| **Istioctl**| [Install guide](https://istio.io/latest/docs/ops/diagnostic-tools/istioctl/) |
 | **Argo CD CLI (optional)** | [Install guide](https://argo-cd.readthedocs.io/en/stable/cli_installation/) |
 
 
