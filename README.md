@@ -644,7 +644,7 @@ You should see the following collections, which are created during subscriber pr
 The presence of these collections confirms that subscribers were added successfully.
 
 2- Validate an individual subscriber by querying one of these collections.
-For example, to inspect the SM policy data for a specific IMSI
+For example, to inspect the Session Management policy data for a specific IMSI
 
 ```bash
 kubectl -n free5gc exec -it mongodb-0 -- mongo free5gc --eval 'db.policyData.ues.smData.find({ ueId: "imsi-602020000000001" }).pretty()'
