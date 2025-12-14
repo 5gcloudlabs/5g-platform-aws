@@ -28,7 +28,7 @@ metadata:
   name: {{ .Values.global.n3networkUPF.name }}
 spec:
 # [MODIFIED by 5g-cloud-labs]
-# Added host-device CNI plugin configuration.
+# Added host-device & tuning CNI plugins configuration.
 # Removed macvlan/ipvlan configuration.
 # Integrated IPAM with Whereabouts.
   config: '{
