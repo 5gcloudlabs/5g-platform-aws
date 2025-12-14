@@ -32,19 +32,28 @@ spec:
 # Removed macvlan/ipvlan configuration.
 # Integrated IPAM with Whereabouts.
   config: '{
-        "cniVersion": "0.3.1",
-        "type": "{{ .Values.global.n3networkUPF.type }}",
-        "device": "{{ $.Values.global.n3networkUPF.masterIf }}",
-        "ipam": {
-          "type": "whereabouts",
-          "range": "{{ $.Values.global.n3networkUPF.subnetIP }}/{{ $.Values.global.n3networkUPF.cidr }}",
-          "range_start": "{{ $.Values.global.n3networkUPF.n3if.ipAddress }}",
-          "range_end": "{{ $.Values.global.n3networkUPF.n3if.ipAddress }}",
-          "routes": [{"dst": "{{ $.Values.global.n3networkUPF.routeDST }}",
-          "gw": "{{ $.Values.global.n3networkUPF.gatewayIP }}"}]
+  "cniVersion": "0.3.1",
+  "plugins": [
+    {
+      "type": "{{ .Values.global.n3networkUPF.type }}",
+      "device": "{{ $.Values.global.n3networkUPF.masterIf }}",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "{{ $.Values.global.n3networkUPF.subnetIP }}/{{ $.Values.global.n3networkUPF.cidr }}",
+        "range_start": "{{ $.Values.global.n3networkUPF.n3if.ipAddress }}",
+        "range_end": "{{ $.Values.global.n3networkUPF.n3if.ipAddress }}",
+        "routes": [
+          {
+            "dst": "{{ $.Values.global.n3networkUPF.routeDST }}",
+            "gw": "{{ $.Values.global.n3networkUPF.gatewayIP }}"
+          }
+        ]
+      }
     },
     {
-          "type": "tuning",
-          "mtu": 9000}
-    }'
+      "type": "tuning",
+      "mtu": 9000
+    }
+  ]
+}'
 {{- end }}
