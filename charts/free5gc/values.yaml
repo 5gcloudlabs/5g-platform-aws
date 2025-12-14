@@ -56,7 +56,7 @@ global:
     enabled: true
     name: n4networksmf
     type: ipvlan
-    masterIf: ens7 #ec2 network interface designated for UPF n3 interface (controlplane node)
+    masterIf: ens7 #ec2 network interface designated for SMF n4 interface (controlplane node)
     subnetIP: 100.64.4.0
     cidr: 28
     gatewayIP: 100.64.4.1    
