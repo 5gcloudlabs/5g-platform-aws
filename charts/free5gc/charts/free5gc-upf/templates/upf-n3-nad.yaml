@@ -52,7 +52,7 @@ spec:
     },
     {
       "type": "tuning",
-      "mtu": 9000
+      "mtu": 9001
     }
   ]
 }'
