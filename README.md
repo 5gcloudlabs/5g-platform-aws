@@ -496,7 +496,7 @@ application.argoproj.io/free5gc-app created
 
 ###### Validate the 5G Core Deployment
 
-After triggering the deployment, you can verify that the 5G Core components are running using several methods.
+This section verifies the 5G Core deployment by checking Network Function pod status, 3GPP SBI service registration in the NRF, Multus-based multi-NIC pods for traffic separation, and N4 connectivity between the SMF and UPF.
 
 1. Validate 5G Core Pod Status
 
@@ -555,14 +555,36 @@ You only need to verify the key fields shown below (your real output will contai
 
 ```
 
-3. Validate the N4 interface state is up, by checking the SMF logs. 
+3. Validate that traffic-separated NFs (AMF, SMF, and UPF) have multiple network interfaces with IP addresses automatically allocated via Whereabouts from the designated Multus subnets.
+
+AMF N2 Interface:
+
+```bash
+kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=amf -o name) -- ip a
+```
+
+Expected Outcome:
+
+```bash
+eth0@if30: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
+link/ether de:0d:00:33:a5:68 brd ff:ff:ff:ff:ff:ff
+inet 192.168.101.86/32 scope global eth0
+
+n2@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN qlen 1000
+link/ether 0a:4e:dd:6e:14:ab brd ff:ff:ff:ff:ff:ff
+inet 100.64.1.10/28 brd 100.64.1.15 scope global n2
+```
+
+
+
+4. Validate the N4 interface state is up, by checking the SMF logs. 
 
 ```bash
 kubectl -n free5gc logs $(kubectl -n free5gc get pod -l nf=smf -o name)
 ```
 Expected Output
 
-You should see the PFCP Association Request and the corresponding ‘Association Setup Accepted’ response from the UPF, using IP addresses allocated automatically by the Whereabouts IPAM from the designated Multus subnets.
+You should see the PFCP Association Request and the corresponding ‘Association Setup Accepted’ response from the UPF.
 
 
 ```bash
