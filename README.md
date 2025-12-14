@@ -560,15 +560,12 @@ You only need to verify the key fields shown below (your real output will contai
 AMF N2 Interface:
 
 ```bash
-kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=amf -o name) -- ip a
+kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=amf -o name) -- ip address show dev n2
 ```
 
 Expected Outcome:
 
 ```bash
-eth0@if30: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
-link/ether de:0d:00:33:a5:68 brd ff:ff:ff:ff:ff:ff
-inet 192.168.101.86/32 scope global eth0
 
 n2@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN qlen 1000
 link/ether 0a:4e:dd:6e:14:ab brd ff:ff:ff:ff:ff:ff
