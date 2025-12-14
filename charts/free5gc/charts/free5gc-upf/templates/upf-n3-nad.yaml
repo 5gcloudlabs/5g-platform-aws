@@ -42,6 +42,9 @@ spec:
           "range_end": "{{ $.Values.global.n3networkUPF.n3if.ipAddress }}",
           "routes": [{"dst": "{{ $.Values.global.n3networkUPF.routeDST }}",
           "gw": "{{ $.Values.global.n3networkUPF.gatewayIP }}"}]
-    }
+    },
+    {
+          "type": "tuning",
+          "mtu": 9000}
     }'
 {{- end }}
