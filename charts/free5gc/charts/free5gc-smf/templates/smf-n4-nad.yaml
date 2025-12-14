@@ -38,7 +38,7 @@ spec:
           "capabilities": { "ips": true },
           "master": "{{ .Values.global.n4networkSMF.masterIf }}",
           "mode": "l2",
-          "mtu": "9001",
+          "mtu": 9001,
         "ipam": {
           "type": "whereabouts",
           "range": "{{ $.Values.global.n4networkSMF.subnetIP }}/{{ $.Values.global.n4networkSMF.cidr }}",
