@@ -37,6 +37,7 @@ spec:
           "capabilities": { "ips": true },
           "master": "{{ .Values.global.n2networkgNB.masterIf }}",
           "mode": "l2",
+          "mtu": 9001,
           "ipam": {
             "type": "whereabouts",
             "range": "{{ $.Values.global.n2networkgNB.subnetIP }}/{{ $.Values.global.n2networkgNB.cidr }}",
