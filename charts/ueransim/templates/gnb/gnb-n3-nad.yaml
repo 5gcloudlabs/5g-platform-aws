@@ -28,16 +28,28 @@ spec:
 # Removed macvlan/ipvlan configuration.
 # Integrated IPAM with Whereabouts.
   config: '{
-        "cniVersion": "0.3.1",
-        "type": "{{ .Values.global.n3networkgNB.type }}",
-        "device": "{{ $.Values.global.n3networkgNB.masterIf }}",
-        "ipam": {
-          "type": "whereabouts",
-          "range": "{{ $.Values.global.n3networkgNB.subnetIP }}/{{ $.Values.global.n3networkgNB.cidr }}",
-          "range_start": "{{ $.Values.global.n3networkgNB.n3if.ipAddress }}",
-          "range_end": "{{ $.Values.global.n3networkgNB.n3if.ipAddress }}",
-          "routes": [{"dst": "{{ $.Values.global.n3networkgNB.routeDST }}",
-          "gw": "{{ $.Values.global.n3networkgNB.gatewayIP }}"}]
+  "cniVersion": "0.3.1",
+  "plugins": [
+    {
+      "type": "{{ .Values.global.n3networkgNB.type }}",
+      "device": "{{ .Values.global.n3networkgNB.masterIf }}",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "{{ .Values.global.n3networkgNB.subnetIP }}/{{ .Values.global.n3networkgNB.cidr }}",
+        "range_start": "{{ .Values.global.n3networkgNB.n3if.ipAddress }}",
+        "range_end": "{{ .Values.global.n3networkgNB.n3if.ipAddress }}",
+        "routes": [
+          {
+            "dst": "{{ .Values.global.n3networkgNB.routeDST }}",
+            "gw": "{{ .Values.global.n3networkgNB.gatewayIP }}"
+          }
+        ]
+      }
+    },
+    {
+      "type": "tuning",
+      "mtu": 9001
     }
-    }'
+  ]
+}'
 {{- end }}
