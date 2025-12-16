@@ -557,22 +557,55 @@ You only need to verify the key fields shown below (your real output will contai
 
 3. Validate that traffic-separated NFs (AMF, SMF, and UPF) have multiple network interfaces with IP addresses automatically allocated via Whereabouts from the designated Multus subnets.
 
-AMF N2 Interface:
+AMF:
 
 ```bash
-kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=amf -o name) -- ip address show dev n2
+kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=amf -o name) -- ip address show
 ```
 
 Expected Outcome:
 
 ```bash
+3: eth0@if26: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
+    link/ether 7e:eb:9d:b1:44:66 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.100.206/32 scope global eth0
 
-n2@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN qlen 1000
-link/ether 0a:4e:dd:6e:14:ab brd ff:ff:ff:ff:ff:ff
-inet 100.64.1.10/28 brd 100.64.1.15 scope global n2
+       valid_lft forever preferred_lft forever
+4: n2@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN qlen 1000
+    link/ether 0a:e8:cb:25:bc:71 brd ff:ff:ff:ff:ff:ff
+    inet 100.64.1.10/28 brd 100.64.1.15 scope global n2
 ```
 
+SMF:
+```bash
+3: eth0@if30: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
+    link/ether b6:aa:9a:72:87:58 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.253/32 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::b4aa:9aff:fe72:8758/64 scope link 
+       valid_lft forever preferred_lft forever
+4: n4@n4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN qlen 1000
+    link/ether 0a:e7:73:16:f4:69 brd ff:ff:ff:ff:ff:ff
+    inet 100.64.4.10/28 brd 100.64.4.15 scope global n4
+```
 
+UPF:
+```bash
+3: eth0@if25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UP group default 
+    link/ether 56:46:cf:95:7c:09 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 192.168.59.250/32 scope global eth0
+4: n4@if10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 06:01:7d:14:41:71 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 100.64.5.10/28 brd 100.64.5.15 scope global n4
+9: n3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 06:84:32:89:40:8b brd ff:ff:ff:ff:ff:ff
+    altname enp0s6
+    inet 100.64.3.10/28 brd 100.64.3.15 scope global n3
+11: n6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 06:4d:37:87:cd:19 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    inet 100.64.6.10/28 brd 100.64.6.15 scope global n6
+```
 
 4. Validate the N4 interface state is up, by checking the SMF logs. 
 
