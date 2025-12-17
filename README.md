@@ -555,6 +555,8 @@ You only need to verify the key fields shown below (your real output will contai
 
 ```
 
+
+
 3. Validate that traffic-separated NFs (AMF, SMF, and UPF) have multiple network interfaces with IP addresses automatically allocated via Whereabouts from the designated Multus subnets.
 
 AMF:
@@ -577,6 +579,13 @@ Expected Outcome:
 ```
 
 SMF:
+
+```bash
+kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=smf -o name) -- ip address show
+```
+
+Expected Outcome:
+
 ```bash
 3: eth0@if30: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
     link/ether b6:aa:9a:72:87:58 brd ff:ff:ff:ff:ff:ff
@@ -590,6 +599,13 @@ SMF:
 ```
 
 UPF:
+
+```bash
+kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=upf -o name) -- ip address show
+```
+
+Expected Outcome:
+
 ```bash
 3: eth0@if25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UP group default 
     link/ether 56:46:cf:95:7c:09 brd ff:ff:ff:ff:ff:ff link-netnsid 0
@@ -606,6 +622,8 @@ UPF:
     altname enp0s8
     inet 100.64.6.10/28 brd 100.64.6.15 scope global n6
 ```
+
+
 
 4. Validate the N4 interface state is up, by checking the SMF logs. 
 
