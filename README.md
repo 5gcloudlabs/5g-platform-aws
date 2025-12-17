@@ -591,15 +591,13 @@ Expected Outcome:
 Verify that the SMF pod has a dedicated N4 interface attached along side the default Kubernetes interface.
 
 ```bash
-3: eth0@if30: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
-    link/ether b6:aa:9a:72:87:58 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.122.253/32 scope global eth0
-       valid_lft forever preferred_lft forever
-    inet6 fe80::b4aa:9aff:fe72:8758/64 scope link 
-       valid_lft forever preferred_lft forever
-4: n4@n4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN qlen 1000
-    link/ether 0a:e7:73:16:f4:69 brd ff:ff:ff:ff:ff:ff
-    inet 100.64.4.10/28 brd 100.64.4.15 scope global n4
+eth0@if30: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
+link/ether b6:aa:9a:72:87:58 brd ff:ff:ff:ff:ff:ff
+inet 192.168.122.253/32 scope global eth0
+
+n4@n4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN qlen 1000
+link/ether 0a:e7:73:16:f4:69 brd ff:ff:ff:ff:ff:ff
+inet 100.64.4.10/28 brd 100.64.4.15 scope global n4
 ```
 
 The example above is a trimmed excerpt of the output (e.g loopback interface is omitted).
@@ -615,20 +613,20 @@ Expected Outcome
 Verify that the UPF pod has a dedicated N3, N4 & N6 interfaces attached along side the default Kubernetes interface.
 
 ```bash
-3: eth0@if25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UP group default 
-    link/ether 56:46:cf:95:7c:09 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet 192.168.59.250/32 scope global eth0
-4: n4@if10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/ether 06:01:7d:14:41:71 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet 100.64.5.10/28 brd 100.64.5.15 scope global n4
-9: n3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
-    link/ether 06:84:32:89:40:8b brd ff:ff:ff:ff:ff:ff
-    altname enp0s6
-    inet 100.64.3.10/28 brd 100.64.3.15 scope global n3
-11: n6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-    link/ether 06:4d:37:87:cd:19 brd ff:ff:ff:ff:ff:ff
-    altname enp0s8
-    inet 100.64.6.10/28 brd 100.64.6.15 scope global n6
+eth0@if25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UP group default 
+link/ether 56:46:cf:95:7c:09 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+inet 192.168.59.250/32 scope global eth0
+n4@if10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN group default qlen 1000
+link/ether 06:01:7d:14:41:71 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+inet 100.64.5.10/28 brd 100.64.5.15 scope global n4
+n3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+link/ether 06:84:32:89:40:8b brd ff:ff:ff:ff:ff:ff
+altname enp0s6
+inet 100.64.3.10/28 brd 100.64.3.15 scope global n3
+n6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+link/ether 06:4d:37:87:cd:19 brd ff:ff:ff:ff:ff:ff
+altname enp0s8
+inet 100.64.6.10/28 brd 100.64.6.15 scope global n6
 ```
 
 The example above is a trimmed excerpt of the output (e.g loopback interface is omitted).
