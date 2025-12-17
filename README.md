@@ -559,32 +559,36 @@ You only need to verify the key fields shown below (your real output will contai
 
 3. Validate that traffic-separated NFs (AMF, SMF, and UPF) have multiple network interfaces with IP addresses automatically allocated via Whereabouts from the designated Multus subnets.
 
-AMF:
+- Verify AMF Network Interfaces:
 
 ```bash
 kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=amf -o name) -- ip address show
 ```
 
 Expected Outcome:
+Verify that the AMF pod has a dedicated N2 interface attached along side the default Kubernetes interface.
 
 ```bash
-3: eth0@if26: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
-    link/ether 7e:eb:9d:b1:44:66 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.100.206/32 scope global eth0
+eth0@if26: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
+link/ether 7e:eb:9d:b1:44:66 brd ff:ff:ff:ff:ff:ff
+inet 192.168.100.206/32 scope global eth0
 
-       valid_lft forever preferred_lft forever
-4: n2@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN qlen 1000
-    link/ether 0a:e8:cb:25:bc:71 brd ff:ff:ff:ff:ff:ff
-    inet 100.64.1.10/28 brd 100.64.1.15 scope global n2
+n2@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN qlen 1000
+link/ether 0a:e8:cb:25:bc:71 brd ff:ff:ff:ff:ff:ff
+inet 100.64.1.10/28 brd 100.64.1.15 scope global n2
 ```
 
-SMF:
+The example above is a trimmed excerpt of the output (e.g loopback interface is omitted).
+
+- Verify SMF Network Interfaces:
 
 ```bash
 kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=smf -o name) -- ip address show
 ```
 
 Expected Outcome:
+
+Verify that the SMF pod has a dedicated N4 interface attached along side the default Kubernetes interface.
 
 ```bash
 3: eth0@if30: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 9001 qdisc noqueue state UP 
@@ -598,13 +602,17 @@ Expected Outcome:
     inet 100.64.4.10/28 brd 100.64.4.15 scope global n4
 ```
 
-UPF:
+The example above is a trimmed excerpt of the output (e.g loopback interface is omitted).
+
+- Verify UPF Network Interfaces
 
 ```bash
 kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=upf -o name) -- ip address show
 ```
 
-Expected Outcome:
+Expected Outcome
+
+Verify that the UPF pod has a dedicated N3, N4 & N6 interfaces attached along side the default Kubernetes interface.
 
 ```bash
 3: eth0@if25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UP group default 
@@ -623,7 +631,7 @@ Expected Outcome:
     inet 100.64.6.10/28 brd 100.64.6.15 scope global n6
 ```
 
-
+The example above is a trimmed excerpt of the output (e.g loopback interface is omitted).
 
 4. Validate the N4 interface state is up, by checking the SMF logs. 
 
