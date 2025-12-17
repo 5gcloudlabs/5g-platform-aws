@@ -608,7 +608,7 @@ The example above is a trimmed excerpt of the output (e.g loopback interface is 
 kubectl -n free5gc exec -it $(kubectl -n free5gc get pod -l nf=upf -o name) -- ip address show
 ```
 
-Expected Outcome
+Expected Outcome:
 
 Verify that the UPF pod has a dedicated N3, N4 & N6 interfaces attached along side the default Kubernetes interface.
 
@@ -616,13 +616,16 @@ Verify that the UPF pod has a dedicated N3, N4 & N6 interfaces attached along si
 eth0@if25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UP group default 
 link/ether 56:46:cf:95:7c:09 brd ff:ff:ff:ff:ff:ff link-netnsid 0
 inet 192.168.59.250/32 scope global eth0
+
 n4@if10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc noqueue state UNKNOWN group default qlen 1000
 link/ether 06:01:7d:14:41:71 brd ff:ff:ff:ff:ff:ff link-netnsid 0
 inet 100.64.5.10/28 brd 100.64.5.15 scope global n4
+
 n3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
 link/ether 06:84:32:89:40:8b brd ff:ff:ff:ff:ff:ff
 altname enp0s6
 inet 100.64.3.10/28 brd 100.64.3.15 scope global n3
+
 n6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
 link/ether 06:4d:37:87:cd:19 brd ff:ff:ff:ff:ff:ff
 altname enp0s8
