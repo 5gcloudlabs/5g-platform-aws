@@ -496,7 +496,7 @@ application.argoproj.io/free5gc-app created
 
 ###### Validate the 5G Core Deployment
 
-This section verifies the 5G Core deployment by checking Network Function pod status, 3GPP SBI service registration in the NRF, Multus-based multi-NIC pods for traffic separation, and N4 connectivity between the SMF and UPF.
+This section verifies the 5G Core deployment and auto-integration by checking Network Function pod status, 3GPP SBI service registration in the NRF, Multus-based multi-NIC pods for traffic separation, and N4 interface connectivity between the SMF and UPF.
 
 1. Validate 5G Core Pod Status
 
@@ -634,7 +634,7 @@ inet 100.64.6.10/28 brd 100.64.6.15 scope global n6
 
 The example above is a trimmed excerpt of the output (e.g loopback interface is omitted).
 
-4. Validate the N4 interface state is up, by checking the SMF logs. 
+4. Validate the N4 interface is up between SMF & UPF, by checking the SMF logs. 
 
 ```bash
 kubectl -n free5gc logs $(kubectl -n free5gc get pod -l nf=smf -o name)
@@ -776,15 +776,17 @@ Expected Output.
 you should see output similar to: 
 
 ```bash
-application.argoproj.io/free5gc-app created
+application.argoproj.io/ueransim-app created
 ```
 
 ###### Validate UERANSIM Deployment
 
-After triggering the deployment, you can verify that the UE and gNB simulation components are running:
-1. Verify using kubectl
+This section validates the UERANSIM deployment and auto-integration by checking gNB and UE pod status, N2 connectivity between the gNB and AMF, and successful UE registration and PDU session establishment.
 
-Check that all Free5GC pods are starting correctly and reaching a Running status.
+
+1. Validate UE & gNB Pod Status
+
+Check that all UERANSIM pods are starting correctly and reaching a Running status.
 
 
 ```bash
@@ -801,6 +803,9 @@ aws-5gcloudlabs-ueransim-ue-5685b847d7-vhmn7   2/2     Running
 ```
 
 
+2. Validate the N2 interface is up between gNB & AMF, by checking the gNB logs.
+
+  
 
 #### B) Deployment via Console-UI
 
