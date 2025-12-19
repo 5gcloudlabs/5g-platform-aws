@@ -823,7 +823,70 @@ aws-5gcloudlabs-ueransim-ue-5685b847d7-vhmn7   2/2     Running
 
 2. Validate the N2 interface is up between gNB & AMF, by checking the gNB logs.
 
-  
+```bash
+kubectl -n ueransim logs $(kubectl -n ueransim get pod -l component=gnb -o name) | grep 'sctp\|NG'
+```
+
+Expected Outcome:
+
+```bash
+[sctp] [info] Trying to establish SCTP connection... (100.64.1.10:38412)
+[sctp] [info] SCTP connection established (100.64.1.10:38412)
+[sctp] [debug] SCTP association setup ascId[3]
+[ngap] [debug] Sending NG Setup Request
+[ngap] [debug] NG Setup Response received
+[ngap] [info] NG Setup procedure is successful
+```
+
+3. Verify UE registration and PDU session establishment, by checking UE pod logs
+
+```bash
+kubectl -n ueransim logs $(kubectl -n ueransim get pod -l component=ue -o name)
+```
+
+
+
+Expected Outcome:
+
+```bash
+[602020000000001|nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
+[602020000000001|rrc] [debug] New signal detected for cell[1], total [1] cells in coverage
+[602020000000001|nas] [info] UE switches to state [MM-DEREGISTERED/NO-CELL-AVAILABLE]
+[602020000000001|nas] [info] Selected plmn[602/02]
+[602020000000001|rrc] [info] Selected cell plmn[602/02] tac[1] category[SUITABLE]
+[602020000000001|nas] [info] UE switches to state [MM-DEREGISTERED/PS]
+[602020000000001|nas] [info] UE switches to state [MM-DEREGISTERED/NORMAL-SERVICE]
+[602020000000001|nas] [debug] Initial registration required due to [MM-DEREG-NORMAL-SERVICE]
+[602020000000001|nas] [debug] Sending Initial Registration
+[602020000000001|nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[602020000000001|rrc] [debug] Sending RRC Setup Request
+[602020000000001|rrc] [info] RRC connection established
+[602020000000001|rrc] [info] UE switches to state [RRC-CONNECTED]
+[602020000000001|nas] [info] UE switches to state [CM-CONNECTED]
+[602020000000001|nas] [debug] Authentication Request received
+[602020000000001|nas] [debug] Received SQN [000000000021]
+[602020000000001|nas] [debug] SQN-MS [000000000000]
+[602020000000001|nas] [debug] Security Mode Command received
+[602020000000001|nas] [debug] Selected integrity[2] ciphering[0]
+[602020000000001|nas] [debug] Registration accept received
+[602020000000001|nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[602020000000001|nas] [debug] Sending Registration Complete
+[602020000000001|nas] [info] Initial Registration is successful
+[602020000000001|nas] [debug] Sending PDU Session Establishment Request
+[602020000000001|nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[602020000000001|nas] [debug] PDU Session Establishment Accept received
+[602020000000001|nas] [info] PDU Session establishment is successful PSI[1]
+[602020000000001|app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun1, 10.1.0.2] is up.
+```
+
+Summary:
+
+- UE detects a suitable cell and selects the target PLMN
+- Initial registration is initiated and completed successfully
+- Authentication and security procedures complete without errors
+- UE transitions to REGISTERED / NORMAL-SERVICE
+- PDU session establishment succeeds and the UE data interface is created
+
 
 #### B) Deployment via Console-UI
 
