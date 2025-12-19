@@ -187,10 +187,28 @@ Expected Output:
 Plan: 178 to add, 0 to change, 0 to destroy.
 ```
 
-**Plan execution:**
+**Execution:**
 
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu apply
+
+Plan: 68 to add, 0 to change, 0 to destroy.
+╷
+│ Warning: Resource targeting is in effect
+│ 
+│ You are creating a plan with either the -target option or the -exclude option, which means that the result of this plan may not represent
+│ all of the changes requested by the current configuration.
+│ 
+│ The -target and -exclude options are not for routine use, and are provided only for exceptional situations such as recovering from errors or
+│ mistakes, or when OpenTofu specifically suggests to use it as part of an error message.
+╵
+
+Do you want to perform these actions?
+  OpenTofu will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
 ```
 Expected Output:
 ```bash
