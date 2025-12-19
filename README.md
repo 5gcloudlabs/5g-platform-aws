@@ -846,7 +846,8 @@ kubectl -n ueransim logs $(kubectl -n ueransim get pod -l component=ue -o name)
 
 
 
-Expected Outcome:
+Expected Outcome*:
+*(Trimmed excerpt of the output)
 
 ```bash
 [602020000000001|nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
