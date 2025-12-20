@@ -919,6 +919,30 @@ The example above is a trimmed excerpt of the output.
 
 
 
+### 5. End-to-End Network Connectivity Validation:  
+This step validates end-to-end user-plane connectivity by generating ICMP traffic from the UE data interface (`uesimtunx`) toward an external destination. Successful ping responses confirm that the UE data path is fully operational across the 5G Core (UE → gNB → UPF → external network) and that NAT and routing through the UPF are correctly configured.
+
+```bash
+kubectl -n ueransim exec -it $(kubectl -n ueransim get pod -l component=ue -o name) -- ping -c 4 -I uesimtun0 google.com
+```
+
+Expected Outcome:
+
+Successful ICMP responses with zero packet loss confirm end-to-end user-plane connectivity.
+
+```bash
+PING google.com (142.250.185.206) from 10.1.0.1 uesimtun0: 56(84) bytes of data.
+64 bytes from fra16s52-in-f14.1e100.net (142.250.185.206): icmp_seq=1 ttl=115 time=2.18 ms
+64 bytes from fra16s52-in-f14.1e100.net (142.250.185.206): icmp_seq=2 ttl=115 time=2.08 ms
+64 bytes from fra16s52-in-f14.1e100.net (142.250.185.206): icmp_seq=3 ttl=115 time=1.84 ms
+64 bytes from fra16s52-in-f14.1e100.net (142.250.185.206): icmp_seq=4 ttl=115 time=1.80 ms
+
+--- google.com ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 1.802/1.973/2.183/0.160 ms
+```
+
+### Congratulations! You have successfully validated internet access through a fully functional 5G Core deployed on a public cloud.
 
 #### B) Deployment via Console-UI
 
