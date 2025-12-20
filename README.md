@@ -903,7 +903,7 @@ kubectl -n ueransim exec -it $(kubectl -n ueransim get pod -l component=ue -o na
 
 Expected Outcome:
 
-The `uesimtun0` and `uesimtun1` interfaces are created with IP addresses correctly assigned from the UE IP pool (10.1.0.0/16) after successful PDU session establishment.
+The `uesimtun(x)` interfaces are created—one per UE—with IP addresses correctly assigned from the UE IP pool (`10.1.0.0/16`) after successful PDU session establishment.
 
 ```bash
 eth0@if24: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001
