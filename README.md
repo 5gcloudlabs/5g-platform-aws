@@ -838,6 +838,12 @@ Expected Outcome:
 [ngap] [info] NG Setup procedure is successful
 ```
 
+Summary
+
+- SCTP association between the gNB and AMF is successfully established
+- NGAP NG Setup procedure completes successfully
+- N2 interface connectivity between the gNB and AMF is confirmed
+
 3. Verify UE registration and PDU session establishment, by checking UE pod logs
 
 ```bash
