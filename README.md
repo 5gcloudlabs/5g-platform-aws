@@ -942,7 +942,8 @@ PING google.com (142.250.185.206) from 10.1.0.1 uesimtun0: 56(84) bytes of data.
 rtt min/avg/max/mdev = 1.802/1.973/2.183/0.160 ms
 ```
 
-### Congratulations! You have successfully validated internet access through a fully functional 5G Core deployed on a public cloud.
+### Congratulations! 
+### You have successfully validated internet access through a fully functional 5G Core deployed on a public cloud.
 
 #### B) Deployment via Console-UI
 
