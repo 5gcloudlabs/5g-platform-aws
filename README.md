@@ -895,6 +895,31 @@ Summary:
 - PDU session establishment succeeds and the UE data interface is created
 
 
+4. Validate UE IP Address Allocation
+
+```bash
+kubectl -n ueransim exec -it $(kubectl -n ueransim get pod -l component=ue -o name) -- ip a
+```
+
+Expected Outcome:
+
+The `uesimtun0` and `uesimtun1` interfaces are created with IP addresses correctly assigned from the UE IP pool (10.1.0.0/16) after successful PDU session establishment.
+
+```bash
+eth0@if24: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001
+inet 192.168.49.23/32 scope global eth0
+
+uesimtun0: <POINTOPOINT,UP,LOWER_UP>
+inet 10.1.0.1/32 scope global uesimtun0
+
+uesimtun1: <POINTOPOINT,UP,LOWER_UP>
+inet 10.1.0.2/32 scope global uesimtun1
+```
+The example above is a trimmed excerpt of the output.
+
+
+
+
 #### B) Deployment via Console-UI
 
 You can deploy the 5G Core using the AWS 5G Cloud Labs Web Console, which provides an interactive UI for entering MCC/MNC values and triggering the deployment pipeline.
