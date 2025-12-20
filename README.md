@@ -943,7 +943,7 @@ rtt min/avg/max/mdev = 1.802/1.973/2.183/0.160 ms
 ```
 
 ### Congratulations! 
-### You have successfully validated internet access through a fully functional 5G Core deployed on a public cloud.
+#### You have successfully validated internet access through a fully functional 5G Core deployed on a public cloud.
 
 #### B) Deployment via Console-UI
 
