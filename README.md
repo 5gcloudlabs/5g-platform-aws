@@ -893,7 +893,7 @@ Summary:
 - Authentication and security procedures complete without errors
 - UE transitions to REGISTERED / NORMAL-SERVICE
 - PDU session establishment succeeds and the UE data TUN interface is created
-- UE 602020000000001 is assigned IP Address 10.1.0.2
+- UE `602020000000001` is assigned IP Address `10.1.0.2`
 
 
 4. Validate UE IP Address Allocation
