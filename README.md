@@ -892,7 +892,8 @@ Summary:
 - Initial registration is initiated and completed successfully
 - Authentication and security procedures complete without errors
 - UE transitions to REGISTERED / NORMAL-SERVICE
-- PDU session establishment succeeds and the UE data interface is created
+- PDU session establishment succeeds and the UE data TUN interface is created
+- UE 602020000000001 is assigned IP Address 10.1.0.2
 
 
 4. Validate UE IP Address Allocation
@@ -903,7 +904,7 @@ kubectl -n ueransim exec -it $(kubectl -n ueransim get pod -l component=ue -o na
 
 Expected Outcome:
 
-The `uesimtun(x)` interfaces are created—one per UE—with IP addresses correctly assigned from the UE IP pool (`10.1.0.0/16`) after successful PDU session establishment.
+The `uesimtun(x)` interfaces are created—one per UE—with IP addresses assigned from the UE IP pool (`10.1.0.0/16`) after successful PDU session establishment.
 
 ```bash
 eth0@if24: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001
@@ -943,7 +944,7 @@ rtt min/avg/max/mdev = 1.802/1.973/2.183/0.160 ms
 ```
 
 ### Congratulations! 
-#### You have successfully validated internet access through a fully functional 5G Core deployed on a public cloud!
+#### You have successfully validated internet access through a fully functional 5G Core deployed on AWS !
 
 #### B) Deployment via Console-UI
 
