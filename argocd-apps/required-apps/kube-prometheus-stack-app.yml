@@ -25,6 +25,12 @@ spec:
            dashboards:
              enabled: true
              label: grafana_dashboard
+       prometheus:
+         prometheusSpec:
+           podMonitorSelector: {}
+           serviceMonitorSelector: {}
+           podMonitorNamespaceSelector: {}
+           serviceMonitorNamespaceSelector: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
