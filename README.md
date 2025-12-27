@@ -692,12 +692,12 @@ You will be prompted to enter how many test subscribers you want to provision. I
 
 Example prompt: 
 ```bash
-Enter the number of subscribers to provision (e.g: 10): 2
+Enter the number of subscribers to provision (e.g: 10): 10
 ```
 
 Expected Output:
 ```bash
-*** Starting provisioning of (2) subscribers with IMSI range beginning at (602020000000001) ***
+*** Starting provisioning of (10) subscribers with IMSI range beginning at (602020000000001) ***
 
 Please wait...
 
@@ -706,6 +706,15 @@ Please wait...
 
 602020000000001
 602020000000002
+602020000000003
+602020000000004
+602020000000005
+602020000000006
+602020000000007
+602020000000008
+602020000000009
+602020000000010
+
 ```
 IMSI numbering starts at $mcc.$mnc.0000000001.
 
@@ -883,7 +892,7 @@ Expected Outcome*:
 [602020000000001|nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
 [602020000000001|nas] [debug] PDU Session Establishment Accept received
 [602020000000001|nas] [info] PDU Session establishment is successful PSI[1]
-[602020000000001|app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun1, 10.1.0.2] is up.
+[602020000000001|app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun7, 10.1.0.8] is up.
 ```
 
 Summary:
@@ -893,7 +902,7 @@ Summary:
 - Authentication and security procedures complete without errors
 - UE transitions to REGISTERED / NORMAL-SERVICE
 - PDU session establishment succeeds and the UE data TUN interface is created
-- UE `602020000000001` is assigned IP Address `10.1.0.2`
+- UE `602020000000001` is assigned IP Address `10.1.0.8`
 
 
 4. Validate UE IP Address Allocation
@@ -915,6 +924,12 @@ inet 10.1.0.1/32 scope global uesimtun0
 
 uesimtun1: <POINTOPOINT,UP,LOWER_UP>
 inet 10.1.0.2/32 scope global uesimtun1
+
+uesimtun2: <POINTOPOINT,PROMISC,NOTRAILERS,UP,LOWER_UP>
+inet 10.1.0.3/32 scope global uesimtun2
+
+uesimtun3: <POINTOPOINT,PROMISC,NOTRAILERS,UP,LOWER_UP>
+inet 10.1.0.4/32 scope global uesimtun3
 ```
 The example above is a trimmed excerpt of the output.
 
