@@ -26,7 +26,7 @@ spec:
              enabled: true
              label: grafana_dashboard
   - repoURL: https://github.com/5g-cloud-labs/new-test-2.git
-    path: argocd-apps/monitoring
+    path: argocd-apps/required-apps/monitoring
     targetRevision: trims            
   destination:
     server: https://kubernetes.default.svc
