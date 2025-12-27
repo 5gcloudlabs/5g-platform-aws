@@ -9,8 +9,8 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    chart: kube-prometheus-stack
+  sources:
+  - chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: "76.2.1"
     helm:
@@ -25,6 +25,9 @@ spec:
            dashboards:
              enabled: true
              label: grafana_dashboard
+  - repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    path: argocd-apps/monitoring
+    targetRevision: trims            
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
