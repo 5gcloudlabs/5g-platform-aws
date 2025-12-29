@@ -10,7 +10,6 @@ spec:
     matchNames:
       - istio-system
       - free5gc
-      - ueransim
   selector:
     matchLabels:
       security.istio.io/tlsMode: istio
