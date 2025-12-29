@@ -1,0 +1,170 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio-mesh-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  istio-mesh-dashboard.json: |
+    {
+      "uid": "istio-mesh",
+      "title": "Istio Mesh Dashboard",
+      "schemaVersion": 39,
+      "editable": true,
+      "graphTooltip": 1,
+      "refresh": "15s",
+      "timezone": "utc",
+
+      "templating": {
+        "list": [
+          {
+            "name": "datasource",
+            "type": "datasource",
+            "query": "prometheus",
+            "current": {},
+            "refresh": 1
+          },
+          {
+            "name": "namespace",
+            "type": "query",
+            "datasource": "$datasource",
+            "query": "label_values(istio_requests_total, destination_workload_namespace)",
+            "includeAll": true,
+            "multi": true,
+            "refresh": 2
+          },
+          {
+            "name": "workload",
+            "type": "query",
+            "datasource": "$datasource",
+            "query": "label_values(istio_requests_total{destination_workload_namespace=~\"$namespace\"}, destination_workload)",
+            "includeAll": true,
+            "multi": true,
+            "refresh": 2
+          }
+        ]
+      },
+
+      "time": {
+        "from": "now-30m",
+        "to": "now"
+      },
+
+      "panels": [
+        {
+          "type": "row",
+          "title": "Global Traffic",
+          "collapsed": false,
+          "gridPos": { "x": 0, "y": 0, "w": 24, "h": 1 }
+        },
+
+        {
+          "id": 1,
+          "type": "stat",
+          "title": "Traffic Volume (req/s)",
+          "datasource": "$datasource",
+          "gridPos": { "x": 0, "y": 1, "w": 6, "h": 5 },
+          "targets": [
+            {
+              "expr": "sum(rate(istio_requests_total{reporter=~\"source|waypoint\",destination_workload_namespace=~\"$namespace\",destination_workload=~\"$workload\"}[$__rate_interval]))",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": { "unit": "reqps" }
+          }
+        },
+
+        {
+          "id": 2,
+          "type": "stat",
+          "title": "Success Rate",
+          "datasource": "$datasource",
+          "gridPos": { "x": 6, "y": 1, "w": 6, "h": 5 },
+          "targets": [
+            {
+              "expr": "sum(rate(istio_requests_total{reporter=~\"source|waypoint\",response_code!~\"5..\",destination_workload_namespace=~\"$namespace\",destination_workload=~\"$workload\"}[$__rate_interval])) / sum(rate(istio_requests_total{reporter=~\"source|waypoint\",destination_workload_namespace=~\"$namespace\",destination_workload=~\"$workload\"}[$__rate_interval]))",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": { "unit": "percentunit" }
+          }
+        },
+
+        {
+          "id": 3,
+          "type": "stat",
+          "title": "5xx Errors (req/s)",
+          "datasource": "$datasource",
+          "gridPos": { "x": 12, "y": 1, "w": 6, "h": 5 },
+          "targets": [
+            {
+              "expr": "sum(rate(istio_requests_total{reporter=~\"source|waypoint\",response_code=~\"5..\",destination_workload_namespace=~\"$namespace\",destination_workload=~\"$workload\"}[$__rate_interval]))",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": { "unit": "reqps" }
+          }
+        },
+
+        {
+          "type": "row",
+          "title": "HTTP / gRPC Workloads",
+          "collapsed": false,
+          "gridPos": { "x": 0, "y": 7, "w": 24, "h": 1 }
+        },
+
+        {
+          "id": 4,
+          "type": "table",
+          "title": "HTTP Latency (P50 / P90 / P99)",
+          "datasource": "$datasource",
+          "gridPos": { "x": 0, "y": 8, "w": 24, "h": 14 },
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.5, sum by (le,destination_workload,destination_workload_namespace) (rate(istio_request_duration_milliseconds_bucket{destination_workload_namespace=~\"$namespace\",destination_workload=~\"$workload\"}[$__rate_interval])))",
+              "format": "table",
+              "refId": "P50"
+            },
+            {
+              "expr": "histogram_quantile(0.9, sum by (le,destination_workload,destination_workload_namespace) (rate(istio_request_duration_milliseconds_bucket{destination_workload_namespace=~\"$namespace\",destination_workload=~\"$workload\"}[$__rate_interval])))",
+              "format": "table",
+              "refId": "P90"
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum by (le,destination_workload,destination_workload_namespace) (rate(istio_request_duration_milliseconds_bucket{destination_workload_namespace=~\"$namespace\",destination_workload=~\"$workload\"}[$__rate_interval])))",
+              "format": "table",
+              "refId": "P99"
+            }
+          ],
+          "transformations": [
+            { "id": "merge" }
+          ]
+        },
+
+        {
+          "type": "row",
+          "title": "Istio Component Versions",
+          "collapsed": false,
+          "gridPos": { "x": 0, "y": 23, "w": 24, "h": 1 }
+        },
+
+        {
+          "id": 5,
+          "type": "timeseries",
+          "title": "Istio Versions",
+          "datasource": "$datasource",
+          "gridPos": { "x": 0, "y": 24, "w": 24, "h": 8 },
+          "targets": [
+            {
+              "expr": "sum by (component, tag) (istio_build)",
+              "legendFormat": "{{component}} ({{tag}})",
+              "refId": "A"
+            }
+          ]
+        }
+      ]
+    }
