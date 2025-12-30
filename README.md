@@ -158,7 +158,27 @@ HTTPS:
 git clone https://github.com/5g-cloud-labs/aws-5gcloudlabs.git
 ```
 
-### 3. Install Infrastructure Using OpenTofu
+### 3. Insert OpenTofu Input Variables
+
+| Variable Name | Default Value | Description |
+|--------------|--------------|-------------|
+| `region` | `eu-central-1` | AWS region where all infrastructure resources will be created. |
+| `bucket-name` | — | Name of the S3 bucket used to store the Terraform remote state file. |
+| `key` | — | Path and filename of the Terraform state file inside the S3 bucket. |
+| `vpc_name` | `cloud-5g-vpc` | Name assigned to the VPC hosting the 5G Core infrastructure. |
+| `vpc_cidr` | `192.168.0.0/16` | Primary CIDR block for the VPC network. |
+| `azs` | `["eu-central-1b", "eu-central-1c"]` | Availability Zones used for creating subnets and high availability. |
+| `eks_cluster_name` | `cloud-5g-eks` | Name of the Amazon EKS cluster running the 5G Core workloads. |
+| `ami_id` | `ami-064c2479baf726e71` | Ubuntu-based AMI optimized for EKS worker nodes and Free5GC compatibility. |
+| `dns_provider_name` | `cloudflare` | DNS provider hosting the public domain (used by ExternalDNS). |
+| `cloudflare_api_token` | — | API token used by Terraform and ExternalDNS to manage DNS records in Cloudflare. |
+| `domain_name` | — | Public domain name associated with the DNS hosted zone. |
+| `zone_id` | — | Identifier of the DNS hosted zone at the DNS provider. |
+
+
+
+
+### 4. Install Infrastructure Using OpenTofu
 
 After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
 
@@ -478,7 +498,7 @@ k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 3.126.96.223
 k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 18.194.188.63
 ```
 
-### 4. End-to-End 5G Network Deployment:  
+### 5. End-to-End 5G Network Deployment:  
 Deploy the 5G Core, provision test subscribers, and launch the UE & gNB simulation — either via CLI or Console-UI.
 
 #### A) 5G Network Deployment via CLI:
@@ -935,7 +955,7 @@ The example above is a trimmed excerpt of the output.
 
 
 
-### 5. End-to-End Network Connectivity Validation:  
+### 6. End-to-End Network Connectivity Validation:  
 This step validates end-to-end user-plane connectivity by generating ICMP traffic from the UE data interface (`uesimtunx`) toward an external destination. Successful ping responses confirm that the UE data path is fully operational across the 5G Core (UE → gNB → UPF → external network) and that NAT and routing through the UPF are correctly configured.
 
 ```bash
