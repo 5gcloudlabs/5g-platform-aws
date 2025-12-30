@@ -158,7 +158,17 @@ HTTPS:
 git clone https://github.com/5g-cloud-labs/aws-5gcloudlabs.git
 ```
 
-### 3. Insert OpenTofu Input Variables
+### 3. Set OpenTofu Input Variables
+
+**Navigate to the infrastructure directory:** 
+
+```bash
+cd aws-5gcloudlabs/infrastructure
+```
+**Edit the file vars.auto.tfvars:**
+```bash
+/aws-5gcloudlabs/infrastructure$ nano vars.auto.tfvars
+```
 
 | Variable Name | Default Value | Description |
 |--------------|--------------|-------------|
