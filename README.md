@@ -165,9 +165,9 @@ git clone https://github.com/5g-cloud-labs/aws-5gcloudlabs.git
 ```bash
 cd aws-5gcloudlabs/infrastructure
 ```
-**Edit the file vars.auto.tfvars:**
+**Update the values of the variables in vars.auto.tfvars:**
 ```bash
-/aws-5gcloudlabs/infrastructure$ nano vars.auto.tfvars
+nano vars.auto.tfvars
 ```
 
 | Variable Name | Default Value | Description |
@@ -190,6 +190,8 @@ cd aws-5gcloudlabs/infrastructure
 
 After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
 
+Infrastructure is deployed in two steps: first, the EKS cluster and its directly dependent resources (such as the VPC) are provisioned using a targeted apply, followed by a full tofu apply to deploy the remaining components.
+
 #### a) Initialize and Deploy Infrastructure
 
 **Navigate to the infrastructure directory:** 
@@ -208,11 +210,11 @@ Expected Output:
 
 **Create execution plan:**
 ```bash
-/aws-5gcloudlabs/infrastructure$ tofu plan
+/aws-5gcloudlabs/infrastructure$ tofu apply --target=module.eks
 ```
 Expected Output:
 ```bash
-Plan: 178 to add, 0 to change, 0 to destroy.
+Plan: 68 to add, 0 to change, 0 to destroy.
 ```
 
 **Execution:**
@@ -221,15 +223,7 @@ Plan: 178 to add, 0 to change, 0 to destroy.
 /aws-5gcloudlabs/infrastructure$ tofu apply
 
 Plan: 68 to add, 0 to change, 0 to destroy.
-╷
-│ Warning: Resource targeting is in effect
-│ 
-│ You are creating a plan with either the -target option or the -exclude option, which means that the result of this plan may not represent
-│ all of the changes requested by the current configuration.
-│ 
-│ The -target and -exclude options are not for routine use, and are provided only for exceptional situations such as recovering from errors or
-│ mistakes, or when OpenTofu specifically suggests to use it as part of an error message.
-╵
+
 
 Do you want to perform these actions?
   OpenTofu will perform the actions described above.
@@ -240,8 +234,12 @@ Do you want to perform these actions?
 ```
 Expected Output:
 ```bash
-Apply complete! Resources: 178 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 68 added, 0 changed, 0 destroyed.
 ```
+
+
+
+
 
 The OpenTofu configuration performs the following:
 
