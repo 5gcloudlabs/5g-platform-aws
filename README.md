@@ -181,9 +181,8 @@ cd aws-5gcloudlabs/infrastructure
 | `eks_cluster_name` | `cloud-5g-eks` | Name of the Amazon EKS cluster running the 5G Core workloads. |
 | `ami_id` | `ami-064c2479baf726e71` | Ubuntu-based AMI optimized for EKS worker nodes and Free5GC compatibility. |
 | `domain_name` | — | Public domain name associated with the DNS hosted zone. |
-| `cloudflare_api_token` | — | API token used by Terraform and ExternalDNS to manage DNS records in Cloudflare. |
 | `zone_id` | — | Identifier of the DNS hosted zone at the DNS provider. |
-
+| `cloudflare_api_token` | — | API token used by Terraform and ExternalDNS to manage DNS records in Cloudflare. |
 
 
 
