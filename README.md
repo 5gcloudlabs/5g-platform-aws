@@ -48,7 +48,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **Istio** – Ingress gateway and service-mesh capabilities for traffic management and observability.  
 - **AWS Load Balancer Controller (ALB)** – Watches Ingress resources and provisions AWS ALBs accordingly.  
 - **Multus** – CNI meta-plugin enabling multiple network interfaces per pod; used for 3GPP interface separation.  
-- **Whereabouts** – IPAM provider assigning `/32` IPs as defined in NetworkAttachmentDefinitions (NADs).  
+- **Whereabouts** – IPAM provider automatically assigns IP addresses based on the configured NetworkAttachmentDefinitions (NADs).  
 - **Prometheus, Grafana, Loki** – Monitoring, visualization, and centralized logging stack.
 
 
