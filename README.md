@@ -274,7 +274,8 @@ Apply complete! Resources: 110 added, 0 changed, 0 destroyed.
 ```
 
 **Summary**
-- The OpenTofu configuration performs the following:
+
+The OpenTofu configuration performs the following:
 
 Provisions all AWS resources (VPC, EKS, EC2, EFS, TLS Certificate, IAM roles, etc.).
 
