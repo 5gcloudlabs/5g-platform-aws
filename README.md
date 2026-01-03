@@ -189,7 +189,7 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 
 ### 4. Install Infrastructure Using OpenTofu
 
-Infrastructure is deployed in two steps: first, the EKS cluster and its directly dependent resources (such as the VPC) are provisioned using a targeted apply, followed by a full tofu apply to deploy the remaining components.
+Infrastructure deployment is performed in two stages: a targeted apply provisions the EKS cluster, worker nodes, and their direct dependencies (such as the VPC) to establish the Kubernetes environment, followed by a full 'tofu apply' to deploy the remaining infrastructure components, including those that depend on EKS.
 
 #### 4. a) Initialize OpenTofu Infrastructure Directory
 
@@ -208,9 +208,9 @@ Expected Output:
 ...
 ```
 
-#### 4. b) Create targetted plan/execution:
+#### 4. b) Create targetted execution plan/execution:
 
-**Plan**
+**Execution Plan**
 
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu plan --target=module.eks
@@ -241,9 +241,9 @@ Apply complete! Resources: 68 added, 0 changed, 0 destroyed.
 ```
 
 
-#### 4. c) Create final plan/execution:
+#### 4. c) Create final execution plan/execution:
 
-**Plan**
+**Execution Plan**
 
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu plan
