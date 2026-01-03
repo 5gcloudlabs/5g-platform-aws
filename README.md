@@ -185,32 +185,35 @@ nano vars.auto.tfvars
 | `cloudflare_api_token` | — | API token used by Terraform and ExternalDNS to manage DNS records in Cloudflare. |
 
 
+After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
 
 ### 4. Install Infrastructure Using OpenTofu
 
-After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
-
 Infrastructure is deployed in two steps: first, the EKS cluster and its directly dependent resources (such as the VPC) are provisioned using a targeted apply, followed by a full tofu apply to deploy the remaining components.
 
-#### a) Initialize and Deploy Infrastructure
+#### 4. a) Initialize OpenTofu Infrastructure Directory
 
-**Navigate to the infrastructure directory:** 
+Navigate to the infrastructure directory:
 
 ```bash
 cd aws-5gcloudlabs/infrastructure
 ```
-**Initialize infrastructure directory:**
+Initialize infrastructure directory:
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu init
 ```
+
 Expected Output:
 ```bash
 ...
 ```
 
-**Create execution plan:**
+#### 4. b) Create targetted plan/execution:
+
+**Plan**
+
 ```bash
-/aws-5gcloudlabs/infrastructure$ tofu apply --target=module.eks
+/aws-5gcloudlabs/infrastructure$ tofu plan --target=module.eks
 ```
 Expected Output:
 ```bash
@@ -238,8 +241,37 @@ Apply complete! Resources: 68 added, 0 changed, 0 destroyed.
 ```
 
 
+#### 4. c) Create final plan/execution:
+
+**Plan**
+
+```bash
+/aws-5gcloudlabs/infrastructure$ tofu plan
+```
+Expected Output:
+```bash
+Plan: 110 to add, 0 to change, 0 to destroy.
+```
+
+**Execution:**
+
+```bash
+/aws-5gcloudlabs/infrastructure$ tofu apply
+
+Plan: 110 to add, 0 to change, 0 to destroy.
 
 
+Do you want to perform these actions?
+  OpenTofu will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+```
+Expected Output:
+```bash
+Apply complete! Resources: 110 added, 0 changed, 0 destroyed.
+```
 
 The OpenTofu configuration performs the following:
 
