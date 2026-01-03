@@ -36,7 +36,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **SSM** – Secure node access and automation via SSM documents.  
 - **EFS** – Shared persistent storage used by MongoDB (storing UDR subscriber data and NRF NF profiles).  
 - **IAM / STS** – Authentication, authorization, and role management (including IRSA for EKS).  
-- **Certificate Management** – Domain validation and TLS certificate provisioning for secure communications.
+- **AWS Certificate Manager** – Domain validation and TLS certificate provisioning for secure communications.
 - **S3** – Stores the OpenTofu state file. Must be preconfigured before running the infrastructure deployment.  
 
 
