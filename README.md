@@ -1,5 +1,5 @@
 <h1 align="center">Welcome to aws-5GCloudLabs !</h1>
-<p align="center"><p align="center">An open-source project for deploying a complete 5G Core and UE/RAN simulation environment on AWS Cloud.</p></p>
+<p align="center"><p align="center">An open-source project for deploying a complete 5G Core pre-integrated with UE/RAN simulation environment on AWS Cloud.</p></p>
 
 <p align="center">
 <img width="600" height="4000" alt="main (2)" src="https://github.com/user-attachments/assets/09287ae6-25ef-4596-bacb-844dd08f2868" />
