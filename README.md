@@ -73,7 +73,7 @@ To understand how these components interact to deliver the full 5G deployment wo
 
 ### 1. Prerequisites
 
-#### a) Cloud Account Requirements
+#### 1. a) Cloud Account Requirements
 
 Before deploying any infrastructure, these must be available:
 
@@ -83,7 +83,7 @@ Before deploying any infrastructure, these must be available:
 | **Cloudflare Account** | With a **registered domain** + **API Token** with respective domain zone "DNS:Edit" permissions. |
 
 
-#### b) Local Workstation Requirements
+#### 1. b) Local Workstation Requirements
 Install the following tools locally:
 
 | Tool | Installation |
@@ -106,7 +106,7 @@ helm version --short
 argocd --version   
 ```
 
-#### c) Configure AWS credentials
+#### 1. c) Configure AWS credentials
 
 Generate AWS **[Access Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)** from your AWS IAM console.
 
@@ -129,7 +129,7 @@ export AWS_REGION="<region>"
 ```
 
 
-#### d) Create an S3 Bucket for the OpenTofu State
+#### 1. d) Create an S3 Bucket for the OpenTofu State
 
 aws s3api create-bucket --bucket $bucket-name --create-bucket-configuration LocationConstraint=$region
 
@@ -281,7 +281,7 @@ Deploys several Kubernetes add-ons directly using helm_release resources.
 
 Applies the Argo CD required-apps Application using a kubectl_manifest resource, which triggers Argo CD to fetch all remaining add-ons from the Git repository.
 
-#### b) Validate infrastructure creation
+#### 4. d) Validate infrastructure creation
 Once opentofu apply completes, perform the checks below to confirm the EKS cluster, Argo CD bootstrap, add-ons and ingress are healthy and reachable.
 
 ##### - Update kubeconfig and verify EKS connectivity
