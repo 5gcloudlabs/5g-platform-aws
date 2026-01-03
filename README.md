@@ -60,7 +60,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 
 
-#### **Core 5G Applications**
+#### **5G Applications**
 
 - **Free5GC** – Open-source 5G Core implementation deployed via Argo CD.  
 - **UERANSIM** – Open-source UE and gNodeB simulator for end-to-end validation and testing.
