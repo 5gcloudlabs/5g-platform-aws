@@ -273,6 +273,7 @@ Expected Output:
 Apply complete! Resources: 110 added, 0 changed, 0 destroyed.
 ```
 
+**Summary**
 The OpenTofu configuration performs the following:
 
 Provisions all AWS resources (VPC, EKS, EC2, EFS, TLS Certificate, IAM roles, etc.).
@@ -280,6 +281,7 @@ Provisions all AWS resources (VPC, EKS, EC2, EFS, TLS Certificate, IAM roles, et
 Deploys several Kubernetes add-ons directly using helm_release resources.
 
 Applies the Argo CD required-apps Application using a kubectl_manifest resource, which triggers Argo CD to fetch all remaining add-ons from the Git repository.
+
 
 #### 4. d) Validate infrastructure creation
 Once opentofu apply completes, perform the checks below to confirm the EKS cluster, Argo CD bootstrap, add-ons and ingress are healthy and reachable.
