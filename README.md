@@ -42,7 +42,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 #### **Kubernetes Add-ons and Integrations**
 
-- **AWS Load Balancer Controller (AWS LBC)** – Watches Ingress resources and provisions AWS ALBs accordingly.
+- **AWS Load Balancer Controller (AWS LBC)** – Watches Ingress resources and provisions AWS ALB accordingly.
 - **AWS EFS CSI Driver**– The Amazon EFS CSI Driver enables Kubernetes to provision and manage Amazon EFS file systems.
 - **ExternalDNS** – Updates DNS records dynamically based on Kubernetes resources.  
 - **cert-manager** – Automates TLS certificate issuance and renewal to support end-to-end encryption.  
@@ -92,7 +92,6 @@ Install the following tools locally:
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
 | **Helm** (optional) | [Install guide](https://helm.sh/docs/intro/install/) |
-| **istioctl** (optional) | [Install guide](https://istio.io/latest/docs/ops/diagnostic-tools/istioctl/) |
 
 
 Verify installs & versions
