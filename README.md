@@ -42,15 +42,15 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 #### **Kubernetes Add-ons and Integrations**
 
-- **Argo CD** – Application lifecycle management via GitOps; syncs Helm charts from the repository.  
-- **cert-manager** – Automates TLS certificate issuance and renewal to support end-to-end encryption.  
+- **AWS Load Balancer Controller (AWS LBC)** – Watches Ingress resources and provisions AWS ALBs accordingly.
+- **AWS EFS CSI Driver**– The Amazon EFS CSI Driver enables Kubernetes to provision and manage Amazon EFS file systems.
 - **ExternalDNS** – Updates DNS records dynamically based on Kubernetes resources.  
-- **Istio** – Ingress gateway and service-mesh capabilities for traffic management and observability.  
-- **AWS Load Balancer Controller (ALB)** – Watches Ingress resources and provisions AWS ALBs accordingly.  
+- **cert-manager** – Automates TLS certificate issuance and renewal to support end-to-end encryption.  
+- **Istio** – `Ingress Gateway` as reverse proxy in addition to `Service-Mesh` capabilities for traffic management and observability.  
 - **Multus** – CNI meta-plugin enabling multiple network interfaces per pod; used for 3GPP interface separation.  
 - **Whereabouts** – IPAM provider automatically assigns IP addresses based on the configured NetworkAttachmentDefinitions (NADs).  
 - **Prometheus, Grafana, Loki** – Monitoring, visualization, and centralized logging stack.
-
+- **Argo CD** – Application lifecycle management via GitOps; syncs Helm charts from the repository.  
 
 
 #### **External Integrations**
