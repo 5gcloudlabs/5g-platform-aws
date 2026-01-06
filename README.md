@@ -1022,6 +1022,9 @@ rtt min/avg/max/mdev = 1.802/1.973/2.183/0.160 ms
 ### Congratulations! 
 #### You have successfully validated internet access through a fully functional 5G Core deployed on AWS !
 
+
+---
+
 #### B) Deployment via Console-UI
 
 You can deploy the 5G Core using the AWS 5G Cloud Labs Web Console, which provides an interactive UI for entering MCC/MNC values and triggering the deployment pipeline.
@@ -1034,15 +1037,18 @@ Steps
 https://console.<your-domain>
 ```
 
+Insert MCC & MNC values and click Deploy:
 <img width="1295" height="692" alt="console-1" src="https://github.com/user-attachments/assets/9e8ed1d3-e85c-452a-ac1a-1d962d3f5bc5" />
 
-
+Wait for parameters to be updated accordingly:
 <img width="1295" height="692" alt="console-2" src="https://github.com/user-attachments/assets/b8fc3d4c-faec-4d56-98e9-e8acdb8f35f7" />
 
 
+CNF Readiness State:
 <img width="1295" height="692" alt="console-3" src="https://github.com/user-attachments/assets/95644f1d-8c0a-4b95-87dd-3a947a68e341" />
 
 
+Insert the number of subscribers to provision:
 <img width="1295" height="692" alt="console-4" src="https://github.com/user-attachments/assets/935b68b7-ade7-4629-b421-e7255ce1b3d3" />
 
 
