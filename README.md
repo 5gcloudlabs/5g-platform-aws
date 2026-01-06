@@ -1076,3 +1076,8 @@ https://console.<your-domain>
 
 
 
+### 7. System Monitoring via Grafana
+
+
+
+### 8. Termination Procedure
