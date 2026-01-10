@@ -10,12 +10,12 @@ terraform {
     }
 
     kubernetes = {
-      source  = "hashicorp/kubernetes"
+      source  = "opentofu/kubernetes"
       version = "2.38.0"
     }
 
     helm = {
-      source  = "hashicorp/helm"
+      source  = "opentofu/helm"
       version = "3.0.2"
     }
 
@@ -29,15 +29,20 @@ terraform {
       version = "5.7.1"
     }
 
+    argocd = {
+      source = "argoproj-labs/argocd"
+      version = "7.12.5"
+    }
+
   }
 
     backend "s3" {
       region = var.region
       bucket = var.bucket-name
       key = var.key
-}
+    }
 
-}
+  }
 
 
 provider "aws" {
@@ -84,4 +89,12 @@ provider "kubectl" {
 
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
+}
+
+
+provider "argocd" {
+  server_addr = "argocd.${var.domain_name}"
+  grpc_web    = true
+  username    = "admin"
+  password    = local.argocd_password
 }
