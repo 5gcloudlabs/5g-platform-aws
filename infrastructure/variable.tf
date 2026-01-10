@@ -60,13 +60,6 @@ variable "ami_id" {
 
 ##DNS Parameters##
 
-variable "dns_provider_name" {
-  description = "Name of the DNS provider where hosted zone is registered with"
-  type = string
-  default = "cloudflare"
-}
-
-
 variable "cloudflare_api_token" {
   description = "cloudflare access api token utilized by cloudflare provider and external-dns"
 }
@@ -80,4 +73,5 @@ variable "zone_id" {
   description = "ID of the DNS zone registered with the DNS provider"
   type = string
 }
+
 

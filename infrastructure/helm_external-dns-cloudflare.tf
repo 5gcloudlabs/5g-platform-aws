@@ -12,7 +12,7 @@ resource "helm_release" "external-dns" {
 
   set  = [ {
   name  = "provider.name"
-  value = var.dns_provider_name
+  value = "cloudflare"
   }, 
 
   {
