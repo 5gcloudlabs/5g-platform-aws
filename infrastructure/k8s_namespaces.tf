@@ -31,9 +31,6 @@ resource "kubernetes_namespace_v1" "ueransim" {
     depends_on       = [module.eks]
     metadata {
         name = "ueransim"
-    labels = {
-        "istio-injection" = "enabled"
-    }
     
     }
 }
