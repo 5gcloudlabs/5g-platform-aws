@@ -14,9 +14,11 @@ runtimeConfig:
       - id: '0.aws:runShellScript'
         runCommand:
           - ip link set ens4 up
+          - ip link set ens4 mtu 9001
           - ip link set ens5 up
           - ip link set ens6 up
           - ip link set ens7 up
+          - ip link set ens7 mtu 9001
           - ip link set ens8 up
 DOC
 }
