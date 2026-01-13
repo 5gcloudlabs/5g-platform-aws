@@ -14,7 +14,7 @@ spec:
     helm:
      parameters:
      - name: "Domain"
-       value: ${ARGOCD_ENV_DOMAIN_NAME}
+       value: "${ARGOCD_ENV_DOMAIN_NAME}"
   destination:
     server: https://kubernetes.default.svc
     namespace: default
