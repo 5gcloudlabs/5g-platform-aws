@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: test-cm
 data:
-    domain-name = {{ .Values.Domain }}
+  domain-name = {{ .Values.Domain }}
