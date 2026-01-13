@@ -6,7 +6,7 @@ metadata:
   namespace: default
   labels:
     domain: ${ARGOCD_ENV_DOMAIN_NAME}
-    arn: ${ARGOCD_ENV_EFS-ARN}
+    arn: ${ARGOCD_ENV_EFS_ARN}
 spec:
   containers:
     - name: nginx
