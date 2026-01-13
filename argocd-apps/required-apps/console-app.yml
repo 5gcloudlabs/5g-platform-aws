@@ -12,9 +12,8 @@ spec:
     targetRevision: trims
     path: charts/console
     helm:
-     parameters:
-     - name: "Domain"
-       value: "${ARGOCD_ENV_DOMAIN_NAME}"
+      values: |
+       Domain: test
   destination:
     server: https://kubernetes.default.svc
     namespace: default
