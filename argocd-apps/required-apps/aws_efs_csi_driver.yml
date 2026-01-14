@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-efs-csi-driver
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+    chart: aws-efs-csi-driver
+    targetRevision: 3.2.1
+    helm:
+      parameters:
+        - name: replicaCount
+          value: "1"
+
+        # Controller service account annotation (IRSA)
+        - name: controller.serviceAccount.annotations.eks\.amazonaws\.com/role-arn
+          value: arn:aws:iam::<ACCOUNT_ID>:role/<EFS_CSI_DRIVER_ROLE>
+
+        - name: controller.logLevel
+          value: "5"
+
+        # Node service account annotation (IRSA)
+        - name: node.serviceAccount.annotations.eks\.amazonaws\.com/role-arn
+          value: arn:aws:iam::<ACCOUNT_ID>:role/<EFS_CSI_DRIVER_ROLE>
+
+        - name: node.logLevel
+          value: "5"
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
