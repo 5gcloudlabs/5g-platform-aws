@@ -17,14 +17,14 @@ spec:
 
         # Controller service account annotation (IRSA)
         - name: controller.serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-          value: arn:aws:iam::<ACCOUNT_ID>:role/<EFS_CSI_DRIVER_ROLE>
+          value: ${ARGOCD_ENV_EFS_ARN}
 
         - name: controller.logLevel
           value: "5"
 
         # Node service account annotation (IRSA)
         - name: node.serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-          value: arn:aws:iam::<ACCOUNT_ID>:role/<EFS_CSI_DRIVER_ROLE>
+          value: ${ARGOCD_ENV_EFS_ARN}
 
         - name: node.logLevel
           value: "5"
