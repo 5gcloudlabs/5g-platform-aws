@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: oci://ghcr.io/5g-cloud-labs/helm/
     chart: console-ui
-    targetRevision: trims
+    targetRevision: "0.1.0"
     helm:
      parameters:
      - name: Domain
