@@ -13,7 +13,7 @@ spec:
     path: charts/console
     helm:
      parameters:
-     - name: "Domain"
+     - name: Domain
        value: ${ARGOCD_ENV_DOMAIN_NAME}
   destination:
     server: https://kubernetes.default.svc
