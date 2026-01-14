@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    repoURL: oci://ghcr.io/5g-cloud-labs/helm/
+    chart: console-ui
     targetRevision: trims
-    path: charts/console
     helm:
      parameters:
      - name: Domain
