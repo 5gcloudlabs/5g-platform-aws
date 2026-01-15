@@ -10,4 +10,4 @@ containerPort: 8080
 serviceAccount:
   name: console-sa
 
-Domain: $
+Domain: ARGOCD_ENV_DOMAIN_NAME
