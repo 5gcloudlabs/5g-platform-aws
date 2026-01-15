@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cf-token-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    targetRevision: trims
+    path: k8s-resources/cloudflare-token/base
+    kustomize:
+        patches:
+        - target:
+            kind: Secret
+            name: cloudflare-api-token-secret
+          patch: |-
+            - op: replace
+              path: /data/cloudflare-api-token
+              value: ${ARGOCD_ENV_CF_API_TOKEN}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:    
+    automated:
+      prune: true
