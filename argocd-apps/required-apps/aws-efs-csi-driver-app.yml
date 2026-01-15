@@ -5,9 +5,8 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
-  source:
-    repoURL: https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+  sources:
+  - repoURL: https://kubernetes-sigs.github.io/aws-efs-csi-driver/
     chart: aws-efs-csi-driver
     targetRevision: 3.2.1
     helm:
@@ -28,7 +27,7 @@ spec:
 
         - name: node.logLevel
           value: "5"
-
+  - repoURL:
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
