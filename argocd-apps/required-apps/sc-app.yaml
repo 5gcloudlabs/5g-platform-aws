@@ -15,7 +15,7 @@ spec:
         patches:
         - target:
             kind: StorageClass
-            name: external-dns
+            name: efs-sc
           patch: |-
             - op: add
               path: /spec/template/spec/containers/0/args/3
