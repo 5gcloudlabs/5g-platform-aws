@@ -1,1 +1,31 @@
-
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sc-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    targetRevision: trims
+    path: k8s-resources/storage
+    kustomize:
+        patches:
+        - target:
+            kind: Deployment
+            name: external-dns
+          patch: |-
+            - op: add
+              path: /spec/template/spec/containers/0/args/3
+              value: --txt-owner-id={{.name}}   # patch using attribute from generator
+     parameters:
+     - name: Domain
+       value: ${ARGOCD_ENV_DOMAIN_NAME}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:    
+    automated:
+      prune: true
