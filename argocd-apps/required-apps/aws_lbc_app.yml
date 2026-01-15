@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-load-balancer-controller
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://aws.github.io/eks-charts
+    chart: aws-load-balancer-controller
+    targetRevision: 1.13.4
+    helm:
+      parameters:
+        - name: clusterName
+          value: ${ARGOCD_ENV_EKS_CLUSTER_NAME}
+
+        - name: replicaCount
+          value: "1"
+
+        - name: serviceAccount.name
+          value: aws-load-balancer-controller
+
+        - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn
+          value: ${ARGOCD_ENV_AWS_LBC_IAM_ROLE_ARN}
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
