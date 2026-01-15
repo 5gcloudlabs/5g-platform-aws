@@ -14,7 +14,7 @@ spec:
     kustomize:
         patches:
         - target:
-            kind: Deployment
+            kind: StorageClass
             name: external-dns
           patch: |-
             - op: add
