@@ -17,12 +17,9 @@ spec:
             kind: StorageClass
             name: efs-sc
           patch: |-
-            - op: add
-              path: /spec/template/spec/containers/0/args/3
-              value: --txt-owner-id={{.name}}   # patch using attribute from generator
-     parameters:
-     - name: Domain
-       value: ${ARGOCD_ENV_DOMAIN_NAME}
+            - op: replace
+              path: /parameters/fileSystemId
+              value: ${ARGOCD_ENV_EFS_ID}
   destination:
     server: https://kubernetes.default.svc
     namespace: default
