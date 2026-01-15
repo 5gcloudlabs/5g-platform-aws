@@ -27,7 +27,9 @@ spec:
 
         - name: node.logLevel
           value: "5"
-  - repoURL:
+  - repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    path: k8s-resources/storage
+    targetRevision: trims            
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
