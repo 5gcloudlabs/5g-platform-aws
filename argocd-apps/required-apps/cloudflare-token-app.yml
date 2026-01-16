@@ -19,7 +19,7 @@ spec:
           patch: |-
             - op: replace
               path: /stringData/cloudflare-api-token
-              value: x.${ARGOCD_ENV_CF_API_TOKEN}
+              value: ${ARGOCD_ENV_CF_API_TOKEN}
   destination:
     server: https://kubernetes.default.svc
     namespace: default
