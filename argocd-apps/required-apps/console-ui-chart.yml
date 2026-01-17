@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: console-ui-app
+  name: console-ui
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
