@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cf-token-app
+  name: cloudflare-token-secret
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
