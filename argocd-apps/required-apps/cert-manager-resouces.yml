@@ -17,6 +17,7 @@ spec:
             version: v1
             group: cert-manager.io
             kind: Certificate
+            namespace: istio-system
             name: tls-cert
           patch: |-
             - op: replace
