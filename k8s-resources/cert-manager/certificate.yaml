@@ -8,7 +8,7 @@ spec:
     name: cluster-issuer
     kind: ClusterIssuer
   secretName: tls-cert-secret
-  commonName: ${ARGOCD_ENV_DOMAIN_NAME}
+  commonName: DOMAIN_NAME
   dnsNames:
-    - ${ARGOCD_ENV_DOMAIN_NAME}
-    - *.${ARGOCD_ENV_DOMAIN_NAME}
+    - DOMAIN_NAME
+    - *.DOMAIN_NAME
