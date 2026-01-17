@@ -17,3 +17,40 @@ spec:
   syncPolicy:    
     automated:
       prune: true
+      
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-resources
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    targetRevision: trims
+    path: k8s-resources/cert-manager/certificate
+    kustomize:
+        patches:
+        - target:
+            kind: Certificate
+            name: tls-cert
+          patch: |-
+            - op: replace
+              path: /spec/commonName
+              value: ${ARGOCD_ENV_DOMAIN_NAME}
+            - op: replace
+              path: /spec/dnsNames/0
+              value: ${ARGOCD_ENV_DOMAIN_NAME}
+            - op: replace
+              path: /spec/dnsNames/1
+              value: "*.${ARGOCD_ENV_DOMAIN_NAME}"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:    
+    automated:
+      prune: true
