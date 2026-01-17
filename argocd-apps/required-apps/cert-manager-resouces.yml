@@ -15,6 +15,7 @@ spec:
         patches:
         - target:
             version: v1
+            group: cert-manager.io
             kind: Certificate
             name: tls-cert
           patch: |-
