@@ -22,7 +22,7 @@ spec:
           value: aws-load-balancer-controller
 
         - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-          value: ${ARGOCD_ENV_AWS_LBC_IAM_ROLE_ARN}
+          value: ${ARGOCD_ENV_LBC_IAM_ROLE_ARN}
 
   destination:
     server: https://kubernetes.default.svc
