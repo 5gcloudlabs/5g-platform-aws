@@ -18,10 +18,10 @@ spec:
             name: ingress
           patch: |-
             - op: replace
-              path: /spec/rule/host/0
+              path: /spec/rules/host/0
               value: "argocd.${ARGOCD_ENV_DOMAIN_NAME}"
             - op: replace
-              path: /spec/rule/host/1
+              path: /spec/rules/host/1
               value: "console.${ARGOCD_ENV_DOMAIN_NAME}"
   destination:
     server: https://kubernetes.default.svc
