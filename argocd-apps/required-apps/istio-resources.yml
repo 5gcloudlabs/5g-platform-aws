@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-resources
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    targetRevision: trims
+    path: k8s-resources/istio/virtual-services
+    kustomize:
+        patches:
+        - target:
+            kind: VirtualService
+            name: istio-vs-console
+          patch: |-
+            - op: replace
+              path: /spec/hosts/0
+              value: "console.${ARGOCD_ENV_DOMAIN_NAME}"
+        - target:
+            kind: VirtualService
+            name: istio-vs-argocd
+          patch: |-
+            - op: replace
+              path: /spec/hosts/0
+              value: "argocd.${ARGOCD_ENV_DOMAIN_NAME}"
+              
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:    
+    automated:
+      prune: true
