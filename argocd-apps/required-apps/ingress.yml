@@ -18,7 +18,7 @@ spec:
             name: ingress
           patch: |-
             - op: replace
-              path: /metadata/annotations/alb.ingress.kubernetes.io/certificate-arn
+              path: /metadata/annotations/alb.ingress.kubernetes.io~1certificate-arn
               value: ${ARGOCD_ENV_ACM_CERTIFICATE_ARN}
             - op: replace
               path: /spec/rules/0/host
