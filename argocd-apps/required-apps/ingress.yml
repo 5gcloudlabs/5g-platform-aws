@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    targetRevision: trims
+    path: k8s-resources/ingress
+    kustomize:
+        patches:
+        - target:
+            kind: Ingress
+            name: ingress
+          patch: |-
+            - op: replace
+              path: /spec/rule/host/0
+              value: "argocd.${ARGOCD_ENV_DOMAIN_NAME}"
+            - op: replace
+              path: /spec/rule/host/1
+              value: "console.${ARGOCD_ENV_DOMAIN_NAME}"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  syncPolicy:    
+    automated:
+      prune: true
