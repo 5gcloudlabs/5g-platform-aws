@@ -23,6 +23,15 @@ spec:
             - op: replace
               path: /spec/rules/1/host
               value: "console.${ARGOCD_ENV_DOMAIN_NAME}"
+            - op: replace
+              path: /spec/rules/2/host
+              value: "webui.${ARGOCD_ENV_DOMAIN_NAME}"
+            - op: replace
+              path: /spec/rules/3/host
+              value: "grafana.${ARGOCD_ENV_DOMAIN_NAME}"
+            - op: replace
+              path: /spec/rules/4/host
+              value: "prometheus.${ARGOCD_ENV_DOMAIN_NAME}"              
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
