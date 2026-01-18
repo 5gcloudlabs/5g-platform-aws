@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-issuer
+  name: cert-manager-cluster-issuer
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -18,11 +18,12 @@ spec:
     automated:
       prune: true
 
+---
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-resources
+  name: cert-manager-certificate
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
