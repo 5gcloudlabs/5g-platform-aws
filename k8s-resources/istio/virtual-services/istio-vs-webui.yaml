@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: istio-vs-webui
+  namespace: free5gc
+spec:
+  hosts:
+  - HOSTNAME
+  gateways:
+  - istio-system/istio-gw
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: webui-service
+        port:
+          number: 5000
