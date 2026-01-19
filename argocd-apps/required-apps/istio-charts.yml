@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-base-chart
+  name: istio-base
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
@@ -22,7 +22,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istiod-chart
+  name: istiod
   namespace: argocd
 spec:
   project: default
@@ -41,7 +41,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-gateway-chart
+  name: istio-gateway
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
