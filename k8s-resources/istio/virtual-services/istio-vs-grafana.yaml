@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: istio-vs-grafana
+  namespace: monitoring
+spec:
+  hosts:
+  - HOSTNAME
+  gateways:
+  - istio-system/istio-gw
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: kube-prometheus-stack-grafana
+        port:
+          number: 80
