@@ -65,6 +65,6 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **Free5GC** – Open-source 5G Core implementation deployed via Argo CD.  
 - **UERANSIM** – Open-source UE and gNodeB simulator for end-to-end validation and testing.
 
-To understand how these components interact to deliver the full 5G deployment workflow, refer to the **[Arch&Design](./docs/Arch&Design)** section.
+To understand how these components interact to deliver the full 5G deployment workflow, refer to the **[Arch&Design](./docs/Arch&Design)** and for installation instructions, please refer to **[installation-instructions](./installation-instructions)** section.
 
 ---
