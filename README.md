@@ -1,70 +1,126 @@
 <h1 align="center">Welcome to aws-5GCloudLabs !</h1>
-<p align="center"><p align="center">An open-source project for deploying 5G Core network pre-integrated with UE/RAN simulation environment on AWS Cloud.</p></p>
-
+<p align="center">An open-source project for deploying 5G Core network pre-integrated with UE/RAN simulation environment on AWS Cloud.</p>
 <p align="center">
-<img width="600" height="4000" alt="main (2)" src="https://github.com/user-attachments/assets/09287ae6-25ef-4596-bacb-844dd08f2868" />
+<img width="600" height="400" alt="main (2)" src="https://github.com/user-attachments/assets/09287ae6-25ef-4596-bacb-844dd08f2868" />
 </p>
 
 ---
 
 ## Overview
 
-Deploying a 5G Core network typically requires complex on-premise infrastructure and manual configuration.
-**aws-5GCloudLabs** provides an automated and reproducible environment for deploying and testing the Free5GC 5G Core on Amazon EKS, eliminating the need for dedicated hardware or local setup.
+Deploying a 5G Core network typically requires complex on-premise infrastructure, specialized hardware, and extensive manual configuration. **aws-5GCloudLabs** eliminates these barriers by providing a fully automated, cloud-native environment for deploying and testing the Free5GC 5G Core on Amazon EKS.
 
+This project enables engineers, students, and practitioners to:
+- **Experiment with 5G protocols** without physical infrastructure investment
+- **Deploy reproducible environments** in minutes using Infrastructure-as-Code
+- **Test end-to-end scenarios** with integrated UE and gNodeB simulation
+- **Learn cloud-native networking** through production-grade tooling (GitOps, service mesh, observability)
 
+Built with OpenTofu for infrastructure provisioning and Argo CD for GitOps-based application management, the entire stack follows declarative configuration principles for consistency and reproducibility.
+
+---
+
+## What You Get
+
+- **Complete 5G Core**: Free5GC deployment with all network functions (AMF, SMF, UPF, UDM, PCF, etc.)
+- **Integrated Testing**: UERANSIM pre-configured for immediate UE and gNB simulation
+- **Production Patterns**: Service mesh (Istio), observability (Prometheus/Grafana/Loki), and automated TLS
+- **Multi-interface Networking**: Multus CNI for 3GPP-compliant interface separation (N2, N3, N4, N6)
+- **GitOps Workflow**: Declarative application lifecycle with Argo CD
+- **One-command Deployment**: Automated infrastructure provisioning to running 5G lab
 
 ---
 
 ## Building Blocks
 
-The **aws-5GCloudLabs** environment brings together automated infrastructure provisioning, Kubernetes orchestration, observability, and 5G Core deployment — forming a complete and reproducible 5G lab on AWS.
+The **aws-5GCloudLabs** environment integrates infrastructure automation, Kubernetes orchestration, observability tooling, and 5G Core deployment into a cohesive, reproducible laboratory environment.
 
+### Infrastructure Automation
+- **OpenTofu** – Infrastructure-as-Code engine for declarative AWS resource provisioning
 
+### AWS Services
+- **VPC** – Network isolation with segmented subnets for infrastructure, Multus networks, and applications
+- **EKS** – Managed Kubernetes cluster with custom node groups and kernel tuning for network workloads
+- **EC2** – Compute instances with security groups, ENIs, and ALB integration
+- **SSM** – Secure shell access and automation without SSH keys
+- **EFS** – Persistent shared storage for MongoDB (UDR subscriber data and NRF profiles)
+- **IAM / STS** – Fine-grained permissions with IRSA for pod-level AWS authentication
+- **ACM** – TLS certificate management for secure service communication
+- **S3** – Remote state storage for OpenTofu (must be preconfigured)
 
-#### **Infrastructure Automation**
+### Kubernetes Ecosystem
+- **Argo CD** – GitOps continuous deployment syncing Helm charts from this repository
+- **AWS Load Balancer Controller** – Automatic ALB provisioning from Kubernetes Ingress resources
+- **AWS EFS CSI Driver** – Dynamic EFS volume provisioning for stateful workloads
+- **ExternalDNS** – Automatic DNS record management synchronized with Kubernetes services
+- **cert-manager** – Automated TLS certificate issuance and renewal (Let's Encrypt integration)
+- **Istio** – Service mesh providing ingress gateway, traffic management, and telemetry
+- **Multus CNI** – Multiple network interfaces per pod for 3GPP protocol compliance
+- **Whereabouts IPAM** – Automatic IP address allocation for Multus secondary networks
+- **Prometheus + Grafana + Loki** – Full observability stack for metrics, visualization, and log aggregation
 
-- **OpenTofu** – Automates infrastructure provisioning using Infrastructure-as-Code (IaC) principles.
+### External Dependencies
+- **Let's Encrypt** – Public CA for automated certificate issuance via cert-manager
+- **Cloudflare** – DNS provider for domain validation (requires registered domain)
 
+### 5G Applications
+- **Free5GC** – Open-source 5G Core network functions deployed via GitOps
+- **UERANSIM** – Open-source gNodeB and UE simulator for registration and data session testing
 
+---
 
-#### **AWS Services**
+## Architecture & Documentation
 
-- **VPC** – Defines networking components including subnets, NAT gateways, internet gateways, and CIDR segmentation for infrastructure, Multus networks, and applications.  
-- **EKS** – Managed Kubernetes cluster (CaaS), including node groups, compute nodes, kernel configuration, and user-data bootstrapping.  
-- **EC2** – Compute resources, ENIs, security groups (virtual firewalls), and ALB integration points.  
-- **SSM** – Secure node access and automation via SSM documents.  
-- **EFS** – Shared persistent storage used by MongoDB (storing UDR subscriber data and NRF NF profiles).  
-- **IAM / STS** – Authentication, authorization, and role management (including IRSA for EKS).  
-- **AWS Certificate Manager** – Domain validation and TLS certificate provisioning for secure communications.
-- **S3** – Stores the OpenTofu state file. Must be preconfigured before running the infrastructure deployment.  
+For detailed architecture diagrams, component interactions, and design decisions, see **[Architecture & Design](./docs/Arch&Design)**.
 
+For step-by-step deployment instructions, prerequisites, and configuration options, see **[Installation Instructions](./installation-instructions)**.
 
-#### **Kubernetes Add-ons and Integrations**
+---
 
-- **Argo CD** – Application lifecycle management via GitOps; syncs Helm charts from the repository.  
-- **AWS Load Balancer Controller (AWS LBC)** – Watches Ingress resources and provisions AWS ALB accordingly.
-- **AWS EFS CSI Driver**– The Amazon EFS CSI Driver enables Kubernetes to provision and manage Amazon EFS file systems.
-- **ExternalDNS** – Updates DNS records dynamically based on Kubernetes resources.  
-- **cert-manager** – Automates TLS certificate issuance and renewal to support end-to-end encryption.  
-- **Istio** – `Ingress Gateway` as reverse proxy in addition to `Service-Mesh` capabilities for traffic management and observability.  
-- **Multus** – CNI meta-plugin enabling multiple network interfaces per pod; used for 3GPP interface separation.  
-- **Whereabouts** – IPAM provider automatically assigns IP addresses based on the configured NetworkAttachmentDefinitions (NADs).  
-- **Prometheus, Grafana, Loki** – Monitoring, visualization, and centralized logging stack.
+## Quick Start
+```bash
+# 1. Configure AWS credentials and S3 backend
+# 2. Clone the repository
+git clone https://github.com/yourusername/aws-5gcloudlabs.git
+cd aws-5gcloudlabs
 
+# 3. Deploy infrastructure
+cd infrastructure
+tofu init
+tofu apply
 
-#### **External Integrations**
+# 4. Access Argo CD and sync applications
+# (Detailed steps in installation-instructions)
+```
 
-- **Let’s Encrypt** – Certificate authority used (via cert-manager) for automated certificate issuance and renewal.  
-- **Cloudflare** – DNS provider for domain records and validation; requires an externally managed domain.
+---
 
+## Use Cases
 
+- **5G Protocol Learning**: Hands-on experience with AMF, SMF, UPF, and other network functions
+- **Cloud-Native Development**: Reference architecture for containerized telecom workloads
+- **Integration Testing**: Validate UE registration, PDU sessions, and data plane connectivity
+- **Research & Experimentation**: Modify core configurations, test edge computing scenarios, network slicing
 
-#### **5G Applications**
+---
 
-- **Free5GC** – Open-source 5G Core implementation deployed via Argo CD.  
-- **UERANSIM** – Open-source UE and gNodeB simulator for end-to-end validation and testing.
+## Contributing
 
-To understand how these components interact to deliver the full 5G deployment workflow, refer to the **[Arch&Design](./docs/Arch&Design)** and for installation instructions, please refer to **[installation-instructions](./installation-instructions)** section.
+Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+---
+
+## License
+
+[Include your license here]
+
+---
+
+## Acknowledgments
+
+This project builds on the excellent work of:
+- [Free5GC](https://free5gc.org/) - Open-source 5G Core implementation
+- [UERANSIM](https://github.com/aligungr/UERANSIM) - 5G UE and RAN simulator
+- The broader cloud-native and telecom open-source communities
 
 ---
