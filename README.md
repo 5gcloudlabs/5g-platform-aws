@@ -8,7 +8,7 @@
 
 ## Overview
 
-Deploying a 5G Core network typically requires complex on-premise infrastructure, specialized hardware, and extensive manual configuration. **aws-5GCloudLabs** eliminates these barriers by providing a fully automated, cloud-native environment for deploying and testing the Free5GC 5G Core on Amazon EKS.
+Deploying a 5G Core network typically involves on-premise infrastructure, dedicated hardware, and manual configuration across multiple network functions. **aws-5GCloudLabs** eliminates these barriers by providing a fully automated, cloud-native environment for deploying and testing the Free5GC 5G Core on Amazon EKS.
 
 This project enables engineers, students, and practitioners to:
 - **Experiment with 5G protocols** without physical infrastructure investment
@@ -53,7 +53,7 @@ The **aws-5GCloudLabs** environment integrates infrastructure automation, Kubern
 - **AWS Load Balancer Controller** – Automatic ALB provisioning from Kubernetes Ingress resources
 - **AWS EFS CSI Driver** – Dynamic EFS volume provisioning for stateful workloads
 - **ExternalDNS** – Automatic DNS record management synchronized with Kubernetes services
-- **cert-manager** – Automated TLS certificate issuance and renewal (Let's Encrypt integration)
+- **cert-manager** – Automated TLS certificate issuance (Let's Encrypt integration) to support end-to-end encryption. 
 - **Istio** – `Ingress Gateway` as reverse proxy & `Service-Mesh` capabilities for traffic management and observability. 
 - **Multus CNI** – Multiple network interfaces per pod for 3GPP protocol compliance
 - **Whereabouts IPAM** – Automatic IP address allocation for Multus secondary networks
