@@ -48,7 +48,7 @@ The **aws-5GCloudLabs** environment integrates infrastructure automation, Kubern
 - **ACM** – TLS certificate management for secure service communication
 - **S3** – Remote state storage for OpenTofu (must be preconfigured)
 
-### Kubernetes Ecosystem
+### Kubernetes Add-ons
 - **Argo CD** – GitOps continuous deployment syncing Helm charts from this repository
 - **AWS Load Balancer Controller** – Automatic ALB provisioning from Kubernetes Ingress resources
 - **AWS EFS CSI Driver** – Dynamic EFS volume provisioning for stateful workloads
@@ -59,7 +59,7 @@ The **aws-5GCloudLabs** environment integrates infrastructure automation, Kubern
 - **Whereabouts IPAM** – Automatic IP address allocation for Multus secondary networks
 - **Prometheus + Grafana + Loki** – Full observability stack for metrics, visualization, and log aggregation
 
-### External Dependencies
+### External Integrations
 - **Let's Encrypt** – Public CA for automated certificate issuance via cert-manager
 - **Cloudflare** – DNS provider for domain validation (requires registered domain)
 
@@ -84,12 +84,13 @@ For step-by-step deployment instructions, prerequisites, and configuration optio
 git clone https://github.com/yourusername/aws-5gcloudlabs.git
 cd aws-5gcloudlabs
 
-# 3. Deploy infrastructure
+# 3. Provision infrastructure
 cd infrastructure
+fill in the mandatory variables in `vars.auto.tfvars`
 tofu init
 tofu apply
 
-# 4. Access Argo CD and sync applications
+# 4. Deploy 5G Core
 # (Detailed steps in installation-instructions)
 ```
 
