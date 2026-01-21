@@ -41,7 +41,7 @@ The **aws-5GCloudLabs** environment integrates infrastructure automation, Kubern
 ### AWS Services
 - **VPC** – Network isolation with segmented subnets for infrastructure, Multus networks, and applications
 - **EKS** – Managed Kubernetes cluster with custom node groups and kernel tuning for network workloads
-- **EC2** – Compute instances with security groups, ENIs, and ALB integration
+- **EC2** – Compute instances with ENIs & security groups.
 - **SSM** – Secure shell access and automation without SSH keys
 - **EFS** – Persistent shared storage for MongoDB (UDR subscriber data and NRF profiles)
 - **IAM / STS** – Fine-grained permissions with IRSA for pod-level AWS authentication
@@ -49,12 +49,12 @@ The **aws-5GCloudLabs** environment integrates infrastructure automation, Kubern
 - **S3** – Remote state storage for OpenTofu (must be preconfigured)
 
 ### Kubernetes Add-ons
-- **Argo CD** – GitOps continuous deployment syncing Helm charts from this repository
+- **Argo CD** – Application lifecycle management via GitOps.
 - **AWS Load Balancer Controller** – Automatic ALB provisioning from Kubernetes Ingress resources
 - **AWS EFS CSI Driver** – Dynamic EFS volume provisioning for stateful workloads
 - **ExternalDNS** – Automatic DNS record management synchronized with Kubernetes services
 - **cert-manager** – Automated TLS certificate issuance and renewal (Let's Encrypt integration)
-- **Istio** – Service mesh providing ingress gateway, traffic management, and telemetry
+- **Istio** – `Ingress Gateway` as reverse proxy & `Service-Mesh` capabilities for traffic management and observability. 
 - **Multus CNI** – Multiple network interfaces per pod for 3GPP protocol compliance
 - **Whereabouts IPAM** – Automatic IP address allocation for Multus secondary networks
 - **Prometheus + Grafana + Loki** – Full observability stack for metrics, visualization, and log aggregation
