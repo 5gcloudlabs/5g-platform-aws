@@ -113,7 +113,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for g
 
 ## License
 
-./LICENSE
+[LICENSE](./LICENSE)
 
 ---
 
