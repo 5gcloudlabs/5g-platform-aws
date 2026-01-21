@@ -42,6 +42,7 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 
 #### **Kubernetes Add-ons and Integrations**
 
+- **Argo CD** – Application lifecycle management via GitOps; syncs Helm charts from the repository.  
 - **AWS Load Balancer Controller (AWS LBC)** – Watches Ingress resources and provisions AWS ALB accordingly.
 - **AWS EFS CSI Driver**– The Amazon EFS CSI Driver enables Kubernetes to provision and manage Amazon EFS file systems.
 - **ExternalDNS** – Updates DNS records dynamically based on Kubernetes resources.  
@@ -50,7 +51,6 @@ The **aws-5GCloudLabs** environment brings together automated infrastructure pro
 - **Multus** – CNI meta-plugin enabling multiple network interfaces per pod; used for 3GPP interface separation.  
 - **Whereabouts** – IPAM provider automatically assigns IP addresses based on the configured NetworkAttachmentDefinitions (NADs).  
 - **Prometheus, Grafana, Loki** – Monitoring, visualization, and centralized logging stack.
-- **Argo CD** – Application lifecycle management via GitOps; syncs Helm charts from the repository.  
 
 
 #### **External Integrations**
