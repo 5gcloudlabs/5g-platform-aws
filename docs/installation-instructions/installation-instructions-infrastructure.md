@@ -233,31 +233,46 @@ ip-192-168-119-14.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
 ```
 
-##### - Verify the below helm charts are deployed successfully via OpenTofu*: 
+
+
+##### - Verify Argo CD applications are synced
+Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications, completing the cluster bootstrapping process.
+The status should display **Synced** and **Healthy**:
+
+
+
 ```bash
-helm list -A
-NAME                        	        NAMESPACE               STATUS         	CHART                                  	 APP VERSION
-argocd                      	        argocd      	        deployed       	argo-cd-8.2.5                      	     v3.0.12    
-aws-efs-csi-driver          	        kube-system 	        deployed       	aws-efs-csi-driver-3.2.1           	     2.1.10     
-aws-load-balancer-controller	        kube-system 	        deployed       	aws-load-balancer-controller-1.13.4	     v2.13.4    
-cert-manager                 	        cert-manager	        deployed       	cert-manager-v1.18.2               	     v1.18.2    
-external-dns                	        kube-system 	    	  deployed        external-dns-1.19.0                      0.19.0     
-istio-base                  	        istio-system	        deployed       	base-1.26.3                        	     1.26.3     
-istio-gateway               	        istio-system	        deployed       	gateway-1.26.3                     	     1.26.3     
-istiod                      	        istio-system	        deployed       	istiod-1.26.3                      	     1.26.3     
-```
+kubectl -n argocd get app
+NAME                           SYNC STATUS   HEALTH STATUS
+aws-efs-csi-driver             Synced        Healthy
+aws-load-balancer-controller   Synced        Healthy
+cert-manager                   Synced        Healthy
+cert-manager-certificate       Synced        Healthy
+cert-manager-cluster-issuer    Synced        Healthy
+cloudflare-token-secret        Synced        Healthy
+console-ui                     Synced        Healthy
+curl-app                       Synced        Healthy
+executor-app                   Synced        Healthy
+external-dns                   Synced        Healthy
+gateway                        Synced        Healthy
+ingress                        Synced        Healthy
+istio-base                     Synced        Healthy
+istio-gateway                  Synced        Healthy
+istiod                         Synced        Healthy
+kube-prometheus-stack          Synced        Healthy
+kube-prometheus-stack-crds     Synced        Healthy
+loki                           Synced        Healthy
+multus                         Synced        Healthy
+required-apps                  Synced        Healthy
+storage-class                  Synced        Healthy
+virtual-services               Synced        Healthy
+whereabouts                    Synced        Healthy
 
-These Helm charts are deployed during cluster bootstrapping using `helm_release` in OpenTofu. While not the typical recommendation for managing Helm charts, it’s required because:
-
-**AWS Load Balancer** Controller and **EFS CSI Driver** need the AWS `IAM role ARNs` created by OpenTofu so their service accounts can be annotated for IRSA.
-
-**ExternalDNS** and cert-manager rely on runtime variable `var.domain_name` to create DNS records and TLS certificate.
 
 **Argo CD** must be installed early so it can manage all remaining Git-based deployments.
 
 ##### - Ensure the respective pods are deployed successfully
 
--  Verify that the `aws-load-balancer-controller` and `aws-efs-csi-driver` pods are running as expected in the kube-system namespace. Additionally, you may validate the health of the remaining system components deployed in this namespace.
 
 ```bash
   kubectl -n kube-system get pods
@@ -331,23 +346,6 @@ argocd-repo-server-549b88f9f-cvspp                  1/1     Running
 argocd-server-6b896f4dcc-2rqmh                      1/1     Running 
 ```
 
-##### - Verify Argo CD applications are synced
-Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications, completing the cluster bootstrapping process.
-The status should display **Synced** and **Healthy**:
-
-
-```bash
-kubectl -n argocd get apps
-NAME                         SYNC STATUS   HEALTH STATUS
-console-app                  Synced        Healthy
-curl-app                     Synced        Healthy
-executor-app                 Synced        Healthy
-kube-prometheus-stack        Synced        Healthy
-kube-prometheus-stack-crds   Synced        Healthy
-loki                         Synced        Healthy
-multus                       Synced        Healthy
-required-apps                Synced        Healthy
-whereabouts                  Synced        Healthy
 
 ```
 
