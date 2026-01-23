@@ -12,7 +12,8 @@ https://console.<your-domain>
 ```
 
 - Insert MCC & MNC values and click Deploy:
-<img width="1295" height="692" alt="console-1" src="https://github.com/user-attachments/assets/9e8ed1d3-e85c-452a-ac1a-1d962d3f5bc5" />
+<img width="1296" height="688" alt="Screenshot from 2026-01-13 15-53-58" src="https://github.com/user-attachments/assets/5725010c-2610-4813-89b8-7675067d9761" />
+
 
 - Wait for parameters to be updated accordingly:
 <img width="1295" height="692" alt="console-2" src="https://github.com/user-attachments/assets/b8fc3d4c-faec-4d56-98e9-e8acdb8f35f7" />
