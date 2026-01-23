@@ -21,7 +21,6 @@ Install the following tools locally:
 | **AWS CLI** | [Install guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
-| **Helm** (optional) | [Install guide](https://helm.sh/docs/intro/install/) |
 
 
 Verify installs & versions
