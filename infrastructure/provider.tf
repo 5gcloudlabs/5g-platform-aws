@@ -92,9 +92,9 @@ provider "cloudflare" {
 }
 
 
-provider "argocd" {
-  server_addr = "argocd.${var.domain_name}"
-  grpc_web    = true
-  username    = "admin"
-  password    = local.argocd_password
-}
+#provider "argocd" {
+#  server_addr = "argocd.${var.domain_name}"
+#  grpc_web    = true
+#  username    = "admin"
+#  password    = local.argocd_password
+#}
