@@ -1,0 +1,130 @@
+resource "kubernetes_ingress_v1" "ingress" {
+  depends_on = [kubernetes_namespace_v1.istio-system, module.acm, module.eks, module.vpc]
+# time_sleep.wait_for_alb-controller,
+  metadata {
+    name = "ingress"
+    namespace = kubernetes_namespace_v1.istio-system.metadata[0].name
+    annotations = {
+      "kubernetes.io/ingress.class" = "alb"
+      "alb.ingress.kubernetes.io/scheme" =  "internet-facing"
+      "alb.ingress.kubernetes.io/healthcheck-interval-seconds": 30
+      "alb.ingress.kubernetes.io/healthcheck-path" = "/healthz"
+      "alb.ingress.kubernetes.io/listen-ports" = "[{\"HTTP\": 80}, {\"HTTPS\":443}]"
+      "alb.ingress.kubernetes.io/certificate-arn" = module.acm.acm_certificate_arn
+      "alb.ingress.kubernetes.io/backend-protocol" = "HTTPS"
+      "alb.ingress.kubernetes.io/target-type" = "ip"
+    }
+  }
+
+  spec {
+
+    rule {
+          host = "console.${var.domain_name}"
+      http {
+        path {
+          backend {
+            service {
+              name = "istio-gateway"
+              port {
+                number = 443
+              }
+            }
+          }
+          path = "/"
+                  path_type = "Prefix"
+        }
+      }
+    }
+
+
+    rule {
+          host = "argocd.${var.domain_name}"
+      http {
+        path {
+          backend {
+            service {
+              name = "istio-gateway"
+              port {
+                number = 443
+              }
+            }
+          }
+          path = "/"
+                  path_type = "Prefix"
+        }
+      }
+    }
+
+
+    rule {
+          host = "grafana.${var.domain_name}"
+      http {
+        path {
+          backend {
+            service {
+              name = "istio-gateway"
+              port {
+                number = 443
+              }
+            }
+          }
+
+          path = "/"
+                  path_type = "Prefix"
+        }
+      }
+    }
+
+
+    rule {
+          host = "webui.${var.domain_name}"
+      http {
+        path {
+          backend {
+            service {
+              name = "istio-gateway"
+              port {
+                number = 443
+              }
+            }
+          }
+
+          path = "/"
+                  path_type = "Prefix"
+        }
+      }
+    }
+
+
+    rule {
+          host = "prometheus.${var.domain_name}"
+      http {
+        path {
+          backend {
+            service {
+              name = "istio-gateway"
+              port {
+                number = 443
+              }
+            }
+          }
+
+          path = "/"
+                  path_type = "Prefix"
+        }
+      }
+    }
+
+  }
+}
+
+
+
+#resource "time_sleep" "wait_post_ingress" {
+
+#    depends_on = [
+#        kubernetes_ingress_v1.ingress
+#    ]
+
+#    create_duration = "180s"
+#}
