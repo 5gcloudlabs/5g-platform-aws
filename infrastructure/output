@@ -1,4 +1,0 @@
-output "debug_argocd_password" {
-  value     = nonsensitive(local.argocd_password)
-  sensitive = false
-}
