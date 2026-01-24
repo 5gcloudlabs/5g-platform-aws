@@ -1,5 +1,5 @@
 resource "kubernetes_secret_v1" "git-repo-secret" {
-  depends_on = [kubernetes_namespace_v1.argocd]
+  depends_on = [helm_release.argocd]
   metadata {
     name = "git-repo-secret"
     namespace = "argocd"
