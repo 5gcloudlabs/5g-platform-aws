@@ -32,7 +32,7 @@ spec:
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     targetRevision: trims
-    path: k8s-resources/cert-manager/certificate
+    path: cluster-bootstrap/k8s-resources/cert-manager/certificate
     kustomize:
         patches:
         - target:
