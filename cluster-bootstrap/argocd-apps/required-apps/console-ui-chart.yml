@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     targetRevision: trims
-    path: cluster-bootstrap/charts-charts/console
+    path: cluster-bootstrap/helm-charts/console
     helm:
      parameters:
      - name: Domain
