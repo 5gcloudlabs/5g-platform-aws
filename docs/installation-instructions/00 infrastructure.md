@@ -185,7 +185,7 @@ Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
 ```
 
 
-#### 4. c) Applyconfiguration
+#### 4. c) Apply configuration
 
 
 ```bash
