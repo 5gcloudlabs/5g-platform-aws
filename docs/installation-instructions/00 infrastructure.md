@@ -59,8 +59,6 @@ export AWS_REGION="<region>"
 
 #### 1. d) Create an S3 Bucket for the OpenTofu State
 
-aws s3api create-bucket --bucket $bucket-name --create-bucket-configuration LocationConstraint=$region
-
 OpenTofu requires an S3 bucket to store its remote state file.  
 Create the bucket using one of the following commands:
 
