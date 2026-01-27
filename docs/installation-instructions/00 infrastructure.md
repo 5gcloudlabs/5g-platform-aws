@@ -201,7 +201,7 @@ Plan: 144 to add, 0 to change, 0 to destroy.
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu apply
 
-Plan: 110 to add, 0 to change, 0 to destroy.
+Plan: 144 to add, 0 to change, 0 to destroy.
 
 
 Do you want to perform these actions?
@@ -213,18 +213,18 @@ Do you want to perform these actions?
 ```
 Expected Output:
 ```bash
-Apply complete! Resources: 110 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
 ```
 
 **Summary**
 
 The OpenTofu configuration performs the following:
 
-Provisions all AWS resources (VPC, EKS, EC2, EFS, TLS Certificate, IAM roles, etc.).
+Provisions the required AWS resources [ VPC subnets, IGW, NATGW, EKS cluster, worker nodes, additional network interfaces, SGs, SG rules, EFS, TLS Certificate, IAM roles, etc.).
 
-Deploys several Kubernetes add-ons directly using helm_release resources.
+Installs Argocd helm chart, via helm_release resource.
 
-Applies the Argo CD required-apps Application using a kubectl_manifest resource, which triggers Argo CD to fetch all remaining add-ons from the Git repository.
+Cluster bootstrapping by applying the Argo CD required-apps app-of-apps using a kubectl_manifest resource, triggering ArgoCD to deploy all the required applications for the EKS cluster, from the github repository.
 
 
 #### 4. d) Validate infrastructure creation
