@@ -119,7 +119,7 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 
 Infrastructure deployment is performed in two stages: a targeted apply provisions the EKS cluster, worker nodes, and their direct dependencies (such as the VPC) to establish the Kubernetes environment, followed by a full `tofu apply` to deploy the remaining infrastructure components, including those that depend on EKS.
 
-#### 4. a) Initialize OpenTofu Infrastructure Directory
+#### 4. a) Initialize configuration
 
 Navigate to the infrastructure directory:
 
@@ -133,19 +133,35 @@ Initialize infrastructure directory:
 
 Expected Output:
 ```bash
-...
+
+Initializing the backend...
+
+Successfully configured the backend "s3"! OpenTofu will automatically
+use this backend unless the backend configuration changes.
+Initializing modules...
+.
+.
+Initializing provider plugins...
+.
+.
+OpenTofu has been successfully initialized!
+
+You may now begin working with OpenTofu. Try running "tofu plan" to see
+any changes that are required for your infrastructure. All OpenTofu commands
+should now work.
+
+
 ```
 
-#### 4. b) Create targetted execution plan/execution:
+#### 4. b) Create a plan:
 
-**Execution Plan**
 
 ```bash
-/aws-5gcloudlabs/infrastructure$ tofu plan --target=module.eks
+/aws-5gcloudlabs/infrastructure$ tofu plan 
 ```
 Expected Output:
 ```bash
-Plan: 68 to add, 0 to change, 0 to destroy.
+Plan: 144 to add, 0 to change, 0 to destroy.
 ```
 
 **Execution:**
@@ -153,7 +169,7 @@ Plan: 68 to add, 0 to change, 0 to destroy.
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu apply
 
-Plan: 68 to add, 0 to change, 0 to destroy.
+Plan: 144 to add, 0 to change, 0 to destroy.
 
 
 Do you want to perform these actions?
@@ -165,20 +181,19 @@ Do you want to perform these actions?
 ```
 Expected Output:
 ```bash
-Apply complete! Resources: 68 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
 ```
 
 
-#### 4. c) Create final execution plan/execution:
+#### 4. c) Applyconfiguration
 
-**Execution Plan**
 
 ```bash
 /aws-5gcloudlabs/infrastructure$ tofu plan
 ```
 Expected Output:
 ```bash
-Plan: 110 to add, 0 to change, 0 to destroy.
+Plan: 144 to add, 0 to change, 0 to destroy.
 ```
 
 **Execution:**
