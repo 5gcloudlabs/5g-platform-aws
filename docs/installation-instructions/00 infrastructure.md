@@ -115,7 +115,7 @@ nano vars.auto.tfvars
 
 After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
 
-### 4. Install Infrastructure Using OpenTofu
+### 4. Provision Infrastructure Using OpenTofu
 
 Infrastructure deployment is performed in two stages: a targeted apply provisions the EKS cluster, worker nodes, and their direct dependencies (such as the VPC) to establish the Kubernetes environment, followed by a full `tofu apply` to deploy the remaining infrastructure components, including those that depend on EKS.
 
