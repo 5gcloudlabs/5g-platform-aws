@@ -139,7 +139,9 @@ use this backend unless the backend configuration changes.
 Initializing modules...
 .
 .
+.
 Initializing provider plugins...
+.
 .
 .
 OpenTofu has been successfully initialized!
@@ -147,8 +149,6 @@ OpenTofu has been successfully initialized!
 You may now begin working with OpenTofu. Try running "tofu plan" to see
 any changes that are required for your infrastructure. All OpenTofu commands
 should now work.
-
-
 ```
 
 #### 4. b) Create a plan:
@@ -159,6 +159,9 @@ should now work.
 ```
 Expected Output:
 ```bash
+.
+.
+.
 Plan: 144 to add, 0 to change, 0 to destroy.
 ```
 
@@ -179,6 +182,9 @@ Do you want to perform these actions?
 ```
 Expected Output:
 ```bash
+.
+.
+.
 Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
 ```
 
@@ -211,6 +217,9 @@ Do you want to perform these actions?
 ```
 Expected Output:
 ```bash
+.
+.
+.
 Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
 ```
 
@@ -218,11 +227,11 @@ Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
 
 The OpenTofu configuration performs the following:
 
-Provisions the required AWS resources [ VPC subnets, IGW, NATGW, EKS cluster, worker nodes, additional network interfaces, SGs, SG rules, EFS, TLS Certificate, IAM roles, etc.).
+- Provisions the required AWS resources [ VPC subnets, IGW, NATGW, EKS cluster, worker nodes, additional network interfaces, SGs, SG rules, EFS, TLS Certificate, IAM roles, etc.).
 
-Installs Argocd helm chart, via helm_release resource.
+- Installs Argocd helm chart, via helm_release resource.
 
-Cluster bootstrapping by applying the Argo CD required-apps app-of-apps using a kubectl_manifest resource, triggering ArgoCD to deploy all the required applications for the EKS cluster, from the github repository.
+- Cluster bootstrapping by applying the Argo CD required-apps app-of-apps using a kubectl_manifest resource, triggering ArgoCD to deploy all the required applications for the EKS cluster, from the github repository.
 
 
 #### 4. d) Validate infrastructure creation
