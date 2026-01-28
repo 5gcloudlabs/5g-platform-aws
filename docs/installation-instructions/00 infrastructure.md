@@ -115,7 +115,7 @@ After completing all prerequisites, you can deploy the AWS infrastructure and th
 
 ### 4. Provision Infrastructure Using OpenTofu
 
-AWS Infrastructure VPC, EKS, EFS, etc is provisioo 
+OpenTofu provisions the required AWS infrastructure and triggers cluster-bootsrap via ArgoCD.
 
 #### 4. a) Initialize configuration
 
