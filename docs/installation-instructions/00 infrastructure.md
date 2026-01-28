@@ -263,7 +263,7 @@ The status should display **Synced** and **Healthy**:
 
 
 ```bash
-kubectl -n argocd get app
+kubectl -n argocd get app 
 NAME                           SYNC STATUS   HEALTH STATUS
 aws-efs-csi-driver             Synced        Healthy
 aws-load-balancer-controller   Synced        Healthy
@@ -275,6 +275,7 @@ console-ui                     Synced        Healthy
 curl-app                       Synced        Healthy
 executor-app                   Synced        Healthy
 external-dns                   Synced        Healthy
+free5gc                        Synced        Healthy
 gateway                        Synced        Healthy
 ingress                        Synced        Healthy
 istio-base                     Synced        Healthy
@@ -286,8 +287,9 @@ loki                           Synced        Healthy
 multus                         Synced        Healthy
 required-apps                  Synced        Healthy
 storage-class                  Synced        Healthy
-virtual-services               Synced        Healthy
+virtual-services               OutOfSync     Healthy
 whereabouts                    Synced        Healthy
+
 
 
 **Argo CD** must be installed early so it can manage all remaining Git-based deployments.
