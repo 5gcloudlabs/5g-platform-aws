@@ -99,7 +99,7 @@ nano vars.auto.tfvars
 | `region` | `eu-central-1` | AWS region where all infrastructure resources will be created. |
 | `bucket-name` | `""` | Name of the S3 bucket used to store the Terraform remote state file. |
 | `key` | `state/iac.tfstate` | Path and filename of the Terraform state file inside the S3 bucket. |
-| `vpc_name` | `cloud-5g` | Name assigned to the VPC hosting the 5G Core infrastructure. |
+| `vpc_name` | `cloud-5g-vpc` | Name assigned to the VPC hosting the 5G Core infrastructure. |
 | `vpc_cidr` | `192.168.0.0/16` | Primary CIDR block for the VPC network. |
 | `azs` | `["eu-central-1b", "eu-central-1c"]` | Availability Zones used for subnet creation and high availability. |
 | `eks_cluster_name` | `cloud-5g-eks` | Name of the Amazon EKS cluster running the 5G Core workloads. |
