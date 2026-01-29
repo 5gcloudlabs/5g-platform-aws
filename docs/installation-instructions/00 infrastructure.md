@@ -256,9 +256,9 @@ ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 
 
 
-##### - Verify Argo CD applications are synced
-Confirm that Argo CD has successfully deployed the `required-apps` Application and all dependent applications, completing the cluster bootstrapping process.
-The status should display **Synced** and **Healthy**:
+##### - Verify EKS Cluster Bootstrapping:
+Confirm that Argo CD has successfully deployed the `cluster-bootstrap` Application and all child applications.
+The status should display **Synced*** and **Healthy**:
 
 
 
@@ -271,9 +271,10 @@ cert-manager                   Synced        Healthy
 cert-manager-certificate       Synced        Healthy
 cert-manager-cluster-issuer    Synced        Healthy
 cloudflare-token-secret        Synced        Healthy
+cluster-bootstrap              Synced        Healthy
 console-ui                     Synced        Healthy
-curl-app                       Synced        Healthy
-executor-app                   Synced        Healthy
+curl                           Synced        Healthy
+executor                       Synced        Healthy
 external-dns                   Synced        Healthy
 free5gc                        Synced        Healthy
 gateway                        Synced        Healthy
@@ -285,14 +286,13 @@ kube-prometheus-stack          Synced        Healthy
 kube-prometheus-stack-crds     Synced        Healthy
 loki                           Synced        Healthy
 multus                         Synced        Healthy
-required-apps                  Synced        Healthy
 storage-class                  Synced        Healthy
 virtual-services               OutOfSync     Healthy
 whereabouts                    Synced        Healthy
 
 
+*virual-services 
 
-**Argo CD** must be installed early so it can manage all remaining Git-based deployments.
 
 ##### - Ensure the respective pods are deployed successfully
 
@@ -350,27 +350,6 @@ istiod-556bf8849c-7qfs4          1/1     Running
 
 ```
 
-Confirm that all Argo CD components (API server, repository server, application controller, and Redis) are running and healthy in the argocd namespace. A fully functional Argo CD installation is required for managing GitOps-driven application deployments.
-
-
-```bash
-  kubectl -n argocd get pods
-```  
-Expected Outcome:
-
-```bash
-NAME                                                READY   STATUS  
-argocd-application-controller-0                     1/1     Running 
-argocd-applicationset-controller-56c9b5889f-lhb9l   1/1     Running 
-argocd-dex-server-659554d859-82zsb                  1/1     Running 
-argocd-notifications-controller-67c4db49fd-7p77m    1/1     Running 
-argocd-redis-7c5f9cbc5b-5cpqq                       1/1     Running 
-argocd-repo-server-549b88f9f-cvspp                  1/1     Running 
-argocd-server-6b896f4dcc-2rqmh                      1/1     Running 
-```
-
-
-```
 
 ##### - Ensure the respective pods are deployed successfully
 
@@ -407,31 +386,7 @@ curl-deployment-5db9cb8c57-hjdkc   1/1     Running
 executor-9f5589868-qp9gq           1/1     Running 
 ```
 
-- **Multus and Whereabouts:**
-Already validated in an earlier step, but you can re-check if needed:
-```bash
-kubectl -n kube-system get pods
-```
-Expected Output:
-```bash
-NAME                                            READY   STATUS    
-aws-load-balancer-controller-7896c5c598-8dbxq   1/1     Running   
-aws-node-5p9hs                                  2/2     Running   
-aws-node-6k54j                                  2/2     Running   
-coredns-54d96d77bc-9gv6m                        1/1     Running   
-coredns-54d96d77bc-dt88g                        1/1     Running   
-efs-csi-controller-649b9665d7-6xwtv             3/3     Running   
-efs-csi-controller-649b9665d7-sz6vz             3/3     Running   
-efs-csi-node-gpq99                              3/3     Running   
-efs-csi-node-wdc49                              3/3     Running   
-external-dns-549fbd7b7-r5pp2                    1/1     Running   
-kube-multus-ds-8bb6q                            1/1     Running   
-kube-multus-ds-m7rrk                            1/1     Running   
-kube-proxy-ccr8q                                1/1     Running   
-kube-proxy-dsmqv                                1/1     Running   
-whereabouts-whereabouts-chart-2mr5j             1/1     Running   
-whereabouts-whereabouts-chart-sdsbq             1/1     Running   
-```
+
 
 ##### Validate Ingress and DNS Resolution
 
@@ -489,9 +444,3 @@ ANSWER SECTION:
 k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 3.126.96.223
 k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 18.194.188.63
 ```
-
-### 7. System Monitoring via Grafana
-
-
-
-### 8. Termination Procedure
