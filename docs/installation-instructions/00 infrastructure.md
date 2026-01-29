@@ -108,6 +108,22 @@ nano vars.auto.tfvars
 | `zone_id` | — | Identifier of the DNS hosted zone at the DNS provider. |
 | `cloudflare_api_token` | — | API token used by Terraform and ExternalDNS to manage DNS records in Cloudflare. |
 
+---
+
+| Variable Name | Default / Effective Value | Description |
+|--------------|---------------------------|-------------|
+| `region` | `eu-central-1` | AWS region where all infrastructure resources will be created. |
+| `bucket-name` | `REDACTED_STATE_BUCKET` | Name of the S3 bucket used to store the Terraform remote state file. |
+| `key` | `state/iac.tfstate` | Path and filename of the Terraform state file inside the S3 bucket. |
+| `vpc_name` | `cloud-5g` | Name assigned to the VPC hosting the 5G Core infrastructure. |
+| `vpc_cidr` | `192.168.0.0/16` | Primary CIDR block for the VPC network. |
+| `azs` | `["eu-central-1b", "eu-central-1c"]` | Availability Zones used for subnet creation and high availability. |
+| `eks_cluster_name` | `cloud-5g-eks` | Name of the Amazon EKS cluster running the 5G Core workloads. |
+| `ami_id` | `REDACTED_AMI_ID` | Ubuntu EKS-optimized AMI (Focal Pro, compatible with Free5GC v3.3.0 and GTP5G). |
+| `domain_name` | `""` | Public domain name associated with the DNS hosted zone. |
+| `zone_id` | `""` | Identifier of the DNS hosted zone at the DNS provider. |
+| `cloudflare_api_token` | `""` | API token used by Terraform and ExternalDNS to manage DNS records in Cloudflare. |
+
 
 After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
 
