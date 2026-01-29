@@ -30,8 +30,6 @@ Run the following to confirm tools are installed:
 aws --version
 tofu version
 kubectl version --client --short
-helm version --short
-argocd --version   
 ```
 
 #### 1. c) Configure AWS credentials
@@ -235,16 +233,33 @@ The OpenTofu configuration performs the following:
 
 
 #### 4. d) Validate infrastructure creation
-Once opentofu apply completes, perform the checks below to confirm the EKS cluster, Argo CD bootstrap, add-ons and ingress are healthy and reachable.
+Once opentofu apply completes, perform the checks below to confirm AWS resource provisioning:
+
+`aws ec2 describe-vpcs`
+
+`aws ec2 describe-subnets`
+
+`aws acm list-certificates`
+
+`aws efs describe-file-systems`
+
 
 ##### - Update kubeconfig and verify EKS connectivity
-
-Configure `kubectl` for the new cluster and verify node readiness:
 
 ```bash
 aws eks update-kubeconfig --region "$AWS_REGION" --name "<EKS_CLUSTER_NAME>"
 Updated context arn:aws:eks:eu-central-1:**********:cluster/cloud-5g-eks in /home/barakota/.kube/config
 ```
+
+```bash
+kubectl version
+Client Version: v1.34.3
+Kustomize Version: v5.7.1
+Server Version: v1.34.3-eks-ac2d5a0
+```
+
+##### - Verify node readiness:
+
 You should see 2 worker nodes in Ready state.
 
 ```bash
@@ -256,10 +271,9 @@ ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.
 
 
 
-##### - Verify EKS Cluster Bootstrapping:
+#### 4. e) Verify EKS Cluster Bootstrapping:
 Confirm that Argo CD has successfully deployed the `cluster-bootstrap` Application and all child applications.
-The status should display **Synced*** and **Healthy**:
-
+The status should display **Synced** and **Healthy**:
 
 
 ```bash
@@ -276,7 +290,6 @@ console-ui                     Synced        Healthy
 curl                           Synced        Healthy
 executor                       Synced        Healthy
 external-dns                   Synced        Healthy
-free5gc                        Synced        Healthy
 gateway                        Synced        Healthy
 ingress                        Synced        Healthy
 istio-base                     Synced        Healthy
@@ -287,14 +300,63 @@ kube-prometheus-stack-crds     Synced        Healthy
 loki                           Synced        Healthy
 multus                         Synced        Healthy
 storage-class                  Synced        Healthy
-virtual-services               OutOfSync     Healthy
+virtual-services               Synced        Healthy
 whereabouts                    Synced        Healthy
+```
+
+Applications overview:
+
+cluster-bootstrap – Parent Argo CD application that bootstraps and manages all core cluster components.
+
+aws-efs-csi-driver – Enables Kubernetes pods to use AWS EFS for persistent shared storage.
+
+aws-load-balancer-controller – Manages AWS Application and Network Load Balancers for Kubernetes services and ingresses.
+
+cert-manager – Automates the issuance and renewal of TLS certificates within the cluster.
+
+cert-manager-cluster-issuer – Defines the cluster-wide certificate issuer (e.g. Let’s Encrypt).
+
+cert-manager-certificate – Provisions specific TLS certificates using cert-manager.
+
+cloudflare-token-secret – Stores Cloudflare API credentials used for DNS and certificate automation.
+
+external-dns – Automatically manages DNS records in Cloudflare based on Kubernetes services and ingresses.
+
+istio-base – Installs the core Istio CRDs required for the service mesh.
+
+istiod – Istio control plane responsible for traffic management, security, and observability.
+
+istio-gateway – Deploys Istio ingress gateway for external traffic into the cluster.
+
+ingress – Defines Kubernetes ingress resources exposed through Istio.
+
+gateway – Configures Istio Gateway resources for routing external traffic.
+
+virtual-services – Defines Istio VirtualServices for application-level traffic routing.
+
+multus – Enables multiple network interfaces per pod, required for 5G workloads.
+
+whereabouts – Provides IP address management (IPAM) for secondary pod networks used by Multus.
+
+storage-class – Defines default and custom Kubernetes storage classes.
+
+kube-prometheus-stack-crds – Installs CRDs required by the Prometheus monitoring stack.
+
+kube-prometheus-stack – Provides cluster monitoring using Prometheus, Grafana.
+
+loki – Centralized log aggregation system for Kubernetes workloads.
+
+executor – Backend execution pod responsible for running deployment and automation scripts.
+
+console-ui – Web-based user interface for deploying the 5G network.
+
+curl – Utility pod used to support 5G subscribers provisioning via cli or console-ui.
 
 
-*virual-services 
 
+##### - Additional Validation 
 
-##### - Ensure the respective pods are deployed successfully
+As an additional validation step, you can verify that the underlying Kubernetes resources have been successfully deployed and are running in their respective namespaces.
 
 
 ```bash
@@ -350,10 +412,6 @@ istiod-556bf8849c-7qfs4          1/1     Running
 
 ```
 
-
-##### - Ensure the respective pods are deployed successfully
-
-
 **Monitoring & Observability stack:**
 
 ```bash
@@ -374,7 +432,7 @@ loki-promtail-84cm6                                         1/1     Running
 prometheus-kube-prometheus-stack-prometheus-0               2/2     Running 
 ```
 
-- **Console UI, executor, and curl helper pods:**
+- **Console UI, executor, and curl utility pods:**
 ```bash
 kubectl get pods
 ```
