@@ -1,10 +1,10 @@
-resource "kubectl_manifest" "required_apps" {
+resource "kubectl_manifest" "cluster_bootstrap" {
   depends_on = [helm_release.argocd]
   yaml_body = <<EOF
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: required-apps
+  name: cluster-bootstrap
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
