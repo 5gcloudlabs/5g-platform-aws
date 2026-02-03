@@ -10,12 +10,12 @@ terraform {
     }
 
     kubernetes = {
-      source  = "opentofu/kubernetes"
+      source  = "hashicorp/kubernetes"
       version = "2.38.0"
     }
 
     helm = {
-      source  = "opentofu/helm"
+      source  = "hashicorp/helm"
       version = "3.0.2"
     }
 
@@ -29,10 +29,10 @@ terraform {
       version = "5.7.1"
     }
 
-    argocd = {
-      source = "argoproj-labs/argocd"
-      version = "7.12.5"
-    }
+#    argocd = {
+#      source = "argoproj-labs/argocd"
+#      version = "7.12.5"
+#    }
 
   }
 
