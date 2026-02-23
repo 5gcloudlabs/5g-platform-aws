@@ -72,7 +72,7 @@ spec:
               value: "prometheus.${ARGOCD_ENV_DOMAIN_NAME}"                            
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: free5gc
   syncPolicy:    
     automated:
       prune: true
