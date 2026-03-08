@@ -22,17 +22,17 @@ spec:
                 servedGuamiList:
                 - plmnId:
                     mcc: ${ARGOCD_ENV_MCC}
-                    mnc: $mnc
+                    mnc: ${ARGOCD_ENV_MNC}
                   amfId: cafe00
                 supportTaiList:
                 - plmnId:
                     mcc: ${ARGOCD_ENV_MCC}
-                    mnc: $mnc
+                    mnc: ${ARGOCD_ENV_MNC}
                   tac: 000001
                 plmnSupportList:
                 - plmnId:
                     mcc: ${ARGOCD_ENV_MCC}
-                    mnc: $mnc
+                    mnc: ${ARGOCD_ENV_MNC}
                   snssaiList:
                     - sst: 1
                       sd: 010203
@@ -48,7 +48,7 @@ spec:
               configuration1: |-
                 plmnSupportList:
                   - mcc: ${ARGOCD_ENV_MCC}
-                    mnc: $mnc                
+                    mnc: ${ARGOCD_ENV_MNC}        
 
         free5gc-nrf:
           nrf:
@@ -56,8 +56,8 @@ spec:
             configuration:
               configuration: |-
                 DefaultPlmnId:
-                  mcc: $mcc
-                  mnc: $mnc  
+                  mcc: ${ARGOCD_ENV_MCC}
+                  mnc: ${ARGOCD_ENV_MNC}
     
         free5gc-nssf:
           nssf:
@@ -66,12 +66,12 @@ spec:
               configuration1: |-
                 nssfName: NSSFA
                 supportedPlmnList:
-                  - mcc: $mcc
-                    mnc: $mnc
+                  - mcc: ${ARGOCD_ENV_MCC}
+                    mnc: ${ARGOCD_ENV_MNC}
                 supportedNssaiInPlmnList:
                   - plmnId:
-                      mcc: $mcc
-                      mnc: $mnc
+                      mcc: ${ARGOCD_ENV_MCC}
+                      mnc: ${ARGOCD_ENV_MNC}
                     supportedSnssaiList:
                       - sst: 1
                         sd: 010203
@@ -90,8 +90,8 @@ spec:
             configuration:
               configuration1: |-
                 plmnList:
-                  - mcc: $mcc
-                    mnc: $mnc
+                  - mcc: ${ARGOCD_ENV_MCC}
+                    mnc: ${ARGOCD_ENV_MNC}
 
   destination:
     server: https://kubernetes.default.svc
