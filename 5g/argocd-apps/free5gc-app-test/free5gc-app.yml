@@ -21,17 +21,17 @@ spec:
               configuration1: |-
                 servedGuamiList:
                 - plmnId:
-                    mcc: $mcc
+                    mcc: ${ARGOCD_ENV_MCC}
                     mnc: $mnc
                   amfId: cafe00
                 supportTaiList:
                 - plmnId:
-                    mcc: $mcc
+                    mcc: ${ARGOCD_ENV_MCC}
                     mnc: $mnc
                   tac: 000001
                 plmnSupportList:
                 - plmnId:
-                    mcc: $mcc
+                    mcc: ${ARGOCD_ENV_MCC}
                     mnc: $mnc
                   snssaiList:
                     - sst: 1
@@ -47,7 +47,7 @@ spec:
             configuration:
               configuration1: |-
                 plmnSupportList:
-                  - mcc: $mcc
+                  - mcc: ${ARGOCD_ENV_MCC}
                     mnc: $mnc                
 
         free5gc-nrf:
