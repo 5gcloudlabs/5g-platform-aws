@@ -1,0 +1,107 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: free5gc
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+    targetRevision: trims
+    path: 5g/helm-charts/free5gc
+    helm:
+      releaseName: aws-5gcloudlabs
+      values: |        
+        free5gc-amf:
+          amf:
+            name: amf
+            configuration:
+              configuration1: |-
+                servedGuamiList:
+                - plmnId:
+                    mcc: $mcc
+                    mnc: $mnc
+                  amfId: cafe00
+                supportTaiList:
+                - plmnId:
+                    mcc: $mcc
+                    mnc: $mnc
+                  tac: 000001
+                plmnSupportList:
+                - plmnId:
+                    mcc: $mcc
+                    mnc: $mnc
+                  snssaiList:
+                    - sst: 1
+                      sd: 010203
+                    - sst: 1
+                      sd: 112233
+                supportDnnList:
+                - internet
+
+        free5gc-ausf:
+          ausf:      
+            name: ausf
+            configuration:
+              configuration1: |-
+                plmnSupportList:
+                  - mcc: $mcc
+                    mnc: $mnc                
+
+        free5gc-nrf:
+          nrf:
+            name: nrf
+            configuration:
+              configuration: |-
+                DefaultPlmnId:
+                  mcc: $mcc
+                  mnc: $mnc  
+    
+        free5gc-nssf:
+          nssf:
+            name: nssf
+            configuration:
+              configuration1: |-
+                nssfName: NSSFA
+                supportedPlmnList:
+                  - mcc: $mcc
+                    mnc: $mnc
+                supportedNssaiInPlmnList:
+                  - plmnId:
+                      mcc: $mcc
+                      mnc: $mnc
+                    supportedSnssaiList:
+                      - sst: 1
+                        sd: 010203
+                      - sst: 1
+                        sd: 112233
+                      - sst: 1
+                        sd: 3
+                      - sst: 2
+                        sd: 1
+                      - sst: 2
+                        sd: 2
+
+        free5gc-smf:
+          smf:
+            name: smf
+            configuration:
+              configuration1: |-
+                plmnList:
+                  - mcc: $mcc
+                    mnc: $mnc
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: free5gc
+  syncPolicy:    
+    automated:
+      prune: true
+      selfHeal: true
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
+    syncOptions:
+    - CreateNamespace=true
