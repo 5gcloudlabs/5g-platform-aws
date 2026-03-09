@@ -13,11 +13,11 @@ spec:
         image: curlimages/curl:8.5.0
         env:
         - name: MCC
-          value: insert_value
+          value: "insert_value"
         - name: MNC
-          value: insert_value
+          value: "insert_value"
         - name: COUNT
-          value: insert_value
+          value: "insert_value"
         command: ["/bin/sh","-c"]
         args:
         - |
