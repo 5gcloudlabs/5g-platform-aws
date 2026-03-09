@@ -189,10 +189,10 @@ spec:
           for imsi in $(seq $start_imsi $end_imsi); do
             echo "Provisioning imsi-$imsi"
 
-            payload=$(echo "$JSON_TEMPLATE" | sed "s/__IMSI__/$imsi/g" | sed "s/__PLMN__/${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}/g")
+            payload=$(echo "$JSON_TEMPLATE" | sed "s/__IMSI__/$imsi/g" | sed "s/__PLMN__/${MCC}${MNC}/g")
 
             curl -s -X POST \
-              "http://webui-service.free5gc.svc.cluster.local:5000/api/subscriber/imsi-${imsi}/${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}" \
+              "http://webui-service.free5gc.svc.cluster.local:5000/api/subscriber/imsi-${imsi}/${MCC}${MNC}" \
               -H "Token: admin" \
               -H "Content-Type: application/json" \
               --data-raw "$payload"
