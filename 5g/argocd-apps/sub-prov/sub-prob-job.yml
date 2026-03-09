@@ -13,11 +13,11 @@ spec:
         image: curlimages/curl:8.5.0
         env:
         - name: MCC
-          value: "${ARGOCD_ENV_MCC}"
+          value: $ARGOCD_ENV_MCC
         - name: MNC
-          value: "${ARGOCD_ENV_MNC}"
+          value: $ARGOCD_ENV_MNC
         - name: COUNT
-          value: "${ARGOCD_ENV_COUNT}"          
+          value: $ARGOCD_ENV_COUNT
         command: ["/bin/sh","-c"]
         args:
         - |
