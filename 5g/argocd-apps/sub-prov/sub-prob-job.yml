@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: subscriber-provisioner-
+  name: sub-prov-job
   namespace: free5gc
 spec:
   backoffLimit: 1
