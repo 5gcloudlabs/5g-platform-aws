@@ -14,8 +14,8 @@ spec:
     kustomize:
         patches:
         - target:
-            kind: Ing
-            name: ingress
+            kind: Job
+            name: sub-prov-job
           patch: |-
             - op: replace
               path: /metadata/annotations/alb.ingress.kubernetes.io~1certificate-arn
@@ -28,7 +28,7 @@ spec:
               value: "console.${ARGOCD_ENV_DOMAIN_NAME}"
   destination:
     server: https://kubernetes.default.svc
-    namespace: istio-system
+    namespace: default
   syncPolicy:    
     automated:
       prune: true
