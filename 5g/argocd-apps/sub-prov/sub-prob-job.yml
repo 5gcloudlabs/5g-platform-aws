@@ -23,8 +23,8 @@ spec:
         - |
           set -e
 
-          start_imsi="${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}0000000001"
-          end_imsi=$((start_imsi + ARGOCD_ENV_COUNT - 1))
+          start_imsi="$MCC$MNC0000000001"
+          end_imsi=$((start_imsi + COUNT - 1))
 
           echo "Starting provisioning of $COUNT subscribers"
           echo "IMSI range: $start_imsi -> $end_imsi"
