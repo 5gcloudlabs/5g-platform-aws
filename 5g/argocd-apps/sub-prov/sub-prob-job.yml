@@ -11,20 +11,13 @@ spec:
       containers:
       - name: subscriber-provisioner
         image: curlimages/curl:8.5.0
-        env:
-        - name: MCC
-          value: ${ARGOCD_ENV_MCC}
-        - name: MNC
-          value: ${ARGOCD_ENV_MNC}
-        - name: COUNT
-          value: ${ARGOCD_ENV_COUNT}
           
         command: ["/bin/sh","-c"]
         args:
         - |
           set -e
 
-          start_imsi="${MCC}${MNC}0000000001"
+          start_imsi="${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}0000000001"
           end_imsi=$((start_imsi + COUNT - 1))
 
           echo "Starting provisioning of $COUNT subscribers"
