@@ -18,7 +18,7 @@ spec:
             name: sub-prov-job
           patch: |-
             - op: replace
-              path: /metadata/annotations/alb.ingress.kubernetes.io~1certificate-arn
+              path: /spec/spec/containers/0/
               value: ${ARGOCD_ENV_ACM_CERTIFICATE_ARN}
             - op: replace
               path: /spec/rules/0/host
