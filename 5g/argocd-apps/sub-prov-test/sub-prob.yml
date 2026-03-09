@@ -24,7 +24,7 @@ spec:
               path: /spec/spec/containers/0/env/1/value
               value: ${ARGOCD_ENV_MNC}
             - op: replace
-              path: /spec/spec/containers/0/env/1/value
+              path: /spec/spec/containers/0/env/2/value
               value: ${ARGOCD_ENV_COUNT}
   destination:
     server: https://kubernetes.default.svc
