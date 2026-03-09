@@ -11,14 +11,20 @@ spec:
       containers:
       - name: subscriber-provisioner
         image: curlimages/curl:8.5.0
-          
+        env:
+        - name: MCC
+          value: "${ARGOCD_ENV_MCC}"
+        - name: MNC
+          value: "${ARGOCD_ENV_MNC}"
+        - name: COUNT
+          value: "${ARGOCD_ENV_COUNT}"          
         command: ["/bin/sh","-c"]
         args:
         - |
           set -e
 
           start_imsi="${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}0000000001"
-          end_imsi=$((start_imsi + COUNT - 1))
+          end_imsi=$((start_imsi + ARGOCD_ENV_COUNT - 1))
 
           echo "Starting provisioning of $COUNT subscribers"
           echo "IMSI range: $start_imsi -> $end_imsi"
@@ -183,10 +189,10 @@ spec:
           for imsi in $(seq $start_imsi $end_imsi); do
             echo "Provisioning imsi-$imsi"
 
-            payload=$(echo "$JSON_TEMPLATE" | sed "s/__IMSI__/$imsi/g" | sed "s/__PLMN__/${MCC}${MNC}/g")
+            payload=$(echo "$JSON_TEMPLATE" | sed "s/__IMSI__/$imsi/g" | sed "s/__PLMN__/${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}/g")
 
             curl -s -X POST \
-              "http://webui-service.free5gc.svc.cluster.local:5000/api/subscriber/imsi-${imsi}/${MCC}${MNC}" \
+              "http://webui-service.free5gc.svc.cluster.local:5000/api/subscriber/imsi-${imsi}/${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}" \
               -H "Token: admin" \
               -H "Content-Type: application/json" \
               --data-raw "$payload"
