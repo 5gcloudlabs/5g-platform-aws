@@ -18,8 +18,8 @@ spec:
             name: sub-prov-job
           patch: |-
             - op: replace
-              path: /spec/spec/containers/0/
-              value: ${ARGOCD_ENV_ACM_CERTIFICATE_ARN}
+              path: /spec/spec/containers/0/env/mcc
+              value: ${ARGOCD_ENV_MCC}
             - op: replace
               path: /spec/rules/0/host
               value: "argocd.${ARGOCD_ENV_DOMAIN_NAME}"
