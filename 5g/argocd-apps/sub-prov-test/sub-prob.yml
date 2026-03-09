@@ -21,11 +21,11 @@ spec:
               path: /spec/spec/containers/0/env/mcc
               value: ${ARGOCD_ENV_MCC}
             - op: replace
-              path: /spec/rules/0/host
-              value: "argocd.${ARGOCD_ENV_DOMAIN_NAME}"
+              path: /spec/spec/containers/0/env/mnc
+              value: ${ARGOCD_ENV_MNC}
             - op: replace
-              path: /spec/rules/1/host
-              value: "console.${ARGOCD_ENV_DOMAIN_NAME}"
+              path: /spec/spec/containers/0/env/count
+              value: ${ARGOCD_ENV_COUNT}
   destination:
     server: https://kubernetes.default.svc
     namespace: default
