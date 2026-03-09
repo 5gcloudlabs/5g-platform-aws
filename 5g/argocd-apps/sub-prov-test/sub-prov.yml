@@ -18,13 +18,13 @@ spec:
             name: sub-prov-job
           patch: |-
             - op: replace
-              path: /spec/spec/containers/0/env/0/value
+              path: /spec/template/spec/containers/0/env/0/value
               value: ${ARGOCD_ENV_MCC}
             - op: replace
-              path: /spec/spec/containers/0/env/1/value
+              path: /spec/template/spec/containers/0/env/1/value
               value: ${ARGOCD_ENV_MNC}
             - op: replace
-              path: /spec/spec/containers/0/env/2/value
+              path: /spec/spec/template/containers/0/env/2/value
               value: ${ARGOCD_ENV_COUNT}
   destination:
     server: https://kubernetes.default.svc
