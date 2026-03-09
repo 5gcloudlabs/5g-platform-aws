@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: sub-prov-job
-  namespace: free5gc
+  namespace: default
 spec:
   backoffLimit: 1
   template:
