@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: free5gc
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/hook: PreSync  
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
