@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     targetRevision: trims
-    path: 5g/argocd-apps/job-test
+    path: 5g/k8s-resources/sub-prov-job
     kustomize:
         patches:
         - target:
