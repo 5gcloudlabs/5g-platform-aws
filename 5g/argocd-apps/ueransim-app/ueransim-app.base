@@ -19,8 +19,8 @@ spec:
           gnb:
             name: gnb
             configuration1: |-
-              mcc: $mcc
-              mnc: $mnc
+              mcc: ${ARGOCD_ENV_MCC}
+              mnc: ${ARGOCD_ENV_MNC}
           ue:
             name: ue
             command: "./nr-ue -c ../config/ue-config.yaml -n ${count}"
