@@ -27,7 +27,7 @@ spec:
 
         args:
         - |
-          set -ex
+          set -e
 
           OUTPUT_FILE=/tmp/subs-prov-output.log
           rm -f $OUTPUT_FILE
