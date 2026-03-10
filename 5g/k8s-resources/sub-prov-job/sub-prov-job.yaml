@@ -29,94 +29,100 @@ spec:
         - |
           set -ex
 
+          OUTPUT_FILE=/tmp/subs-prov-output.log
+          rm -f $OUTPUT_FILE
+
           echo "*** Starting provisioning of ($COUNT) subscribers with IMSI range beginning at (${MCC}${MNC}0000000001) ***"
           echo
           echo "Please wait..."
-          echo
-          echo "===== Provisioned IMSI List ====="
           echo
 
           for i in $(seq 1 $COUNT); do
 
             imsi="${MCC}${MNC}$(printf "%010d" $i)"
 
-            echo "$imsi"
+            payload=$(cat <<EOF
+{
+  "plmnID": "${MCC}${MNC}",
+  "ueId": "imsi-${imsi}",
+  "AuthenticationSubscription": {
+    "authenticationManagementField": "8000",
+    "authenticationMethod": "5G_AKA",
+    "milenage": {
+      "op": {
+        "encryptionAlgorithm": 0,
+        "encryptionKey": 0,
+        "opValue": ""
+      }
+    },
+    "opc": {
+      "encryptionAlgorithm": 0,
+      "encryptionKey": 0,
+      "opcValue": "8e27b6af0e692e750f32667a3b14605d"
+    },
+    "permanentKey": {
+      "encryptionAlgorithm": 0,
+      "encryptionKey": 0,
+      "permanentKeyValue": "8baf473f2f8fd09487cccbd7097c6862"
+    },
+    "sequenceNumber": "16f3b3f70fc2"
+  },
+  "AccessAndMobilitySubscriptionData": {
+    "gpsis": ["msisdn-"],
+    "nssai": {
+      "defaultSingleNssais": [
+        {"sst": 1, "sd": "010203", "isDefault": true},
+        {"sst": 1, "sd": "112233", "isDefault": true}
+      ],
+      "singleNssais": []
+    },
+    "subscribedUeAmbr": {
+      "downlink": "2 Gbps",
+      "uplink": "1 Gbps"
+    }
+  },
+  "SessionManagementSubscriptionData": [
+    {
+      "singleNssai": {"sst": 1, "sd": "010203"},
+      "dnnConfigurations": {
+        "internet": {
+          "sscModes": {
+            "defaultSscMode": "SSC_MODE_1",
+            "allowedSscModes": ["SSC_MODE_2","SSC_MODE_3"]
+          },
+          "pduSessionTypes": {
+            "defaultSessionType": "IPV4",
+            "allowedSessionTypes": ["IPV4"]
+          },
+          "sessionAmbr": {
+            "uplink": "200 Mbps",
+            "downlink": "100 Mbps"
+          },
+          "5gQosProfile": {
+            "5qi": 9,
+            "arp": {"priorityLevel": 8},
+            "priorityLevel": 8
+          }
+        }
+      }
+    }
+  ],
+  "FlowRules": []
+}
+EOF
+)
 
-            payload=$(printf '{
-              "plmnID": "%s",
-              "ueId": "imsi-%s",
-              "AuthenticationSubscription": {
-                "authenticationManagementField": "8000",
-                "authenticationMethod": "5G_AKA",
-                "milenage": {
-                  "op": {
-                    "encryptionAlgorithm": 0,
-                    "encryptionKey": 0,
-                    "opValue": ""
-                  }
-                },
-                "opc": {
-                  "encryptionAlgorithm": 0,
-                  "encryptionKey": 0,
-                  "opcValue": "8e27b6af0e692e750f32667a3b14605d"
-                },
-                "permanentKey": {
-                  "encryptionAlgorithm": 0,
-                  "encryptionKey": 0,
-                  "permanentKeyValue": "8baf473f2f8fd09487cccbd7097c6862"
-                },
-                "sequenceNumber": "16f3b3f70fc2"
-              },
-              "AccessAndMobilitySubscriptionData": {
-                "gpsis": ["msisdn-"],
-                "nssai": {
-                  "defaultSingleNssais": [
-                    {"sst":1,"sd":"010203","isDefault":true},
-                    {"sst":1,"sd":"112233","isDefault":true}
-                  ],
-                  "singleNssais": []
-                },
-                "subscribedUeAmbr": {
-                  "downlink": "2 Gbps",
-                  "uplink": "1 Gbps"
-                }
-              },
-              "SessionManagementSubscriptionData": [
-                {
-                  "singleNssai": {"sst":1,"sd":"010203"},
-                  "dnnConfigurations": {
-                    "internet": {
-                      "sscModes": {
-                        "defaultSscMode": "SSC_MODE_1",
-                        "allowedSscModes": ["SSC_MODE_2","SSC_MODE_3"]
-                      },
-                      "pduSessionTypes": {
-                        "defaultSessionType": "IPV4",
-                        "allowedSessionTypes": ["IPV4"]
-                      },
-                      "sessionAmbr": {
-                        "uplink": "200 Mbps",
-                        "downlink": "100 Mbps"
-                      },
-                      "5gQosProfile": {
-                        "5qi": 9,
-                        "arp": {"priorityLevel":8},
-                        "priorityLevel":8
-                      }
-                    }
-                  }
-                }
-              ],
-              "FlowRules": []
-            }' "${MCC}${MNC}" "$imsi")
-
-            curl --fail -s -X POST \
-              "http://webui-service.free5gc.svc.cluster.local:5000/api/subscriber/imsi-${imsi}/${MCC}${MNC}" \
+            curl -v -X POST \
+              "webui-service.free5gc.svc.cluster.local:5000/api/subscriber/imsi-${imsi}/${MCC}${MNC}" \
+              -H "Host: webui-service.free5gc.svc.cluster.local:5000" \
               -H "Token: admin" \
-              -H "Content-Type: application/json" \
-              --data-raw "$payload"
+              --data-raw "$payload" >> $OUTPUT_FILE 2>&1
 
           done
 
+
           echo
-          echo "===== Provisioning complete ====="
+          echo "===== Provisioned IMSI List ====="
+          echo
+
+          grep "imsi-" $OUTPUT_FILE | awk -F'imsi-|/' '{print $5}'
