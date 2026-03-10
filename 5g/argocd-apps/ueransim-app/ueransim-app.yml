@@ -23,11 +23,11 @@ spec:
               mnc: ${ARGOCD_ENV_MNC}
           ue:
             name: ue
-            command: "./nr-ue -c ../config/ue-config.yaml -n ${count}"
+            command: "./nr-ue -c ../config/ue-config.yaml -n ${ARGOCD_ENV_COUNT}"
             configuration1: |-
-              mcc: $mcc 
-              mnc: $mnc 
-              supi: "imsi-${mcc}${mnc}0000000001"
+              mcc: ${ARGOCD_ENV_MCC}
+              mnc: ${ARGOCD_ENV_MNC}
+              supi: "imsi-${ARGOCD_ENV_MCC}${ARGOCD_ENV_MNC}0000000001"
        
   destination:
     server: https://kubernetes.default.svc
