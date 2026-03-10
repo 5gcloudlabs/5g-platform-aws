@@ -5,13 +5,16 @@ metadata:
   namespace: default
 spec:
   backoffLimit: 1
+  ttlSecondsAfterFinished: 3600
+
   template:
     spec:
-      ttlSecondsAfterFinished: 3600    
-      restartPolicy: OnFailure
+      restartPolicy: Never
+
       containers:
       - name: subscriber-provisioner
         image: curlimages/curl:8.5.0
+
         env:
         - name: MCC
           value: insert_value
@@ -19,10 +22,12 @@ spec:
           value: insert_value
         - name: COUNT
           value: insert_value
+
         command: ["/bin/sh","-c"]
+
         args:
         - |
-          set -e
+          set -ex
 
           echo "*** Starting provisioning of ($COUNT) subscribers with IMSI range beginning at (${MCC}${MNC}0000000001) ***"
           echo
@@ -37,10 +42,9 @@ spec:
 
             echo "$imsi"
 
-            payload=$(cat <<EOF
-            {
-              "plmnID": "${MCC}${MNC}",
-              "ueId": "imsi-${imsi}",
+            payload=$(printf '{
+              "plmnID": "%s",
+              "ueId": "imsi-%s",
               "AuthenticationSubscription": {
                 "authenticationManagementField": "8000",
                 "authenticationMethod": "5G_AKA",
@@ -67,8 +71,8 @@ spec:
                 "gpsis": ["msisdn-"],
                 "nssai": {
                   "defaultSingleNssais": [
-                    {"sst": 1, "sd": "010203", "isDefault": true},
-                    {"sst": 1, "sd": "112233", "isDefault": true}
+                    {"sst":1,"sd":"010203","isDefault":true},
+                    {"sst":1,"sd":"112233","isDefault":true}
                   ],
                   "singleNssais": []
                 },
@@ -79,12 +83,12 @@ spec:
               },
               "SessionManagementSubscriptionData": [
                 {
-                  "singleNssai": {"sst": 1, "sd": "010203"},
+                  "singleNssai": {"sst":1,"sd":"010203"},
                   "dnnConfigurations": {
                     "internet": {
                       "sscModes": {
                         "defaultSscMode": "SSC_MODE_1",
-                        "allowedSscModes": ["SSC_MODE_2", "SSC_MODE_3"]
+                        "allowedSscModes": ["SSC_MODE_2","SSC_MODE_3"]
                       },
                       "pduSessionTypes": {
                         "defaultSessionType": "IPV4",
@@ -96,118 +100,17 @@ spec:
                       },
                       "5gQosProfile": {
                         "5qi": 9,
-                        "arp": {"priorityLevel": 8},
-                        "priorityLevel": 8
-                      }
-                    },
-                    "internet2": {
-                      "sscModes": {
-                        "defaultSscMode": "SSC_MODE_1",
-                        "allowedSscModes": ["SSC_MODE_2", "SSC_MODE_3"]
-                      },
-                      "pduSessionTypes": {
-                        "defaultSessionType": "IPV4",
-                        "allowedSessionTypes": ["IPV4"]
-                      },
-                      "sessionAmbr": {
-                        "uplink": "200 Mbps",
-                        "downlink": "100 Mbps"
-                      },
-                      "5gQosProfile": {
-                        "5qi": 9,
-                        "arp": {"priorityLevel": 8},
-                        "priorityLevel": 8
-                      }
-                    }
-                  }
-                },
-                {
-                  "singleNssai": {"sst": 1, "sd": "112233"},
-                  "dnnConfigurations": {
-                    "internet": {
-                      "sscModes": {
-                        "defaultSscMode": "SSC_MODE_1",
-                        "allowedSscModes": ["SSC_MODE_2", "SSC_MODE_3"]
-                      },
-                      "pduSessionTypes": {
-                        "defaultSessionType": "IPV4",
-                        "allowedSessionTypes": ["IPV4"]
-                      },
-                      "sessionAmbr": {
-                        "uplink": "200 Mbps",
-                        "downlink": "100 Mbps"
-                      },
-                      "5gQosProfile": {
-                        "5qi": 9,
-                        "arp": {"priorityLevel": 8},
-                        "priorityLevel": 8
-                      }
-                    },
-                    "internet2": {
-                      "sscModes": {
-                        "defaultSscMode": "SSC_MODE_1",
-                        "allowedSscModes": ["SSC_MODE_2", "SSC_MODE_3"]
-                      },
-                      "pduSessionTypes": {
-                        "defaultSessionType": "IPV4",
-                        "allowedSessionTypes": ["IPV4"]
-                      },
-                      "sessionAmbr": {
-                        "uplink": "200 Mbps",
-                        "downlink": "100 Mbps"
-                      },
-                      "5gQosProfile": {
-                        "5qi": 9,
-                        "arp": {"priorityLevel": 8},
-                        "priorityLevel": 8
+                        "arp": {"priorityLevel":8},
+                        "priorityLevel":8
                       }
                     }
                   }
                 }
               ],
-              "SmfSelectionSubscriptionData": {
-                "subscribedSnssaiInfos": {
-                  "01010203": {
-                    "dnnInfos": [
-                      {"dnn": "internet"},
-                      {"dnn": "internet2"}
-                    ]
-                  },
-                  "01112233": {
-                    "dnnInfos": [
-                      {"dnn": "internet"},
-                      {"dnn": "internet2"}
-                    ]
-                  }
-                }
-              },
-              "AmPolicyData": {
-                "subscCats": ["free5gc"]
-              },
-              "SmPolicyData": {
-                "smPolicySnssaiData": {
-                  "01010203": {
-                    "snssai": {"sst": 1, "sd": "010203"},
-                    "smPolicyDnnData": {
-                      "internet": {"dnn": "internet"},
-                      "internet2": {"dnn": "internet2"}
-                    }
-                  },
-                  "01112233": {
-                    "snssai": {"sst": 1, "sd": "112233"},
-                    "smPolicyDnnData": {
-                      "internet": {"dnn": "internet"},
-                      "internet2": {"dnn": "internet2"}
-                    }
-                  }
-                }
-              },
               "FlowRules": []
-            }
-            EOF
-            )
+            }' "${MCC}${MNC}" "$imsi")
 
-            curl -s -X POST \
+            curl --fail -s -X POST \
               "http://webui-service.free5gc.svc.cluster.local:5000/api/subscriber/imsi-${imsi}/${MCC}${MNC}" \
               -H "Token: admin" \
               -H "Content-Type: application/json" \
