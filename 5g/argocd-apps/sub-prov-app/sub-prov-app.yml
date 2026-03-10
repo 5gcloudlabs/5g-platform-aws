@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: sub-prov
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/hook: Sync  
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
