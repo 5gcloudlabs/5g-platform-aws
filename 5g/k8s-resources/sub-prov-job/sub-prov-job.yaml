@@ -73,14 +73,114 @@ spec:
                     {"sst":1,"sd":"010203","isDefault":true},
                     {"sst":1,"sd":"112233","isDefault":true}
                   ],
-                  "singleNssais": []
+                  "singleNssais":[]
                 },
-                "subscribedUeAmbr": {
-                  "downlink": "2 Gbps",
-                  "uplink": "1 Gbps"
+                "subscribedUeAmbr":{
+                  "downlink":"2 Gbps",
+                  "uplink":"1 Gbps"
                 }
               },
-              "FlowRules": []
+              "SessionManagementSubscriptionData":[
+                {
+                  "singleNssai":{"sst":1,"sd":"010203"},
+                  "dnnConfigurations":{
+                    "internet":{
+                      "sscModes":{
+                        "defaultSscMode":"SSC_MODE_1",
+                        "allowedSscModes":["SSC_MODE_2","SSC_MODE_3"]
+                      },
+                      "pduSessionTypes":{
+                        "defaultSessionType":"IPV4",
+                        "allowedSessionTypes":["IPV4"]
+                      },
+                      "sessionAmbr":{
+                        "uplink":"200 Mbps",
+                        "downlink":"100 Mbps"
+                      },
+                      "5gQosProfile":{
+                        "5qi":9,
+                        "arp":{"priorityLevel":8},
+                        "priorityLevel":8
+                      }
+                    },
+                    "internet2":{
+                      "sscModes":{
+                        "defaultSscMode":"SSC_MODE_1",
+                        "allowedSscModes":["SSC_MODE_2","SSC_MODE_3"]
+                      },
+                      "pduSessionTypes":{
+                        "defaultSessionType":"IPV4",
+                        "allowedSessionTypes":["IPV4"]
+                      },
+                      "sessionAmbr":{
+                        "uplink":"200 Mbps",
+                        "downlink":"100 Mbps"
+                      },
+                      "5gQosProfile":{
+                        "5qi":9,
+                        "arp":{"priorityLevel":8},
+                        "priorityLevel":8
+                      }
+                    }
+                  }
+                },
+                {
+                  "singleNssai":{"sst":1,"sd":"112233"},
+                  "dnnConfigurations":{
+                    "internet":{
+                      "sscModes":{
+                        "defaultSscMode":"SSC_MODE_1",
+                        "allowedSscModes":["SSC_MODE_2","SSC_MODE_3"]
+                      },
+                      "pduSessionTypes":{
+                        "defaultSessionType":"IPV4",
+                        "allowedSessionTypes":["IPV4"]
+                      },
+                      "sessionAmbr":{
+                        "uplink":"200 Mbps",
+                        "downlink":"100 Mbps"
+                      },
+                      "5gQosProfile":{
+                        "5qi":9,
+                        "arp":{"priorityLevel":8},
+                        "priorityLevel":8
+                      }
+                    }
+                  }
+                }
+              ],
+              "SmfSelectionSubscriptionData":{
+                "subscribedSnssaiInfos":{
+                  "01010203":{
+                    "dnnInfos":[{"dnn":"internet"},{"dnn":"internet2"}]
+                  },
+                  "01112233":{
+                    "dnnInfos":[{"dnn":"internet"},{"dnn":"internet2"}]
+                  }
+                }
+              },
+              "AmPolicyData":{
+                "subscCats":["free5gc"]
+              },
+              "SmPolicyData":{
+                "smPolicySnssaiData":{
+                  "01010203":{
+                    "snssai":{"sst":1,"sd":"010203"},
+                    "smPolicyDnnData":{
+                      "internet":{"dnn":"internet"},
+                      "internet2":{"dnn":"internet2"}
+                    }
+                  },
+                  "01112233":{
+                    "snssai":{"sst":1,"sd":"112233"},
+                    "smPolicyDnnData":{
+                      "internet":{"dnn":"internet"},
+                      "internet2":{"dnn":"internet2"}
+                    }
+                  }
+                }
+              },
+              "FlowRules":[]
             }' "${MCC}${MNC}" "$imsi")
 
             curl -v -X POST \
@@ -90,6 +190,7 @@ spec:
               --data-raw "$payload" >> $OUTPUT_FILE 2>&1
 
           done
+
 
           echo
           echo "===== Provisioned IMSI List ====="
