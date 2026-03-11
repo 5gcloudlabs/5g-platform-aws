@@ -4,7 +4,7 @@ metadata:
   name: sub-prov
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0" 
+    argocd.argoproj.io/hook: PostSync
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
