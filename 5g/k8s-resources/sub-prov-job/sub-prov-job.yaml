@@ -3,8 +3,6 @@ kind: Job
 metadata:
   name: sub-prov-job
   namespace: default
-  annotations:
-    argocd.argoproj.io/hook: PostSync  
 spec:
   backoffLimit: 1
   ttlSecondsAfterFinished: 3600
