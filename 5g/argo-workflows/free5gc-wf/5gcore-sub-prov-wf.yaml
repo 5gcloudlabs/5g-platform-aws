@@ -45,9 +45,9 @@ spec:
                 name: envsubst
                 env:
                   - name: MCC
-                    value: "602"
+                    value: "{{ mcc }}"
                   - name: MNC
-                    value: "02"
+                    value: "{{ mnc }}"
             destination:
               server: https://kubernetes.default.svc
               namespace: free5gc
@@ -83,11 +83,11 @@ spec:
                 name: envsubst
                 env:
                   - name: MCC
-                    value: "602"
+                    value: "{{ mcc }}"
                   - name: MNC
-                    value: "02"
+                    value: "{{ mnc }}"
                   - name: COUNT
-                    value: "10"
+                    value: "{{ count }}"
             destination:
               server: https://kubernetes.default.svc
               namespace: free5gc
