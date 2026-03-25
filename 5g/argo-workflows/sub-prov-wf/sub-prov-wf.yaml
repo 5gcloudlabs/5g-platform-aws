@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: sub-prov-wf
+  namespace: argo
+spec:
+  serviceAccountName: argo-workflow
+  entrypoint: sub-prov
+  templates:
+    - name: sub-prov
+      resource:
+        action: create
+        manifest: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            name: sub-prov-init
+            namespace: argocd
+            finalizers:
+              - resources-finalizer.argocd.argoproj.io
+          spec:
+            project: default
+            source:
+              repoURL: https://github.com/5g-cloud-labs/new-test-2.git
+              targetRevision: trims
+              path: 5g/argocd-apps/sub-prov-app
+              plugin:
+                name: envsubst
+                env:
+                  - name: MCC
+                    value: "602"
+                  - name: MNC
+                    value: "02"
+                  - name: COUNT
+                    value: "10"
+            destination:
+              server: https://kubernetes.default.svc
+              namespace: free5gc
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
