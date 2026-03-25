@@ -35,7 +35,7 @@ spec:
               - task2-sub-prov
               - delay-10s
 
-    # ── Step 1: Deploy 5G Core ─────────────────────────────────────────────
+    # Step 1: Deploy 5G Core 
     - name: free5gc
       resource:
         action: create
@@ -70,12 +70,12 @@ spec:
                 prune: true
                 selfHeal: true
 
-    # ── Delay: 60s buffer after core is Healthy ────────────────────────────
+    # Delay: 60s buffer after core is Healthy 
     - name: delay-60
       suspend:
         duration: "60s"
 
-    # ── Step 2: Provision Subscribers ──────────────────────────────────────
+    # Step 2: Provision Subscribers
     - name: sub-prov
       resource:
         action: create
@@ -112,12 +112,12 @@ spec:
                 prune: true
                 selfHeal: true
 
-    # ── Delay: 10s buffer after sub-prov Job completes ────────────────────
+    # Delay: 10s buffer after sub-prov Job completes
     - name: delay-10
       suspend:
         duration: "10s"
 
-    # ── Step 3: Deploy UE & RAN Simulation ────────────────────────────────
+    # Step 3: Deploy UE & RAN Simulation
     - name: ueransim
       resource:
         action: create
