@@ -88,10 +88,10 @@ spec:
             while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
               webui_ok=0; udr_ok=0
 
-              if curl -sf -o /dev/null --max-time 5 "http://${WEBUI}"; then
+              if curl -s -o /dev/null -w '%{http_code}' --max-time 5 "http://${WEBUI}" | grep -q '^[2345]'; then
                 webui_ok=1
               fi
-              if curl -sf -o /dev/null --max-time 5 "http://${UDR}"; then
+              if curl -s -o /dev/null -w '%{http_code}' --max-time 5 "http://${UDR}" | grep -q '^[2345]'; then
                 udr_ok=1
               fi
 
