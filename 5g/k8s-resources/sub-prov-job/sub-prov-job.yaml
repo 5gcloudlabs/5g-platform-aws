@@ -3,13 +3,15 @@ kind: Job
 metadata:
   name: sub-prov-job
   namespace: free5gc
-  annotations:
-    sidecar.istio.io/inject: "false"  
 spec:
   backoffLimit: 1
   ttlSecondsAfterFinished: 3600
 
   template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"  
+    
     spec:
       restartPolicy: Never
 
