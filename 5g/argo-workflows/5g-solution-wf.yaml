@@ -7,14 +7,16 @@ spec:
   serviceAccountName: argo-workflow
   entrypoint: 5g-solution
   templates:
+
+    # ── DAG ────────────────────────────────────────────────────────────────
     - name: 5g-solution
       dag:
         tasks:
           - name: task1-free5gc
             template: free5gc
 
-          - name: delay-60s
-            template: delay-60
+          - name: wait-for-services
+            template: wait-for-services
             dependencies:
               - task1-free5gc
 
@@ -22,7 +24,7 @@ spec:
             template: sub-prov
             dependencies:
               - task1-free5gc
-              - delay-60s
+              - wait-for-services
 
           - name: delay-10s
             template: delay-10
@@ -35,7 +37,7 @@ spec:
               - task2-sub-prov
               - delay-10s
 
-    # Step 1: Deploy 5G Core 
+    # ── Step 1: Deploy 5G Core ─────────────────────────────────────────────
     - name: free5gc
       resource:
         action: create
@@ -70,12 +72,44 @@ spec:
                 prune: true
                 selfHeal: true
 
-    # Delay: 60s buffer after core is Healthy 
-    - name: delay-60
-      suspend:
-        duration: "60s"
+    # ── Readiness gate: wait for webui + UDR before provisioning ────────────
+    - name: wait-for-services
+      container:
+        image: curlimages/curl:8.5.0
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            WEBUI="webui-service.free5gc.svc.cluster.local:5000"
+            UDR="aws-5gcloudlabs-free5gc-udr-service.free5gc.svc.cluster.local:8000"
+            MAX_ATTEMPTS=30
+            INTERVAL=10
 
-    # Step 2: Provision Subscribers
+            attempt=1
+            while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
+              webui_ok=0; udr_ok=0
+
+              if curl -sf -o /dev/null --max-time 5 "http://${WEBUI}"; then
+                webui_ok=1
+              fi
+              if curl -sf -o /dev/null --max-time 5 "http://${UDR}"; then
+                udr_ok=1
+              fi
+
+              echo "[attempt ${attempt}/${MAX_ATTEMPTS}] webui=${webui_ok} udr=${udr_ok}"
+
+              if [ "$webui_ok" -eq 1 ] && [ "$udr_ok" -eq 1 ]; then
+                echo "Both services are reachable. Proceeding."
+                exit 0
+              fi
+
+              sleep $INTERVAL
+              attempt=$((attempt + 1))
+            done
+
+            echo "Timed out waiting for services after $((MAX_ATTEMPTS * INTERVAL))s"
+            exit 1
+
+    # ── Step 2: Provision Subscribers ──────────────────────────────────────
     - name: sub-prov
       resource:
         action: create
@@ -112,12 +146,12 @@ spec:
                 prune: true
                 selfHeal: true
 
-    # Delay: 10s buffer after sub-prov Job completes
+    # ── Delay: 10s buffer after sub-prov Job completes ────────────────────
     - name: delay-10
       suspend:
         duration: "10s"
 
-    # Step 3: Deploy UE & RAN Simulation
+    # ── Step 3: Deploy UE & RAN Simulation ────────────────────────────────
     - name: ueransim
       resource:
         action: create
