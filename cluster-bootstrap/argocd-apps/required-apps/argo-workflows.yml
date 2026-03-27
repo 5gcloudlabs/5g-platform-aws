@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-workflows
+  namespace: argocd  
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: argo-workflows
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 0.47.5
+    helm:
+      values: |
+        workflow:
+          serviceAccount:
+            create: true
+            name: argo-workflow
+  
+        extraObjects:
+          - apiVersion: rbac.authorization.k8s.io/v1
+            kind: Role
+            metadata:
+              name: argo-workflow-create-app
+              namespace: argocd
+            rules:
+              - apiGroups: ["argoproj.io"]
+                resources: ["applications"]
+                verbs: ["*"]
+  
+          - apiVersion: rbac.authorization.k8s.io/v1
+            kind: RoleBinding
+            metadata:
+              name: argo-workflow-create-app
+              namespace: argocd
+            subjects:
+              - kind: ServiceAccount
+                name: argo-workflow
+                namespace: argo
+            roleRef:
+              kind: Role
+              name: argo-workflow-create-app
+              apiGroup: rbac.authorization.k8s.io
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
