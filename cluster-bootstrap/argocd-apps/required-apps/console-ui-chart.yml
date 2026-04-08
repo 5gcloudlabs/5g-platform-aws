@@ -13,7 +13,7 @@ spec:
     path: cluster-bootstrap/helm-charts/ai-agent-fe
     helm:
      parameters:
-     - name: Domain
+     - name: domain
        value: ${ARGOCD_ENV_DOMAIN_NAME}
      - name: Domain
        value: ${ARGOCD_ENV_DOMAIN_NAME}       
