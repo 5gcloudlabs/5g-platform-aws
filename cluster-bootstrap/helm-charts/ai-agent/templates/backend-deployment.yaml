@@ -29,10 +29,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: ai-agent-config
-            {{- if .Values.secrets.GITHUB_TOKEN }}
             - secretRef:
                 name: ai-agent-secret
-            {{- end }}
           readinessProbe:
             httpGet:
               path: /status
