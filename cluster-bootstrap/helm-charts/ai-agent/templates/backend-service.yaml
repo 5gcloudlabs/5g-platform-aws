@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-agent-backend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: ai-agent
+    component: backend
+spec:
+  selector:
+    app: ai-agent
+    component: backend
+  ports:
+    - port: {{ .Values.backend.port }}
+      targetPort: {{ .Values.backend.port }}
+      protocol: TCP
+  type: ClusterIP

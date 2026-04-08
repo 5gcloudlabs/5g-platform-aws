@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-agent-frontend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: ai-agent
+    component: frontend
+spec:
+  replicas: {{ .Values.frontend.replicas }}
+  selector:
+    matchLabels:
+      app: ai-agent
+      component: frontend
+  template:
+    metadata:
+      labels:
+        app: ai-agent
+        component: frontend
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+        - name: frontend
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["chainlit", "run", "frontend.py", "-h", "--port", "{{ .Values.frontend.port }}"]
+          ports:
+            - containerPort: {{ .Values.frontend.port }}
+          envFrom:
+            - configMapRef:
+                name: ai-agent-config
+            {{- if .Values.secrets.GITHUB_TOKEN }}
+            - secretRef:
+                name: ai-agent-secret
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.frontend.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.frontend.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
