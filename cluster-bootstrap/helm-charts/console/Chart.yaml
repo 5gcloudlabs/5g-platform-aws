@@ -1,5 +1,0 @@
-apiVersion: v2
-name: console-ui
-description: A Helm chart for deploying 5g-cloud-labs UI Console
-version: 0.1.0
-appVersion: "1.0.0"
