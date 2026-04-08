@@ -1,0 +1,40 @@
+domain: ""
+
+image:
+  repository: ghcr.io/5g-cloud-labs/ai-agent
+  tag: latest
+  pullPolicy: Always
+
+serviceAccount:
+  name: ai-agent
+  roleArn: ""
+
+backend:
+  replicas: 1
+  port: 8000
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+frontend:
+  replicas: 1
+  port: 8080
+  serviceType: LoadBalancer
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+config:
+  POLL_INTERVAL: "1"
+  GITHUB_RAW_BASE: "https://raw.githubusercontent.com/5g-cloud-labs/new-test-2/trims"
+  AWS_DEFAULT_REGION: "eu-central-1"
+  BEDROCK_REGION: "us-east-1"
+  BEDROCK_MODEL_ID: "anthropic.claude-3-haiku-20240307-v1:0"
