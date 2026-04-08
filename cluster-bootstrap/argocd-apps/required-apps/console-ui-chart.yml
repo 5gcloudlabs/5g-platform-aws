@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: console-ui
+  name: ai-agent-fe
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,11 +10,13 @@ spec:
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     targetRevision: trims
-    path: cluster-bootstrap/helm-charts/console
+    path: cluster-bootstrap/helm-charts/ai-agent-fe
     helm:
      parameters:
      - name: Domain
        value: ${ARGOCD_ENV_DOMAIN_NAME}
+     - name: Domain
+       value: ${ARGOCD_ENV_DOMAIN_NAME}       
   destination:
     server: https://kubernetes.default.svc
     namespace: default
