@@ -23,7 +23,7 @@ backend:
 frontend:
   replicas: 1
   port: 8080
-  serviceType: LoadBalancer
+  serviceType: ClusterIP
   resources:
     requests:
       cpu: 100m
