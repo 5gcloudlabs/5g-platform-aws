@@ -16,7 +16,9 @@ spec:
      - name: domain
        value: ${ARGOCD_ENV_DOMAIN_NAME}
      - name: serviceAccount.roleArn
-       value: ${ARGOCD_ENV_AI_AGENT_BEDROCK_ROLE_ARN}       
+       value: ${ARGOCD_ENV_AI_AGENT_BEDROCK_ROLE_ARN}   
+     - name: config.BEDROCK_MODEL_ID
+       value: ${ARGOCD_ENV_BEDROCK_MODEL_ID}       
   destination:
     server: https://kubernetes.default.svc
     namespace: ai-agent
