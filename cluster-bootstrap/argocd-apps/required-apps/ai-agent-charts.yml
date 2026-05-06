@@ -17,10 +17,12 @@ spec:
        value: ${ARGOCD_ENV_AI_AGENT_BEDROCK_ROLE_ARN}
      - name: config.DOMAIN
        value: ${ARGOCD_ENV_DOMAIN_NAME}       
+     - name: config.AWS_DEFAULT_REGION
+       value: ${ARGOCD_ENV_REGION}       
+     - name: config.BEDROCK_REGION
+       value: ${ARGOCD_ENV_BEDROCK_REGION}       
      - name: config.BEDROCK_MODEL_ID
-       value: ${ARGOCD_ENV_BEDROCK_MODEL_ID}
-     - name: config.DOMA
-       value: ${ARGOCD_ENV_DOMAIN_NAME}       
+       value: ${ARGOCD_ENV_BEDROCK_MODEL_ID}       
   destination:
     server: https://kubernetes.default.svc
     namespace: ai-agent
