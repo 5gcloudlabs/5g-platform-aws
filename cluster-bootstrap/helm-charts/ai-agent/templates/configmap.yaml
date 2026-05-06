@@ -6,7 +6,7 @@ metadata:
 data:
   BACKEND_URL: "http://ai-agent-backend:{{ .Values.backend.port }}"
   POLL_INTERVAL: {{ .Values.config.POLL_INTERVAL | quote }}
-  DOMAIN_NAME: {{ .Values.config.domain | quote }}
+  DOMAIN_NAME: {{ .Values.config.DOMAIN_NAME | quote }}
   GITHUB_RAW_BASE: {{ .Values.config.GITHUB_RAW_BASE | quote }}
   AWS_DEFAULT_REGION: {{ .Values.config.AWS_DEFAULT_REGION | quote }}
   BEDROCK_REGION: {{ .Values.config.BEDROCK_REGION | quote }}
