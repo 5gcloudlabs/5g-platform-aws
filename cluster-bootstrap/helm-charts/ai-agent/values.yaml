@@ -31,9 +31,9 @@ frontend:
       memory: 512Mi
 
 config:
-  domain: ""
-  POLL_INTERVAL: "1"
   GITHUB_RAW_BASE: "https://raw.githubusercontent.com/5g-cloud-labs/new-test-2/trims"
+  domain: ""
   AWS_DEFAULT_REGION: "eu-central-1"
   BEDROCK_REGION: "us-east-1"
   BEDROCK_MODEL_ID: ""
+  POLL_INTERVAL: "1"
