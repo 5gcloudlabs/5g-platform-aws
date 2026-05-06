@@ -13,12 +13,14 @@ spec:
     path: cluster-bootstrap/helm-charts/ai-agent
     helm:
      parameters:
-     - name: domain
-       value: ${ARGOCD_ENV_DOMAIN_NAME}
      - name: serviceAccount.roleArn
-       value: ${ARGOCD_ENV_AI_AGENT_BEDROCK_ROLE_ARN}   
+       value: ${ARGOCD_ENV_AI_AGENT_BEDROCK_ROLE_ARN}
+     - name: config.DOMAIN
+       value: ${ARGOCD_ENV_DOMAIN_NAME}       
      - name: config.BEDROCK_MODEL_ID
-       value: ${ARGOCD_ENV_BEDROCK_MODEL_ID}       
+       value: ${ARGOCD_ENV_BEDROCK_MODEL_ID}
+     - name: config.DOMA
+       value: ${ARGOCD_ENV_DOMAIN_NAME}       
   destination:
     server: https://kubernetes.default.svc
     namespace: ai-agent
