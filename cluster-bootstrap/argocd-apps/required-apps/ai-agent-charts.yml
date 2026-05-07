@@ -15,7 +15,7 @@ spec:
      parameters:
      - name: serviceAccount.roleArn
        value: ${ARGOCD_ENV_AI_AGENT_BEDROCK_ROLE_ARN}
-     - name: config.DOMAIN
+     - name: config.DOMAIN_NAME
        value: ${ARGOCD_ENV_DOMAIN_NAME}       
      - name: config.AWS_DEFAULT_REGION
        value: ${ARGOCD_ENV_REGION}       
