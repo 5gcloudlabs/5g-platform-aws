@@ -11,3 +11,10 @@ data:
   AWS_DEFAULT_REGION: {{ .Values.config.AWS_DEFAULT_REGION | quote }}
   BEDROCK_REGION: {{ .Values.config.BEDROCK_REGION | quote }}
   BEDROCK_MODEL_ID: {{ .Values.config.BEDROCK_MODEL_ID | quote }}
+  CORE_NAMESPACE: {{ .Values.config.CORE_NAMESPACE | quote }}
+  UERANSIM_NAMESPACE: {{ .Values.config.UERANSIM_NAMESPACE | quote }}
+  PING_INTERFACE: {{ .Values.config.PING_INTERFACE | quote }}
+  PING_TARGET: {{ .Values.config.PING_TARGET | quote }}
+  PING_COUNT: {{ .Values.config.PING_COUNT | quote }}
+  ARGO_WF_BASE_PATH: {{ .Values.config.ARGO_WF_BASE_PATH | quote }}
+  ARGOCD_APPS_BASE_PATH: {{ .Values.config.ARGOCD_APPS_BASE_PATH | quote }}
