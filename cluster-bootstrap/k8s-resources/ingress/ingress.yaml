@@ -47,7 +47,7 @@ spec:
                 port:
                   number: 443
 
-    - host: webui.free5gc.DOMAIN_NAME
+    - host: free5gc.DOMAIN_NAME
       http:
         paths:
           - path: /
