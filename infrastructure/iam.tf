@@ -222,7 +222,19 @@ resource "aws_iam_policy" "ai_agent_bedrock_policy" {
           "bedrock:InvokeModel",
           "bedrock:InvokeModelWithResponseStream"
         ]
-        Resource = "arn:aws:bedrock:*::foundation-model/anthropic.*"
+        Resource = [
+          "arn:aws:bedrock:*::foundation-model/*",
+          "arn:aws:bedrock:*:*:inference-profile/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "aws-marketplace:Subscribe",
+          "aws-marketplace:Unsubscribe",
+          "aws-marketplace:ViewSubscriptions"
+        ]
+        Resource = "*"
       }
     ]
   })
