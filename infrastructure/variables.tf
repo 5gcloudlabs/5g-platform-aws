@@ -58,6 +58,23 @@ variable "ami_id" {
 }
 
 
+
+##AI Parameters
+
+variable "bedrock_region" {
+  description = "Bedrock region override. Leave empty if defined <region> 'under Global Parameters', hosts Bedrock." ##https://docs.aws.amazon.com/general/latest/gr/bedrock.html
+  type = string
+  default = ""
+}
+
+
+variable "bedrock_model_id" {
+  description = "AI model used by bedrock."
+  type = string
+  default = "anthropic.claude-3-haiku-20240307-v1:0"
+}
+
+
 ##DNS Parameters##
 
 variable "cloudflare_api_token" {
