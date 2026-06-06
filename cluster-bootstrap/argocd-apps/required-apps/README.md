@@ -1,40 +1,47 @@
-# Required Apps Argo CD Application
+# Required Apps — Argo CD Application of Applications
+
+Cluster-bootstrap child applications for **5G Platform AWS**, deployed by Argo CD after OpenTofu provisioning.
+
+The parent Application is defined in `infrastructure/argocd.tf` and points at `cluster-bootstrap/argocd-apps/required-apps/`.
+
+---
 
 ## Purpose
-This Argo CD `Application` manifest deploys a collection of **supporting applications** required for running the main workloads (**free5GC** and **UERANSIM**) on Amazon EKS.  
-These applications provide networking, observability and user interface for the end-to-end 5G deployment workflow.
+
+OpenTofu creates the EKS cluster and installs Argo CD. Cluster bootstrap then syncs these required platform add-ons:
+
+| Application | Purpose |
+|-------------|---------|
+| `aws-efs-csi-driver` | EFS persistent volumes |
+| `aws-load-balancer-controller` | ALB for Ingress |
+| `cert-manager` (+ resources) | TLS certificates |
+| `cloudflare-token-secret` | DNS provider credentials |
+| `external-dns` | Automatic DNS records |
+| `istio-base` / `istiod` / `istio-gateway` | Service mesh |
+| `ingress` / `gateway` / `virtual-services` | External access routing |
+| `multus` / `whereabouts` | Multi-NIC networking and IPAM |
+| `kube-prometheus-stack` / `loki` | Metrics, dashboards, logs |
+| `storage-class` | EFS StorageClass |
+| `argo-workflows` | Multi-step telecom deployment orchestration |
+| `ai-agent` | Telco Deployment Assistant (Bedrock-backed console) |
+
+Telecom workloads (free5GC, UERANSIM, subscriber provisioning) are not part of cluster bootstrap. They are deployed on demand via the Telco Deployment Assistant, which triggers Argo CD Applications and Argo Workflows under `5g/`.
 
 ---
 
-## Overview
-The manifest defines an app of apps in Argo CD named required-apps, which coordinates the deployment of multiple supporting applications.
+## Deployment flow
 
-- **multus-app** and **whereabouts-app** – Extend Kubernetes networking with multi-interface and IPAM capabilities.
-- **Executor-app** and **Console-app** – Provide a UI interface for deployment automation workflows.
-- **curl-app** – Utility pod enables subscriber provisioning. 
-- **kube-prometheus-stack-crd** and **kube-prometheus-stack-app** – Provide monitoring, metrics, and alerting for cluster resources.  
-- **loki-stack-app** – Enables centralized log aggregation and querying.  
-
-These applications are deployed under the `argocd` namespace using Argo CD’s **Application of Applications** pattern, allowing unified management of all the required apps as a single logical entity.
-
----
-
-## Deployment Flow
-The `required-apps` manifest is triggered automatically at the **end of infrastructure provisioning**, defined as a `kubectl_manifest` resource in the OpenTofu configuration.
+```text
+OpenTofu apply
+  → EKS cluster + Argo CD install
+  → cluster-bootstrap Application created
+  → required-apps synced (platform add-ons)
+  → user opens https://console.<domain>
+  → Telco Deployment Assistant deploys telecom components from 5g/
+```
 
 ---
 
-## References
+## envsubst plugin
 
-Argo CD Applications
- – Official documentation for declarative app management.
-
-Helm Charts Repository
- – Underlying Helm charts used by the sub-applications.
-
----
-
-## License & Attribution
-
-This manifest is maintained by © 2025 5g-cloud-labs (a project by CNAD LTD.).
-All referenced Helm charts and manifests are open source under their respective licenses.
+Manifests in this directory use `${ARGOCD_ENV_*}` placeholders. The envsubst CMP plugin (configured in `infrastructure/argocd.tf`) substitutes values passed from OpenTofu (region, domain, cert ARN, IAM ARNs, Bedrock settings).

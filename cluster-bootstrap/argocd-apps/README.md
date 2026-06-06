@@ -1,15 +1,20 @@
 # Argo CD Applications
 
-This directory contains Argo CD `Application` manifests used to deploy components of the **AWS 5G Cloud Labs** environment on Amazon EKS.
+Argo CD `Application` manifests for **5G Platform AWS**.
 
-## Applications
+## Directories
 
-| Application | Description |
-|--------------|-------------|
-| **required-apps** | Defines an *App of Apps* that deploys supporting add-ons such as Multus, Whereabouts, Prometheus, Loki, Console, Executor, and curl utilities. |
-| **free5gc-app** | Deploys the full **free5GC 5G Core Network** using the corresponding Helm chart. |
-| **ueransim-app** | Deploys **UERANSIM**, simulating gNB and UE behavior for testing and validation. |
+| Path | Description |
+|------|-------------|
+| `cluster-bootstrap/argocd-apps/required-apps/` | Platform bootstrap (Istio, Multus, observability, argo-workflows, ai-agent, and others). Synced automatically after OpenTofu apply. |
+| `5g/argocd-apps/` | Telecom workload wrappers (free5GC, sub-prov, UERANSIM). Deployed on demand via the Telco Deployment Assistant or Argo Workflows — not at cluster bootstrap. |
 
-## Notes
+## Telecom deployment model
 
-All applications are managed by Argo CD for automated synchronization and lifecycle management once the cluster is provisioned.
+Telecom applications are not pre-synced at install time. The Telco Deployment Assistant (`ai-agent`):
+
+1. Parses user intent via Amazon Bedrock
+2. Fetches the relevant manifest from this repository
+3. Applies a single Argo CD Application (`kubectl`) or submits an Argo Workflow (multi-step)
+
+See [Telco Deployment Assistant guide](../../docs/installation-instructions/01%20ai-agent-console.md).

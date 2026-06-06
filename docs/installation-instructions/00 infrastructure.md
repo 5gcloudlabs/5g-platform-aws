@@ -1,20 +1,23 @@
 
-## Installation Instructions
+## Installation Instructions — Infrastructure
+
+Part of **5G Platform AWS** — reference implementation of the 5G Cloud Labs telecom laboratory.
+
+This guide covers prerequisites and OpenTofu provisioning (Phase 1). After cluster bootstrap completes, use the [Telco Deployment Assistant](./01%20ai-agent-console.md) to deploy and validate telecom workloads (Phase 2).
+
+---
 
 ### 1. Prerequisites
 
-#### 1. a) Cloud Account Requirements
-
-Before deploying any infrastructure, these must be available:
+#### 1.a) Cloud account requirements
 
 | Requirement | Description |
-|------------|-------------|
-| **AWS Account** | With permissions to create the required **AWS services** as described in the [AWS Services](#aws-services) section. |
-| **Cloudflare Account** | With a **registered domain** + **API Token** with respective domain zone "DNS:Edit" permissions. |
+|-------------|-------------|
+| **AWS Account** | Permissions to create VPC, EKS, EC2, EFS, ACM, IAM, SSM, and S3 resources. |
+| **Cloudflare Account** | A registered domain, zone ID, and API token with **DNS:Edit** permissions for that zone. |
+| **Amazon Bedrock access** | Model access enabled in the AWS account/region used by the Telco Deployment Assistant (see [Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html)). |
 
-
-#### 1. b) Local Workstation Requirements
-Install the following tools locally:
+#### 1.b) Local workstation requirements
 
 | Tool | Installation |
 |------|--------------|
@@ -22,31 +25,17 @@ Install the following tools locally:
 | **OpenTofu** | [Install guide](https://opentofu.org/docs/intro/install/) |
 | **kubectl** | [Install guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/) |
 
+Verify:
 
-Verify installs & versions
-
-Run the following to confirm tools are installed:
 ```bash
 aws --version
 tofu version
-kubectl version --client --short
+kubectl version --client
 ```
 
-#### 1. c) Configure AWS credentials
+#### 1.c) Configure AWS credentials
 
-Generate AWS **[Access Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)** from your AWS IAM console.
-
-Then configure the credentials using one of the following methods:
-
-Option 1 — AWS CLI:
-```bash
-aws configure
-AWS Access Key ID: "<access-key>"
-AWS Secret Access Key: "<secret-key>"
-Default region name: "<region>"
-```
-
-Option 2 — Environment Variables:
+Configure credentials via `aws configure` or environment variables:
 
 ```bash
 export AWS_ACCESS_KEY_ID="<access-key>"
@@ -54,451 +43,169 @@ export AWS_SECRET_ACCESS_KEY="<secret-key>"
 export AWS_REGION="<region>"
 ```
 
+#### 1.d) Create an S3 bucket for OpenTofu state
 
-#### 1. d) Create an S3 Bucket for the OpenTofu State
+For `us-east-1`:
 
-OpenTofu requires an S3 bucket to store its remote state file.  
-Create the bucket using one of the following commands:
-
-For `us-east-1` (no LocationConstraint required):
 ```bash
 aws s3api create-bucket --bucket <bucket-name>
 ```
-For all other AWS regions:
-```bash
-aws s3api create-bucket --bucket <bucket-name> --create-bucket-configuration LocationConstraint=$AWS_REGION
-```
 
-### 2. Clone repository 
-
-Download the `aws-5GCloudLabs` project to your local workstation, either via SSH or HTTPS:
-
-SSH:
-```bash
-git clone git@github.com:5g-cloud-labs/aws-5gcloudlabs.git
-```
-HTTPS:
-```bash
-git clone https://github.com/5g-cloud-labs/aws-5gcloudlabs.git
-```
-
-### 3. Set OpenTofu Input Variables
-
-**Navigate to the infrastructure directory:** 
+For other regions:
 
 ```bash
-cd aws-5gcloudlabs/infrastructure
-```
-**Update the values of the variables in vars.auto.tfvars:**
-```bash
-nano vars.auto.tfvars
+aws s3api create-bucket --bucket <bucket-name> \
+  --create-bucket-configuration LocationConstraint=$AWS_REGION
 ```
 
-| Variable Name | Default / Effective Value | Description |
-|--------------|---------------------------|-------------|
-| `region` | `eu-central-1` | AWS region where all infrastructure resources will be created. |
-| `bucket-name` | `""` | Name of the S3 bucket used to store the Terraform remote state file. |
-| `key` | `state/iac.tfstate` | Path and filename of the Terraform state file inside the S3 bucket. |
-| `vpc_name` | `cloud-5g-vpc` | Name assigned to the VPC hosting the 5G Core infrastructure. |
-| `vpc_cidr` | `192.168.0.0/16` | Primary CIDR block for the VPC network. |
-| `azs` | `["eu-central-1b", "eu-central-1c"]` | Availability Zones used for subnet creation and high availability. |
-| `eks_cluster_name` | `cloud-5g-eks` | Name of the Amazon EKS cluster running the 5G Core workloads. |
-| `ami_id` | `REDACTED_AMI_ID` | Ubuntu EKS-optimized AMI (Focal Pro, compatible with Free5GC v3.3.0 and GTP5G), choose the right image according to the Region |
-| `domain_name` | `""` | Public domain name associated with the DNS hosted zone. |
-| `zone_id` | `""` | Identifier of the DNS hosted zone at the DNS provider. |
-| `cloudflare_api_token` | `""` | API token used by Terraform and ExternalDNS to manage DNS records in Cloudflare. |
+---
 
-
-After completing all prerequisites, you can deploy the AWS infrastructure and the Kubernetes add-ons using **OpenTofu**.
-
-### 4. Provision Infrastructure Using OpenTofu
-
-OpenTofu provisions the required AWS infrastructure and triggers cluster-bootsrap via ArgoCD.
-
-#### 4. a) Initialize configuration
-
-Navigate to the infrastructure directory:
+### 2. Clone the repository
 
 ```bash
-cd aws-5gcloudlabs/infrastructure
-```
-Initialize infrastructure directory:
-```bash
-/aws-5gcloudlabs/infrastructure$ tofu init
+git clone https://github.com/5gcloudlabs/5g-platform-aws.git
+cd 5g-platform-aws/infrastructure
 ```
 
-Expected Output:
-```bash
+---
 
-Initializing the backend...
+### 3. Set OpenTofu input variables
 
-Successfully configured the backend "s3"! OpenTofu will automatically
-use this backend unless the backend configuration changes.
-Initializing modules...
-.
-.
-.
-Initializing provider plugins...
-.
-.
-.
-OpenTofu has been successfully initialized!
+Edit `vars.auto.tfvars`:
 
-You may now begin working with OpenTofu. Try running "tofu plan" to see
-any changes that are required for your infrastructure. All OpenTofu commands
-should now work.
-```
+| Variable | Default / example | Description |
+|----------|-------------------|-------------|
+| `region` | `eu-central-1` | AWS region for all resources. |
+| `bucket-name` | *(required)* | S3 bucket for OpenTofu remote state. |
+| `key` | `state/iac.tfstate` | State file path inside the bucket. |
+| `vpc_name` | `cloud-5g-vpc` | VPC name. |
+| `vpc_cidr` | `192.168.0.0/16` | Primary VPC CIDR. |
+| `azs` | `["eu-central-1b", "eu-central-1c"]` | Availability zones. |
+| `eks_cluster_name` | `cloud-5g-eks` | EKS cluster name. |
+| `ami_id` | region-specific Ubuntu EKS AMI | Worker node AMI ([reference](https://cloud-images.ubuntu.com/docs/aws/eks/)). |
+| `domain_name` | *(required)* | Public domain (e.g. `5gcloudlabs.ai`). |
+| `zone_id` | *(required)* | Cloudflare zone ID. |
+| `cloudflare_api_token` | *(required)* | Cloudflare API token for DNS and ACM validation. |
+| `bedrock_region` | `""` | Bedrock region override; empty uses `region`. |
+| `bedrock_model_id` | Claude Haiku (see `variables.tf`) | Bedrock model or inference profile for the Telco Deployment Assistant. |
 
-#### 4. b) Create a plan:
+---
 
+### 4. Provision infrastructure with OpenTofu
 
-```bash
-/aws-5gcloudlabs/infrastructure$ tofu plan 
-```
-Expected Output:
-```bash
-.
-.
-.
-Plan: 144 to add, 0 to change, 0 to destroy.
-```
+OpenTofu provisions AWS resources (including the EKS cluster), installs Argo CD, and creates the cluster-bootstrap Application. Argo CD then syncs the required platform add-ons from `cluster-bootstrap/argocd-apps/required-apps/`.
 
-**Execution:**
+#### 4.a) Initialize
 
 ```bash
-/aws-5gcloudlabs/infrastructure$ tofu apply
-
-Plan: 144 to add, 0 to change, 0 to destroy.
-
-
-Do you want to perform these actions?
-  OpenTofu will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-
-```
-Expected Output:
-```bash
-.
-.
-.
-Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
+cd 5g-platform-aws/infrastructure
+tofu init
 ```
 
-
-#### 4. c) Apply configuration
-
+#### 4.b) Plan and apply
 
 ```bash
-/aws-5gcloudlabs/infrastructure$ tofu plan
+tofu plan
+tofu apply
 ```
-Expected Output:
+
+Confirm with `yes` when prompted. A fresh deployment typically adds on the order of ~140 resources (exact count varies with provider versions).
+
+**What `tofu apply` does:**
+
+- Creates VPC, subnets, NAT, secondary CIDR (`100.64.0.0/16`), EKS cluster, and two node groups (control-plane and user-plane)
+- Attaches Multus ENIs and security groups for N2/N3/N4/N6 interfaces
+- Creates EFS, ACM certificate (DNS-validated via Cloudflare), and IAM roles (ALB controller, EFS CSI, ai-agent Bedrock)
+- Installs Argo CD (Helm) with the envsubst CMP plugin
+- Registers the Git repository secret and applies the cluster-bootstrap Argo CD Application
+
+#### 4.c) Validate AWS resources
+
 ```bash
-Plan: 144 to add, 0 to change, 0 to destroy.
+aws ec2 describe-vpcs
+aws ec2 describe-subnets
+aws acm list-certificates
+aws efs describe-file-systems
 ```
 
-**Execution:**
-
-```bash
-/aws-5gcloudlabs/infrastructure$ tofu apply
-
-Plan: 144 to add, 0 to change, 0 to destroy.
-
-
-Do you want to perform these actions?
-  OpenTofu will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-
-```
-Expected Output:
-```bash
-.
-.
-.
-Apply complete! Resources: 144 added, 0 changed, 0 destroyed.
-```
-
-**Summary**
-
-The OpenTofu configuration performs the following:
-
-- Provisions the required AWS resources [ VPC subnets, IGW, NATGW, EKS cluster, worker nodes, additional network interfaces, SGs, SG rules, EFS, TLS Certificate, IAM roles, etc.).
-
-- Installs Argocd helm chart, via helm_release resource.
-
-- Cluster bootstrapping by applying the Argo CD required-apps app-of-apps using a kubectl_manifest resource, triggering ArgoCD to deploy all the required applications for the EKS cluster, from the github repository.
-
-
-#### 4. d) Validate infrastructure creation
-Once opentofu apply completes, perform the checks below to confirm AWS resource provisioning:
-
-`aws ec2 describe-vpcs`
-
-`aws ec2 describe-subnets`
-
-`aws acm list-certificates`
-
-`aws efs describe-file-systems`
-
-
-##### - Update kubeconfig and verify EKS connectivity
+#### 4.d) Configure kubectl and verify nodes
 
 ```bash
 aws eks update-kubeconfig --region "$AWS_REGION" --name "<EKS_CLUSTER_NAME>"
-Updated context arn:aws:eks:eu-central-1:**********:cluster/cloud-5g-eks in /home/barakota/.kube/config
-```
-
-```bash
-kubectl version
-Client Version: v1.34.3
-Kustomize Version: v5.7.1
-Server Version: v1.34.3-eks-ac2d5a0
-```
-
-##### - Verify node readiness:
-
-You should see 2 worker nodes in Ready state.
-
-```bash
 kubectl get nodes
-NAME                                              STATUS   ROLES    AGE   VERSION
-ip-192-168-119-14.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
-ip-192-168-36-219.eu-central-1.compute.internal   Ready    <none>   13m   v1.29.15
 ```
 
+Expect **two** worker nodes in `Ready` state (control-plane and user-plane node groups).
 
+#### 4.e) Verify cluster bootstrap (Argo CD)
 
-#### 4. e) Verify EKS Cluster Bootstrapping:
-Confirm that Argo CD has successfully deployed the `cluster-bootstrap` Application and all child applications.
-The status should display **Synced** and **Healthy**:
-
+Wait until the parent application and its children are **Synced** and **Healthy**:
 
 ```bash
-kubectl -n argocd get app 
-NAME                           SYNC STATUS   HEALTH STATUS
-aws-efs-csi-driver             Synced        Healthy
-aws-load-balancer-controller   Synced        Healthy
-cert-manager                   Synced        Healthy
-cert-manager-certificate       Synced        Healthy
-cert-manager-cluster-issuer    Synced        Healthy
-cloudflare-token-secret        Synced        Healthy
-cluster-bootstrap              Synced        Healthy
-console-ui                     Synced        Healthy
-curl                           Synced        Healthy
-executor                       Synced        Healthy
-external-dns                   Synced        Healthy
-gateway                        Synced        Healthy
-ingress                        Synced        Healthy
-istio-base                     Synced        Healthy
-istio-gateway                  Synced        Healthy
-istiod                         Synced        Healthy
-kube-prometheus-stack          Synced        Healthy
-kube-prometheus-stack-crds     Synced        Healthy
-loki                           Synced        Healthy
-multus                         Synced        Healthy
-storage-class                  Synced        Healthy
-virtual-services               Synced        Healthy
-whereabouts                    Synced        Healthy
+kubectl -n argocd get applications
 ```
 
-Applications overview:
+Expected applications include (non-exhaustive):
 
-cluster-bootstrap – Parent Argo CD application that bootstraps and manages all core cluster components.
+| Application | Purpose |
+|-------------|---------|
+| `cluster-bootstrap` | Parent app-of-apps |
+| `ai-agent` | Telco Deployment Assistant — frontend + backend (Bedrock) |
+| `argo-workflows` | Workflow engine for multi-step 5G deployments |
+| `aws-load-balancer-controller` | ALB provisioning |
+| `aws-efs-csi-driver` | EFS persistent volumes |
+| `cert-manager` / `cert-manager-*` | TLS certificate automation |
+| `external-dns` | Cloudflare DNS records |
+| `istio-base` / `istiod` / `istio-gateway` | Service mesh and ingress |
+| `ingress` / `gateway` / `virtual-services` | External routing |
+| `multus` / `whereabouts` | Multi-NIC networking and IPAM |
+| `kube-prometheus-stack` / `loki` | Observability |
+| `storage-class` | EFS-backed `efs-sc` StorageClass |
 
-aws-efs-csi-driver – Enables Kubernetes pods to use AWS EFS for persistent shared storage.
-
-aws-load-balancer-controller – Manages AWS Application and Network Load Balancers for Kubernetes services and ingresses.
-
-cert-manager – Automates the issuance and renewal of TLS certificates within the cluster.
-
-cert-manager-cluster-issuer – Defines the cluster-wide certificate issuer (e.g. Let’s Encrypt).
-
-cert-manager-certificate – Provisions specific TLS certificates using cert-manager.
-
-cloudflare-token-secret – Stores Cloudflare API credentials used for DNS and certificate automation.
-
-external-dns – Automatically manages DNS records in Cloudflare based on Kubernetes services and ingresses.
-
-istio-base – Installs the core Istio CRDs required for the service mesh.
-
-istiod – Istio control plane responsible for traffic management, security, and observability.
-
-istio-gateway – Deploys Istio ingress gateway for external traffic into the cluster.
-
-ingress – Defines Kubernetes ingress resources exposed through Istio.
-
-gateway – Configures Istio Gateway resources for routing external traffic.
-
-virtual-services – Defines Istio VirtualServices for application-level traffic routing.
-
-multus – Enables multiple network interfaces per pod, required for 5G workloads.
-
-whereabouts – Provides IP address management (IPAM) for secondary pod networks used by Multus.
-
-storage-class – Defines default and custom Kubernetes storage classes.
-
-kube-prometheus-stack-crds – Installs CRDs required by the Prometheus monitoring stack.
-
-kube-prometheus-stack – Provides cluster monitoring using Prometheus, Grafana.
-
-loki – Centralized log aggregation system for Kubernetes workloads.
-
-executor – Backend execution pod responsible for running deployment and automation scripts.
-
-console-ui – Web-based user interface for deploying the 5G network.
-
-curl – Utility pod used to support 5G subscribers provisioning via cli or console-ui.
-
-
-
-##### - Additional Validation 
-
-As an additional validation step, you can verify that the underlying Kubernetes resources have been successfully deployed and are running in their respective namespaces.
-
+Verify key namespaces:
 
 ```bash
-  kubectl -n kube-system get pods
-```  
-Expected Outcome:
-
-```bash
-NAME                                            READY   STATUS    
-aws-load-balancer-controller-7896c5c598-8dbxq   1/1     Running   
-aws-node-5p9hs                                  2/2     Running   
-aws-node-6k54j                                  2/2     Running   
-coredns-54d96d77bc-9gv6m                        1/1     Running   
-coredns-54d96d77bc-dt88g                        1/1     Running   
-efs-csi-controller-649b9665d7-6xwtv             3/3     Running   
-efs-csi-controller-649b9665d7-sz6vz             3/3     Running   
-efs-csi-node-gpq99                              3/3     Running   
-efs-csi-node-wdc49                              3/3     Running   
-external-dns-549fbd7b7-r5pp2                    1/1     Running   
-kube-multus-ds-8bb6q                            1/1     Running   
-kube-multus-ds-m7rrk                            1/1     Running   
-kube-proxy-ccr8q                                1/1     Running   
-kube-proxy-dsmqv                                1/1     Running   
-whereabouts-whereabouts-chart-2mr5j             1/1     Running   
-whereabouts-whereabouts-chart-sdsbq             1/1     Running   
-```
-
-- Verfiy that all cert-manager components (including the controller, webhook, and CA injector) are running as expected in the cert-manager namespace. These services are required for issuing TLS certificates for cluster services and ingress resources.
-
-```bash
-  kubectl -n cert-manager get pods
-```  
-Expected Outcome:
-
-```bash
-NAME                                      READY   STATUS  
-cert-manager-595b985855-scchf             1/1     Running 
-cert-manager-cainjector-dd577f84c-zgl95   1/1     Running 
-cert-manager-webhook-79cd9bf9d-kz86t      1/1     Running
-```
-
-- Verify that the Istio control plane components—such as istiod, the ingress gateway, and base system pods—are running properly in the istio-system namespace. These components provide the service mesh foundation and ingress routing for the platform.
-
-```bash
-  kubectl -n istio-system get pods
-```  
-Expected Outcome:
-
-```bash
-NAME                             READY   STATUS   
-istio-gateway-5dcdfc6df6-m2bps   1/1     Running  
-istiod-556bf8849c-7qfs4          1/1     Running  
-
-```
-
-**Monitoring & Observability stack:**
-
-```bash
+kubectl -n ai-agent get pods
+kubectl -n argo get pods
+kubectl -n kube-system get pods
+kubectl -n istio-system get pods
 kubectl -n monitoring get pods
 ```
 
-Expected Output:
-```bash
-NAME                                                        READY   STATUS  
-kube-prometheus-stack-grafana-7bc5ccb655-864lt              3/3     Running 
-kube-prometheus-stack-kube-state-metrics-668f8bbd5f-f95tr   1/1     Running 
-kube-prometheus-stack-operator-7fd5b447b-hjpx6              1/1     Running 
-kube-prometheus-stack-prometheus-node-exporter-57vjf        1/1     Running 
-kube-prometheus-stack-prometheus-node-exporter-qgbf9        1/1     Running 
-loki-0                                                      1/1     Running 
-loki-promtail-568m2                                         1/1     Running 
-loki-promtail-84cm6                                         1/1     Running 
-prometheus-kube-prometheus-stack-prometheus-0               2/2     Running 
-```
+The Telco Deployment Assistant pods (`ai-agent-frontend`, `ai-agent-backend`) should reach `Running`.
 
-- **Console UI, executor, and curl utility pods:**
-```bash
-kubectl get pods
-```
-Expected Output:
-```bash
-NAME                               READY   STATUS  
-console-8c88b9cf9-h9vzx            1/1     Running 
-curl-deployment-5db9cb8c57-hjdkc   1/1     Running 
-executor-9f5589868-qp9gq           1/1     Running 
-```
-
-
-
-##### Validate Ingress and DNS Resolution
-
-As a final validation step, ensure the Ingress resource is deployed correctly, the CNAME records exist, and DNS resolves to the ALB IPs.
-
-###### 1. Verify the ALB Ingress configuration
-Check that the Ingress resource is created with the correct hosts, annotations including ACM TLS certificate ARN:
+#### 4.f) Validate ingress and DNS
 
 ```bash
 kubectl -n istio-system describe ingress ingress
 ```
 
-Expected Output:
-```bash
-Name:             ingress
-Labels:           <none>
-Namespace:        istio-system
-Address:          k8s-istiosys-ingress-9190591614-1233209419.eu-central-1.elb.amazonaws.com
-Ingress Class:    <none>
-Default backend:  <default>
-Rules:
-  Host                    Path  Backends
-  ----                    ----  --------
-  console.$domain_name     
-                          /   istio-gateway:443 (192.168.41.38:443)
-  argocd.$domain_name      
-                          /   istio-gateway:443 (192.168.41.38:443)
-  grafana.$domain_name     
-                          /   istio-gateway:443 (192.168.41.38:443)
-  webui.$domain_name       
-                          /   istio-gateway:443 (192.168.41.38:443)
-  prometheus.$domain_name  
-                          /   istio-gateway:443 (192.168.41.38:443)
-Annotations:              alb.ingress.kubernetes.io/backend-protocol: HTTPS
-                          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:************:certificate/f7b0eeb2-bd46-464e-8bc1-be02c18797fd
-                          alb.ingress.kubernetes.io/healthcheck-interval-seconds: 30
-                          alb.ingress.kubernetes.io/healthcheck-path: /healthz
-                          alb.ingress.kubernetes.io/listen-ports: [{"HTTP": 80}, {"HTTPS":443}]
-                          alb.ingress.kubernetes.io/scheme: internet-facing
-                          alb.ingress.kubernetes.io/target-type: ip
-                          kubernetes.io/ingress.class: alb
-Events:                   <none>
-```
+Expected host rules:
 
-###### 2. Validate that DNS resolves to the ALB
-Run `dig` against the ALB hostname shown under the **Address** field:
+| Host | Service |
+|------|---------|
+| `console.<domain>` | Telco Deployment Assistant |
+| `argocd.<domain>` | Argo CD UI |
+| `grafana.<domain>` | Grafana |
+| `free5gc.<domain>` | free5GC WebUI |
+| `prometheus.<domain>` | Prometheus |
+
+Confirm the ALB hostname in the **Address** field resolves:
 
 ```bash
-dig k8s-istiosys-ingress-9190591614-1233209419.eu-central-1.elb.amazonaws.com
+dig +short <alb-hostname-from-ingress>
 ```
 
-Expected Output:
-```bash
-ANSWER SECTION:
-k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 3.126.96.223
-k8s-istiosys-ingress-...elb.amazonaws.com. 60 IN A 18.194.188.63
-```
+---
+
+### 5. Next step — deploy the 5G network
+
+Infrastructure and platform bootstrap are complete. Continue with:
+
+[Deploy and validate the telecom environment via the Telco Deployment Assistant](./01%20ai-agent-console.md)
+
+---
+
+### 6. Tear down
+
+See **[terminate.md](./terminate.md)**.

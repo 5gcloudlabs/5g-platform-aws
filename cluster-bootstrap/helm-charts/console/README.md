@@ -1,47 +1,7 @@
-# Console UI Helm Chart
+# Console Chart (Deprecated)
 
-## Purpose
+This Helm chart is no longer used. The operator interface is the **Telco Deployment Assistant** (`cluster-bootstrap/helm-charts/ai-agent/`).
 
-This Helm chart deploys the 5G Cloud Labs Console UI on Amazon EKS. 
-The Console UI serves as the user-facing interface for interacting with the 5G Cloud Labs environment.
+External traffic to `https://console.<domain>` is routed by Istio to `ai-agent-frontend` in the `ai-agent` namespace (see `cluster-bootstrap/k8s-resources/istio/virtual-services/istio-vs-console.yaml`).
 
----
-
-## Overview
-
-The Console UI provides an interactive web interface to simplify the end-to-end deployment and testing of a 5G Core Network (free5GC) and RAN/UE simulation (UERANSIM) on Amazon EKS. 
-
-It enables users to:
-- Deploy the 5G Core Network ([free5GC](https://github.com/free5gc/free5gc) network functions such as AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR, UPF).
-- Provision Subscribers
-- Deploy UE & gNB and simulators using [UERANSIM](https://github.com/aligungr/UERANSIM).  
-- Monitor Pod Readiness & Logs for both network functions and simulations.
-- Test the 5G network Latency & Bandwidth.
-
-
----
-
-## Deployment
-
-- This chart is deployed and managed via Argo CD.
-- The corresponding Argo CD Application manifest is defined in
-  [`console-app.yml`](../../argocd/required-apps/console-app.yml).
-- The application manifest is included in the "required-apps" set and is deployed automatically by Argo CD post EKS cluster creation.
-- The pod runs the container image `ghcr.io/5g-cloud-labs/console-ui:<tag>`.
-- The source code repository (Flask + HTML templates) is available at [https://github.com/5g-cloud-labs/console-ui](https://github.com/5g-cloud-labs/console-ui).
-
-
----
-
-## References
-
-- [https://flask.palletsprojects.com](https://flask.palletsprojects.com/en/stable/)
-- [https://docs.docker.com/build](https://docs.docker.com/build/)
-  
----
-
-## License & Attribution
-
-This chart was created and is maintained by © 2025 5g-cloud-labs (a project by CNAD LTD.).
-<br>Licensed under the Apache License 2.0.
-
+Retained for reference only; may be removed in a future release.

@@ -1,127 +1,199 @@
-<h1 align="center">Welcome to aws-5Gcloudlabs !</h1>
-<p align="center">An open-source project for deploying 5G Core network pre-integrated with UE/RAN simulation environment on AWS.</p>
-<p align="center">
-<img width="600" height="3000" alt="main" src="https://github.com/user-attachments/assets/bb3cf98c-bb5b-4941-805e-77d1910e7276" />
-</p>
+# 5G Platform AWS
+
+**AWS-based telecom laboratory platform for experimenting with AI and automation use cases.**
 
 ---
 
 ## Overview
 
-Deploying a 5G Core network typically involves on-premise infrastructure, dedicated hardware, and manual configuration across multiple network functions. **aws-5GCloudLabs** eliminates these barriers by providing a fully automated, cloud-native environment for deploying and testing the Free5GC 5G Core on Amazon EKS.
+5G Platform AWS is the reference implementation of the 5G Cloud Labs project.
 
-This project enables engineers, students, and practitioners to:
-- **Experiment with 5G protocols** without physical infrastructure investment
-- **Deploy reproducible environments** in minutes using Infrastructure-as-Code
-- **Test end-to-end scenarios** with integrated UE and gNodeB simulation
-- **Learn cloud-native networking** through production-grade tooling (GitOps, service mesh, observability)
+The repository provides an automated deployment of a Kubernetes-based telecom environment on AWS and serves as a foundation for experimenting with automation and AI-assisted operational workflows.
 
-Built with OpenTofu for infrastructure provisioning and Argo CD for GitOps-based application management, the entire stack follows declarative configuration principles for consistency and reproducibility.
+The platform combines Infrastructure as Code, GitOps practices, and open-source telecom software to create a reproducible environment suitable for testing ideas that would otherwise require access to dedicated telecom lab infrastructure.
 
 ---
 
-## What You Get
+## Purpose
 
-- **Complete 5G Core**: Free5GC deployment with all network functions (AMF, SMF, UPF, UDM, PCF, etc.)
-- **Integrated Testing**: UERANSIM pre-configured for immediate UE and gNB simulation
-- **Production Patterns**: Service mesh (Istio), observability (Prometheus/Grafana/Loki), and automated TLS
-- **Multi-interface Networking**: Multus CNI for 3GPP-compliant interface separation (N2, N3, N4, N6)
-- **GitOps Workflow**: Declarative application lifecycle with Argo CD
-- **One-command Deployment**: Automated infrastructure provisioning to running 5G lab
+The primary purpose of this project is to provide a practical telecom laboratory environment.
 
----
+While the automated deployment of a 5G environment on AWS is an important capability, it is not the end goal of the project.
 
-## Building Blocks
+The deployed environment serves as a foundation for exploring:
 
-The **aws-5GCloudLabs** environment integrates infrastructure automation, Kubernetes orchestration, observability tooling, and 5G Core deployment into a cohesive, reproducible laboratory environment.
-
-### Infrastructure Automation
-- **OpenTofu** – Infrastructure-as-Code engine for declarative AWS resource provisioning
-
-### AWS Services
-- **VPC** – Network isolation with segmented subnets for infrastructure, Multus networks, and applications
-- **EKS** – Managed Kubernetes cluster with custom node groups and kernel tuning for network workloads
-- **EC2** – Compute instances with ENIs & security groups.
-- **SSM** – Secure shell access and automation without SSH keys
-- **EFS** – Persistent shared storage for MongoDB (UDR subscriber data and NRF profiles)
-- **IAM / STS** – Fine-grained permissions with IRSA for pod-level AWS authentication
-- **ACM** – TLS certificate management for secure service communication
-- **S3** – Remote state storage for OpenTofu (must be preconfigured)
-
-### Kubernetes Add-ons
-- **Argo CD** – Application lifecycle management via GitOps.
-- **AWS Load Balancer Controller** – Automatic ALB provisioning from Kubernetes Ingress resources
-- **AWS EFS CSI Driver** – Dynamic EFS volume provisioning for stateful workloads
-- **ExternalDNS** – Automatic DNS record management synchronized with Kubernetes services
-- **cert-manager** – Automated TLS certificate issuance (Let's Encrypt integration) to support end-to-end encryption. 
-- **Istio** – `Ingress Gateway` as reverse proxy & `Service-Mesh` capabilities for traffic management and observability. 
-- **Multus CNI** – Multiple network interfaces per pod for 3GPP protocol compliance
-- **Whereabouts IPAM** – Automatic IP address allocation for Multus secondary networks
-- **Prometheus + Grafana + Loki** – Full observability stack for metrics, visualization, and log aggregation
-
-### External Integrations
-- **Let's Encrypt** – Public CA for automated certificate issuance via cert-manager
-- **Cloudflare** – DNS provider for domain validation (requires registered domain)
-
-### 5G Applications
-- **Free5GC** – Open-source 5G Core network functions deployed via GitOps
-- **UERANSIM** – Open-source gNodeB and UE simulator for registration and data session testing
+- Automation workflows
+- AI-assisted operations
+- Deployment tooling
+- Network validation
+- Observability practices
+- Operational runbooks
+- Subscriber lifecycle automation
 
 ---
 
-## Architecture & Documentation
+## Background
 
-For detailed architecture diagrams, component interactions, and design decisions, see **[Architecture & Design](./docs/Arch&Design)**.
+The project began as an effort to automate the deployment of a complete 5G environment on AWS.
 
-For step-by-step deployment instructions, prerequisites, and configuration options, see **[Installation Instructions](./installation-instructions)**.
+Over time, the scope expanded beyond deployment automation to focus on providing a reusable environment for experimentation and learning.
+
+Today, the platform acts as a laboratory where automation and AI use cases can be developed and evaluated against realistic telecom workloads.
 
 ---
 
-## Quick Start
-```bash
-# 1. Configure AWS credentials and S3 backend
-# 2. Clone the repository
-git clone https://github.com/yourusername/aws-5gcloudlabs.git
-cd aws-5gcloudlabs
+## Current Implementation
 
-# 3. Provision infrastructure
-cd infrastructure
-fill in the mandatory variables in `vars.auto.tfvars`
-tofu init
-tofu apply
+### Infrastructure layer
 
-# 4. Deploy 5G Core
-# (Detailed steps in installation-instructions)
+Provisioned with OpenTofu (`infrastructure/`):
+
+- VPC (primary and secondary CIDR for Multus networking)
+- Amazon EKS (dedicated control-plane and user-plane node groups)
+- Secondary ENIs, subnets, and security groups for 3GPP interfaces (N2, N3, N4, N6)
+- EFS, ACM, IAM / IRSA, SSM
+- Argo CD installation and cluster-bootstrap Application registration
+
+### Kubernetes layer
+
+Synced by Argo CD after OpenTofu apply (`cluster-bootstrap/`):
+
+- Argo CD (GitOps, envsubst CMP plugin)
+- Argo Workflows
+- Istio, ingress, cert-manager, external-dns
+- AWS Load Balancer Controller, EFS CSI driver
+- Multus, Whereabouts
+- Prometheus, Grafana, Loki
+
+Telecom workloads are **not** installed at bootstrap. They are deployed on demand through the Telco Deployment Assistant.
+
+### Telecom layer
+
+Deployed on demand via the assistant or Argo Workflows (`5g/`):
+
+- free5GC (5G Core network functions)
+- Subscriber provisioning Job
+- UERANSIM (gNB and UE simulation)
+
+### User interface
+
+- Telco Deployment Assistant (`ai-agent`) at `https://console.<your-domain>`
+- Amazon Bedrock for intent parsing and guided operator interaction
+- Status checks and connectivity validation from the same console
+
+---
+
+## Current Experiment
+
+### Telco Deployment Assistant
+
+The first AI and automation experiment built on top of this platform is the Telco Deployment Assistant.
+
+The assistant simplifies the creation of a telecom environment by automating a number of operational tasks, including deployment workflows, subscriber provisioning, and simulation setup.
+
+Technically, it is implemented as the `ai-agent` service: a web console backed by Amazon Bedrock. The user describes the desired outcome in natural language; Bedrock selects a single-step Argo CD application or a multi-step Argo Workflow, collects parameters such as MCC, MNC, and subscriber count, fetches manifests from this repository, and applies them to the cluster.
+
+The objective is to explore how AI-assisted tooling can support telecom operations and reduce operational complexity.
+
+---
+
+## Architecture
+
+Two phases: **provision** the lab once with OpenTofu, then **operate** it through the Telco Deployment Assistant.
+
+```text
+                         ┌─────────────────────┐
+                         │        User         │
+                         └──────────┬──────────┘
+                                    │
+              ┌─────────────────────┴─────────────────────┐
+              │                                           │
+              ▼                                           ▼
+   ┌──────────────────────┐              ┌──────────────────────────────┐
+   │  Phase 1 — Provision │              │  Phase 2 — Operate           │
+   │  OpenTofu (local)    │              │  Telco Deployment Assistant  │
+   │                      │              │  (ai-agent + Amazon Bedrock) │
+   └──────────┬───────────┘              └──────────────┬───────────────┘
+              │                                         │
+              │  AWS infrastructure                     │  chat at console.<domain>
+              │  EKS cluster + Argo CD install        │  → Argo Workflows / Argo CD apps
+              │  cluster-bootstrap sync               │
+              │                                         ▼
+              │                          ┌──────────────────────────────┐
+              └─────────────────────────►│  Telecom workloads (on EKS)  │
+                                         │  free5GC · sub-prov · UERANSIM│
+                                         └──────────────────────────────┘
+
+   ┌──────────────────────────────────────────────────────────────────────┐
+   │                              AWS                                      │
+   │  VPC · ENIs · EFS · ACM · IAM                                         │
+   │  Amazon EKS                                                           │
+   │    └── Platform add-ons (Argo CD, Istio, Multus, observability, …)   │
+   └──────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Use Cases
+## Repository Structure
 
-- **5G Protocol Learning**: Hands-on experience with AMF, SMF, UPF, and other network functions
-- **Cloud-Native Development**: Reference architecture for containerized telecom workloads
-- **Integration Testing**: Validate UE registration, PDU sessions, and data plane connectivity
-- **Research & Experimentation**: Modify core configurations, test edge computing scenarios, network slicing
+```text
+.
+├── infrastructure/     OpenTofu — AWS infrastructure, EKS, Argo CD bootstrap
+├── cluster-bootstrap/  Argo CD apps — platform add-ons and ai-agent
+├── 5g/                 Helm charts, ArgoCD apps, workflows — telecom payloads
+└── docs/               Installation guides and architecture diagrams
+```
+
+---
+
+## Areas of Interest
+
+Future work may include experiments related to:
+
+- AI-assisted deployment workflows
+- Troubleshooting assistance
+- Configuration generation
+- Operational automation
+- Network validation
+- Observability workflows
+- Subscriber lifecycle management
+- Multi-cloud deployments
+
+The direction of the project will be guided by practical experimentation and learning.
+
+---
+
+## Getting Started
+
+Documentation and deployment guides are available in the [`docs/`](./docs/) directory.
+
+Typical workflow:
+
+1. Provision AWS infrastructure with OpenTofu (`infrastructure/`)
+2. Wait for cluster-bootstrap to sync in Argo CD (platform add-ons, including the Telco Deployment Assistant)
+3. Open `https://console.<your-domain>` and deploy the 5G environment via the assistant — for example: *"Deploy the full 5G solution with MCC 602, MNC 02, and 10 subscribers"*
+4. Validate connectivity and explore automation and AI-assisted workflows
+
+Detailed steps: [Installation instructions](./docs/installation-instructions/00%20infrastructure.md) · [Telco Deployment Assistant](./docs/installation-instructions/01%20ai-agent-console.md)
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+Contributions are welcome.
+
+Please open an issue or submit a pull request to discuss improvements, bug fixes, or new ideas.
 
 ---
 
 ## License
 
-[LICENSE](./LICENSE)
+Apache License 2.0
 
 ---
 
-## Acknowledgments
+## Maintainer
 
-This project builds on the excellent work of:
-- [Free5GC](https://free5gc.org/) - Open-source 5G Core implementation
-- [UERANSIM](https://github.com/aligungr/UERANSIM) - 5G UE and RAN simulator
-- The broader cloud-native and telecom open-source communities
+5G Cloud Labs
 
----
+info@5gcloudlabs.ai

@@ -1,7 +1,9 @@
 # Acknowledgements
 
-This project builds upon the work of several open-source communities:
+**5G Platform AWS** builds upon the work of several open-source communities:
 
-- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) – for the initial Helm charts that enabled Kubernetes-based 5G Core deployments.  
-- [free5GC project](https://github.com/free5gc/free5gc) – for the reference open-source implementation of the 5G Core network functions.  
-- [UERANSIM](https://github.com/aligungr/UERANSIM) – for providing an open-source RAN and UE simulator used in 5G testing and validation.  
+- [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) — Helm charts for Kubernetes-based 5G Core deployments
+- [free5GC](https://github.com/free5gc/free5gc) — open-source 5G Core network functions
+- [UERANSIM](https://github.com/aligungr/UERANSIM) — open-source RAN and UE simulator
+
+Maintained by **5G Cloud Labs** — info@5gcloudlabs.ai

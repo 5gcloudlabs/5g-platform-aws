@@ -1,79 +1,52 @@
 # Infrastructure
 
-This directory defines and provisions all the underlying **AWS** and **Kubernetes** infrastructure components required for the **AWS 5G Cloud Labs** environment.  
-All infrastructure is deployed using **OpenTofu** — an open-source Infrastructure as Code (IaC) tool fully compatible with Terraform syntax.
+OpenTofu configuration for **5G Platform AWS** — the reference telecom laboratory on AWS.
+
+This directory provisions AWS infrastructure (including the EKS cluster), installs Argo CD, and registers the cluster-bootstrap Application. Argo CD then syncs required platform add-ons from `cluster-bootstrap/argocd-apps/required-apps/` — for example Istio, ingress, Multus, observability, argo-workflows, and the Telco Deployment Assistant (`ai-agent`).
+
+Telecom workloads under `5g/` are deployed later via the assistant, not during `tofu apply`.
 
 ---
 
-## AWS Resources
-
-These files define the core AWS infrastructure for hosting the EKS-based 5G environment.
+## OpenTofu files
 
 | File | Description |
-|------|--------------|
-| `aws_vpc.tf` | Creates the main Virtual Private Cloud (VPC) with subnets, route tables, and gateways. |
-| `aws_vpc_multus-subnet.tf` | Adds dedicated subnets for Multus CNI network interfaces. |
-| `aws_vpc_n6-routing.tf` | Configures N6 interface routing for UPF traffic. |
-| `aws_eks.tf` | Provisions the Amazon Elastic Kubernetes Service (EKS) cluster. |
-| `aws_ec2_istio_sg-rule.tf` | Defines EC2 security group rules for Istio ingress and egress traffic. |
-| `aws_ec2_multus-sg.tf` | Creates security groups for Multus ENI interfaces. |
-| `aws_ec2_multus-eni.tf` | Manages secondary ENI attachment for Multus CNI. |
-| `aws_ec2_multus-sg-rule.tf` | Defines specific ingress and egress rules for Multus interfaces. |
-| `aws_efs.tf` | Creates an Amazon EFS File System for persistent storage. |
-| `aws_iam_efs.tf` | Defines IAM policies and roles for the EFS CSI Driver. |
-| `aws_iam_alb-controller.tf` | Configures IAM roles and policies for the AWS Load Balancer Controller. |
-| `aws_acm+dns_valid.tf` | Manages ACM certificates and DNS validation for HTTPS. |
-| `aws_ssm_doc-5gcp.tf` | Defines SSM documents for 5G Core provisioning automation. |
-| `aws_ssm_doc-5gup.tf` | Defines SSM documents for 5G User Plane provisioning automation. |
+|------|-------------|
+| `providers.tf` | Provider configuration (AWS, Kubernetes, Helm, kubectl, Cloudflare), S3 backend |
+| `variables.tf` | Input variables (region, VPC, EKS, DNS, Bedrock) |
+| `vars.auto.tfvars` | Environment-specific variable values (not committed with secrets in production) |
+| `vpc.tf` | VPC, subnets, NAT, secondary CIDR (`100.64.0.0/16`), N6 route table |
+| `eks.tf` | EKS cluster, control-plane and user-plane node groups, VPC CNI tuning, Istio webhook SG rules |
+| `multus.tf` | Multus subnets, ENIs, attachments, and security groups for N2/N3/N4/N6 |
+| `ssm.tf` | SSM documents to bring secondary ENIs up on worker nodes |
+| `efs.tf` | Amazon EFS for persistent volumes (MongoDB) |
+| `iam.tf` | IRSA roles for ALB controller, EFS CSI driver, and ai-agent Bedrock access |
+| `acm.tf` | ACM certificate with Cloudflare DNS validation |
+| `argocd.tf` | Argo CD Helm release (envsubst CMP plugin) and cluster-bootstrap Application |
+| `k8s_git-repo-secret.tf` | Git credential secret for Argo CD repository access |
 
 ---
 
-## Kubernetes Resources
+## Provision vs. operate
 
-These files configure Kubernetes objects deployed into the EKS cluster.
+| Phase | Tool | Scope |
+|-------|------|-------|
+| AWS infrastructure | OpenTofu | VPC, EKS cluster and nodes, ENIs, EFS, ACM, IAM, Argo CD install |
+| Cluster bootstrap | Argo CD | Required add-ons under `required-apps/` (Istio, ingress, Multus, observability, argo-workflows, ai-agent, etc.) |
+| Telecom workloads | Telco Deployment Assistant | free5GC, subscriber provisioning, UERANSIM (via Argo CD / Argo Workflows) |
 
-| File | Description |
-|------|--------------|
-| `k8s_namespaces.tf` | Creates required namespaces (e.g., `argocd`, `free5gc`, `ueransim`). |
-| `k8s_ingress.tf` | Defines ingress configurations for external access. |
-| `k8s_istio_resources.tf` | Configures Istio Gateway and VirtualService resources. |
-| `k8s_cert-manager_resources.tf` | Defines ClusterIssuer and Certificate resources for TLS. |
-| `k8s_cloudflare-api-token-secret.tf` | Creates the Cloudflare API token secret for DNS management. |
-| `k8s_cloudflare-api-token-secret-cert-manager-ns.tf` | Replicates the Cloudflare token in the `cert-manager` namespace. |
-| `k8s_cm_domain_name.tf` | Configures a ConfigMap containing the cluster’s domain name. |
-| `k8s_cm_grafana_pdu_dashboard.tf` | Loads a Grafana dashboard for PDU session monitoring. |
-| `k8s_cm_grafana_reg_dashboard.tf` | Loads a Grafana dashboard for registration metrics. |
-| `k8s_git-repo-secret.tf` | Creates a Git credential secret for Argo CD. |
-| `k8s_git-repo-secret_def_ns.tf` | Adds the same secret to the default namespace. |
-| `k8s_env_variable_vpc-cni.tf` | Configures environment variables for the AWS VPC CNI plugin. |
-| `k8s_storage_class.tf` | Defines the `efs-sc` StorageClass for dynamic EFS-backed Persistent Volumes. |
+Only Argo CD is installed directly by OpenTofu via Helm. Other cluster add-ons are Argo CD Applications under `cluster-bootstrap/argocd-apps/required-apps/`.
 
 ---
 
-## Helm Releases
+## Usage
 
-These files deploy cluster add-ons directly using the **`helm_release`** resource in **OpenTofu**, rather than through Argo CD.  
-This approach ensures tighter integration between these system-level components and the underlying infrastructure during the initial provisioning phase.
+```bash
+git clone https://github.com/5gcloudlabs/5g-platform-aws.git
+cd 5g-platform-aws/infrastructure
+tofu init
+tofu plan
+tofu apply
+```
 
-
-| File | Description |
-|------|--------------|
-| `helm_argocd.tf` | Installs Argo CD for GitOps-based deployment management. |
-| `helm_cert-manager.tf` | Deploys Cert-Manager for automatic certificate management. |
-| `helm_efs_csi_driver.tf` | Installs the Amazon EFS CSI Driver to support dynamic PV provisioning. |
-| `helm_istio-charts.tf` | Deploys Istio service mesh components. |
-| `helm_external-dns-cloudflare.tf` | Installs ExternalDNS configured for Cloudflare DNS records. |
-| `helm_alb-controller.tf` | Installs the AWS Load Balancer Controller for ingress handling. |
-
----
-
-## Supporting Files
-
-| File | Description |
-|------|--------------|
-| `argocd_required_apps.tf` | Ensures core Argo CD Applications (e.g., Executor, Console UI) are pre-registered. |
-| `provider.tf` | Defines provider configurations (AWS, Kubernetes, Helm). |
-| `variable.tf` | Declares reusable variables for the infrastructure stack. |
-| `terraform.tfvars` | Contains environment-specific variable values. |
-
----
+See [Installation instructions](../docs/installation-instructions/00%20infrastructure.md) for prerequisites and validation.

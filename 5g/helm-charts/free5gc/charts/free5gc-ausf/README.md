@@ -46,4 +46,4 @@ Deployment is managed via Argo CD Application [`free5gc-app.base`](../../../../a
 ## License & Attribution
 
 This chart is based on **towards5gs-helm** (Apache 2.0).  
-Modifications and integrations are owned by © 2025 5g-cloud-labs (a project by CNAD LTD.).
+Modifications and integrations are owned by © 5G Cloud Labs.

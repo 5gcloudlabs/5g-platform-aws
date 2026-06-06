@@ -1,19 +1,29 @@
-# Helm Charts
+# Helm Charts — Cluster Bootstrap
 
-This directory contains the locally maintained Helm charts used to deploy the main and supporting components of the **AWS 5G Cloud Labs** environment on Amazon EKS.
-
-## Charts
+Locally maintained Helm charts for **5G Platform AWS**, deployed by Argo CD during cluster bootstrap.
 
 | Chart | Description |
-|--------|-------------|
-| **console** | Deploys the Console UI for managing 5G network deployment and provisioning workflows. |
-| **curl** | Deploys a lightweight test utility pod for validating network connectivity. |
-| **executor** | Deploys the Executor component responsible for running automation and provisioning scripts. |
-| **free5gc** | Deploys the complete free5GC 5G Core Network. |
-| **multus** | Deploys the Multus CNI plugin for multi-interface pod networking. |
-| **ueransim** | Deploys the UERANSIM components to simulate gNB and UE traffic. |
+|-------|-------------|
+| ai-agent | Telco Deployment Assistant — frontend and backend (Amazon Bedrock). Console at `console.<domain>`. |
+| multus | Multus CNI for multi-interface pod networking (required by telecom workloads). |
 
-## Notes
+---
 
-These charts are referenced by the corresponding Argo CD `Application` manifests to enable automated and declarative deployment.
+## Charts outside bootstrap
 
+These charts live under `5g/helm-charts/` and are deployed on demand by the Telco Deployment Assistant (not at cluster bootstrap):
+
+| Chart | Description |
+|-------|-------------|
+| free5gc | free5GC 5G Core network functions |
+| ueransim | gNodeB and UE simulator |
+
+---
+
+## Legacy chart
+
+The console chart in this directory is deprecated. The Istio VirtualService for `console.<domain>` routes to ai-agent-frontend (Telco Deployment Assistant), not the old console deployment.
+
+---
+
+Charts are referenced by Argo CD Application manifests in `cluster-bootstrap/argocd-apps/required-apps/`.
