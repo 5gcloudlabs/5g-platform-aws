@@ -44,8 +44,8 @@ The environment combines:
 
 **Infrastructure and platform**
 - OpenTofu — AWS infrastructure (VPC, EKS, persistent storage, IAM, TLS)
-- Multi-interface networking — Multus CNI and dedicated ENIs for 3GPP traffic separation (N2, N3, N4, N6)
 - Argo CD — GitOps bootstrap of cluster platform services
+- Multi-interface networking — Multus CNI and dedicated ENIs for 3GPP traffic separation (N2, N3, N4, N6)
 - Istio, cert-manager, and external DNS — ingress, service mesh, and automated TLS
 - Prometheus, Grafana, and Loki — metrics, dashboards, and log aggregation
 - Argo Workflows — multi-step telecom deployment orchestration
