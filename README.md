@@ -57,11 +57,11 @@ The current environment combines cloud infrastructure, Kubernetes, GitOps practi
 **Infrastructure provisioning** (`infrastructure/`)
 
 - OpenTofu — AWS infrastructure (VPC, EKS, persistent storage, IAM, TLS)
-- Multi-interface networking — Multus CNI and dedicated ENIs for 3GPP traffic separation (N2, N3, N4, N6)
 - Argo CD — GitOps bootstrap of cluster platform services
 
 **Platform services** (`cluster-bootstrap/`)
 
+- Multi-interface networking — Multus CNI and Whereabouts IPAM for 3GPP traffic separation (N2, N3, N4, N6)
 - Istio, cert-manager, and external DNS — ingress, service mesh, and automated TLS
 - Prometheus, Grafana, and Loki — metrics, dashboards, and log aggregation
 - Argo Workflows — multi-step telecom deployment orchestration
@@ -155,7 +155,7 @@ The objective is to better understand where AI-assisted tooling can provide prac
 A typical workflow consists of:
 
 1. **Provision** — configure OpenTofu variables and apply (`infrastructure/`) to create AWS resources, EKS, and Argo CD
-2. **Bootstrap** — wait for `cluster-bootstrap` applications to sync in Argo CD (Istio, Multus, observability, Argo Workflows, ai-agent)
+2. **Bootstrap** — wait for `cluster-bootstrap` applications to sync in Argo CD (Istio, Multus, Whereabouts, observability, Argo Workflows, ai-agent)
 3. **Operate** — open `https://console.<your-domain>` and use the Telco Deployment Assistant to deploy telecom workloads — for example:
 
    *"Deploy the full 5G solution with MCC 602, MNC 02, and 10 subscribers"*
