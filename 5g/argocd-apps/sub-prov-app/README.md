@@ -25,7 +25,7 @@ IMSI numbering starts at `{MCC}{MNC}0000000001`.
 ## Deployment flow
 
 ```text
-User → Telco Deployment Assistant (Bedrock)
+User → Telco Deployment Assistant (Bedrock / Claude Haiku 4.5)
   → kubectl apply or Argo Workflow step
   → sub-prov Job runs
   → subscribers registered in MongoDB / WebUI

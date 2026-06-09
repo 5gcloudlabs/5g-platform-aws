@@ -23,7 +23,7 @@ OpenTofu creates the EKS cluster and installs Argo CD. Cluster bootstrap then sy
 | `kube-prometheus-stack` / `loki` | Metrics, dashboards, logs |
 | `storage-class` | EFS StorageClass |
 | `argo-workflows` | Multi-step telecom deployment orchestration |
-| `ai-agent` | Telco Deployment Assistant (Bedrock-backed console) |
+| `ai-agent` | Telco Deployment Assistant (Bedrock / Claude Haiku 4.5 console) |
 
 Telecom workloads (free5GC, UERANSIM, subscriber provisioning) are not part of cluster bootstrap. They are deployed on demand via the Telco Deployment Assistant, which triggers Argo CD Applications and Argo Workflows under `5g/`.
 
@@ -44,4 +44,4 @@ OpenTofu apply
 
 ## envsubst plugin
 
-Manifests in this directory use `${ARGOCD_ENV_*}` placeholders. The envsubst CMP plugin (configured in `infrastructure/argocd.tf`) substitutes values passed from OpenTofu (region, domain, cert ARN, IAM ARNs, Bedrock settings).
+Manifests in this directory use `${ARGOCD_ENV_*}` placeholders. The envsubst CMP plugin (configured in `infrastructure/argocd.tf`) substitutes values passed from OpenTofu (region, domain, cert ARN, IAM ARNs, Bedrock region and Claude Haiku 4.5 model ID).

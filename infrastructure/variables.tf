@@ -69,9 +69,9 @@ variable "bedrock_region" {
 
 
 variable "bedrock_model_id" {
-  description = "AI model used by bedrock."
+  description = "Bedrock model or inference profile ID for the Telco Deployment Assistant (Anthropic Claude Haiku 4.5)."
   type = string
-  default = "anthropic.claude-3-haiku-20240307-v1:0"
+  default = "global.anthropic.claude-haiku-4-5-20251001-v1:0"
 }
 
 

@@ -77,7 +77,7 @@ The current environment combines cloud infrastructure, Kubernetes, GitOps practi
 
 ### Experiments
 
-- [Telco Deployment Assistant](https://github.com/5g-cloud-labs/telco-deployment-assistant) — AI-assisted deployment, parameter collection, and operational validation (Amazon Bedrock)
+- [Telco Deployment Assistant](https://github.com/5g-cloud-labs/telco-deployment-assistant) — AI-assisted deployment, parameter collection, and operational validation (Amazon Bedrock — Anthropic Claude Haiku 4.5)
 
 ---
 
@@ -97,7 +97,7 @@ Current capabilities include:
 - RAN and UE simulation workflows (free5GC, UERANSIM)
 - Operational validation through Argo Workflows and Argo CD applications
 
-The assistant is deployed from this repository as the `ai-agent` service during cluster bootstrap. Its source code lives in the separate [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) repository.
+The assistant is deployed from this repository as the `ai-agent` service during cluster bootstrap, using Amazon Bedrock (Anthropic Claude Haiku 4.5). Its source code lives in the separate [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) repository.
 
 The objective is to better understand where AI-assisted tooling can provide practical value in telecom operations.
 
@@ -116,7 +116,7 @@ The objective is to better understand where AI-assisted tooling can provide prac
    ┌──────────────────────┐              ┌──────────────────────────────┐
    │  Phase 1 — Provision │              │  Phase 2 — Operate           │
    │  OpenTofu (local)    │              │  Telco Deployment Assistant  │
-   │                      │              │  (ai-agent + Amazon Bedrock) │
+   │                      │              │  (ai-agent + Bedrock / Claude Haiku 4.5) │
    └──────────┬───────────┘              └──────────────┬───────────────┘
               │                                         │
               │  AWS infrastructure                     │  chat at console.<domain>
@@ -182,7 +182,7 @@ AWS currently serves as the primary laboratory environment. Additional cloud pla
 
 ### Prerequisites
 
-- AWS account, Cloudflare domain + API token, Amazon Bedrock model access
+- AWS account, Cloudflare domain + API token, Amazon Bedrock access (Anthropic Claude Haiku 4.5)
 - AWS CLI, OpenTofu, kubectl
 
 ### Quick start
@@ -191,7 +191,7 @@ AWS currently serves as the primary laboratory environment. Additional cloud pla
 git clone https://github.com/5g-cloud-labs/5g-platform-aws.git
 cd 5g-platform-aws/infrastructure
 
-# Configure vars.auto.tfvars (domain, Cloudflare, S3 backend, Bedrock settings)
+# Configure vars.auto.tfvars (domain, Cloudflare, S3 backend, Bedrock / Claude Haiku 4.5)
 tofu init
 tofu apply
 ```
@@ -216,7 +216,7 @@ If you are new to the project, start with the installation and deployment guides
 
 | Repository | Description |
 |------------|-------------|
-| [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) | AI assistant source — Bedrock intent, workflow selection, and operator chat |
+| [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) | AI assistant source — Bedrock (Claude Haiku 4.5) intent, workflow selection, and operator chat |
 | `5g-platform-gcp` | GCP laboratory *(future)* |
 
 ---

@@ -24,7 +24,7 @@ Not synced at cluster bootstrap. Applied on demand by the Telco Deployment Assis
 ## Deployment flow
 
 ```text
-User → Telco Deployment Assistant (Bedrock)
+User → Telco Deployment Assistant (Bedrock / Claude Haiku 4.5)
   → kubectl apply or Argo Workflow step
   → Argo CD syncs Helm chart
   → gNB + UE pods in ueransim namespace

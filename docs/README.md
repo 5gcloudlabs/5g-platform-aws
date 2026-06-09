@@ -19,7 +19,7 @@ Diagrams and design notes: [docs/arch/](./arch/)
 | Directory | Role |
 |-----------|------|
 | `infrastructure/` | OpenTofu — AWS infrastructure, EKS, Argo CD bootstrap |
-| `cluster-bootstrap/` | Platform add-ons and Telco Deployment Assistant (`ai-agent`) |
+| `cluster-bootstrap/` | Platform add-ons and Telco Deployment Assistant (`ai-agent`, Bedrock / Claude Haiku 4.5) |
 | `5g/` | Telecom payloads — Helm charts, Argo CD apps, workflows |
 
 ## Typical workflow
@@ -27,6 +27,6 @@ Diagrams and design notes: [docs/arch/](./arch/)
 1. **Provision** — `tofu apply` in `infrastructure/`
 2. **Bootstrap** — wait for Argo CD to sync `cluster-bootstrap`
 3. **Operate** — open `https://console.<your-domain>` and use the Telco Deployment Assistant
-4. **Experiment** — automation, observability, and AI-assisted operational workflows
+4. **Experiment** — automation, observability, and AI-assisted operational workflows (Bedrock / Claude Haiku 4.5)
 
 Maintained by **5G Cloud Labs** — info@5gcloudlabs.ai

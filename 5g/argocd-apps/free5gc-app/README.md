@@ -26,7 +26,7 @@ Network functions: AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR, UPF, WebUI, MongoDB
 ## Deployment flow
 
 ```text
-User → Telco Deployment Assistant (Bedrock)
+User → Telco Deployment Assistant (Bedrock / Claude Haiku 4.5)
   → kubectl apply (patched Application YAML)
   → Argo CD syncs Helm chart
   → free5GC pods in free5gc namespace

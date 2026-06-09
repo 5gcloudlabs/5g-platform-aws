@@ -4,7 +4,7 @@ Locally maintained Helm charts for **5G Platform AWS**, deployed by Argo CD duri
 
 | Chart | Description |
 |-------|-------------|
-| ai-agent | Telco Deployment Assistant — frontend and backend (Amazon Bedrock). Console at `console.<domain>`. |
+| ai-agent | Telco Deployment Assistant — frontend and backend (Amazon Bedrock — Anthropic Claude Haiku 4.5). Console at `console.<domain>`. |
 | multus | Multus CNI for multi-interface pod networking (required by telecom workloads). |
 
 ---

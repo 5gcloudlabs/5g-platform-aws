@@ -13,14 +13,14 @@ Telecom workloads under `5g/` are deployed later via the assistant, not during `
 | File | Description |
 |------|-------------|
 | `providers.tf` | Provider configuration (AWS, Kubernetes, Helm, kubectl, Cloudflare), S3 backend |
-| `variables.tf` | Input variables (region, VPC, EKS, DNS, Bedrock) |
+| `variables.tf` | Input variables (region, VPC, EKS, DNS, Bedrock / Claude Haiku 4.5) |
 | `vars.auto.tfvars` | Environment-specific variable values (not committed with secrets in production) |
 | `vpc.tf` | VPC, subnets, NAT, secondary CIDR (`100.64.0.0/16`), N6 route table |
 | `eks.tf` | EKS cluster, control-plane and user-plane node groups, VPC CNI tuning, Istio webhook SG rules |
 | `multus.tf` | Multus subnets, ENIs, attachments, and security groups for N2/N3/N4/N6 |
 | `ssm.tf` | SSM documents to bring secondary ENIs up on worker nodes |
 | `efs.tf` | Amazon EFS for persistent volumes (MongoDB) |
-| `iam.tf` | IRSA roles for ALB controller, EFS CSI driver, and ai-agent Bedrock access |
+| `iam.tf` | IRSA roles for ALB controller, EFS CSI driver, and ai-agent Bedrock access (Claude Haiku 4.5) |
 | `acm.tf` | ACM certificate with Cloudflare DNS validation |
 | `argocd.tf` | Argo CD Helm release (envsubst CMP plugin) and cluster-bootstrap Application |
 | `k8s_git-repo-secret.tf` | Git credential secret for Argo CD repository access |

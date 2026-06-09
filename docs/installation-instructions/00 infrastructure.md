@@ -15,7 +15,7 @@ This guide covers prerequisites and OpenTofu provisioning (Phase 1). After clust
 |-------------|-------------|
 | **AWS Account** | Permissions to create VPC, EKS, EC2, EFS, ACM, IAM, SSM, and S3 resources. |
 | **Cloudflare Account** | A registered domain, zone ID, and API token with **DNS:Edit** permissions for that zone. |
-| **Amazon Bedrock access** | Model access enabled in the AWS account/region used by the Telco Deployment Assistant (see [Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html)). |
+| **Amazon Bedrock access** | Model access enabled for **Anthropic Claude Haiku 4.5** in the AWS account/region used by the Telco Deployment Assistant (see [Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) and the [Claude Haiku 4.5 model card](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-haiku-4-5.html)). |
 
 #### 1.b) Local workstation requirements
 
@@ -87,7 +87,7 @@ Edit `vars.auto.tfvars`:
 | `zone_id` | *(required)* | Cloudflare zone ID. |
 | `cloudflare_api_token` | *(required)* | Cloudflare API token for DNS and ACM validation. |
 | `bedrock_region` | `""` | Bedrock region override; empty uses `region`. |
-| `bedrock_model_id` | Claude Haiku (see `variables.tf`) | Bedrock model or inference profile for the Telco Deployment Assistant. |
+| `bedrock_model_id` | Anthropic Claude Haiku 4.5 (see `variables.tf`) | Bedrock model or inference profile ID for the Telco Deployment Assistant. |
 
 ---
 
@@ -115,7 +115,7 @@ Confirm with `yes` when prompted. A fresh deployment typically adds on the order
 
 - Creates VPC, subnets, NAT, secondary CIDR (`100.64.0.0/16`), EKS cluster, and two node groups (control-plane and user-plane)
 - Attaches Multus ENIs and security groups for N2/N3/N4/N6 interfaces
-- Creates EFS, ACM certificate (DNS-validated via Cloudflare), and IAM roles (ALB controller, EFS CSI, ai-agent Bedrock)
+- Creates EFS, ACM certificate (DNS-validated via Cloudflare), and IAM roles (ALB controller, EFS CSI, ai-agent Bedrock access for Claude Haiku 4.5)
 - Installs Argo CD (Helm) with the envsubst CMP plugin
 - Registers the Git repository secret and applies the cluster-bootstrap Argo CD Application
 
@@ -150,7 +150,7 @@ Expected applications include (non-exhaustive):
 | Application | Purpose |
 |-------------|---------|
 | `cluster-bootstrap` | Parent app-of-apps |
-| `ai-agent` | Telco Deployment Assistant — frontend + backend (Bedrock) |
+| `ai-agent` | Telco Deployment Assistant — frontend + backend (Bedrock / Claude Haiku 4.5) |
 | `argo-workflows` | Workflow engine for multi-step 5G deployments |
 | `aws-load-balancer-controller` | ALB provisioning |
 | `aws-efs-csi-driver` | EFS persistent volumes |

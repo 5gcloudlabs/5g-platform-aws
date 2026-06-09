@@ -56,7 +56,7 @@ The environment combines:
 - UERANSIM — gNodeB and UE simulation for registration and data-plane testing
 
 **Experiments**
-- [Telco Deployment Assistant](https://github.com/5g-cloud-labs/telco-deployment-assistant) — AI-assisted deployment, parameter collection, and operational validation (Amazon Bedrock)
+- [Telco Deployment Assistant](https://github.com/5g-cloud-labs/telco-deployment-assistant) — AI-assisted deployment, parameter collection, and operational validation (Amazon Bedrock — Anthropic Claude Haiku 4.5)
 
 The first experiment built on this environment is the **Telco Deployment Assistant**, which explores how AI-assisted tooling can simplify deploying and operating a telecom laboratory without manual CLI steps or fixed deployment scripts.
 
@@ -79,7 +79,7 @@ AWS currently serves as the primary laboratory environment. Additional cloud pla
 
 | Repository | Description |
 |------------|-------------|
-| [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) | AI-assisted deployment and operational workflows — natural-language intent, Bedrock, and Argo orchestration |
+| [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) | AI-assisted deployment and operational workflows — natural-language intent, Bedrock (Claude Haiku 4.5), and Argo orchestration |
 
 ---
 

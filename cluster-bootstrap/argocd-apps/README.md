@@ -13,7 +13,7 @@ Argo CD `Application` manifests for **5G Platform AWS**.
 
 Telecom applications are not pre-synced at install time. The Telco Deployment Assistant (`ai-agent`):
 
-1. Parses user intent via Amazon Bedrock
+1. Parses user intent via Amazon Bedrock (Anthropic Claude Haiku 4.5)
 2. Fetches the relevant manifest from this repository
 3. Applies a single Argo CD Application (`kubectl`) or submits an Argo Workflow (multi-step)
 

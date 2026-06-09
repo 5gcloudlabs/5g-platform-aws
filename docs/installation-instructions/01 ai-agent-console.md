@@ -3,7 +3,7 @@
 
 Part of **5G Platform AWS**. Phase 2 of the platform workflow.
 
-After OpenTofu provisioning and cluster bootstrap are complete, all telecom deployments are driven through the **Telco Deployment Assistant** at `https://console.<your-domain>`. The assistant is implemented as the `ai-agent` service (Amazon Bedrock + FastAPI backend). There is no separate CLI or legacy click-through UI.
+After OpenTofu provisioning and cluster bootstrap are complete, all telecom deployments are driven through the **Telco Deployment Assistant** at `https://console.<your-domain>`. The assistant is implemented as the `ai-agent` service (Amazon Bedrock — Anthropic Claude Haiku 4.5 — with a FastAPI backend). There is no separate CLI or legacy click-through UI.
 
 ---
 
@@ -13,7 +13,7 @@ After OpenTofu provisioning and cluster bootstrap are complete, all telecom depl
 https://console.<your-domain>
 ```
 
-The assistant is a chat interface backed by Amazon Bedrock. You describe what you want in natural language; it collects MCC, MNC, and (when needed) subscriber count, then triggers the appropriate deployment on the cluster.
+The assistant is a chat interface backed by Amazon Bedrock (Anthropic Claude Haiku 4.5). You describe what you want in natural language; it collects MCC, MNC, and (when needed) subscriber count, then triggers the appropriate deployment on the cluster.
 
 ---
 
@@ -21,7 +21,7 @@ The assistant is a chat interface backed by Amazon Bedrock. You describe what yo
 
 | Layer | Role |
 |-------|------|
-| Bedrock (intent) | Parses your message and selects exactly one deployment option. |
+| Bedrock / Claude Haiku 4.5 (intent) | Parses your message and selects exactly one deployment option. |
 | Parameter extraction | Collects MCC, MNC, and count only when you explicitly provide them. |
 | Manifest fetch | Reads workflow and ArgoCD app YAML from this repository (`GITHUB_RAW_BASE` in the ai-agent Helm values). |
 | Execution | Single-step apps are applied with `kubectl`; multi-step flows are submitted as Argo Workflows. |
