@@ -7,6 +7,24 @@ This guide covers prerequisites and OpenTofu provisioning (Phase 1). After clust
 
 ---
 
+## Cost
+
+The laboratory runs on billable AWS resources for as long as it remains provisioned. Based on observed billing, the **average running cost is approximately USD 3.50–4.00 per hour** in AWS charges — primarily EKS, EC2 worker nodes, networking, load balancers, and storage.
+
+With applicable taxes (approximately **16.6%** on AWS charges in the reference deployment), the **estimated all-in cost is around USD 4.50 per hour**.
+
+| Item | Approximate rate |
+|------|------------------|
+| AWS usage | USD 3.50–4.00 / hour |
+| Tax (~16.6%) | applied to AWS charges |
+| **Estimated total** | **~USD 4.50 / hour** |
+
+Actual costs vary by AWS region, instance hours, data transfer, and whether telecom workloads (free5GC, UERANSIM) are deployed. Amazon Bedrock usage for the Telco Deployment Assistant is billed separately on a per-request basis and is typically small compared to infrastructure charges.
+
+**Tear down the environment when it is not in use** to avoid ongoing hourly charges. See [Terminate environment](./terminate.md).
+
+---
+
 ### 1. Prerequisites
 
 #### 1.a) Cloud account requirements

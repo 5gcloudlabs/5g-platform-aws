@@ -39,6 +39,12 @@ Only Argo CD is installed directly by OpenTofu via Helm. Other cluster add-ons a
 
 ---
 
+## Cost
+
+Provisioning creates billable AWS resources. Based on observed billing, the running laboratory averages approximately **USD 3.50–4.00 per hour** in AWS usage, or **~USD 4.50 per hour** including applicable taxes (~16.6%). See the [Cost section](../docs/installation-instructions/00%20infrastructure.md#cost) in the installation guide for a breakdown and [terminate.md](../docs/installation-instructions/terminate.md) to tear down when finished.
+
+---
+
 ## Usage
 
 ```bash

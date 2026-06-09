@@ -103,6 +103,8 @@ If you're new to the project, start with:
 
 This repository contains the AWS laboratory environment: infrastructure provisioning, cluster bootstrap, telecom payloads, and documentation for the full deploy-and-operate workflow.
 
+Expect approximately **USD 3.50–4.00/hour** in AWS usage while the lab is running (~**USD 4.50/hour** including applicable taxes). Tear down when not in use.
+
 ---
 
 ## Contributing

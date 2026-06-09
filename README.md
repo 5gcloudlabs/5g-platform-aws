@@ -178,6 +178,14 @@ AWS currently serves as the primary laboratory environment. Additional cloud pla
 
 ---
 
+## Cost
+
+The laboratory incurs AWS charges for as long as it is running. Based on observed billing, average usage is approximately **USD 3.50–4.00 per hour** in AWS costs, or **~USD 4.50 per hour** including applicable taxes (~16.6%). Bedrock usage for the Telco Deployment Assistant is additional but typically minor.
+
+Costs vary by region, workload, and uptime. Tear down when not in use — see the [installation guide](docs/installation-instructions/00%20infrastructure.md#cost) for details and [terminate.md](docs/installation-instructions/terminate.md) to stop charges.
+
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -203,7 +211,7 @@ After cluster bootstrap syncs in Argo CD, open `https://console.<your-domain>` a
 | Guide | Description |
 |-------|-------------|
 | [docs/](docs/) | Documentation index |
-| [Installation — infrastructure](docs/installation-instructions/00%20infrastructure.md) | OpenTofu provisioning and bootstrap validation |
+| [Installation — infrastructure](docs/installation-instructions/00%20infrastructure.md) | Cost estimate, OpenTofu provisioning, and bootstrap validation |
 | [Telco Deployment Assistant](docs/installation-instructions/01%20ai-agent-console.md) | Deploy and validate telecom workloads |
 | [Architecture diagrams](docs/arch/) | VPC, EKS, CNI, and ingress design |
 | [Terminate environment](docs/installation-instructions/terminate.md) | Tear down AWS resources |

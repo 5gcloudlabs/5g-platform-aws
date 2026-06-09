@@ -2,11 +2,13 @@
 
 Reference implementation of the [5G Cloud Labs](https://5gcloudlabs.ai) telecom laboratory on AWS.
 
+Running the full laboratory on AWS costs approximately **USD 3.50–4.00 per hour** in AWS usage, or **~USD 4.50 per hour** including applicable taxes (~16.6%). See [Cost](./installation-instructions/00%20infrastructure.md#cost) in the infrastructure installation guide for details.
+
 ## Guides
 
 | Document | Description |
 |----------|-------------|
-| [Installation — infrastructure](./installation-instructions/00%20infrastructure.md) | Prerequisites, OpenTofu apply, cluster bootstrap validation |
+| [Installation — infrastructure](./installation-instructions/00%20infrastructure.md) | Prerequisites, cost estimate, OpenTofu apply, cluster bootstrap validation |
 | [Telco Deployment Assistant](./installation-instructions/01%20ai-agent-console.md) | Deploy and validate free5GC, subscribers, and UERANSIM via the console |
 | [Terminate environment](./installation-instructions/terminate.md) | Tear down AWS resources |
 
