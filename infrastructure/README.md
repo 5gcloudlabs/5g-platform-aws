@@ -1,10 +1,10 @@
 # Infrastructure
 
-OpenTofu configuration for **5G Platform AWS** — the reference telecom laboratory on AWS.
+OpenTofu configuration for **5G Platform AWS** — the AWS **platform environment** within [5G Cloud Labs](https://5gcloudlabs.ai).
 
-This directory provisions AWS infrastructure (including the EKS cluster), installs Argo CD, and registers the cluster-bootstrap Application. Argo CD then syncs required platform add-ons from `cluster-bootstrap/argocd-apps/required-apps/` — for example Istio, ingress, Multus, observability, argo-workflows, and the Telco Deployment Assistant (`ai-agent`).
+This directory provisions the platform stack on AWS: EKS, networking, IAM, Argo CD bootstrap, and the cluster-bootstrap Application. Network components under `5g/` are deployed later via the Network Deployment Agent, not during `tofu apply`.
 
-Telecom workloads under `5g/` are deployed later via the assistant, not during `tofu apply`.
+Deploying this stack is only needed for **end-to-end evaluation** on AWS. Earlier work can stay in a dedicated use case repository or on your workstation.
 
 ---
 
@@ -33,7 +33,7 @@ Telecom workloads under `5g/` are deployed later via the assistant, not during `
 |-------|------|-------|
 | AWS infrastructure | OpenTofu | VPC, EKS cluster and nodes, ENIs, EFS, ACM, IAM, Argo CD install |
 | Cluster bootstrap | Argo CD | Required add-ons under `required-apps/` (Istio, ingress, Multus, observability, argo-workflows, ai-agent, etc.) |
-| Telecom workloads | Telco Deployment Assistant | free5GC, subscriber provisioning, UERANSIM (via Argo CD / Argo Workflows) |
+| Network components | Network Deployment Agent | Free5GC, subscriber provisioning, UERANSIM (via Argo CD / Argo Workflows) |
 
 Only Argo CD is installed directly by OpenTofu via Helm. Other cluster add-ons are Argo CD Applications under `cluster-bootstrap/argocd-apps/required-apps/`.
 

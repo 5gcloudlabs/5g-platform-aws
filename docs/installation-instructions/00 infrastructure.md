@@ -1,9 +1,11 @@
 
 ## Installation Instructions — Infrastructure
 
-Part of **5G Platform AWS** — reference implementation of the 5G Cloud Labs telecom laboratory.
+Part of **5G Platform AWS** — the AWS platform environment within [5G Cloud Labs](https://5gcloudlabs.ai).
 
-This guide covers prerequisites and OpenTofu provisioning (Phase 1). After cluster bootstrap completes, use the [Telco Deployment Assistant](./01%20ai-agent-console.md) to deploy and validate telecom workloads (Phase 2).
+This guide covers prerequisites and OpenTofu provisioning (Phase 1) for contributors who need a **deployed platform environment** for end-to-end evaluation. After cluster bootstrap completes, use the [Network Deployment Agent](./01%20ai-agent-console.md) to deploy and validate network components (Phase 2).
+
+If you are developing a use case or experiment in a dedicated repository, you do not need to follow this guide until you are ready for end-to-end validation on AWS.
 
 ---
 
@@ -19,7 +21,7 @@ With applicable taxes (approximately **16.6%** on AWS charges in the reference d
 | Tax (~16.6%) | applied to AWS charges |
 | **Estimated total** | **~USD 4.50 / hour** |
 
-Actual costs vary by AWS region, instance hours, data transfer, and whether telecom workloads (free5GC, UERANSIM) are deployed. Amazon Bedrock usage for the Telco Deployment Assistant is billed separately on a per-request basis and is typically small compared to infrastructure charges.
+Actual costs vary by AWS region, instance hours, data transfer, and whether network components (Free5GC, UERANSIM) are deployed. Amazon Bedrock usage for the Network Deployment Agent is billed separately on a per-request basis and is typically small compared to infrastructure charges.
 
 **Tear down the environment when it is not in use** to avoid ongoing hourly charges. See [Terminate environment](./terminate.md).
 
@@ -33,7 +35,7 @@ Actual costs vary by AWS region, instance hours, data transfer, and whether tele
 |-------------|-------------|
 | **AWS Account** | Permissions to create VPC, EKS, EC2, EFS, ACM, IAM, SSM, and S3 resources. |
 | **Cloudflare Account** | A registered domain, zone ID, and API token with **DNS:Edit** permissions for that zone. |
-| **Amazon Bedrock access** | Model access enabled for **Anthropic Claude Haiku 4.5** in the AWS account/region used by the Telco Deployment Assistant (see [Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) and the [Claude Haiku 4.5 model card](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-haiku-4-5.html)). |
+| **Amazon Bedrock access** | Model access enabled for **Anthropic Claude Haiku 4.5** in the AWS account/region used by the Network Deployment Agent (see [Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) and the [Claude Haiku 4.5 model card](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-haiku-4-5.html)). |
 
 #### 1.b) Local workstation requirements
 
@@ -105,7 +107,7 @@ Edit `vars.auto.tfvars`:
 | `zone_id` | *(required)* | Cloudflare zone ID. |
 | `cloudflare_api_token` | *(required)* | Cloudflare API token for DNS and ACM validation. |
 | `bedrock_region` | `""` | Bedrock region override; empty uses `region`. |
-| `bedrock_model_id` | Anthropic Claude Haiku 4.5 (see `variables.tf`) | Bedrock model or inference profile ID for the Telco Deployment Assistant. |
+| `bedrock_model_id` | Anthropic Claude Haiku 4.5 (see `variables.tf`) | Bedrock model or inference profile ID for the Network Deployment Agent. |
 
 ---
 
@@ -168,7 +170,7 @@ Expected applications include (non-exhaustive):
 | Application | Purpose |
 |-------------|---------|
 | `cluster-bootstrap` | Parent app-of-apps |
-| `ai-agent` | Telco Deployment Assistant — frontend + backend (Bedrock / Claude Haiku 4.5) |
+| `ai-agent` | Network Deployment Agent — frontend + backend (Bedrock / Claude Haiku 4.5) |
 | `argo-workflows` | Workflow engine for multi-step 5G deployments |
 | `aws-load-balancer-controller` | ALB provisioning |
 | `aws-efs-csi-driver` | EFS persistent volumes |
@@ -190,7 +192,7 @@ kubectl -n istio-system get pods
 kubectl -n monitoring get pods
 ```
 
-The Telco Deployment Assistant pods (`ai-agent-frontend`, `ai-agent-backend`) should reach `Running`.
+The Network Deployment Agent pods (`ai-agent-frontend`, `ai-agent-backend`) should reach `Running`.
 
 #### 4.f) Validate ingress and DNS
 
@@ -202,7 +204,7 @@ Expected host rules:
 
 | Host | Service |
 |------|---------|
-| `console.<domain>` | Telco Deployment Assistant |
+| `console.<domain>` | Network Deployment Agent |
 | `argocd.<domain>` | Argo CD UI |
 | `grafana.<domain>` | Grafana |
 | `free5gc.<domain>` | free5GC WebUI |
@@ -220,7 +222,7 @@ dig +short <alb-hostname-from-ingress>
 
 Infrastructure and platform bootstrap are complete. Continue with:
 
-[Deploy and validate the telecom environment via the Telco Deployment Assistant](./01%20ai-agent-console.md)
+[Deploy and validate network components via the Network Deployment Agent](./01%20ai-agent-console.md)
 
 ---
 

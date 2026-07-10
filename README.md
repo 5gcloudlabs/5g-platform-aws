@@ -1,188 +1,215 @@
 # 5G Platform AWS
 
-**AWS-based telecom laboratory environment.**
+**AWS platform environment for the 5G Cloud Labs integration laboratory.**
 
-Part of [5G Cloud Labs](https://5gcloudlabs.ai) — an open-source initiative for practical telecom laboratory environments.
+Part of the **5G Cloud Labs** project.
+
+5G Cloud Labs is an open-source R&D platform for developing, integrating, and evaluating network automation and AI use cases using reproducible cloud-based 5G network environments.
+
+For the project-wide contributor model, repository roles, and development workflow, see the [5G Cloud Labs organization profile](https://github.com/5gcloudlabs).
 
 ---
 
 ## Overview
 
-5G Platform AWS is the first laboratory environment developed as part of the 5G Cloud Labs project.
+This repository deploys a reproducible Kubernetes-based 5G network environment on **Amazon EKS**.
 
-The repository provides an automated deployment of a Kubernetes-based telecom environment on AWS and serves as a foundation for experimenting with automation and AI-assisted operational workflows.
-
-It combines Infrastructure as Code, Kubernetes, GitOps practices, and open-source telecom software to create a reproducible environment that can be deployed on demand and used for learning, testing, and experimentation.
+It is the first platform environment within 5G Cloud Labs, providing a reproducible integration laboratory where automation and AI use cases can be evaluated using a 5G network environment comprising a Free5GC core with simulated radio access and user equipment.
 
 Deployment follows two phases:
 
-1. **Provision** — OpenTofu creates AWS infrastructure, installs Argo CD, and bootstraps the Kubernetes platform
-2. **Operate** — the [Telco Deployment Assistant](https://github.com/5g-cloud-labs/telco-deployment-assistant) deploys and validates telecom workloads via natural-language chat at `https://console.<your-domain>`
+1. **Provision** — OpenTofu creates AWS infrastructure, installs Argo CD, and bootstraps the Kubernetes platform.
+2. **Operate** — the Network Deployment Agent provides a natural language interface for deploying and provisioning network components running on the platform.
+
+The platform is intentionally designed so that network components are deployed on demand rather than during cluster installation.
+
+You do not need to deploy this environment to contribute to every use case. Development can begin in a dedicated use case repository or on your workstation and move here when ready for end-to-end evaluation on AWS.
 
 ---
 
-## Purpose
+## Why This Repository Exists
 
-While the automated deployment of a Kubernetes-based 5G environment on AWS is a key capability of this project, the environment itself is intended to support a broader goal: providing a practical laboratory for experimenting with automation and AI use cases in telecom networks.
+Its purpose is not simply to deploy a 5G network environment on AWS.
 
-The platform is designed to reduce the effort required to create a functional telecom environment, allowing engineers to focus on experimentation rather than infrastructure setup.
+Instead, it provides a reproducible integration laboratory where automation and AI use cases can be developed, integrated, and evaluated against realistic 5G network scenarios.
 
-The project aims to provide a realistic environment where ideas can be explored, tested, validated, and improved using real telecom workloads.
+Use cases are typically developed in their own repositories, then integrated into this environment when they are ready for end-to-end evaluation.
 
----
-
-## What Can Be Done With This Environment?
-
-The laboratory can be used to:
-
-- Deploy a complete telecom laboratory environment in minutes
-- Evaluate automation workflows against realistic network functions
-- Experiment with AI-assisted operational tooling
-- Validate deployment procedures and runbooks
-- Test subscriber provisioning workflows
-- Simulate radio access and user equipment behaviour
-- Explore Kubernetes-based telecom deployments
-- Recreate environments consistently for testing and learning
-
-The environment is intentionally flexible and is expected to evolve as new experiments and ideas emerge.
+The AWS platform provides the infrastructure, platform services, observability, networking, and network components required to perform that evaluation.
 
 ---
 
-## The Laboratory Today
+## What Is In This Repository
 
-The current environment combines cloud infrastructure, Kubernetes, GitOps practices, and telecom workloads into a reproducible laboratory that can be deployed on demand.
+### Infrastructure and Platform
 
-### Infrastructure and platform
+#### Infrastructure Provisioning (`infrastructure/`)
 
-**Infrastructure provisioning** (`infrastructure/`)
+Provisioned using OpenTofu:
 
-- OpenTofu — AWS infrastructure (VPC, EKS, persistent storage, IAM, TLS)
-- Argo CD — GitOps bootstrap of cluster platform services
+- AWS VPC
+- Amazon EKS
+- EFS storage
+- Load Balancer
+- TLS Certification management
+- IAM & SSM configuration
 
-**Platform services** (`cluster-bootstrap/`)
+#### Platform Services (`cluster-bootstrap/`)
 
-- Multi-interface networking — Multus CNI and Whereabouts IPAM for 3GPP traffic separation (N2, N3, N4, N6)
-- Istio, cert-manager, and external DNS — ingress, service mesh, and automated TLS
-- Prometheus, Grafana, and Loki — metrics, dashboards, and log aggregation
-- Argo Workflows — multi-step telecom deployment orchestration
-- Telco Deployment Assistant (`ai-agent`) — deployed during cluster bootstrap as the operator console
+- Argo CD
+- Argo Workflows
+- Multus CNI
+- Whereabouts IPAM
+- Ingress
+- External DNS + Cloudflare integration
+- Cert-Manager + Let's Encrypt integration
+- Istio Gateway
+- Istio Service Mesh
+- Prometheus, Grafana, Loki
+- Network Deployment Agent
 
-### Telecom workloads
-
-**Telecom components** (`5g/`) — *deployed on demand, not at install time*
-
-- free5GC — 5G Core network functions (AMF, SMF, UPF, UDM, UDR, and others)
-- Subscriber provisioning — automated test subscriber creation
-- UERANSIM — gNodeB and UE simulation for registration and data-plane testing
-
-### Experiments
-
-- [Telco Deployment Assistant](https://github.com/5g-cloud-labs/telco-deployment-assistant) — AI-assisted deployment, parameter collection, and operational validation (Amazon Bedrock — Anthropic Claude Haiku 4.5)
+These services provide the platform foundation required to host network components, automation workflows, and operational tooling.
 
 ---
 
-## Current Experiment
+### Network Components and Workflows (`5g/`)
 
-### Telco Deployment Assistant
+Network components are deployed on demand rather than during initial platform installation.
 
-The first experiment built on top of this laboratory environment is the Telco Deployment Assistant.
+The laboratory currently supports:
 
-The assistant explores how AI-assisted tooling can simplify the deployment and operation of telecom platforms by automating operational tasks that would traditionally require manual execution.
+- Free5GC 5G Core
+- Subscriber provisioning
+- UERANSIM gNodeB and UE simulation
+- Deployment automation workflows
 
-Current capabilities include:
+The workflow layer supports automated deployment of the 5G Core, subscriber provisioning, and deployment of UERANSIM simulations.
 
-- Guided deployment workflows via natural-language chat
-- Platform configuration assistance and parameter collection
-- Subscriber provisioning automation
-- RAN and UE simulation workflows (free5GC, UERANSIM)
-- Operational validation through Argo Workflows and Argo CD applications
+Based on user intent, integrated use cases such as the Network Deployment Agent can either deploy individual network components directly or invoke workflows that coordinate multiple deployment and provisioning tasks through a natural language interface.
 
-The assistant is deployed from this repository as the `ai-agent` service during cluster bootstrap, using Amazon Bedrock (Anthropic Claude Haiku 4.5). Its source code lives in the separate [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) repository.
+Together, these components and workflows provide a reproducible 5G network environment that can be used to evaluate AI and automation use cases and perform end-to-end testing of 5G network scenarios.
 
-The objective is to better understand where AI-assisted tooling can provide practical value in telecom operations.
+---
+
+## Operating the Laboratory
+
+The Network Deployment Agent provides the primary interface for deploying and provisioning network components within the AWS laboratory.
+
+The agent uses a large language model (LLM) to translate user intent into deployment and provisioning actions. Depending on the requested operation, it may deploy individual network components directly or invoke automation workflows that coordinate multiple deployment and provisioning tasks.
+
+Once the platform environment has been provisioned and validated, users can interact with the agent through its web interface to deploy the 5G Core, provision subscribers, and deploy UERANSIM simulations.
+
+The agent is intended to simplify deployment and provisioning workflows. Platform administration, troubleshooting, and advanced validation can still be performed through standard Kubernetes and AWS tooling when required.
+
+The Network Deployment Agent is developed independently in the `network-deployment-agent` repository and integrated into the platform during deployment.
+
+Additional use cases and operational tooling may be integrated into the laboratory over time.
 
 ---
 
 ## Architecture
 
 ```text
-                         ┌─────────────────────┐
-                         │        User         │
-                         └──────────┬──────────┘
-                                    │
-              ┌─────────────────────┴─────────────────────┐
-              │                                           │
-              ▼                                           ▼
-   ┌──────────────────────┐              ┌──────────────────────────────┐
-   │  Phase 1 — Provision │              │  Phase 2 — Operate           │
-   │  OpenTofu (local)    │              │  Telco Deployment Assistant  │
-   │                      │              │  (ai-agent + Bedrock / Claude Haiku 4.5) │
-   └──────────┬───────────┘              └──────────────┬───────────────┘
-              │                                         │
-              │  AWS infrastructure                     │  chat at console.<domain>
-              │  EKS cluster + Argo CD install          │  → Argo Workflows / Argo CD apps
-              │  cluster-bootstrap sync                 │
-              │                                         ▼
-              │                          ┌──────────────────────────────┐
-              └─────────────────────────►│  Telecom workloads (on EKS)  │
-                                         │  free5GC · sub-prov · UERANSIM│
-                                         └──────────────────────────────┘
 
-   ┌──────────────────────────────────────────────────────────────────────┐
-   │                              AWS                                      │
-   │  VPC · ENIs · EFS · ACM · IAM                                         │
-   │  Amazon EKS                                                           │
-   │    └── Platform add-ons (Argo CD, Istio, Multus, observability, …)   │
-   └──────────────────────────────────────────────────────────────────────┘
+          User
+
+             │
+      Provision Platform
+             │
+      OpenTofu + CLI
+             │
+             ▼
+      AWS Infrastructure
+             │
+             ▼
+           Amazon EKS
+             │
+             ▼
+      Platform Services
+             │
+             ▼
+      Network Deployment Agent
+             │
+             ▼
+      Network Components
+
 ```
 
+The Network Deployment Agent provides a natural language interface for deploying and provisioning network components after the platform environment has been provisioned and validated. Depending on the requested operation, the agent may deploy individual components directly or invoke automation workflows that coordinate multiple deployment and provisioning tasks.
 ---
 
 ## Repository Structure
 
 ```text
 .
-├── infrastructure/       OpenTofu — AWS infrastructure, EKS, Argo CD bootstrap
-├── cluster-bootstrap/    Argo CD apps — platform add-ons, observability, ai-agent
-├── 5g/                     Helm charts, Argo CD apps, workflows — telecom payloads
-└── docs/                   Installation guides and architecture diagrams
+├── infrastructure/
+│   └── Cloud infrastructure provisioning (OpenTofu)
+│
+├── cluster-bootstrap/
+│   └── Kubernetes platform services and operational tooling
+│
+├── 5g/
+│   └── Network components, automation workflows, and deployment manifests
+│
+└── docs/
+    └── Installation guides, architecture, and operations
 ```
 
 ---
 
 ## Deployment Workflow
 
-A typical workflow consists of:
+### Phase 1 — Provision
 
-1. **Provision** — configure OpenTofu variables and apply (`infrastructure/`) to create AWS resources, EKS, and Argo CD
-2. **Bootstrap** — wait for `cluster-bootstrap` applications to sync in Argo CD (Istio, Multus, Whereabouts, observability, Argo Workflows, ai-agent)
-3. **Operate** — open `https://console.<your-domain>` and use the Telco Deployment Assistant to deploy telecom workloads — for example:
+Provision the platform environment:
 
-   *"Deploy the full 5G solution with MCC 602, MNC 02, and 10 subscribers"*
+1. Configure OpenTofu variables.
+2. Create AWS infrastructure.
+3. Deploy Amazon EKS.
+4. Install Argo CD.
+5. Bootstrap platform services.
 
-4. **Validate** — confirm subscriber registration, data-plane connectivity, and UERANSIM simulation
-5. **Experiment** — explore automation workflows, runbooks, and AI-assisted operational tasks
-6. **Teardown** — follow [terminate.md](docs/installation-instructions/terminate.md) when finished
+At this stage the platform environment is ready, but network components have not yet been deployed.
 
 ---
 
-## Relationship to 5G Cloud Labs
+### Phase 2 — Operate
 
-This repository represents the AWS-based laboratory environment within the broader 5G Cloud Labs project.
+Use the Network Deployment Agent to deploy and provision network components through a natural language interface.
 
-5G Cloud Labs is an open-source cloud-based telecom laboratory for experimenting with AI and automation use cases.
+Example:
 
-The long-term objective is to provide practical telecom environments where new ideas can be explored, tested, and evaluated against realistic network workloads.
+```text
+Deploy the full 5G solution with MCC 602, MNC 02, and 10 subscribers
+```
 
-AWS currently serves as the primary laboratory environment. Additional cloud platforms may be introduced over time where they help broaden experimentation and learning opportunities.
+The agent translates user intent into deployment and provisioning actions, invoking individual component deployments or automation workflows as required.
+
+Typical workflow:
+
+1. Deploy the 5G Core.
+2. Provision subscribers.
+3. Deploy UERANSIM.
+4. Validate registration and connectivity.
+5. Perform experimentation and testing.
 
 ---
 
 ## Cost
 
-The laboratory incurs AWS charges for as long as it is running. Based on observed billing, average usage is approximately **USD 3.50–4.00 per hour** in AWS costs, or **~USD 4.50 per hour** including applicable taxes (~16.6%). Bedrock usage for the Telco Deployment Assistant is additional but typically minor.
+The laboratory incurs AWS charges while it is running.
 
-Costs vary by region, workload, and uptime. Tear down when not in use — see the [installation guide](docs/installation-instructions/00%20infrastructure.md#cost) for details and [terminate.md](docs/installation-instructions/terminate.md) to stop charges.
+Based on current testing and observed usage:
+
+| Item | Approximate Rate |
+|--------|--------|
+| AWS usage | USD 3.50–4.00 / hour |
+| Tax (~16.6%) | Applied to AWS charges |
+| **Estimated total** | **~USD 4.50 / hour** |
+
+Additional costs may be incurred by integrated services or cloud APIs used by individual use cases.
+
+Tear down the environment when not in use.
 
 ---
 
@@ -190,68 +217,80 @@ Costs vary by region, workload, and uptime. Tear down when not in use — see th
 
 ### Prerequisites
 
-- AWS account, Cloudflare domain + API token, Amazon Bedrock access (Anthropic Claude Haiku 4.5)
-- AWS CLI, OpenTofu, kubectl
+- AWS account
+- Domain name and DNS access
+- AWS CLI
+- OpenTofu
+- kubectl
 
-### Quick start
+Additional prerequisites may be required by individual use cases.
+
+---
+
+### Quick Start
 
 ```bash
-git clone https://github.com/5g-cloud-labs/5g-platform-aws.git
+git clone https://github.com/5gcloudlabs/5g-platform-aws.git
 cd 5g-platform-aws/infrastructure
 
-# Configure vars.auto.tfvars (domain, Cloudflare, S3 backend, Bedrock / Claude Haiku 4.5)
 tofu init
 tofu apply
 ```
 
-After cluster bootstrap syncs in Argo CD, open `https://console.<your-domain>` and deploy telecom workloads via the Telco Deployment Assistant.
+Once platform bootstrap is complete:
 
-### Documentation
+1. Access the Network Deployment Agent.
+2. Deploy network components through the agent.
+3. Validate platform operation.
+
+---
+
+## Documentation
 
 | Guide | Description |
-|-------|-------------|
-| [docs/](docs/) | Documentation index |
-| [Installation — infrastructure](docs/installation-instructions/00%20infrastructure.md) | Cost estimate, OpenTofu provisioning, and bootstrap validation |
-| [Telco Deployment Assistant](docs/installation-instructions/01%20ai-agent-console.md) | Deploy and validate telecom workloads |
-| [Architecture diagrams](docs/arch/) | VPC, EKS, CNI, and ingress design |
-| [Terminate environment](docs/installation-instructions/terminate.md) | Tear down AWS resources |
-
-If you are new to the project, start with the installation and deployment guides before exploring the available experiments and workflows.
+|---------|-------------|
+| [`docs/`](docs/) | Documentation index |
+| [Infrastructure installation](docs/installation-instructions/00%20infrastructure.md) | Platform provisioning and bootstrap |
+| [Network deployment](docs/installation-instructions/01%20ai-agent-console.md) | Component deployment and validation |
+| [Architecture](docs/arch/) | Platform and network design |
+| [Teardown](docs/installation-instructions/terminate.md) | Resource cleanup |
 
 ---
 
-## Related repositories
+## Contributing To This Repository
 
-| Repository | Description |
-|------------|-------------|
-| [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) | AI assistant source — Bedrock (Claude Haiku 4.5) intent, workflow selection, and operator chat |
-| `5g-platform-gcp` | GCP laboratory *(future)* |
+Changes in this repository affect the AWS platform environment itself.
+
+Typical examples include:
+
+- OpenTofu infrastructure
+- Platform bootstrap components
+- Network components
+- Integration wiring between use cases and the platform
+
+| Change Type | Recommended Workflow |
+|------------|----------------------|
+| Platform infrastructure | Develop locally where possible, then validate in a deployed laboratory |
+| Network components | Validate against a running platform environment |
+| Use case implementation | Develop within the relevant use case repository |
+| Use case integration | Integrate and validate within this repository |
+
+For the broader project model, see the [5G Cloud Labs organization profile](https://github.com/5gcloudlabs).
 
 ---
 
-## Contributing
+## Related Repositories
 
-Contributions, ideas, discussions, and experiments are welcome.
-
-Whether your interests are in:
-
-- Telecommunications
-- Cloud Infrastructure
-- Kubernetes
-- Infrastructure as Code
-- GitOps
-- Automation
-- Artificial Intelligence
-
-there is room to experiment, learn, and contribute.
-
-Please open an issue or submit a pull request to discuss improvements, fixes, or new ideas.
+| Repository | Role |
+|------------|------|
+| [`network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent) | AI-assisted network deployment and provisioning interface |
+| `5g-platform-gcp` | Future platform environment |
 
 ---
 
 ## License
 
-Apache License 2.0 — see [LICENSE](LICENSE).
+Apache License 2.0
 
 ---
 
@@ -259,6 +298,14 @@ Apache License 2.0 — see [LICENSE](LICENSE).
 
 **5G Cloud Labs**
 
-🌐 Website: https://5gcloudlabs.ai
+🌐 Website: 5gcloudlabs.ai
 
 📧 Contact: info@5gcloudlabs.ai
+
+---
+
+## Project Vision
+
+5G Platform AWS is the first platform environment within 5G Cloud Labs.
+
+As additional platform environments become available, the same integration model can be applied across multiple cloud providers. This enables use cases to be developed independently and evaluated consistently across comparable 5G network environments.

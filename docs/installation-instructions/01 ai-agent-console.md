@@ -1,9 +1,11 @@
 
-## Telco Deployment Assistant — deploy and validate the telecom environment
+## Network Deployment Agent — deploy and validate network components
 
-Part of **5G Platform AWS**. Phase 2 of the platform workflow.
+Part of **5G Platform AWS** — Phase 2 of the platform workflow.
 
-After OpenTofu provisioning and cluster bootstrap are complete, all telecom deployments are driven through the **Telco Deployment Assistant** at `https://console.<your-domain>`. The assistant is implemented as the `ai-agent` service (Amazon Bedrock — Anthropic Claude Haiku 4.5 — with a FastAPI backend). There is no separate CLI or legacy click-through UI.
+This guide describes how to deploy and validate network components on a **running platform environment**. It assumes OpenTofu provisioning and cluster bootstrap are already complete.
+
+The Network Deployment Agent is implemented as the `ai-agent` service (Amazon Bedrock — Anthropic Claude Haiku 4.5 — with a FastAPI backend). Its application logic is maintained in the [`network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent) repository and integrated into this platform during cluster bootstrap.
 
 ---
 
@@ -13,11 +15,11 @@ After OpenTofu provisioning and cluster bootstrap are complete, all telecom depl
 https://console.<your-domain>
 ```
 
-The assistant is a chat interface backed by Amazon Bedrock (Anthropic Claude Haiku 4.5). You describe what you want in natural language; it collects MCC, MNC, and (when needed) subscriber count, then triggers the appropriate deployment on the cluster.
+The agent is a chat interface backed by Amazon Bedrock (Anthropic Claude Haiku 4.5). You describe what you want in natural language; it collects MCC, MNC, and (when needed) subscriber count, then triggers the appropriate deployment on the cluster.
 
 ---
 
-### 2. How the Telco Deployment Assistant works
+### 2. How the Network Deployment Agent works
 
 | Layer | Role |
 |-------|------|
@@ -70,7 +72,7 @@ If parameters are missing, the agent asks follow-up questions in plain language 
 
 ### 3. Monitor deployment in the console
 
-While a deployment runs, the assistant reports progress in friendly terms (network function status, next suggested step, etc.).
+While a deployment runs, the agent reports progress in friendly terms (network function status, next suggested step, etc.).
 
 You can also check status directly:
 
@@ -203,7 +205,7 @@ kubectl -n ueransim exec -it $(kubectl -n ueransim get pod -l component=ue -o na
   -- ping -c 4 -I uesimtun0 google.com
 ```
 
-The assistant can also trigger a latency test via its backend (`/test/latency`).
+The agent can also trigger a latency test via its backend (`/test/latency`).
 
 Successful replies with 0% packet loss confirm UE → gNB → UPF → external network connectivity.
 
@@ -222,4 +224,4 @@ Successful replies with 0% packet loss confirm UE → gNB → UPF → external n
 
 ### Congratulations
 
-You have deployed and validated a telecom environment on AWS EKS using the Telco Deployment Assistant.
+You have deployed and validated a 5G network environment on AWS EKS using the Network Deployment Agent.

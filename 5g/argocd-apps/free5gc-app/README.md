@@ -1,12 +1,8 @@
-# free5GC Argo CD Application
+# Free5GC Argo CD Application
 
-Part of **5G Platform AWS** — telecom layer.
+Part of **5G Platform AWS** — network components layer of the AWS platform environment.
 
-## Purpose
-
-Argo CD `Application` wrapper for the [free5GC Helm chart](../../helm-charts/free5gc). Deploys the free5GC 5G Core into the `free5gc` namespace.
-
-Not synced at cluster bootstrap. Applied on demand by the Telco Deployment Assistant (single-step) or an Argo Workflow (multi-step).
+Free5GC 5G Core used for **end-to-end evaluation** of automation and AI use cases. Not synced at cluster bootstrap; applied on demand by the Network Deployment Agent or Argo Workflows.
 
 ---
 
@@ -26,10 +22,10 @@ Network functions: AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR, UPF, WebUI, MongoDB
 ## Deployment flow
 
 ```text
-User → Telco Deployment Assistant (Bedrock / Claude Haiku 4.5)
+User → Network Deployment Agent (Bedrock / Claude Haiku 4.5)
   → kubectl apply (patched Application YAML)
   → Argo CD syncs Helm chart
-  → free5GC pods in free5gc namespace
+  → Free5GC pods in free5gc namespace
 ```
 
 Or as the first step of workflows `5gcore-sub-prov-wf` / `5g-solution-wf`.
@@ -38,7 +34,7 @@ Or as the first step of workflows `5gcore-sub-prov-wf` / `5g-solution-wf`.
 
 ## References
 
-- [free5GC Helm chart](../../helm-charts/free5gc)
+- [Free5GC Helm chart](../../helm-charts/free5gc)
 - [free5GC](https://free5gc.org/)
 - [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) (upstream, Apache 2.0)
 

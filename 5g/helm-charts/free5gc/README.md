@@ -1,5 +1,7 @@
 # free5gc Helm chart
 
+Part of **5G Platform AWS** — Free5GC 5G Core for end-to-end evaluation within the AWS platform environment.
+
 ## Purpose
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys the complete free5GC 5G Core network on a public cloud environment, specifically optimized for Amazon EKS.  
 It organizes all free5GC network functions as subcharts and manages their configuration for deployment.
@@ -34,9 +36,9 @@ In addition, a global `values.yaml` at the top level provides centralized config
 
 ## Deployment
 
-Deployed on demand via the Telco Deployment Assistant at `https://console.<domain>` or as part of an Argo Workflow (`5gcore-sub-prov-wf`, `5g-solution-wf`).
+Deployed on demand via the Network Deployment Agent at `https://console.<domain>` or as part of an Argo Workflow (`5gcore-sub-prov-wf`, `5g-solution-wf`).
 
-The assistant applies the Argo CD Application wrapper at `5g/argocd-apps/free5gc-app/` with MCC and MNC parameters. See the [Telco Deployment Assistant guide](../../../docs/installation-instructions/01%20ai-agent-console.md).
+The agent applies the Argo CD Application wrapper at `5g/argocd-apps/free5gc-app/` with MCC and MNC parameters. See the [Network deployment guide](../../../docs/installation-instructions/01%20ai-agent-console.md).
 
 ---
 

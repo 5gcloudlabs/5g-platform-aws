@@ -2,16 +2,18 @@
 
 Locally maintained Helm charts for **5G Platform AWS**, deployed by Argo CD during cluster bootstrap.
 
+These charts support the AWS platform environment. The `ai-agent` chart deploys the Network Deployment Agent console; application logic is developed in the [`network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent) repository.
+
 | Chart | Description |
 |-------|-------------|
-| ai-agent | Telco Deployment Assistant — frontend and backend (Amazon Bedrock — Anthropic Claude Haiku 4.5). Console at `console.<domain>`. |
-| multus | Multus CNI for multi-interface pod networking (required by telecom workloads). |
+| ai-agent | Network Deployment Agent — frontend and backend (Amazon Bedrock — Anthropic Claude Haiku 4.5). Console at `console.<domain>`. |
+| multus | Multus CNI for multi-interface pod networking (required by network components) |
 
 ---
 
 ## Charts outside bootstrap
 
-These charts live under `5g/helm-charts/` and are deployed on demand by the Telco Deployment Assistant (not at cluster bootstrap):
+These charts live under `5g/helm-charts/` and are deployed on demand by the Network Deployment Agent (not at cluster bootstrap):
 
 | Chart | Description |
 |-------|-------------|
@@ -22,7 +24,7 @@ These charts live under `5g/helm-charts/` and are deployed on demand by the Telc
 
 ## Legacy chart
 
-The console chart in this directory is deprecated. The Istio VirtualService for `console.<domain>` routes to ai-agent-frontend (Telco Deployment Assistant), not the old console deployment.
+The console chart in this directory is deprecated. The Istio VirtualService for `console.<domain>` routes to ai-agent-frontend (Network Deployment Agent), not the old console deployment.
 
 ---
 

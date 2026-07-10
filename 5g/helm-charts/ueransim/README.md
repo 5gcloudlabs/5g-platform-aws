@@ -1,5 +1,7 @@
 # UERANSIM Helm chart
 
+Part of **5G Platform AWS** — RAN and UE simulation for end-to-end evaluation within the AWS platform environment.
+
 ## Purpose
 This Helm chart, adapted from the [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) project, deploys UERANSIM components on a public cloud environment, specifically optimized for Amazon EKS.  
 It organizes the UERANSIM components as subcharts (`gnb` and `ue`) and manages their configuration for deployment and integration with the free5GC 5G Core.
@@ -34,9 +36,9 @@ Customizations can be found in:
 
 ## Deployment
 
-Deployed on demand via the Telco Deployment Assistant at `https://console.<domain>` or as the final step of an Argo Workflow (`sub-prov-ueransim-wf`, `5g-solution-wf`).
+Deployed on demand via the Network Deployment Agent at `https://console.<domain>` or as the final step of an Argo Workflow (`sub-prov-ueransim-wf`, `5g-solution-wf`).
 
-The assistant applies the Argo CD Application wrapper at `5g/argocd-apps/ueransim-app/` with MCC, MNC, and subscriber count. See the [Telco Deployment Assistant guide](../../../docs/installation-instructions/01%20ai-agent-console.md).
+The agent applies the Argo CD Application wrapper at `5g/argocd-apps/ueransim-app/` with MCC, MNC, and subscriber count. See the [Network deployment guide](../../../docs/installation-instructions/01%20ai-agent-console.md).
 
 ---
 

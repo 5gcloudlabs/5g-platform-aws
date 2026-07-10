@@ -1,6 +1,6 @@
 # AWS EKS Multus CNI Helm Chart
 
-Part of **5G Platform AWS** cluster bootstrap. Required for multi-interface telecom pods (N2/N3/N4/N6).
+Part of **5G Platform AWS** cluster bootstrap. Required for multi-interface network component pods (N2/N3/N4/N6).
 
 ## Purpose
 

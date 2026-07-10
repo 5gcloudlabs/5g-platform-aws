@@ -1,132 +1,160 @@
 # 5G Cloud Labs
 
-**An open-source cloud-based telecom laboratory for experimenting with AI and automation use cases.**
+**An open-source R&D platform for developing, integrating, and evaluating network automation and AI use cases using reproducible cloud-based 5G network environments.**
 
 ---
 
 ## Overview
 
-5G Cloud Labs is an open-source initiative focused on creating practical telecom laboratory environments for experimenting with automation and AI-assisted operational workflows.
+5G Cloud Labs is organized around two complementary repository types:
 
-The project combines Infrastructure as Code, Kubernetes, GitOps practices, and open-source telecom software to create reproducible environments suitable for experimentation, learning, and prototyping.
+- **Platform Environments** provide reproducible cloud-based 5G network environments where use cases can be integrated and evaluated.
+- **Use Case Repositories** contain independent automation and AI capabilities that can be developed, tested, and evolved separately before integration.
 
-The goal is not simply to deploy telecom workloads, but to provide a foundation where automation and AI ideas can be developed, tested, and evaluated against realistic network environments.
-
----
-
-## Why 5G Cloud Labs?
-
-5G Cloud Labs provides a reproducible telecom environment that can be deployed on demand and used to evaluate automation and AI use cases against realistic network workloads.
-
-The platform is intended to reduce the effort required to create a functional telecom test environment, allowing engineers to focus on experimentation rather than infrastructure setup.
-
-Current capabilities enable users to:
-
-- Deploy a complete telecom laboratory environment in minutes
-- Evaluate automation workflows against realistic network functions
-- Test AI-assisted operational tooling
-- Validate deployment procedures and runbooks
-- Experiment with subscriber provisioning workflows
-- Simulate radio access and user equipment behaviour
-- Recreate environments consistently for testing and learning
-
-The objective is to provide a practical foundation for experimentation, iteration, and learning.
+This separation allows platform environments and use cases to evolve independently while providing a consistent model for end-to-end evaluation.
 
 ---
 
-## The Laboratory Today
+## Project Model
 
-The project currently provides an AWS-based telecom laboratory environment that can be deployed on demand and used for experimentation.
+```text
+                          5G Cloud Labs
+                                 │
+          ┌──────────────────────┴──────────────────────┐
+          │                                             │
+          ▼                                             ▼
+  Platform Environments                    Use Case Repositories
+          │                                             │
+          └──────────────────────┬──────────────────────┘
+                                 │
+                                 ▼
+                     End-to-End Evaluation
+```
 
-Deployment follows two phases: **provision** the cloud and Kubernetes platform with OpenTofu, then **operate** the telecom environment through guided workflows.
+Platform Environments provide reproducible integration laboratories.
 
-The environment combines:
-
-**Infrastructure and platform**
-- OpenTofu — AWS infrastructure (VPC, EKS, persistent storage, IAM, TLS)
-- Argo CD — GitOps bootstrap of cluster platform services
-- Multi-interface networking — Multus CNI and Whereabouts IPAM for 3GPP traffic separation (N2, N3, N4, N6)
-- Istio, cert-manager, and external DNS — ingress, service mesh, and automated TLS
-- Prometheus, Grafana, and Loki — metrics, dashboards, and log aggregation
-- Argo Workflows — multi-step telecom deployment orchestration
-
-**Telecom workloads** *(deployed on demand, not at install time)*
-- free5GC — 5G Core network functions (AMF, SMF, UPF, UDM, UDR, and others)
-- Subscriber provisioning — automated test subscriber creation
-- UERANSIM — gNodeB and UE simulation for registration and data-plane testing
-
-**Experiments**
-- [Telco Deployment Assistant](https://github.com/5g-cloud-labs/telco-deployment-assistant) — AI-assisted deployment, parameter collection, and operational validation (Amazon Bedrock — Anthropic Claude Haiku 4.5)
-
-The first experiment built on this environment is the **Telco Deployment Assistant**, which explores how AI-assisted tooling can simplify deploying and operating a telecom laboratory without manual CLI steps or fixed deployment scripts.
-
-This is an ongoing project and an open invitation to experiment, learn, and contribute. Future work may expand existing capabilities, introduce new automation workflows, or explore entirely new AI use cases.
-
-AWS currently serves as the primary laboratory environment. Additional cloud platforms may be introduced over time where they help broaden experimentation and learning opportunities.
+Use Case Repositories focus on solving individual automation or AI problems independently before they are integrated into one or more Platform Environments.
 
 ---
 
-## Repositories
+## Repository Types
 
 ### Platform Environments
 
-| Repository | Description |
-|------------|-------------|
-| [`5g-platform-aws`](https://github.com/5g-cloud-labs/5g-platform-aws) | AWS laboratory — OpenTofu infrastructure, EKS GitOps bootstrap, free5GC, UERANSIM, and on-demand telecom deployment |
-| `5g-platform-gcp` | GCP laboratory *(future)* |
+Platform Environments provide the infrastructure, Kubernetes platform, networking, observability, and deployable network components required for end-to-end evaluation.
 
-### Experiments
+Current and planned Platform Environments include:
 
-| Repository | Description |
-|------------|-------------|
-| [`telco-deployment-assistant`](https://github.com/5g-cloud-labs/telco-deployment-assistant) | AI-assisted deployment and operational workflows — natural-language intent, Bedrock (Claude Haiku 4.5), and Argo orchestration |
+| Repository | Cloud | Description |
+|------------|-------|-------------|
+| **5g-platform-aws** | AWS | AWS Platform Environment |
+| **5g-platform-gcp** *(planned)* | GCP | GCP Platform Environment |
+
+Each Platform Environment follows the same contributor model while providing cloud-specific implementation details.
 
 ---
 
-## Project Philosophy
+### Use Case Repositories
 
-5G Cloud Labs is intentionally experimental.
+Use Case Repositories implement individual automation or AI capabilities independently of any specific Platform Environment.
 
-The project does not aim to prescribe how telecom automation or AI-assisted operations should be implemented.
+Current repository:
 
-Instead, it provides an environment where ideas can be explored, tested, and evaluated against realistic telecom workloads.
+| Repository | Description |
+|------------|-------------|
+| **network-deployment-agent** | AI-assisted network deployment and provisioning through a natural language interface |
 
-Contributions, alternative approaches, and new experiments are encouraged.
+Additional repositories can be created whenever a new automation or AI capability is developed.
+
+---
+
+## Contributor Workflow
+
+Most contributions do **not** require a deployed Platform Environment.
+
+Development typically follows this workflow:
+
+```text
+Develop Locally
+       │
+       ▼
+Use Case Repository
+       │
+       ▼
+Platform Environment
+       │
+       ▼
+End-to-End Evaluation
+```
+
+Developers can build and validate new capabilities locally before integrating them into a Platform Environment for evaluation against a reproducible 5G network environment.
+
+---
+
+## Example Use Cases
+
+5G Cloud Labs is intentionally open-ended.
+
+Examples of use cases that fit naturally within the project include:
+
+- AI-assisted network deployment
+- Intent-based network operations
+- Network provisioning automation
+- Day-2 operational automation
+- AI-assisted troubleshooting
+- Configuration management
+- Network validation
+- Observability and analytics
+- Operational copilots
+- Policy-driven orchestration
+
+The Network Deployment Agent is the first integrated use case, demonstrating how independent capabilities can be integrated into a Platform Environment for end-to-end evaluation.
+
+---
+
+## Project Vision
+
+5G Cloud Labs is designed as a growing collection of Platform Environments and Use Case Repositories.
+
+Platform Environments provide consistent integration laboratories where ideas can be evaluated against comparable 5G network scenarios regardless of the underlying cloud provider.
+
+Use Case Repositories remain independent projects, allowing them to evolve at their own pace while being integrated into one or more Platform Environments.
+
+As the project evolves, additional cloud providers, operational tooling, automation frameworks, and AI capabilities may be added while preserving the same development model.
 
 ---
 
 ## Getting Started
 
-If you're new to the project, start with:
-
-➡ **[5g-platform-aws](https://github.com/5g-cloud-labs/5g-platform-aws)**
-
-This repository contains the AWS laboratory environment: infrastructure provisioning, cluster bootstrap, telecom payloads, and documentation for the full deploy-and-operate workflow.
-
-Expect approximately **USD 3.50–4.00/hour** in AWS usage while the lab is running (~**USD 4.50/hour** including applicable taxes). Tear down when not in use.
+| Goal | Start Here |
+|------|------------|
+| Learn about the project | This page |
+| Deploy a Platform Environment | **5g-platform-aws** |
+| Develop a new capability | Create or contribute to a Use Case Repository |
+| Integrate a capability | Open a pull request against the appropriate Platform Environment |
 
 ---
 
 ## Contributing
 
-Contributions, ideas, discussions, and experiments are welcome.
+Contributions are welcome across both Platform Environments and Use Case Repositories.
 
-Whether your interests are in:
+Choose the repository that best matches the change you want to make.
 
-- Telecommunications
-- Cloud Infrastructure
-- Kubernetes
-- Infrastructure as Code
-- GitOps
-- Automation
-- Artificial Intelligence
+Most development can begin locally without deploying a Platform Environment.
 
-there is room to experiment, learn, and contribute.
+Platform Environments are intended for integration and end-to-end evaluation once a capability is ready.
+
+If you're unsure where a contribution belongs, feel free to open an issue for discussion.
 
 ---
 
 ## Links
 
-🌐 Website: https://5gcloudlabs.ai
+🌐 **Website**
 
-📧 Contact: info@5gcloudlabs.ai
+https://5gcloudlabs.ai
+
+📧 **Contact**
+
+info@5gcloudlabs.ai

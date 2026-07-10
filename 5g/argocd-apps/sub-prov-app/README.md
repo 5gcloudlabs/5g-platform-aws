@@ -1,12 +1,8 @@
 # Subscriber provisioning — Argo CD Application
 
-Part of **5G Platform AWS** — telecom layer.
+Part of **5G Platform AWS** — network components layer of the AWS platform environment.
 
-## Purpose
-
-Argo CD `Application` wrapper for the subscriber provisioning Job at `5g/k8s-resources/sub-prov-job/`. Creates test subscribers in free5GC via the WebUI API.
-
-Not synced at cluster bootstrap. Applied on demand by the Telco Deployment Assistant or as a step in Argo Workflows (`5gcore-sub-prov-wf`, `5g-solution-wf`, `sub-prov-ueransim-wf`).
+Subscriber provisioning used for **end-to-end evaluation**. Not synced at cluster bootstrap; applied on demand by the Network Deployment Agent or Argo Workflows.
 
 ---
 
@@ -25,12 +21,12 @@ IMSI numbering starts at `{MCC}{MNC}0000000001`.
 ## Deployment flow
 
 ```text
-User → Telco Deployment Assistant (Bedrock / Claude Haiku 4.5)
+User → Network Deployment Agent (Bedrock / Claude Haiku 4.5)
   → kubectl apply or Argo Workflow step
   → sub-prov Job runs
   → subscribers registered in MongoDB / WebUI
 ```
 
-See [Telco Deployment Assistant guide](../../docs/installation-instructions/01%20ai-agent-console.md).
+See [Network deployment guide](../../docs/installation-instructions/01%20ai-agent-console.md).
 
 Maintained by **5G Cloud Labs**.

@@ -2,6 +2,8 @@
 
 Cluster-bootstrap child applications for **5G Platform AWS**, deployed by Argo CD after OpenTofu provisioning.
 
+These are **platform services** that make up the AWS platform environment — networking, ingress, observability, workflow orchestration, and the Network Deployment Agent console. They are synced automatically so use cases can be validated against a consistent Kubernetes foundation.
+
 The parent Application is defined in `infrastructure/argocd.tf` and points at `cluster-bootstrap/argocd-apps/required-apps/`.
 
 ---
@@ -22,10 +24,10 @@ OpenTofu creates the EKS cluster and installs Argo CD. Cluster bootstrap then sy
 | `multus` / `whereabouts` | Multi-NIC networking and IPAM |
 | `kube-prometheus-stack` / `loki` | Metrics, dashboards, logs |
 | `storage-class` | EFS StorageClass |
-| `argo-workflows` | Multi-step telecom deployment orchestration |
-| `ai-agent` | Telco Deployment Assistant (Bedrock / Claude Haiku 4.5 console) |
+| `argo-workflows` | Multi-step network deployment orchestration |
+| `ai-agent` | Network Deployment Agent (Bedrock / Claude Haiku 4.5 console) |
 
-Telecom workloads (free5GC, UERANSIM, subscriber provisioning) are not part of cluster bootstrap. They are deployed on demand via the Telco Deployment Assistant, which triggers Argo CD Applications and Argo Workflows under `5g/`.
+Network components (Free5GC, UERANSIM, subscriber provisioning) are not part of cluster bootstrap. They are deployed on demand via the Network Deployment Agent, which triggers Argo CD Applications and Argo Workflows under `5g/`.
 
 ---
 
@@ -37,7 +39,7 @@ OpenTofu apply
   → cluster-bootstrap Application created
   → required-apps synced (platform add-ons)
   → user opens https://console.<domain>
-  → Telco Deployment Assistant deploys telecom components from 5g/
+  → Network Deployment Agent deploys network components from 5g/
 ```
 
 ---
