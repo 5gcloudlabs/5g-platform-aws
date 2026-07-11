@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ai-agent
+  name: network-deployment-agent
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,11 +10,11 @@ spec:
   source:
     repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     targetRevision: trims
-    path: cluster-bootstrap/helm-charts/ai-agent
+    path: cluster-bootstrap/helm-charts/network-deployment-agent
     helm:
      parameters:
      - name: serviceAccount.roleArn
-       value: ${ARGOCD_ENV_AI_AGENT_BEDROCK_ROLE_ARN}
+       value: ${ARGOCD_ENV_NETWORK_DEPLOYMENT_AGENT_BEDROCK_ROLE_ARN}
      - name: config.DOMAIN_NAME
        value: ${ARGOCD_ENV_DOMAIN_NAME}       
      - name: config.AWS_DEFAULT_REGION
@@ -25,7 +25,7 @@ spec:
        value: ${ARGOCD_ENV_BEDROCK_MODEL_ID}       
   destination:
     server: https://kubernetes.default.svc
-    namespace: ai-agent
+    namespace: network-deployment-agent
   syncPolicy:    
     automated:
       prune: true

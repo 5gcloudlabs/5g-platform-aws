@@ -2,7 +2,7 @@
 
 Diagrams for the AWS **platform environment**. They describe infrastructure and networking design for end-to-end evaluation of automation and AI use cases against realistic 5G network scenarios.
 
-Operational deployment on a running platform is via the [Network Deployment Agent](../installation-instructions/01%20ai-agent-console.md).
+Operational deployment on a running platform is via the [Network Deployment Agent](../installation-instructions/01%20network-deployment.md).
 
 | Document | Topic |
 |----------|-------|

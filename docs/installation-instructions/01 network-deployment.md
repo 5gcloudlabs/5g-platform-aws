@@ -5,7 +5,7 @@ Part of **5G Platform AWS** — Phase 2 of the platform workflow.
 
 This guide describes how to deploy and validate network components on a **running platform environment**. It assumes OpenTofu provisioning and cluster bootstrap are already complete.
 
-The Network Deployment Agent is implemented as the `ai-agent` service (Amazon Bedrock — Anthropic Claude Haiku 4.5 — with a FastAPI backend). Its application logic is maintained in the [`network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent) repository and integrated into this platform during cluster bootstrap.
+The Network Deployment Agent is implemented as the `network-deployment-agent` service (Amazon Bedrock — Anthropic Claude Haiku 4.5 — with a FastAPI backend). Its application logic is maintained in the [`network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent) repository and integrated into this platform during cluster bootstrap.
 
 ---
 
@@ -25,7 +25,7 @@ The agent is a chat interface backed by Amazon Bedrock (Anthropic Claude Haiku 4
 |-------|------|
 | Bedrock / Claude Haiku 4.5 (intent) | Parses your message and selects exactly one deployment option. |
 | Parameter extraction | Collects MCC, MNC, and count only when you explicitly provide them. |
-| Manifest fetch | Reads workflow and ArgoCD app YAML from this repository (`GITHUB_RAW_BASE` in the ai-agent Helm values). |
+| Manifest fetch | Reads workflow and ArgoCD app YAML from this repository (`GITHUB_RAW_BASE` in the network-deployment-agent Helm values). |
 | Execution | Single-step apps are applied with `kubectl`; multi-step flows are submitted as Argo Workflows. |
 
 #### Deployment options

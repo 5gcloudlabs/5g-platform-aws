@@ -20,7 +20,7 @@ Deploying this stack is only needed for **end-to-end evaluation** on AWS. Earlie
 | `multus.tf` | Multus subnets, ENIs, attachments, and security groups for N2/N3/N4/N6 |
 | `ssm.tf` | SSM documents to bring secondary ENIs up on worker nodes |
 | `efs.tf` | Amazon EFS for persistent volumes (MongoDB) |
-| `iam.tf` | IRSA roles for ALB controller, EFS CSI driver, and ai-agent Bedrock access (Claude Haiku 4.5) |
+| `iam.tf` | IRSA roles for ALB controller, EFS CSI driver, and network-deployment-agent Bedrock access (Claude Haiku 4.5) |
 | `acm.tf` | ACM certificate with Cloudflare DNS validation |
 | `argocd.tf` | Argo CD Helm release (envsubst CMP plugin) and cluster-bootstrap Application |
 | `k8s_git-repo-secret.tf` | Git credential secret for Argo CD repository access |
@@ -32,7 +32,7 @@ Deploying this stack is only needed for **end-to-end evaluation** on AWS. Earlie
 | Phase | Tool | Scope |
 |-------|------|-------|
 | AWS infrastructure | OpenTofu | VPC, EKS cluster and nodes, ENIs, EFS, ACM, IAM, Argo CD install |
-| Cluster bootstrap | Argo CD | Required add-ons under `required-apps/` (Istio, ingress, Multus, observability, argo-workflows, ai-agent, etc.) |
+| Cluster bootstrap | Argo CD | Required add-ons under `required-apps/` (Istio, ingress, Multus, observability, argo-workflows, network-deployment-agent, etc.) |
 | Network components | Network Deployment Agent | Free5GC, subscriber provisioning, UERANSIM (via Argo CD / Argo Workflows) |
 
 Only Argo CD is installed directly by OpenTofu via Helm. Other cluster add-ons are Argo CD Applications under `cluster-bootstrap/argocd-apps/required-apps/`.

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: network-deployment-agent
+description: Network Deployment Agent — Chainlit frontend + FastAPI backend
+version: 0.1.0
+appVersion: "1.0.0"

@@ -38,7 +38,7 @@ In addition, a global `values.yaml` at the top level provides centralized config
 
 Deployed on demand via the Network Deployment Agent at `https://console.<domain>` or as part of an Argo Workflow (`5gcore-sub-prov-wf`, `5g-solution-wf`).
 
-The agent applies the Argo CD Application wrapper at `5g/argocd-apps/free5gc-app/` with MCC and MNC parameters. See the [Network deployment guide](../../../docs/installation-instructions/01%20ai-agent-console.md).
+The agent applies the Argo CD Application wrapper at `5g/argocd-apps/free5gc-app/` with MCC and MNC parameters. See the [Network deployment guide](../../../docs/installation-instructions/01%20network-deployment.md).
 
 ---
 

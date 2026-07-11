@@ -11,7 +11,7 @@ Running the full laboratory on AWS costs approximately **USD 3.50–4.00 per hou
 | Guide | Description |
 |-------|-------------|
 | [Infrastructure installation](./installation-instructions/00%20infrastructure.md) | Platform provisioning, prerequisites, cost estimate, and bootstrap validation |
-| [Network deployment](./installation-instructions/01%20ai-agent-console.md) | Network component deployment and validation via the Network Deployment Agent |
+| [Network deployment](./installation-instructions/01%20network-deployment.md) | Network component deployment and validation via the Network Deployment Agent |
 | [Architecture](./arch/) | Platform and network design |
 | [Teardown](./installation-instructions/terminate.md) | Resource cleanup |
 

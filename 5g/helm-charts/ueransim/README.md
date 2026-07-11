@@ -38,7 +38,7 @@ Customizations can be found in:
 
 Deployed on demand via the Network Deployment Agent at `https://console.<domain>` or as the final step of an Argo Workflow (`sub-prov-ueransim-wf`, `5g-solution-wf`).
 
-The agent applies the Argo CD Application wrapper at `5g/argocd-apps/ueransim-app/` with MCC, MNC, and subscriber count. See the [Network deployment guide](../../../docs/installation-instructions/01%20ai-agent-console.md).
+The agent applies the Argo CD Application wrapper at `5g/argocd-apps/ueransim-app/` with MCC, MNC, and subscriber count. See the [Network deployment guide](../../../docs/installation-instructions/01%20network-deployment.md).
 
 ---
 

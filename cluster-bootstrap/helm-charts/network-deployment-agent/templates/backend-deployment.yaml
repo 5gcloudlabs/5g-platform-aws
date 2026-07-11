@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ai-agent-backend
+  name: network-deployment-agent-backend
   namespace: {{ .Release.Namespace }}
   labels:
-    app: ai-agent
+    app: network-deployment-agent
     component: backend
 spec:
   replicas: {{ .Values.backend.replicas }}
   selector:
     matchLabels:
-      app: ai-agent
+      app: network-deployment-agent
       component: backend
   template:
     metadata:
       labels:
-        app: ai-agent
+        app: network-deployment-agent
         component: backend
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
@@ -28,9 +28,9 @@ spec:
             - containerPort: {{ .Values.backend.port }}
           envFrom:
             - configMapRef:
-                name: ai-agent-config
+                name: network-deployment-agent-config
             - secretRef:
-                name: ai-agent-secret
+                name: network-deployment-agent-secret
           readinessProbe:
             httpGet:
               path: /status

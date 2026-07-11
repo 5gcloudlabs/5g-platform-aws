@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: istio-vs-console
-  namespace: ai-agent
+  namespace: network-deployment-agent
 spec:
   hosts:
   - HOSTNAME
@@ -14,6 +14,6 @@ spec:
         prefix: /
     route:
     - destination:
-        host: ai-agent-frontend
+        host: network-deployment-agent-frontend
         port:
           number: 8080

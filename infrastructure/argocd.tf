@@ -128,8 +128,8 @@ spec:
         value: ${aws_iam_role.aws_efs_csi_driver_role.arn}
       - name: EFS_ID
         value: ${module.efs.id}
-      - name: AI_AGENT_BEDROCK_ROLE_ARN
-        value: ${aws_iam_role.ai_agent_bedrock_role.arn}
+      - name: NETWORK_DEPLOYMENT_AGENT_BEDROCK_ROLE_ARN
+        value: ${aws_iam_role.network_deployment_agent_bedrock_role.arn}
       - name: BEDROCK_REGION
         value: ${coalesce(var.bedrock_region, var.region)}
       - name: BEDROCK_MODEL_ID

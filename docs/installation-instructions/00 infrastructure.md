@@ -3,7 +3,7 @@
 
 Part of **5G Platform AWS** — the AWS platform environment within [5G Cloud Labs](https://5gcloudlabs.ai).
 
-This guide covers prerequisites and OpenTofu provisioning (Phase 1) for contributors who need a **deployed platform environment** for end-to-end evaluation. After cluster bootstrap completes, use the [Network Deployment Agent](./01%20ai-agent-console.md) to deploy and validate network components (Phase 2).
+This guide covers prerequisites and OpenTofu provisioning (Phase 1) for contributors who need a **deployed platform environment** for end-to-end evaluation. After cluster bootstrap completes, use the [Network Deployment Agent](./01%20network-deployment.md) to deploy and validate network components (Phase 2).
 
 If you are developing a use case or experiment in a dedicated repository, you do not need to follow this guide until you are ready for end-to-end validation on AWS.
 
@@ -135,7 +135,7 @@ Confirm with `yes` when prompted. A fresh deployment typically adds on the order
 
 - Creates VPC, subnets, NAT, secondary CIDR (`100.64.0.0/16`), EKS cluster, and two node groups (control-plane and user-plane)
 - Attaches Multus ENIs and security groups for N2/N3/N4/N6 interfaces
-- Creates EFS, ACM certificate (DNS-validated via Cloudflare), and IAM roles (ALB controller, EFS CSI, ai-agent Bedrock access for Claude Haiku 4.5)
+- Creates EFS, ACM certificate (DNS-validated via Cloudflare), and IAM roles (ALB controller, EFS CSI, network-deployment-agent Bedrock access for Claude Haiku 4.5)
 - Installs Argo CD (Helm) with the envsubst CMP plugin
 - Registers the Git repository secret and applies the cluster-bootstrap Argo CD Application
 
@@ -170,7 +170,7 @@ Expected applications include (non-exhaustive):
 | Application | Purpose |
 |-------------|---------|
 | `cluster-bootstrap` | Parent app-of-apps |
-| `ai-agent` | Network Deployment Agent — frontend + backend (Bedrock / Claude Haiku 4.5) |
+| `network-deployment-agent` | Network Deployment Agent — frontend + backend (Bedrock / Claude Haiku 4.5) |
 | `argo-workflows` | Workflow engine for multi-step 5G deployments |
 | `aws-load-balancer-controller` | ALB provisioning |
 | `aws-efs-csi-driver` | EFS persistent volumes |
@@ -185,14 +185,14 @@ Expected applications include (non-exhaustive):
 Verify key namespaces:
 
 ```bash
-kubectl -n ai-agent get pods
+kubectl -n network-deployment-agent get pods
 kubectl -n argo get pods
 kubectl -n kube-system get pods
 kubectl -n istio-system get pods
 kubectl -n monitoring get pods
 ```
 
-The Network Deployment Agent pods (`ai-agent-frontend`, `ai-agent-backend`) should reach `Running`.
+The Network Deployment Agent pods (`network-deployment-agent-frontend`, `network-deployment-agent-backend`) should reach `Running`.
 
 #### 4.f) Validate ingress and DNS
 
@@ -222,7 +222,7 @@ dig +short <alb-hostname-from-ingress>
 
 Infrastructure and platform bootstrap are complete. Continue with:
 
-[Deploy and validate network components via the Network Deployment Agent](./01%20ai-agent-console.md)
+[Deploy and validate network components via the Network Deployment Agent](./01%20network-deployment.md)
 
 ---
 

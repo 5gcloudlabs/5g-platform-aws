@@ -251,7 +251,7 @@ Once platform bootstrap is complete:
 |---------|-------------|
 | [`docs/`](docs/) | Documentation index |
 | [Infrastructure installation](docs/installation-instructions/00%20infrastructure.md) | Platform provisioning and bootstrap |
-| [Network deployment](docs/installation-instructions/01%20ai-agent-console.md) | Component deployment and validation |
+| [Network deployment](docs/installation-instructions/01%20network-deployment.md) | Component deployment and validation |
 | [Architecture](docs/arch/) | Platform and network design |
 | [Teardown](docs/installation-instructions/terminate.md) | Resource cleanup |
 

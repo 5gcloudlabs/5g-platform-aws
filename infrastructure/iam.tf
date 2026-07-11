@@ -168,9 +168,9 @@ resource "aws_iam_role_policy_attachment" "aws_efs_csi_driver_role_attach" {
 
 ###
 
-# Assume-role-policy/trust-relationship to grant service account "ai-agent" in "ai-agent" namespace AssumeRoleWithWebIdentity action
+# Assume-role-policy/trust-relationship to grant service account "network-deployment-agent" in "network-deployment-agent" namespace AssumeRoleWithWebIdentity action
 
-data "aws_iam_policy_document" "ai_agent_bedrock_assume_role_policy" {
+data "aws_iam_policy_document" "network_deployment_agent_bedrock_assume_role_policy" {
 
     statement {
             actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -180,7 +180,7 @@ data "aws_iam_policy_document" "ai_agent_bedrock_assume_role_policy" {
 
             test =  "StringEquals"
             variable = "${module.eks.oidc_provider}:sub"
-            values = ["system:serviceaccount:ai-agent:ai-agent"]
+            values = ["system:serviceaccount:network-deployment-agent:network-deployment-agent"]
 
             }
 
@@ -204,15 +204,15 @@ data "aws_iam_policy_document" "ai_agent_bedrock_assume_role_policy" {
 
 
 # Create IAM role associating with created assume role policy
-resource "aws_iam_role" "ai_agent_bedrock_role" {
-  assume_role_policy = data.aws_iam_policy_document.ai_agent_bedrock_assume_role_policy.json
-  name               = "ai_agent_bedrock_role"
+resource "aws_iam_role" "network_deployment_agent_bedrock_role" {
+  assume_role_policy = data.aws_iam_policy_document.network_deployment_agent_bedrock_assume_role_policy.json
+  name               = "network_deployment_agent_bedrock_role"
 }
 
 
 # Create Bedrock IAM policy allowing model invocation
-resource "aws_iam_policy" "ai_agent_bedrock_policy" {
-  name = "ai_agent_bedrock_iam_policy"
+resource "aws_iam_policy" "network_deployment_agent_bedrock_policy" {
+  name = "network_deployment_agent_bedrock_iam_policy"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -242,7 +242,7 @@ resource "aws_iam_policy" "ai_agent_bedrock_policy" {
 
 
 # Attach Bedrock policy to the IAM role
-resource "aws_iam_role_policy_attachment" "ai_agent_bedrock_role_attach" {
-  role       = aws_iam_role.ai_agent_bedrock_role.name
-  policy_arn = aws_iam_policy.ai_agent_bedrock_policy.arn
+resource "aws_iam_role_policy_attachment" "network_deployment_agent_bedrock_role_attach" {
+  role       = aws_iam_role.network_deployment_agent_bedrock_role.name
+  policy_arn = aws_iam_policy.network_deployment_agent_bedrock_policy.arn
 }

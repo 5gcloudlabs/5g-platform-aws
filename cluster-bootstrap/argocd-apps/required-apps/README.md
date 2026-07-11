@@ -25,7 +25,7 @@ OpenTofu creates the EKS cluster and installs Argo CD. Cluster bootstrap then sy
 | `kube-prometheus-stack` / `loki` | Metrics, dashboards, logs |
 | `storage-class` | EFS StorageClass |
 | `argo-workflows` | Multi-step network deployment orchestration |
-| `ai-agent` | Network Deployment Agent (Bedrock / Claude Haiku 4.5 console) |
+| `network-deployment-agent` | Network Deployment Agent (Bedrock / Claude Haiku 4.5 console) |
 
 Network components (Free5GC, UERANSIM, subscriber provisioning) are not part of cluster bootstrap. They are deployed on demand via the Network Deployment Agent, which triggers Argo CD Applications and Argo Workflows under `5g/`.
 

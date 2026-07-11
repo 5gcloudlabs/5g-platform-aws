@@ -27,6 +27,6 @@ User → Network Deployment Agent (Bedrock / Claude Haiku 4.5)
   → subscribers registered in MongoDB / WebUI
 ```
 
-See [Network deployment guide](../../docs/installation-instructions/01%20ai-agent-console.md).
+See [Network deployment guide](../../docs/installation-instructions/01%20network-deployment.md).
 
 Maintained by **5G Cloud Labs**.
