@@ -21,7 +21,7 @@ With applicable taxes (approximately **16.6%** on AWS charges in the reference d
 | Tax (~16.6%) | applied to AWS charges |
 | **Estimated total** | **~USD 4.50 / hour** |
 
-Actual costs vary by AWS region, instance hours, data transfer, and whether network components (Free5GC, UERANSIM) are deployed. Amazon Bedrock usage for the Network Deployment Agent is billed separately on a per-request basis and is typically small compared to infrastructure charges.
+Actual costs vary by AWS region, instance hours, and data transfer. Amazon Bedrock usage for the Network Deployment Agent is billed separately on a per-request basis and is typically small compared to infrastructure charges.
 
 **Tear down the environment when it is not in use** to avoid ongoing hourly charges. See [Terminate environment](./terminate.md).
 
@@ -35,7 +35,6 @@ Actual costs vary by AWS region, instance hours, data transfer, and whether netw
 |-------------|-------------|
 | **AWS Account** | Permissions to create VPC, EKS, EC2, EFS, ACM, IAM, SSM, and S3 resources. |
 | **Cloudflare Account** | A registered domain, zone ID, and API token with **DNS:Edit** permissions for that zone. |
-| **Amazon Bedrock access** | Model access enabled for **Anthropic Claude Haiku 4.5** in the AWS account/region used by the Network Deployment Agent (see [Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) and the [Claude Haiku 4.5 model card](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-haiku-4-5.html)). |
 
 #### 1.b) Local workstation requirements
 
@@ -76,6 +75,34 @@ For other regions:
 ```bash
 aws s3api create-bucket --bucket <bucket-name> \
   --create-bucket-configuration LocationConstraint=$AWS_REGION
+```
+
+#### 1.e) Submit Anthropic use case for Bedrock
+
+Anthropic models on Amazon Bedrock require a **one-time first-time use (FTU) form** per AWS account before the Network Deployment Agent can invoke Claude Haiku 4.5. See [Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) and [`PutUseCaseForModelAccess`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_PutUseCaseForModelAccess.html).
+
+Replace the placeholder values in the JSON below, then run:
+
+| Field | Description |
+|-------|-------------|
+| `companyName` | Organization or contributor name. |
+| `companyWebsite` | Company or project URL (portfolio, GitHub profile, or project page if you have no company site). |
+| `intendedUsers` | `0` = internal only, `1` = external, `2` = internal and external. |
+| `industryOption` | Industry category (for example, `Technology`). |
+| `otherIndustryOption` | Optional; use when your industry is not listed. |
+| `useCases` | Brief description of how you will use Anthropic models on Bedrock. |
+
+```bash
+aws bedrock put-use-case-for-model-access \
+  --region us-east-1 \
+  --form-data "$(printf '%s' '{
+    "companyName": "Your Company",
+    "companyWebsite": "https://example.com",
+    "intendedUsers": "0",
+    "industryOption": "Technology",
+    "otherIndustryOption": "",
+    "useCases": "Deploy, provision and validate 5G network components on Amazon EKS using the Network Deployment Agent — a conversational operator interface that interprets natural-language deployment intent via Anthropic Claude on Amazon Bedrock and orchestrates Kubernetes resources and Argo Workflows for end-to-end laboratory evaluation."
+  }' | base64)"
 ```
 
 ---
