@@ -22,10 +22,4 @@ These charts live under `5g/helm-charts/` and are deployed on demand by the Netw
 
 ---
 
-## Legacy chart
-
-The console chart in this directory is deprecated. The Istio VirtualService for `console.<domain>` routes to network-deployment-agent-frontend (Network Deployment Agent), not the old console deployment.
-
----
-
 Charts are referenced by Argo CD Application manifests in `cluster-bootstrap/argocd-apps/required-apps/`.

@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: domain-name-cm
-data:
-  DOMAIN_NAME: {{ .Values.Domain }}
