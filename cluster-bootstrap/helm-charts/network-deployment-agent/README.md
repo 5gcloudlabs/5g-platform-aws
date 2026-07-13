@@ -31,6 +31,7 @@ Key values in `values.yaml`:
 | `config.BEDROCK_REGION` | Bedrock API region |
 | `config.BEDROCK_MODEL_ID` | Model or inference profile (Claude Haiku 4.5) |
 | `config.GITHUB_RAW_BASE` | Platform repo raw URL for deployment manifests |
+| `config.DEPLOYMENT_CATALOG_PATH` | Deployment catalog YAML path (default: `5g/deployment-catalog.yaml`) |
 | `config.ARGO_WF_BASE_PATH` | Argo Workflow path under platform repo |
 | `config.ARGOCD_APPS_BASE_PATH` | Argo CD Application path under platform repo |
 

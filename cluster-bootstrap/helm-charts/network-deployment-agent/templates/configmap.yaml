@@ -8,6 +8,7 @@ data:
   POLL_INTERVAL: {{ .Values.config.POLL_INTERVAL | quote }}
   DOMAIN_NAME: {{ .Values.config.DOMAIN_NAME | quote }}
   GITHUB_RAW_BASE: {{ .Values.config.GITHUB_RAW_BASE | quote }}
+  DEPLOYMENT_CATALOG_PATH: {{ .Values.config.DEPLOYMENT_CATALOG_PATH | quote }}
   AWS_DEFAULT_REGION: {{ .Values.config.AWS_DEFAULT_REGION | quote }}
   BEDROCK_REGION: {{ .Values.config.BEDROCK_REGION | quote }}
   BEDROCK_MODEL_ID: {{ .Values.config.BEDROCK_MODEL_ID | quote }}

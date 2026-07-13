@@ -1,0 +1,57 @@
+# Deployment catalog for the Network Deployment Agent.
+# Single source of truth for deployable options, manifest paths, and LLM intent metadata.
+# Consumed at runtime from GITHUB_RAW_BASE (see DEPLOYMENT_CATALOG_PATH in the agent Helm chart).
+
+version: 1
+
+step_labels:
+  sub-prov: Provision subscribers
+  ueransim: Deploy RAN & UE simulation
+
+options:
+  # Single-step — Argo CD Applications (kubectl apply)
+  - id: free5gc
+    type: kubectl
+    category: single-step
+    manifest: 5g/argocd-apps/free5gc-app/free5gc-app.yml
+    required_params: [mcc, mnc]
+    next_step: sub-prov
+    description: Deploy 5G core only
+
+  - id: sub-prov
+    type: kubectl
+    category: single-step
+    manifest: 5g/argocd-apps/sub-prov-app/sub-prov-app.yml
+    required_params: [mcc, mnc, count]
+    next_step: ueransim
+    description: Provision subscribers only
+
+  - id: ueransim
+    type: kubectl
+    category: single-step
+    manifest: 5g/argocd-apps/ueransim-app/ueransim-app.yml
+    required_params: [mcc, mnc, count]
+    description: Deploy RAN and UE simulation only
+
+  # Multi-step — Argo Workflows
+  - id: 5gcore-sub-prov
+    type: argo
+    category: workflow
+    manifest: 5g/argo-workflows/5gcore-sub-prov-wf.yaml
+    required_params: [mcc, mnc, count]
+    next_step: ueransim
+    description: Deploy 5G core and provision subscribers in one shot
+
+  - id: sub-prov-ueransim
+    type: argo
+    category: workflow
+    manifest: 5g/argo-workflows/sub-prov-ueransim-wf.yaml
+    required_params: [mcc, mnc, count]
+    description: Provision subscribers and deploy UE/RAN simulation (5G core already deployed)
+
+  - id: 5g-solution
+    type: argo
+    category: workflow
+    manifest: 5g/argo-workflows/5g-solution-wf.yaml
+    required_params: [mcc, mnc, count]
+    description: Deploy 5G core, provision subscribers, and deploy UE/RAN simulation

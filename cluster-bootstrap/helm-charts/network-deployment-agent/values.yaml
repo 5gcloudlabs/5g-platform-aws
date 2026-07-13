@@ -37,6 +37,7 @@ config:
   BEDROCK_MODEL_ID: ""
   POLL_INTERVAL: "1"
   GITHUB_RAW_BASE: "https://raw.githubusercontent.com/5g-cloud-labs/new-test-2/trims"
+  DEPLOYMENT_CATALOG_PATH: "5g/deployment-catalog.yaml"
   ARGO_WF_BASE_PATH: "5g/argo-workflows"
   ARGOCD_APPS_BASE_PATH: "5g/argocd-apps"  
   CORE_NAMESPACE: "free5gc"
