@@ -1,8 +1,12 @@
 # Network Deployment Agent
 
-**AI-assisted network deployment and provisioning through a natural language interface.**
+**An AI-powered operational interface for deploying and provisioning cloud-native 5G network environments.**
 
-Part of the **5G Cloud Labs** project — a **use case repository** for developing, testing, and evolving an independent automation and AI capability before integration into platform environments.
+Part of the **5G Cloud Labs** project.
+
+This directory documents the **Network Deployment Agent** use case. Application source is maintained in [`5g-cloud-labs/ai-agent`](https://github.com/5g-cloud-labs/ai-agent).
+
+This repository contains an **AI capability** that is developed independently and integrated into platform environments when ready for end-to-end evaluation.
 
 For the project-wide contributor model and repository roles, see the [5G Cloud Labs organization profile](https://github.com/5gcloudlabs).
 
@@ -10,111 +14,118 @@ For the project-wide contributor model and repository roles, see the [5G Cloud L
 
 ## Overview
 
-The Network Deployment Agent translates operator intent into deployment and provisioning actions on a running 5G platform environment.
+The Network Deployment Agent provides a natural language interface for deploying and provisioning 5G network components on a running platform environment.
 
-Users describe what they want in natural language — for example, deploying the 5G Core, provisioning subscribers, or running a full end-to-end scenario. The agent interprets that intent, collects required parameters when needed, and triggers the appropriate deployment on the cluster.
+Users describe the desired outcome — for example deploying the 5G Core, provisioning subscribers, or deploying a complete end-to-end scenario. The agent interprets that intent, collects any required deployment parameters, and invokes the appropriate deployment action.
 
-It is the primary **operate** interface for platform environments such as [`5g-platform-aws`](https://github.com/5gcloudlabs/5g-platform-aws), where network components are deployed on demand rather than during initial platform installation.
+It is currently integrated into platform environments such as [`5g-platform-aws`](https://github.com/5gcloudlabs/5g-platform-aws), where network components are deployed on demand rather than during platform installation.
 
 ---
 
 ## Why This Use Case Exists
 
-Deploying and provisioning a 5G network environment involves multiple steps, parameters, and orchestration paths. Manual execution through CLI commands and fixed scripts increases friction and makes experimentation harder.
+Deploying and provisioning a cloud-native 5G network involves multiple deployment paths, parameters, and operational steps. Manual execution through CLI commands and fixed scripts increases operational complexity and makes experimentation more difficult.
 
-This use case explores whether a natural language interface — backed by a large language model (LLM) — can simplify those workflows while remaining connected to reproducible, GitOps-driven automation on the platform.
+This use case explores how large language models (LLMs) can simplify deployment and provisioning workflows while remaining integrated with reproducible, GitOps-driven platform automation.
 
-The agent is developed here as an independent capability. It is integrated into platform environments when ready for end-to-end evaluation against realistic network components.
+The agent is developed independently as a reusable capability and integrated into platform environments when ready for end-to-end evaluation.
 
 ---
 
-## What It Does
+## Current Capabilities
 
-The Network Deployment Agent currently supports:
+Current capabilities include:
 
-- **Guided deployment** — natural-language chat at `https://console.<your-domain>`
-- **Parameter collection** — MCC, MNC, and subscriber count when required
-- **Single-step deployments** — individual network components via Argo CD Applications
-- **Multi-step workflows** — coordinated deployments via Argo Workflows
-- **Operational feedback** — progress and status in plain language during deployment
-- **Connectivity validation** — optional latency and reachability checks through the user plane
+- Natural language interaction at `https://console.<your-domain>`
+- Guided parameter collection (MCC, MNC, subscriber count when required)
+- Individual network component deployment via Argo CD Applications
+- Multi-step deployment workflows via Argo Workflows
+- Deployment progress reporting
+- Connectivity validation through the user plane (when UERANSIM is deployed)
 
-### Deployment options
+### Deployment Options
 
-**Single-step** (one operation per request):
+**Single-step deployment**
 
-| Option | Deploys | Required parameters |
-|--------|---------|---------------------|
-| 5G Core only | Free5GC network functions | MCC, MNC |
-| Subscriber provisioning only | `sub-prov` Job | MCC, MNC, count |
-| RAN/UE simulation only | UERANSIM | MCC, MNC, count |
+| Operation | Deploys | Parameters |
+|-----------|---------|------------|
+| 5G Core | Free5GC network functions | MCC, MNC |
+| Subscriber provisioning | `sub-prov` Job | MCC, MNC, subscriber count |
+| RAN / UE simulation | UERANSIM | MCC, MNC, subscriber count |
 
-**Combined workflows** (multi-step, one Argo Workflow):
+**Workflow-based deployment**
 
-| Workflow | Steps | Required parameters |
-|----------|-------|---------------------|
-| Core + subscribers | Free5GC → sub-prov | MCC, MNC, count |
-| Subscribers + simulation | sub-prov → UERANSIM *(core must already be running)* | MCC, MNC, count |
-| Full solution | Free5GC → sub-prov → UERANSIM | MCC, MNC, count |
+| Workflow | Deployment sequence | Parameters |
+|----------|---------------------|------------|
+| Core + Subscribers | Free5GC → Subscriber provisioning | MCC, MNC, subscriber count |
+| Subscribers + Simulation | Subscriber provisioning → UERANSIM *(requires running Core)* | MCC, MNC, subscriber count |
+| Complete 5G Environment | Free5GC → Subscriber provisioning → UERANSIM | MCC, MNC, subscriber count |
 
-### Example prompts
+### Example Requests
 
 ```text
-Deploy the 5G core with MCC 602 and MNC 02
+Deploy the 5G Core with MCC 602 and MNC 02
 ```
 
 ```text
 Deploy the full 5G solution with MCC 602, MNC 02, and 10 subscribers
 ```
 
-If parameters are missing, the agent asks follow-up questions before triggering any action.
+If required information is missing, the agent automatically requests the remaining parameters before executing any deployment.
 
 ---
 
-## Architecture
+## Operational Flow
 
 ```text
-          User
-            │
-            ▼
-   Web interface (Chainlit)
-            │
-            ▼
-   Agent backend (FastAPI)
-            │
-     ┌──────┴──────┐
-     ▼             ▼
- Amazon Bedrock   Platform automation
- (Claude Haiku    (Argo CD Applications,
-  4.5 — intent)    Argo Workflows, kubectl)
-            │
-            ▼
-   Network components on EKS
-   (Free5GC · sub-prov · UERANSIM)
+                 User
+                   │
+                   ▼
+          Chainlit Web Interface
+                   │
+                   ▼
+             FastAPI Backend
+                   │
+                   ▼
+          Amazon Bedrock (Claude Haiku 4.5)
+                   │
+         Intent & Parameter Extraction
+                   │
+                   ▼
+      Platform repository (manifest fetch)
+                   │
+           ┌───────┴────────┐
+           ▼                ▼
+      Argo CD Apps    Argo Workflows
+           │                │
+           └───────┬────────┘
+                   ▼
+         Network Components
+      (Free5GC · sub-prov · UERANSIM)
 ```
 
-| Component | Role |
-|-----------|------|
-| **Frontend** | Chat interface for operator interaction |
-| **Backend** | Intent handling, parameter extraction, orchestration |
-| **Amazon Bedrock** | LLM inference for intent selection (Anthropic Claude Haiku 4.5) |
-| **Manifest fetch** | Reads deployment and workflow YAML from the platform repository |
-| **Execution** | Applies Argo CD Applications or submits Argo Workflows on the cluster |
+| Component | Purpose |
+|-----------|---------|
+| Frontend | Natural language chat interface |
+| Backend | Intent handling, parameter collection, orchestration |
+| Amazon Bedrock | LLM inference for intent interpretation (default: Anthropic Claude Haiku 4.5) |
+| Manifest retrieval | Reads deployment manifests from the platform repository (`GITHUB_RAW_BASE`) |
+| Execution | Applies Argo CD Application manifests or submits Argo Workflows on the cluster |
 
-On platform environments, the agent runs as the `network-deployment-agent` Kubernetes service (`network-deployment-agent-frontend`, `network-deployment-agent-backend` in the `network-deployment-agent` namespace).
+On platform environments, the agent runs as the `network-deployment-agent` Kubernetes service (`network-deployment-agent-frontend` and `network-deployment-agent-backend` in the `network-deployment-agent` namespace), packaged from a **single container image** with different entrypoints per workload.
 
 ---
 
 ## How It Works
 
-1. The user sends a message through the web interface.
-2. Bedrock parses intent and selects exactly one deployment option.
-3. The backend collects MCC, MNC, and count only when explicitly provided or required.
+1. The user submits a request through the web interface.
+2. Amazon Bedrock interprets the requested operation and selects exactly one deployment option.
+3. The backend collects MCC, MNC, and subscriber count when explicitly provided or required.
 4. Deployment manifests are fetched from the platform repository (`GITHUB_RAW_BASE`).
-5. Single-step operations are applied with `kubectl`; multi-step flows are submitted as Argo Workflows.
-6. The agent reports progress and suggested next steps while work runs on the cluster.
+5. Single-step operations apply Argo CD Application manifests to the cluster; multi-step flows submit Argo Workflows.
+6. Deployment progress and operational status are reported back to the user.
 
-Platform administration, troubleshooting, and advanced validation can still be performed through standard Kubernetes and cloud tooling when required.
+Platform administration, troubleshooting, and advanced validation remain available through standard Kubernetes and cloud tooling when required.
 
 ---
 
@@ -122,74 +133,111 @@ Platform administration, troubleshooting, and advanced validation can still be p
 
 ```text
 .
-├── frontend/          Chainlit web interface
-├── backend/           FastAPI agent service
-├── prompts/           LLM intent and orchestration logic
-├── tests/             Unit and integration tests
-└── docs/              Use case documentation
+├── frontend/              Chainlit web interface (frontend.py, chainlit.md)
+├── backend/               FastAPI service (main.py and orchestration modules)
+├── prompts/               LLM prompts and intent templates
+├── tests/                 Unit and integration tests
+├── docs/                  Use case documentation
+├── Dockerfile             Single image for frontend and backend workloads
+├── requirements.txt       Python dependencies
+└── README.md
 ```
 
-Exact layout may evolve as the use case matures. Deployment packaging for platform integration lives in [`5g-platform-aws`](https://github.com/5gcloudlabs/5g-platform-aws) under `cluster-bootstrap/helm-charts/network-deployment-agent/`.
+The container image is published as `ghcr.io/5gcloudlabs/network-deployment-agent`. Root-level `main.py` and `frontend.py` symlinks in the image preserve compatibility with the platform Helm chart entrypoints.
+
+Platform packaging (Helm chart, Argo CD application, IAM) lives in the platform environment repository. For AWS:
+
+```text
+5g-platform-aws/
+└── cluster-bootstrap/
+    └── helm-charts/
+        └── network-deployment-agent/
+```
+
+### Local development
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+export PYTHONPATH=.
+
+# Backend API
+uvicorn backend.main:app --reload --port 8000
+
+# Frontend (separate terminal; set BACKEND_URL=http://localhost:8000)
+chainlit run frontend/frontend.py --port 8080
+```
 
 ---
 
-## Development
+## Development Workflow
 
-Contributors do **not** need a deployed platform environment for all work on this use case.
+Contributors do **not** require a deployed platform environment for all development activities.
 
-| Stage | Where | What happens |
-|-------|-------|--------------|
-| **Develop** | This repository or your workstation | Build and validate agent logic, prompts, and API behaviour |
-| **Integrate** | Platform environment (e.g. `5g-platform-aws`) | Deploy via the platform Helm chart and run end-to-end evaluation |
-| **Operate** | Deployed platform | Validate against live network components and automation workflows |
+| Stage | Location | Typical work |
+|-------|----------|--------------|
+| Develop | This repository or local workstation | Backend development, prompts, frontend, API behaviour |
+| Integrate | Platform environment repository | Package and integrate into a platform environment |
+| Evaluate | Running platform environment | End-to-end evaluation against live network components |
 
-Typical local work includes backend development, prompt iteration, unit tests, and API testing. End-to-end evaluation on AWS is used when a change is ready to be tested against a full 5G network environment.
+Most work can be completed locally. Platform deployment is primarily required when validating integrated behaviour.
 
 ---
 
-## Platform Integration
+## Integration
 
-The agent is integrated into platform environments during cluster bootstrap.
+The Network Deployment Agent is integrated into platform environments during cluster bootstrap.
 
-| Platform | Integration path |
-|----------|------------------|
+| Platform | Integration |
+|----------|-------------|
 | [`5g-platform-aws`](https://github.com/5gcloudlabs/5g-platform-aws) | Helm chart at `cluster-bootstrap/helm-charts/network-deployment-agent/`, synced by Argo CD as application `network-deployment-agent` |
 
-After platform provisioning and bootstrap:
+Typical usage after platform provisioning:
 
 1. Open `https://console.<your-domain>`.
-2. Deploy and provision network components through the agent.
-3. Validate behaviour on the running platform.
+2. Submit a deployment request through the agent.
+3. Review deployment progress.
+4. Validate network operation on the running platform.
 
-Operational guide on AWS: [Network deployment](https://github.com/5gcloudlabs/5g-platform-aws/blob/5g-platform-aws/docs/installation-instructions/01%20network-deployment.md) in `5g-platform-aws`.
+Platform-specific operational guidance: [Network deployment](https://github.com/5gcloudlabs/5g-platform-aws/blob/5g-platform-aws/docs/installation-instructions/01%20network-deployment.md) in `5g-platform-aws`.
+
+Bedrock access on the platform uses an IRSA role attached to the `network-deployment-agent` service account.
 
 ---
 
 ## Configuration
 
-Key runtime settings (provided via the platform Helm chart or environment):
+Key runtime configuration (provided by the platform Helm chart):
 
 | Variable | Purpose |
 |----------|---------|
-| `DOMAIN_NAME` | Public domain for console and platform URLs |
-| `BEDROCK_REGION` | AWS region for Bedrock API calls |
-| `BEDROCK_MODEL_ID` | Bedrock model or inference profile (Claude Haiku 4.5) |
+| `DOMAIN_NAME` | Public platform domain |
+| `AWS_DEFAULT_REGION` | AWS region for cluster and API calls |
+| `BEDROCK_REGION` | AWS region for Amazon Bedrock |
+| `BEDROCK_MODEL_ID` | LLM model or inference profile (default: Claude Haiku 4.5) |
 | `GITHUB_RAW_BASE` | Base URL for fetching platform deployment manifests |
-| `ARGO_WF_BASE_PATH` | Path to Argo Workflow templates in the platform repo |
-| `ARGOCD_APPS_BASE_PATH` | Path to Argo CD Application wrappers in the platform repo |
-| `CORE_NAMESPACE` | Namespace for Free5GC (default `free5gc`) |
-| `UERANSIM_NAMESPACE` | Namespace for UERANSIM (default `ueransim`) |
-
-Bedrock access requires appropriate IAM permissions on the platform (IRSA role attached to the `network-deployment-agent` service account).
+| `ARGO_WF_BASE_PATH` | Argo Workflow manifest path under the platform repo |
+| `ARGOCD_APPS_BASE_PATH` | Argo CD Application manifest path under the platform repo |
+| `CORE_NAMESPACE` | Free5GC namespace (default: `free5gc`) |
+| `UERANSIM_NAMESPACE` | UERANSIM namespace (default: `ueransim`) |
+| `POLL_INTERVAL` | Status polling interval (seconds) |
+| `PING_INTERFACE` / `PING_TARGET` / `PING_COUNT` | User-plane connectivity validation settings |
 
 ---
 
 ## Contributing
 
-Contributions are welcome in this repository.
+Contributions are welcome.
 
-- **Agent logic, prompts, frontend, backend** — develop and test here.
-- **Platform wiring, Helm values, manifest paths** — integrate and validate in the appropriate [platform environment](https://github.com/5gcloudlabs/5g-platform-aws).
+Typical contribution areas include:
+
+- Agent orchestration logic
+- Prompt engineering
+- Frontend improvements
+- Backend APIs
+- Additional deployment capabilities
+
+Platform-specific integration and packaging are maintained in the corresponding [platform environment](https://github.com/5gcloudlabs/5g-platform-aws) repository.
 
 Open an issue or pull request to discuss changes, integration points, or new deployment capabilities.
 
@@ -199,7 +247,7 @@ Open an issue or pull request to discuss changes, integration points, or new dep
 
 | Repository | Role |
 |------------|------|
-| [`5g-platform-aws`](https://github.com/5gcloudlabs/5g-platform-aws) | AWS platform environment — integrates and evaluates this use case |
+| [`5g-platform-aws`](https://github.com/5gcloudlabs/5g-platform-aws) | AWS platform environment integrating this use case |
 | `5g-platform-gcp` | Future platform environment *(planned)* |
 
 ---

@@ -2,7 +2,7 @@
 
 Helm chart for deploying the **Network Deployment Agent** on a 5G Cloud Labs platform environment.
 
-Application source and use case documentation: [`network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent).
+Application source and use case documentation: [`5g-cloud-labs/ai-agent`](https://github.com/5g-cloud-labs/ai-agent).
 
 ---
 
