@@ -58,7 +58,7 @@ spec:
              label: grafana_dashboard
   - repoURL: https://github.com/5g-cloud-labs/new-test-2.git
     path: cluster-bootstrap/k8s-resources/grafana-dashboards
-    targetRevision: trims            
+    targetRevision: 5g-platform-aws            
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
