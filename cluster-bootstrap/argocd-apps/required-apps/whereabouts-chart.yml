@@ -16,7 +16,7 @@ spec:
      - name: "nodeSliceController.enabled"
        value: "false"
      - name: "image.tag"
-       value: "v0.8.0"
+       value: "v0.9.4"
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
