@@ -8,7 +8,7 @@ See the [Architecture Index](./README.md).
 
 ## Overview
 
-Stage B establishes the AWS networking foundation for the platform environment. Every subsequent component—including Amazon EKS, Multus, Free5GC, and UERANSIM—depends on this networking layer.
+Stage B establishes the AWS networking foundation for the platform environment. Every subsequent component — including Amazon EKS, Multus, Free5GC, and UERANSIM — depends on this networking layer.
 
 The design separates Kubernetes networking from 5G network traffic by assigning them to different IP address spaces:
 
@@ -53,9 +53,7 @@ tofu apply
       │
       ▼
 Create VPC
-      │
-      ▼
-Create Public & Private Subnets
+(public & private subnets + NAT Gateways)
       │
       ▼
 Associate Secondary CIDR
@@ -64,14 +62,13 @@ Associate Secondary CIDR
 Create Multus Subnets
       │
       ▼
-Configure NAT Gateways
-      │
-      ▼
 Configure N6 Routing
       │
       ▼
 VPC Ready
 ```
+
+NAT Gateways are created as part of the VPC module. Multus subnets and the N6 route table are configured after the secondary CIDR is associated.
 
 The networking infrastructure is provisioned before Amazon EKS worker nodes are created.
 
@@ -107,6 +104,17 @@ module "vpc" {
     cidrsubnet(var.vpc_cidr, 3, 1),
     cidrsubnet(var.vpc_cidr, 3, 3)
   ]
+
+  private_subnet_tags = {
+    "kubernetes.io/role/internal-elb"                 = "1"
+    "kubernetes.io/cluster/${var.eks_cluster_name}" = "shared"
+    "Tier"                                            = "Private"
+  }
+
+  public_subnet_tags = {
+    "kubernetes.io/role/elb"                          = "1"
+    "kubernetes.io/cluster/${var.eks_cluster_name}" = "shared"
+  }
 
   enable_nat_gateway     = true
   one_nat_gateway_per_az = true
@@ -152,7 +160,7 @@ This address space is reserved exclusively for Multus-attached interfaces.
 
 The UPF N6 interface provides user-plane connectivity toward external networks.
 
-A dedicated route table forwards outbound traffic from the UPF N6 subnet through the VPC NAT Gateway.
+A dedicated route table forwards outbound traffic from the UPF N6 subnet through the VPC NAT Gateway. The configuration uses the first NAT gateway ID from the VPC module (`natgw_ids[0]`); N6 egress is therefore tied to that Availability Zone rather than load-balanced across both NAT Gateways.
 
 ```terraform
 resource "aws_route_table" "n6-route-table" {
@@ -210,8 +218,8 @@ Additional subnets are allocated for:
 - UPF N3
 - UPF N4
 - UPF N6
-- UERANSIM N2
-- UERANSIM N3
+- UERANSIM gNB N2
+- UERANSIM gNB N3
 
 These subnets are later used by Multus to attach secondary interfaces to Kubernetes pods.
 
@@ -244,7 +252,7 @@ After this stage completes successfully, the platform environment contains:
 
 ---
 
-## Dependencies
+## Downstream Dependencies
 
 The VPC provides the networking foundation for subsequent platform components.
 
