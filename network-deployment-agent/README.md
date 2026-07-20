@@ -199,7 +199,7 @@ Typical usage after platform provisioning:
 3. Review deployment progress.
 4. Validate network operation on the running platform.
 
-Platform-specific operational guidance: [Network deployment](https://github.com/5gcloudlabs/5g-platform-aws/blob/5g-platform-aws/docs/installation-instructions/01%20network-deployment.md) in `5g-platform-aws`.
+Platform-specific operational guidance: [Network deployment](https://github.com/5gcloudlabs/5g-platform-aws/blob/main/docs/installation-instructions/01%20network-deployment.md) in `5g-platform-aws`.
 
 Bedrock access on the platform uses an IRSA role attached to the `network-deployment-agent` service account.
 

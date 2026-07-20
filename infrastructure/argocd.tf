@@ -106,8 +106,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/5g-cloud-labs/new-test-2.git
-    targetRevision: 5g-platform-aws
+    repoURL: https://github.com/5gcloudlabs/5g-platform-aws.git
+    targetRevision: main
     path: cluster-bootstrap/argocd-apps/required-apps
     plugin:
       name: envsubst

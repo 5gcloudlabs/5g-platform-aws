@@ -89,7 +89,7 @@ variable "domain_name" {
 variable "git_repo_url" {
   description = "Git repository URL registered with Argo CD for platform manifests."
   type        = string
-  default     = "https://github.com/5g-cloud-labs/new-test-2.git"
+  default     = "https://github.com/5gcloudlabs/5g-platform-aws.git"
 }
 
 variable "git_repo_username" {
