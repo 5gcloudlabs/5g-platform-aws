@@ -19,7 +19,8 @@ This separation allows network functions to expose stable interfaces for 3GPP re
 
 ## Architecture
 
-https://github.com/user-attachments/assets/e38a14dd-8e28-4196-8bbd-4548a09921df
+<img width="5559" height="4600" alt="1-vpc" src="https://github.com/user-attachments/assets/ca953fea-361b-40f3-81e0-9b701c1b6fb3" />
+
 
 
 The primary CIDR provides standard Kubernetes networking, while the secondary CIDR is reserved exclusively for Multus-attached interfaces used by 5G network functions.
