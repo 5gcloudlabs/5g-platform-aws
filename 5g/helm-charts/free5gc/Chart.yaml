@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # Charts "free5gc-n3iwf" & "free5gc-dbpython" have been removed.
 # The original "maintainers" section has been removed.
 # -------------------------------------------------------------------------

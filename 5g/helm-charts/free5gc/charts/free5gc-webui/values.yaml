@@ -10,8 +10,8 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-# [MODIFIED by 5g-cloud-labs]
-# This values.yaml has been customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This values.yaml has been customized for 5g-platform-aws.
 #
 nameOverride: ""
 fullnameOverride: ""
@@ -83,7 +83,7 @@ webui:
     timeoutSeconds: 10
     failureThreshold: 3
     successThreshold: 1
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Added nodeSelector to schedule WebUI on 5gcontrolplane node
   nodeSelector:
     controlplane: "true"

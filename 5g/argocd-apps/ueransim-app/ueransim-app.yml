@@ -14,7 +14,7 @@ spec:
     targetRevision: 5g-platform-aws
     path: 5g/helm-charts/ueransim
     helm:
-      releaseName: aws-5gcloudlabs
+      releaseName: 5g-platform-aws
       values: |
           gnb:
             name: gnb

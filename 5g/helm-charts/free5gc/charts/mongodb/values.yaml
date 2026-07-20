@@ -16,12 +16,12 @@ image:
   registry: docker.io
   ## Bitnami MongoDB(R) image name
   ##
-  # [MODIFIED by 5g-cloud-labs]
+  # [MODIFIED by 5G Cloud Labs]
   repository: bitnamilegacy/mongodb
   ## Bitnami MongoDB(R) image tag
   ## ref: https://hub.docker.com/r/bitnami/mongodb/tags/
   ##
-  # [MODIFIED by 5g-cloud-labs]
+  # [MODIFIED by 5G Cloud Labs]
   tag: 5.0.10-debian-11-r0
   ## Specify a imagePullPolicy
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -302,7 +302,7 @@ affinity: {}
 ## Node labels for pod assignment. Evaluated as a template.
 ## ref: https://kubernetes.io/docs/user-guide/node-selection/
 ##
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Added nodeSelector to schedule MongoDB on 5gcontrolplane node
 nodeSelector:
   controlplane: "true"
@@ -458,7 +458,7 @@ persistence:
   ## If undefined (the default) or set to null, no storageClassName spec is
   ## set, choosing the default provisioner.
   ##
-  # [MODIFIED by 5g-cloud-labs]
+  # [MODIFIED by 5G Cloud Labs]
   # Updated to use Amazon Elastic File System (EFS) via pre-created StorageClass 'efs-sc'
   storageClass: efs-sc
   ## PV Access Mode

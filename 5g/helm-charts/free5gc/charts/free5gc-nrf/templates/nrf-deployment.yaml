@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # -------------------------------------------------------------------------
 #
 
@@ -39,7 +39,7 @@ spec:
       annotations:
         {{- include "free5gc-nrf.nrfAnnotations" $ | nindent 8 }}
         checksum/config: {{ include (print $.Template.BasePath "/nrf-configmap.yaml") $ | sha256sum }}
-        # [MODIFIED by 5g-cloud-labs] 
+        # [MODIFIED by 5G Cloud Labs] 
         # Added annotation to delay application startup until Istio sidecar proxy is ready.
         # Ref: https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
         {{- if $.Values.global.proxy.holdApplicationUntilProxyStarts }}

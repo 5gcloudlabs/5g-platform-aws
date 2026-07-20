@@ -1,14 +1,41 @@
-CNAD LTD 5G Cloud Labs
+5G Cloud Labs
 
-Copyright © 2025 CNAD LTD.
+Copyright © 2026 5G Cloud Labs.
 
 This project is licensed under the Apache License, Version 2.0
 (see the LICENSE file for details).
 
-This project includes components derived from the
-towards5gs-helm project (https://github.com/Orange-OpenSource/towards5gs-helm),
-licensed under the Apache License, Version 2.0.
+## Third-party and derived components
 
-All other materials in this repository, including infrastructure code,
-manifests, locally developed charts, and applications, are original works
-owned by © 2025 CNAD LTD.
+This repository includes or references the following materials:
+
+### towards5gs-helm (Orange OpenSource)
+
+Helm charts for free5GC and UERANSIM under `5g/helm-charts/`, adapted from
+https://github.com/Orange-OpenSource/towards5gs-helm
+(Apache License 2.0).
+
+Container images used by those charts at deploy time are also those distributed
+with / referenced by the towards5gs-helm project (free5GC and UERANSIM images).
+Their upstream project licenses apply to the images themselves (for example,
+UERANSIM is typically GPL-3.0). Those image licenses do not relicense the charts
+or other materials in this repository.
+
+### Bitnami MongoDB Helm chart
+
+The MongoDB subchart under `5g/helm-charts/free5gc/charts/mongodb/` is derived
+from the Bitnami MongoDB Helm chart (Apache License 2.0), as used in the
+towards5gs-helm free5GC packaging.
+
+### Multus CNI Helm chart
+
+The Multus chart under `cluster-bootstrap/helm-charts/multus/` was authored for
+this platform from the Amazon EKS Multus CNI documentation and manifests
+(Apache License 2.0).
+
+## Original works
+
+All other materials in this repository — including OpenTofu infrastructure,
+Argo CD / Argo Workflows manifests, cluster-bootstrap resources, Network
+Deployment Agent packaging, and platform customizations of the charts above —
+are original works owned by © 2026 5G Cloud Labs.

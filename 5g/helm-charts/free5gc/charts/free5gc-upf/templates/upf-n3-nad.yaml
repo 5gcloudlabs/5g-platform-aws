@@ -11,23 +11,23 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # Networking parameters are inherited from the customized global values.yaml.
 # -------------------------------------------------------------------------
 #
 
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Renamed nested parameter group: 'n3network' > 'n3networkUPF'
 {{- if $.Values.global.n3networkUPF.enabled}}
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Updated value for NAD name.
   name: {{ .Values.global.n3networkUPF.name }}
 spec:
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Added host-device & tuning CNI plugins configuration.
 # Removed macvlan/ipvlan configuration.
 # Integrated IPAM with Whereabouts.

@@ -49,6 +49,11 @@ The agent applies the Argo CD Application wrapper at `5g/argocd-apps/ueransim-ap
 ---
 
 ## License & Attribution
-This chart is based on upstream projects licensed under Apache 2.0.  
-Customizations and integrations are owned by © 5G Cloud Labs.
+
+This chart and the UERANSIM container images it deploys are based on
+[towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm)
+(Apache License 2.0). UERANSIM upstream software is typically GPL-3.0; that
+license applies to the image contents and does not relicense this chart.
+Platform customizations for Amazon EKS are owned by © 2026 5G Cloud Labs.
+See the repository [`NOTICE`](../../../NOTICE).
 

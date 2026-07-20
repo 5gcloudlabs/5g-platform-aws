@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # Networking parameters are inherited from the customized global values.yaml.
 # -------------------------------------------------------------------------
 #
@@ -40,7 +40,7 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-upf.upfAnnotations" $ | nindent 8 }}
-        # [MODIFIED by 5g-cloud-labs]
+        # [MODIFIED by 5G Cloud Labs]
         # Removed static IP parameters – IP assignment now managed by Whereabouts via respective NADs.
         # Updated network names for UPF N3 & N4 networks for UPF-specific configuration control 
         k8s.v1.cni.cncf.io/networks: '[
@@ -55,7 +55,7 @@ spec:
             }
             ]'
         checksum/config: {{ include (print $.Template.BasePath "/upf/upf-configmap.yaml") $ | sha256sum }}
-        # [MODIFIED by 5g-cloud-labs]
+        # [MODIFIED by 5G Cloud Labs]
         # Added annotation to delay application startup until Istio sidecar proxy is ready.
         # Ref: https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
         {{- if $.Values.global.proxy.holdApplicationUntilProxyStarts }}
@@ -70,7 +70,7 @@ spec:
         {{- toYaml .imagePullSecrets | nindent 8 }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
-      # [MODIFIED by 5g-cloud-labs]
+      # [MODIFIED by 5G Cloud Labs]
       # Added initContainer for automated secondary IP assignment to the respective ENI on AWS.
       # Ref: https://github.com/aws-samples/eks-automated-ipmgmt-multus-pods/tree/main
       initContainers:

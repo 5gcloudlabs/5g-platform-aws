@@ -49,6 +49,10 @@ The agent applies the Argo CD Application wrapper at `5g/argocd-apps/free5gc-app
 ---
 
 ## License & Attribution
-This chart is based on upstream projects licensed under Apache 2.0.  
-Customizations and integrations are owned by © 5G Cloud Labs.
+
+This chart and the free5GC container images it deploys are based on
+[towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm)
+(Apache License 2.0). The MongoDB subchart is derived from the Bitnami MongoDB
+Helm chart (Apache 2.0). Platform customizations for Amazon EKS are owned by
+© 2026 5G Cloud Labs. See the repository [`NOTICE`](../../../NOTICE).
 

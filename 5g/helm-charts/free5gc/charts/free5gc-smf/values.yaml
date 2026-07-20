@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # Networking parameters are inherited from the customized global values.yaml.
 # -------------------------------------------------------------------------
 #
@@ -40,8 +40,8 @@ initcontainers:
   busybox:
     image: busybox
     tag: "1.32.0"
-# [MODIFIED by 5g-cloud-labs]
-# Custom-built AWS IP Manager image published by 5g-cloud-labs to public ECR.
+# [MODIFIED by 5G Cloud Labs]
+# Custom-built AWS IP Manager image published by 5G Cloud Labs to public ECR.
 # Source reference: https://github.com/aws-samples/eks-automated-ipmgmt-multus-pods
   awsipmgmt:
     registry: public.ecr.aws/g8c8r6q0
@@ -83,7 +83,7 @@ smf:
     timeoutSeconds: 10
     failureThreshold: 3
     successThreshold: 1
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Added nodeSelector to schedule SMF on 5gcontrolplane node
   nodeSelector:
     controlplane: "true"
@@ -112,7 +112,7 @@ smf:
         - nsmf-pdusession
         - nsmf-event-exposure
         - nsmf-oam
-        # [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+        # [MODIFIED by 5G Cloud Labs] Separated configuration into two groups:
         # 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings     
     configuration1: |-
       plmnList: # the list of PLMN IDs that this SMF belongs to (optional, remove this key when unnecessary)
@@ -151,8 +151,8 @@ smf:
             type: AN # the type of the node (AN or UPF)
           UPF:  # the name of the node
             type: UPF # the type of the node (AN or UPF)
-            nodeID: 100.64.5.10 # [MODIFIED by 5g-cloud-labs] #10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)
-            addr: 100.64.5.10 # [MODIFIED by 5g-cloud-labs] #10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)
+            nodeID: 100.64.5.10 # [MODIFIED by 5G Cloud Labs] #10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)
+            addr: 100.64.5.10 # [MODIFIED by 5G Cloud Labs] #10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)
             sNssaiUpfInfos: # S-NSSAI information list for this UPF
                   - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
                       sst: 1 # Slice/Service Type (uinteger, range: 0~255)
@@ -175,7 +175,7 @@ smf:
             interfaces: # Interface list for this UPF
                   - interfaceType: N3 # the type of the interface (N3 or N9)
                     endpoints: # the IP address of this N3/N9 interface on this UPF
-                      - 100.64.3.10 # [MODIFIED by 5g-cloud-labs] #10.100.50.233
+                      - 100.64.3.10 # [MODIFIED by 5G Cloud Labs] #10.100.50.233
                     networkInstances:
                       - internet # Data Network Name (DNN)
         links: # the topology graph of userplane, A and B represent the two nodes of each link

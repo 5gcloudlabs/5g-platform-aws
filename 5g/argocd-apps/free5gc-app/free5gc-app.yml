@@ -14,7 +14,7 @@ spec:
     targetRevision: 5g-platform-aws
     path: 5g/helm-charts/free5gc
     helm:
-      releaseName: aws-5gcloudlabs
+      releaseName: 5g-platform-aws
       values: |        
         free5gc-amf:
           amf:

@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # Networking parameters are inherited from the customized global values.yaml.
 # -------------------------------------------------------------------------
 #
@@ -32,7 +32,7 @@ data:
 
     # The listen IP and nodeID of the N4 interface on this UPF (Can't set to 0.0.0.0)
     pfcp:
-    # [MODIFIED by 5g-cloud-labs] Set UPF N4 interface IP address and node ID from Helm values (n4networkUPF.n4if.ipAddress)
+    # [MODIFIED by 5G Cloud Labs] Set UPF N4 interface IP address and node ID from Helm values (n4networkUPF.n4if.ipAddress)
       addr: {{ $.Values.global.n4networkUPF.n4if.ipAddress }}   # IP addr for listening
       nodeID: {{ $.Values.global.n4networkUPF.n4if.ipAddress }} # External IP or FQDN can be reached
       retransTimeout: 1s # retransmission timeout
@@ -42,7 +42,7 @@ data:
       forwarder: gtp5g
       # The IP list of the N3/N9 interfaces on this UPF
       # If there are multiple connection, set addr to 0.0.0.0 or list all the addresses
-      # [MODIFIED by 5g-cloud-labs] Set UPF N3 interface IP address from Helm values (n3networkUPF.n3if.ipAddress)
+      # [MODIFIED by 5G Cloud Labs] Set UPF N3 interface IP address from Helm values (n3networkUPF.n3if.ipAddress)
       ifList:
         - addr: {{ $.Values.global.n3networkUPF.n3if.ipAddress }}
           type: N3

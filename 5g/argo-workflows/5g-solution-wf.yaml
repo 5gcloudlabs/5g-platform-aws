@@ -80,7 +80,7 @@ spec:
         args:
           - |
             WEBUI="webui-service.free5gc.svc.cluster.local:5000"
-            UDR="aws-5gcloudlabs-free5gc-udr-service.free5gc.svc.cluster.local:80"
+            UDR="5g-platform-aws-free5gc-udr-service.free5gc.svc.cluster.local:80"
             MAX_ATTEMPTS=30
             INTERVAL=10
 

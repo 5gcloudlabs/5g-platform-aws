@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # Networking parameters are inherited from the customized global values.yaml.
 # -------------------------------------------------------------------------
 #
@@ -39,10 +39,10 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-smf.smfAnnotations" $ | nindent 8 }}
-        # [MODIFIED by 5g-cloud-labs]
+        # [MODIFIED by 5G Cloud Labs]
         # Renamed nested parameter group: 'n4network' to 'n4networkSMF' for SMF-specific configuration control 
         {{- if and $.Values.isPfcpNeeded $.Values.global.n4networkSMF.enabled}}
-        # [MODIFIED by 5g-cloud-labs]
+        # [MODIFIED by 5G Cloud Labs]
         # Removed static IP parameters; IP assignment now handled by Whereabouts via the corresponding NAD
         k8s.v1.cni.cncf.io/networks: '[
             { "name": "{{ $.Values.global.n4networkSMF.name }}",
@@ -50,7 +50,7 @@ spec:
             }]'
         {{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/smf-configmap.yaml") $ | sha256sum }}
-        # [MODIFIED by 5g-cloud-labs]
+        # [MODIFIED by 5G Cloud Labs]
         # Added annotation to delay application startup until Istio sidecar proxy is ready.
         # Ref: https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
         {{- if $.Values.global.proxy.holdApplicationUntilProxyStarts }}
@@ -74,7 +74,7 @@ spec:
         - name: DEPENDENCIES
           value: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
         command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']
-      # [MODIFIED by 5g-cloud-labs]
+      # [MODIFIED by 5G Cloud Labs]
       # Added initContainer for automated secondary IP assignment to the respective ENI on AWS.
       # Ref: https://github.com/aws-samples/eks-automated-ipmgmt-multus-pods/tree/main
       - name: aws-ip-mgmt

@@ -290,7 +290,17 @@ For the broader project model, see the [5G Cloud Labs organization profile](http
 
 ## License
 
-Apache License 2.0
+Apache License 2.0 — see [`LICENSE`](./LICENSE) and [`NOTICE`](./NOTICE).
+
+**Copyright © 2026 5G Cloud Labs.**
+
+This repository includes adapted Helm charts and related packaging from
+[towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) (Apache 2.0),
+including free5GC and UERANSIM chart/image references used at deploy time; a
+Bitnami-derived MongoDB chart (Apache 2.0); and a Multus CNI chart authored for
+this platform from Amazon EKS Multus documentation (Apache 2.0). Runtime image
+licenses (for example UERANSIM GPL-3.0) apply to those images and do not
+relicense this repository.
 
 ---
 

@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # -------------------------------------------------------------------------
 #
 
@@ -27,7 +27,7 @@ metadata:
     component: {{ .name }}
 data:
   gnb-config.yaml: |
-    # [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+    # [MODIFIED by 5G Cloud Labs] Separated configuration into two groups:
     # 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings
     {{- .configuration1 | nindent 4 }}
     {{- .configuration2 | nindent 4 }}
@@ -37,9 +37,9 @@ data:
 {{- if .amf.service.ngap.enabled }}
     ngapIp: 0.0.0.0   
 {{- else }}
-    ngapIp: {{ $.Values.global.n2networkgNB.n2if.ipAddress }} # [MODIFIED by 5g-cloud-labs] Set N2 (NGAP) interface IP address for gNB
+    ngapIp: {{ $.Values.global.n2networkgNB.n2if.ipAddress }} # [MODIFIED by 5G Cloud Labs] Set N2 (NGAP) interface IP address for gNB
 {{- end }}
-    gtpIp: {{ $.Values.global.n3networkgNB.n3if.ipAddress }}    # [MODIFIED by 5g-cloud-labs] Set N3 (GTP) interface IP address for gNB
+    gtpIp: {{ $.Values.global.n3networkgNB.n3if.ipAddress }}    # [MODIFIED by 5G Cloud Labs] Set N3 (GTP) interface IP address for gNB
     
     # List of AMF address information
     amfConfigs:

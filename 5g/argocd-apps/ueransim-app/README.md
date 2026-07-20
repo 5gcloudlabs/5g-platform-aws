@@ -11,7 +11,7 @@ RAN and UE simulation used for **end-to-end evaluation**. Not synced at cluster 
 | Field | Value |
 |-------|-------|
 | Helm path | `5g/helm-charts/ueransim` |
-| Release name | `aws-5gcloudlabs` |
+| Release name | `5g-platform-aws` |
 | Namespace | `ueransim` |
 | Parameters | MCC, MNC, and UE count via envsubst / Helm values |
 

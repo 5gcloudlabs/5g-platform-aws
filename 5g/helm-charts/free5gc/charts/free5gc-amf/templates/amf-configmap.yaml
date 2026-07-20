@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # -------------------------------------------------------------------------
 #
 {{- with .Values.amf }}
@@ -36,7 +36,7 @@ data:
 {{- if $.Values.global.amf.service.ngap.enabled }}
         - 0.0.0.0
 {{- else }}
-        # [MODIFIED by 5g-cloud-labs] Set AMF N2 interface IP address from Helm updated values (n2networkAMF.n2if.ipAddress)
+        # [MODIFIED by 5G Cloud Labs] Set AMF N2 interface IP address from Helm updated values (n2networkAMF.n2if.ipAddress)
         - {{ $.Values.global.n2networkAMF.n2if.ipAddress }}
 {{- end }}
       ngapPort: {{ $.Values.global.amf.service.ngap.port }} # the SCTP port listened by NGAP
@@ -50,7 +50,7 @@ data:
           pem: ../cert/amf.pem
 
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
-      # [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+      # [MODIFIED by 5G Cloud Labs] Separated configuration into two groups:
       # 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings
       {{- .configuration.configuration1 | nindent 6 }}
       {{- .configuration.configuration2 | nindent 6 }}

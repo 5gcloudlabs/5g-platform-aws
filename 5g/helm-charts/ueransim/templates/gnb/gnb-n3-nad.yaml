@@ -8,22 +8,22 @@
 # or see the "LICENSE" file for more details.
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # Networking parameters are inherited from the customized global values.yaml.
 # -------------------------------------------------------------------------
 #
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Renamed nested parameter group: 'n3network' > 'n3networkgNB'
 {{- if .Values.global.n3networkgNB.enabled }}
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Updated value for NAD name.
   name: {{ .Values.global.n3networkgNB.name }}
 spec:
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Added host-device CNI plugin configuration.
 # Removed macvlan/ipvlan configuration.
 # Integrated IPAM with Whereabouts.

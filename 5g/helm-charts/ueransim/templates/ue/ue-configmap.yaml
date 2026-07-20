@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # -------------------------------------------------------------------------
 #
 {{- with .Values.ue }}
@@ -26,7 +26,7 @@ metadata:
     component: {{ .name }}
 data:
   ue-config.yaml: |
-    # [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+    # [MODIFIED by 5G Cloud Labs] Separated configuration into two groups:
     # 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings
     {{- .configuration1 | nindent 4 }}
     {{- .configuration2 | nindent 4 }}

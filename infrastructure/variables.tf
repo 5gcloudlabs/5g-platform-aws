@@ -86,9 +86,24 @@ variable "domain_name" {
   type = string
 }
 
-variable "zone_id" {
-  description = "ID of the DNS zone registered with the DNS provider"
-  type = string
+variable "git_repo_url" {
+  description = "Git repository URL registered with Argo CD for platform manifests."
+  type        = string
+  default     = "https://github.com/5g-cloud-labs/new-test-2.git"
+}
+
+variable "git_repo_username" {
+  description = "Username for Argo CD Git repository credentials (ignored when password is empty)."
+  type        = string
+  default     = "git"
+  sensitive   = true
+}
+
+variable "git_repo_password" {
+  description = "Password or PAT for Argo CD Git repository access. Leave empty for public repositories."
+  type        = string
+  default     = ""
+  sensitive   = true
 }
 
 

@@ -135,6 +135,8 @@ Edit `vars.auto.tfvars`:
 | `cloudflare_api_token` | *(required)* | Cloudflare API token for DNS and ACM validation. |
 | `bedrock_region` | `""` | Bedrock region override; empty uses `region`. |
 | `bedrock_model_id` | Anthropic Claude Haiku 4.5 (see `variables.tf`) | Bedrock model or inference profile ID for the Network Deployment Agent. |
+| `git_repo_url` | current platform Git URL | Repository URL registered with Argo CD. |
+| `git_repo_password` | `""` | Optional Git PAT for private repos; leave empty when the platform repository is public. |
 
 ---
 

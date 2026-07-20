@@ -11,7 +11,7 @@ Free5GC 5G Core used for **end-to-end evaluation** of automation and AI use case
 | Field | Value |
 |-------|-------|
 | Helm path | `5g/helm-charts/free5gc` |
-| Release name | `aws-5gcloudlabs` |
+| Release name | `5g-platform-aws` |
 | Namespace | `free5gc` |
 | Parameters | MCC and MNC via envsubst (`${ARGOCD_ENV_MCC}`, `${ARGOCD_ENV_MNC}`) |
 

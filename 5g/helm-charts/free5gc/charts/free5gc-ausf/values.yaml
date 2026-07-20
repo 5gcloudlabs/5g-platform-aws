@@ -11,8 +11,8 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # -------------------------------------------------------------------------
 #
 
@@ -71,7 +71,7 @@ ausf:
     timeoutSeconds: 10
     failureThreshold: 3
     successThreshold: 1
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Added nodeSelector to schedule AUSF on 5gcontrolplane node
   nodeSelector:
     controlplane: "true"
@@ -98,7 +98,7 @@ ausf:
   configuration:
     serviceNameList: |-
       - nausf-auth
-# [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+# [MODIFIED by 5G Cloud Labs] Separated configuration into two groups:
 # 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings      
     configuration1: |-
       plmnSupportList:

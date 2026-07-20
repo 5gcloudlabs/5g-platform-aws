@@ -11,18 +11,18 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # -------------------------------------------------------------------------
-# [MODIFIED by 5g-cloud-labs]
-# This file is customized for aws-5gcloudlabs.
+# [MODIFIED by 5G Cloud Labs]
+# This file is customized for 5g-platform-aws.
 # -------------------------------------------------------------------------
 #
 global:
-  # [MODIFIED by 5g-cloud-labs]
+  # [MODIFIED by 5G Cloud Labs]
   # Add hooks to delay application startup until the pod proxy is ready to accept traffic
   # https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts
   proxy:
     holdApplicationUntilProxyStarts: true
   #Global network parametes
-  # [MODIFIED by 5g-cloud-labs]
+  # [MODIFIED by 5G Cloud Labs]
   # Renamed nested parameter group: 'n2network' > 'n2networkgNB'
   # Updated 'n2networkgNB' configuration parameters.  
   n2networkgNB:
@@ -36,7 +36,7 @@ global:
     n2if:  # NGAP
       ipAddress: 100.64.0.10
     routeDST: 100.64.1.0/28 # route destination to AMF n2 subnet
-  # [MODIFIED by 5g-cloud-labs]
+  # [MODIFIED by 5G Cloud Labs]
   # Renamed nested parameter group: 'n3network' > 'n3networkgNB'
   # Updated 'n3networkgNB' configuration parameters.
   n3networkgNB:
@@ -58,8 +58,8 @@ initcontainers:
   sctp_test:
     image: towards5gs/sctp_test
     tag: latest
-# [MODIFIED by 5g-cloud-labs]
-# Custom-built AWS IP Manager image published by 5g-cloud-labs to public ECR.
+# [MODIFIED by 5G Cloud Labs]
+# Custom-built AWS IP Manager image published by 5G Cloud Labs to public ECR.
 # Source reference: https://github.com/aws-samples/eks-automated-ipmgmt-multus-pods
   awsipmgmt:
     registry: public.ecr.aws/g8c8r6q0
@@ -87,7 +87,7 @@ gnb:
 
   amf:
     n2if:  # NGAP
-      ipAddress: 100.64.1.10 #  [MODIFIED by 5g-cloud-labs] Set N2 interface IP address for AMF.
+      ipAddress: 100.64.1.10 #  [MODIFIED by 5G Cloud Labs] Set N2 interface IP address for AMF.
       port: 38412
     service:
       ngap:
@@ -101,13 +101,13 @@ gnb:
     requests:
       cpu: 100m
       memory: 256Mi
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Updated nodeSelector to schedule gNB on 5guserplane node
   nodeSelector:
     userplane: "true"
   tolerations: []
   affinity: {}
-# [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+# [MODIFIED by 5G Cloud Labs] Separated configuration into two groups:
 # 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings
   configuration1: |-
     mcc: '208' # Mobile Country Code value
@@ -151,14 +151,14 @@ ue:
     requests:
       cpu: 100m
       memory: 128Mi
-# [MODIFIED by 5g-cloud-labs]
+# [MODIFIED by 5G Cloud Labs]
 # Updated nodeSelector to schedule UE on 5guserplane node
   nodeSelector:
     userplane: "true"
   tolerations: []
   affinity: {}
 
-# [MODIFIED by 5g-cloud-labs] Separated configuration into two groups:
+# [MODIFIED by 5G Cloud Labs] Separated configuration into two groups:
 # 'configuration1' for user interface manipulation, and 'configuration2' for static/internal settings
   configuration1: |-
     supi: "imsi-208930000000003"  # IMSI number
