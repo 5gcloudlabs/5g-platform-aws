@@ -1,10 +1,12 @@
-# VPC architecture
+# VPC
 
-5G Platform AWS — infrastructure layer. See [architecture index](./README.md).
+**5G Platform AWS — Infrastructure Layer**
 
-# Networking
+See the [Architecture Index](./README.md).
 
-## Purpose
+---
+
+## Overview
 
 Stage B establishes the AWS networking foundation for the platform environment. Every subsequent component—including Amazon EKS, Multus, Free5GC, and UERANSIM—depends on this networking layer.
 
@@ -17,29 +19,34 @@ This separation allows network functions to expose stable interfaces for 3GPP re
 
 ---
 
-## Architecture
+## VPC Architecture
 
-<img width="5559" height="4600" alt="1-vpc" src="https://github.com/user-attachments/assets/ca953fea-361b-40f3-81e0-9b701c1b6fb3" />
+<img width="5559" height="4600" alt="VPC Architecture" src="https://github.com/user-attachments/assets/ca953fea-361b-40f3-81e0-9b701c1b6fb3" />
 
+The VPC consists of two independent networking domains:
 
+- A **primary CIDR** that provides standard AWS and Kubernetes networking.
+- A **secondary CIDR** dedicated to Multus-attached interfaces used by 5G network functions.
 
-The primary CIDR provides standard Kubernetes networking, while the secondary CIDR is reserved exclusively for Multus-attached interfaces used by 5G network functions.
+This architecture enables Kubernetes workloads to operate using the standard VPC CNI while Free5GC and UERANSIM receive deterministic secondary interfaces for 3GPP reference points.
 
 ---
 
-## Components
+## Key Components
 
 | Component | Responsibility |
 |-----------|----------------|
-| VPC | Creates the primary AWS networking environment, including public and private subnets |
-| Secondary CIDR | Adds a dedicated address space for 5G interfaces |
-| Multus Subnets | Allocates individual Layer-3 networks for each 5G interface |
-| NAT Gateways | Provides outbound internet access for private resources |
-| N6 Route Table | Routes user-plane traffic from the UPF N6 subnet to the NAT Gateway |
+| **VPC** | Creates the primary networking environment, including public and private subnets |
+| **Secondary CIDR** | Provides a dedicated address space for 5G network interfaces |
+| **Public Subnets** | Host internet-facing Application Load Balancers |
+| **Private Subnets** | Host Amazon EKS worker nodes |
+| **Multus Subnets** | Provide dedicated Layer-3 networks for individual 5G interfaces |
+| **NAT Gateways** | Provide outbound internet connectivity for private workloads |
+| **N6 Route Table** | Routes user-plane traffic from the UPF N6 subnet through the NAT Gateway |
 
 ---
 
-## Control Flow
+## Provisioning Workflow
 
 ```text
 tofu apply
@@ -48,25 +55,33 @@ tofu apply
 Create VPC
       │
       ▼
+Create Public & Private Subnets
+      │
+      ▼
 Associate Secondary CIDR
       │
       ▼
 Create Multus Subnets
       │
       ▼
+Configure NAT Gateways
+      │
+      ▼
 Configure N6 Routing
       │
       ▼
-Networking Ready
+VPC Ready
 ```
 
-The networking layer is provisioned before Amazon EKS node groups are created. Later stages attach secondary ENIs from the Multus subnets to worker nodes, allowing network functions to receive deterministic secondary IP addresses.
+The networking infrastructure is provisioned before Amazon EKS worker nodes are created.
+
+Later stages attach secondary Elastic Network Interfaces (ENIs) from the Multus subnets to worker nodes, enabling network functions to receive deterministic secondary IP addresses.
 
 ---
 
-## Implementation
+## Solution Implementation
 
-### Primary VPC
+### VPC
 
 The VPC is created using the community `terraform-aws-modules/vpc/aws` module.
 
@@ -100,13 +115,13 @@ module "vpc" {
 
 The primary CIDR defaults to `192.168.0.0/16` and is divided into public and private subnets across two Availability Zones.
 
-Public subnets host internet-facing load balancers, while private subnets host Amazon EKS worker nodes.
+Public subnets host internet-facing Application Load Balancers, while private subnets host Amazon EKS worker nodes.
 
 Subnet tags enable automatic discovery by Amazon EKS and the AWS Load Balancer Controller.
 
-A NAT Gateway is created in each Availability Zone to provide outbound internet connectivity for workloads running in private subnets.
+A NAT Gateway is deployed in each Availability Zone to provide outbound connectivity for workloads running in private subnets.
 
-To reduce race conditions during provisioning, Terraform waits briefly after the VPC has been created before configuring dependent resources.
+To reduce provisioning race conditions, Terraform pauses briefly before creating dependent resources.
 
 ```terraform
 resource "time_sleep" "sleep-after-vpc-creation" {
@@ -118,7 +133,7 @@ resource "time_sleep" "sleep-after-vpc-creation" {
 
 ---
 
-### Secondary CIDR
+### Secondary VPC CIDR
 
 A secondary CIDR (`100.64.0.0/16`) is associated with the VPC to isolate 5G interface addressing from Kubernetes networking.
 
@@ -133,7 +148,7 @@ This address space is reserved exclusively for Multus-attached interfaces.
 
 ---
 
-### N6 Routing
+### N6 Routing Configuration
 
 The UPF N6 interface provides user-plane connectivity toward external networks.
 
@@ -165,7 +180,7 @@ Without this routing configuration, the UPF cannot provide internet connectivity
 
 ---
 
-### Multus Subnets
+### Multus Network Subnets
 
 The `multus.tf` configuration allocates dedicated `/28` subnets from the secondary CIDR for each 5G interface.
 
@@ -200,20 +215,21 @@ Additional subnets are allocated for:
 
 These subnets are later used by Multus to attach secondary interfaces to Kubernetes pods.
 
-The Helm charts for Free5GC and UERANSIM are intentionally aligned with this networking design, assigning deterministic IP addresses from these subnet ranges to each network function.
+The Free5GC and UERANSIM Helm charts are intentionally aligned with this networking design, assigning deterministic IP addresses from these subnet ranges to each network function.
 
 ---
 
-## Result
+## Provisioning Outcome
 
 After this stage completes successfully, the platform environment contains:
 
-- A VPC with primary and secondary CIDRs
-- Public and private subnets
-- NAT Gateways
-- Dedicated Multus subnets
-- An N6 route table
-- Networking ready for Amazon EKS and Multus integration
+- A VPC with primary and secondary IPv4 CIDRs
+- Public subnets for internet-facing load balancers
+- Private subnets for Amazon EKS worker nodes
+- One NAT Gateway per Availability Zone
+- Dedicated `/28` Multus subnets for 5G interfaces
+- An N6 route table associated with the UPF N6 subnet
+- Networking ready for Amazon EKS, Multus, and platform bootstrap
 
 ---
 
@@ -222,18 +238,18 @@ After this stage completes successfully, the platform environment contains:
 | Symptom | Possible Cause | Investigation |
 |----------|----------------|---------------|
 | Secondary CIDR association fails | CIDR already exists in the AWS account or Region | `aws_vpc_ipv4_cidr_block_association.secondary_cidr` |
-| Pods receive no Multus IP address | Worker node and subnet are in different Availability Zones | Compare `multus.tf` subnet AZs with EKS node groups |
+| Pods receive no Multus IP address | Worker node and subnet are deployed in different Availability Zones | Compare `multus.tf` subnet AZs with the Amazon EKS node groups |
 | UPF cannot reach the internet | Missing N6 route or NAT Gateway configuration | Verify the N6 route table and NAT Gateway |
 | Application Load Balancer is not created | Missing subnet discovery tags | Review `public_subnet_tags` in `vpc.tf` |
 
 ---
 
-## Next Stages
+## Dependencies
 
-The networking layer provides the foundation for the remaining platform components.
+The VPC provides the networking foundation for subsequent platform components.
 
-- **Compute** provisions Amazon EKS worker nodes into the private subnets.
-- **Network Interfaces** attach secondary ENIs from the Multus subnets to those worker nodes.
+- **Amazon EKS** deploys worker nodes into the private subnets.
+- **Elastic Network Interfaces (ENIs)** are attached to worker nodes from the Multus subnets.
 - **Platform Bootstrap** installs Multus CNI and Whereabouts IPAM.
-- **Network Deployment** assigns deterministic secondary IP addresses to Free5GC and UERANSIM network functions.
-
+- **Free5GC** and **UERANSIM** receive deterministic secondary IP addresses from the Multus subnet ranges.
+- **Network Deployment Agent** deploys network functions that rely on this networking model.
