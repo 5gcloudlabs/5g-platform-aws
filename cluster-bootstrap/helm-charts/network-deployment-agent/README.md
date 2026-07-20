@@ -2,7 +2,7 @@
 
 Helm chart for deploying the **Network Deployment Agent** on a 5G Cloud Labs platform environment.
 
-Application source and use case documentation: [`5g-cloud-labs/ai-agent`](https://github.com/5g-cloud-labs/ai-agent).
+Application source and use case documentation: [`5gcloudlabs/network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent).
 
 ---
 
@@ -36,6 +36,8 @@ Key values in `values.yaml`:
 | `config.ARGOCD_APPS_BASE_PATH` | Argo CD Application path under platform repo |
 
 OpenTofu passes Bedrock and domain settings into this chart via the envsubst plugin and Argo CD application parameters in `infrastructure/argocd.tf`.
+
+When the platform repository is public, pods read manifests via `GITHUB_RAW_BASE` with no GitHub token secret.
 
 ---
 

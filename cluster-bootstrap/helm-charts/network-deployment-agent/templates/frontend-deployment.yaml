@@ -29,8 +29,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: network-deployment-agent-config
-            - secretRef:
-                name: network-deployment-agent-secret
           readinessProbe:
             httpGet:
               path: /

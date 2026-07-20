@@ -4,7 +4,7 @@
 
 Part of the **5G Cloud Labs** project.
 
-This directory documents the **Network Deployment Agent** use case. Application source is maintained in [`5g-cloud-labs/ai-agent`](https://github.com/5g-cloud-labs/ai-agent).
+This directory documents the **Network Deployment Agent** use case. Application source is maintained in [`5gcloudlabs/network-deployment-agent`](https://github.com/5gcloudlabs/network-deployment-agent).
 
 This repository contains an **AI capability** that is developed independently and integrated into platform environments when ready for end-to-end evaluation.
 
