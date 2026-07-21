@@ -1,0 +1,38 @@
+##Global Parameters##
+region = ""
+
+
+##S3 Bucket Parameters##
+bucket-name = ""
+key = ""
+
+
+##VPC Parameters##
+vpc_name = ""
+vpc_cidr = ""
+azs = []
+
+
+##EKS Parameters##
+eks_cluster_name = ""
+ami_id = ""
+
+
+##DNS Parameters##
+cloudflare_api_token = ""
+domain_name = ""
+zone_id = ""
+
+
+## AI Parameters
+# The AWS region where your Bedrock API calls will be anchored/initiated.
+# Leave empty ("") to fallback to your global OpenTofu provider's default region.
+bedrock_region = ""
+
+# The Bedrock Model ID or Inference Profile ID. For model details and availability, see:
+# https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-haiku-4-5.html
+# Choose one of three routing options:
+# 1. In-Region: Direct pin to a city (e.g., "anthropic.claude..."). Requires model availability in that exact region.
+# 2. Geo-Redundant: Data sovereignty locked (e.g., "eu.anthropic..." or "us.anthropic..."). Match prefix to your bedrock_region.
+# 3. Global: Max availability & cost savings (e.g., "global.anthropic..."). Routes worldwide; fits any bedrock_region.
+bedrock_model_id = ""

@@ -118,7 +118,13 @@ cd 5g-platform-aws/infrastructure
 
 ### 3. Set OpenTofu input variables
 
-Edit `vars.auto.tfvars`:
+Copy the example file and fill in your environment values:
+
+```bash
+cp vars.auto.tfvars.example vars.auto.tfvars
+```
+
+Then edit `vars.auto.tfvars`:
 
 | Variable | Default / example | Description |
 |----------|-------------------|-------------|

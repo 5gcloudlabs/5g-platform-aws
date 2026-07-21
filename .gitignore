@@ -6,4 +6,4 @@
 # Local secrets and scratch files (never commit)
 infrastructure/k8s_git-repo-secret_def_ns
 5g/argocd-apps/ueransim-app/ueransim-app.tmp
-vars.auto.tfvars
+infrastructure/vars.auto.tfvars

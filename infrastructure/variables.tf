@@ -79,11 +79,18 @@ variable "bedrock_model_id" {
 
 variable "cloudflare_api_token" {
   description = "cloudflare access api token utilized by cloudflare provider and external-dns"
+  type        = string
+  sensitive   = true
 }
 
 variable "domain_name" {
   description = "The domain name of the hosted zone registered with DNS provider"
   type = string
+}
+
+variable "zone_id" {
+  description = "Cloudflare zone ID for the domain_name hosted zone"
+  type        = string
 }
 
 variable "git_repo_url" {

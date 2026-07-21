@@ -14,7 +14,7 @@ Deploying this stack is only needed for **end-to-end evaluation** on AWS. Earlie
 |------|-------------|
 | `providers.tf` | Provider configuration (AWS, Kubernetes, Helm, kubectl, Cloudflare), S3 backend |
 | `variables.tf` | Input variables (region, VPC, EKS, DNS, Bedrock / Claude Haiku 4.5) |
-| `vars.auto.tfvars` | Environment-specific variable values (not committed with secrets in production) |
+| `vars.auto.tfvars.example` | Template for environment-specific values; copy to `vars.auto.tfvars` (gitignored) |
 | `vpc.tf` | VPC, subnets, NAT, secondary CIDR (`100.64.0.0/16`), N6 route table |
 | `eks.tf` | EKS cluster, control-plane and user-plane node groups, VPC CNI tuning, Istio webhook SG rules |
 | `multus.tf` | Multus subnets, ENIs, attachments, and security groups for N2/N3/N4/N6 |
