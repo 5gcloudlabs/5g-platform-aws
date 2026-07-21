@@ -1,6 +1,6 @@
 #ssm document for 5g-control-plane node
 resource "aws_ssm_document" "ssm_doc_5gcp_node_eni_state_up" {
-  depends_on = [aws_network_interface_attachment.smf-N4-nic-attachment] 
+  depends_on = [aws_network_interface_attachment.smf-N4-eni-attachment] 
   name            = "ssm_doc_5gcp_node_eni_state_up"
   document_format = "YAML"
   document_type   = "Command"
@@ -32,7 +32,7 @@ resource "aws_ssm_association" "ssm_association_5gcp_node" {
   }
 }
 resource "aws_ssm_document" "ssm_doc_5gup_node_eni_state_up" {
-  depends_on = [aws_network_interface_attachment.upf-N6-nic-attachment]
+  depends_on = [aws_network_interface_attachment.upf-N6-eni-attachment]
   name            = "ssm_doc_5gup_node_eni_state_up"
   document_format = "YAML"
   document_type   = "Command"

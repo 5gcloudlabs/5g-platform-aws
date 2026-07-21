@@ -37,13 +37,13 @@ This placement aligns with the Multus subnet design established in the [VPC stag
 
 | Worker node | ENI | Private IP | Device index | Reference point |
 |-------------|-----|------------|--------------|-----------------|
-| `5g-controlplane-node` | `amf-N2-nic` | `100.64.1.9` | 1 | AMF-N2 |
-| `5g-controlplane-node` | `smf-N4-nic` | `100.64.4.9` | 2 | SMF-N4 |
-| `5g-userplane-node` | `gnb-N2-nic` | `100.64.0.9` | 1 | gNB-N2 |
-| `5g-userplane-node` | `gnb-N3-nic` | `100.64.2.9` | 2 | gNB-N3 |
-| `5g-userplane-node` | `upf-N3-nic` | `100.64.3.9` | 3 | UPF-N3 |
-| `5g-userplane-node` | `upf-N4-nic` | `100.64.5.9` | 4 | UPF-N4 |
-| `5g-userplane-node` | `upf-N6-nic` | `100.64.6.9` | 5 | UPF-N6 |
+| `5g-controlplane-node` | `amf-N2-eni` | `100.64.1.9` | 1 | AMF N2 |
+| `5g-controlplane-node` | `smf-N4-eni` | `100.64.4.9` | 2 | SMF N4 |
+| `5g-userplane-node` | `gnb-N2-eni` | `100.64.0.9` | 1 | UERANSIM gNB N2 |
+| `5g-userplane-node` | `gnb-N3-eni` | `100.64.2.9` | 2 | UERANSIM gNB N3 |
+| `5g-userplane-node` | `upf-N3-eni` | `100.64.3.9` | 3 | UPF N3 |
+| `5g-userplane-node` | `upf-N4-eni` | `100.64.5.9` | 4 | UPF N4 |
+| `5g-userplane-node` | `upf-N6-eni` | `100.64.6.9` | 5 | UPF N6 |
 
 The secondary ENIs originate from the dedicated Multus subnets created during the VPC stage and provide deterministic addressing for all 5G network functions.
 
@@ -269,26 +269,26 @@ data "aws_instance" "_5gcontrolplane-node" {
   }
 }
 
-resource "aws_network_interface" "amf-N2-nic" {
+resource "aws_network_interface" "amf-N2-eni" {
   subnet_id       = aws_subnet.amf-N2-subnet.id
   private_ips     = ["100.64.1.9"]
   security_groups = [aws_security_group.amf-N2-sg.id]
 
   tags = {
-    Name                                 = "amf-N2-nic"
+    Name                                 = "amf-N2-eni"
     "node.k8s.amazonaws.com/no_manage" = "true"
   }
 }
 
-resource "aws_network_interface_attachment" "amf-N2-nic-attachment" {
+resource "aws_network_interface_attachment" "amf-N2-eni-attachment" {
   depends_on           = [time_sleep.sleep-after-env-variable]
   instance_id          = data.aws_instance._5gcontrolplane-node.id
-  network_interface_id = aws_network_interface.amf-N2-nic.id
+  network_interface_id = aws_network_interface.amf-N2-eni.id
   device_index         = 1
 }
 ```
 
-The control-plane worker then receives `smf-N4-nic` (`100.64.4.9`) at device index `2`. Short sleeps between attachments reduce race conditions while AWS attaches successive interfaces.
+The control-plane worker then receives `smf-N4-eni` (`100.64.4.9`) at device index `2`. Short sleeps between attachments reduce race conditions while AWS attaches successive interfaces.
 
 #### User-plane attachments
 
@@ -302,31 +302,31 @@ data "aws_instance" "_5g-userplane-node" {
   }
 }
 
-resource "aws_network_interface" "gnb-N2-nic" {
+resource "aws_network_interface" "gnb-N2-eni" {
   subnet_id       = aws_subnet.ueransim-gnb-N2-subnet.id
   private_ips     = ["100.64.0.9"]
   security_groups = [aws_security_group.gnb-N2-sg.id]
 
   tags = {
-    Name                                 = "gnb-N2-nic"
+    Name                                 = "gnb-N2-eni"
     "node.k8s.amazonaws.com/no_manage" = "true"
   }
 }
 
-resource "aws_network_interface_attachment" "gnb-N2-nic-attachment" {
+resource "aws_network_interface_attachment" "gnb-N2-eni-attachment" {
   depends_on           = [time_sleep.sleep-after-env-variable]
   instance_id          = data.aws_instance._5g-userplane-node.id
-  network_interface_id = aws_network_interface.gnb-N2-nic.id
+  network_interface_id = aws_network_interface.gnb-N2-eni.id
   device_index         = 1
 }
 ```
 
 Additional user-plane ENIs are attached in order:
 
-- `gnb-N3-nic` → `100.64.2.9` (device index `2`)
-- `upf-N3-nic` → `100.64.3.9` (device index `3`)
-- `upf-N4-nic` → `100.64.5.9` (device index `4`)
-- `upf-N6-nic` → `100.64.6.9` (device index `5`)
+- `gnb-N3-eni` → `100.64.2.9` (device index `2`)
+- `upf-N3-eni` → `100.64.3.9` (device index `3`)
+- `upf-N4-eni` → `100.64.5.9` (device index `4`)
+- `upf-N6-eni` → `100.64.6.9` (device index `5`)
 
 ---
 
@@ -336,7 +336,7 @@ Attaching an ENI in AWS does not automatically bring the Linux interface up. SSM
 
 ```terraform
 resource "aws_ssm_document" "ssm_doc_5gcp_node_eni_state_up" {
-  depends_on      = [aws_network_interface_attachment.smf-N4-nic-attachment]
+  depends_on      = [aws_network_interface_attachment.smf-N4-eni-attachment]
   name            = "ssm_doc_5gcp_node_eni_state_up"
   document_format = "YAML"
   document_type   = "Command"
@@ -386,13 +386,13 @@ Defined in `multus.tf` and attached to secondary ENIs:
 
 | Security group | ENI | Reference point | Description |
 |----------------|-----|-----------------|-------------|
-| `amf-N2-sg` | `amf-N2-nic` | AMF N2 | Allow ingress traffic from gNB |
-| `smf-N4-sg` | `smf-N4-nic` | SMF N4 | Allow ingress traffic from UPF |
-| `gnb-N2-sg` | `gnb-N2-nic` | UERANSIM gNB N2 | Allow ingress traffic from AMF |
-| `gnb-N3-sg` | `gnb-N3-nic` | UERANSIM gNB N3 | Allow N3 ingress from UPF |
-| `upf-N3-sg` | `upf-N3-nic` | UPF N3 | Allow ingress traffic from gNB |
-| `upf-N4-sg` | `upf-N4-nic` | UPF N4 | Allow ingress traffic from SMF |
-| `upf-N6-sg` | `upf-N6-nic` | UPF N6 | Allow N6 outbound traffic from UPF |
+| `amf-N2-sg` | `amf-N2-eni` | AMF N2 | Allow ingress traffic from gNB |
+| `smf-N4-sg` | `smf-N4-eni` | SMF N4 | Allow ingress traffic from UPF |
+| `gnb-N2-sg` | `gnb-N2-eni` | UERANSIM gNB N2 | Allow ingress traffic from AMF |
+| `gnb-N3-sg` | `gnb-N3-eni` | UERANSIM gNB N3 | Allow N3 ingress from UPF |
+| `upf-N3-sg` | `upf-N3-eni` | UPF N3 | Allow ingress traffic from gNB |
+| `upf-N4-sg` | `upf-N4-eni` | UPF N4 | Allow ingress traffic from SMF |
+| `upf-N6-sg` | `upf-N6-eni` | UPF N6 | Allow N6 outbound traffic from UPF |
 
 Example:
 
