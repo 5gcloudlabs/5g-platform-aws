@@ -23,7 +23,6 @@ Deploying this stack is only needed for **end-to-end evaluation** on AWS. Earlie
 | `iam.tf` | IRSA roles for ALB controller, EFS CSI driver, and network-deployment-agent Bedrock access (Claude Haiku 4.5) |
 | `acm.tf` | ACM certificate with Cloudflare DNS validation |
 | `argocd.tf` | Argo CD Helm release (envsubst CMP plugin) and cluster-bootstrap Application |
-| `k8s_git-repo-secret.tf` | Argo CD repository secret (`git_repo_url`; optional credentials via `git_repo_password`) |
 
 ---
 
