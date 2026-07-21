@@ -39,8 +39,8 @@ This placement aligns with the Multus subnet design established in the [VPC stag
 |-------------|-----|------------|--------------|-----------------|
 | `5g-controlplane-node` | `amf-N2-eni` | `100.64.1.9` | 1 | AMF N2 |
 | `5g-controlplane-node` | `smf-N4-eni` | `100.64.4.9` | 2 | SMF N4 |
-| `5g-userplane-node` | `gnb-N2-eni` | `100.64.0.9` | 1 | UERANSIM gNB N2 |
-| `5g-userplane-node` | `gnb-N3-eni` | `100.64.2.9` | 2 | UERANSIM gNB N3 |
+| `5g-userplane-node` | `gnb-N2-eni` | `100.64.0.9` | 1 | gNB N2 |
+| `5g-userplane-node` | `gnb-N3-eni` | `100.64.2.9` | 2 | gNB N3 |
 | `5g-userplane-node` | `upf-N3-eni` | `100.64.3.9` | 3 | UPF N3 |
 | `5g-userplane-node` | `upf-N4-eni` | `100.64.5.9` | 4 | UPF N4 |
 | `5g-userplane-node` | `upf-N6-eni` | `100.64.6.9` | 5 | UPF N6 |
