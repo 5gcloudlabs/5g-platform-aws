@@ -20,7 +20,7 @@ These secondary interfaces are later consumed by Multus, enabling Free5GC and UE
 
 ## Architecture
 
-<img width="5559" height="4600" alt="EKS Architecture" src="https://github.com/user-attachments/assets/c6a1b38f-58f5-4b7b-8eed-dbf6d1158d83" />
+<img width="4600" height="4600" alt="EKS Architecture" src="https://github.com/user-attachments/assets/c6a1b38f-58f5-4b7b-8eed-dbf6d1158d83" />
 
 The Amazon EKS control plane is fully managed by AWS. Worker capacity is provided by two managed node groups deployed across separate Availability Zones.
 
