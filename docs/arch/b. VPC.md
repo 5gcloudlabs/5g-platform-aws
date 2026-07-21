@@ -8,8 +8,6 @@ See the [Architecture Index](./README.md).
 
 ## Overview
 
-Stage B establishes the AWS networking foundation for the platform environment. Every subsequent component — including Amazon EKS, Multus, Free5GC, and UERANSIM — depends on this networking layer.
-
 The design separates Kubernetes networking from 5G network traffic by assigning them to different IP address spaces:
 
 - **Cluster networking** uses the primary VPC CIDR (`192.168.0.0/16` by default) for Kubernetes pods, services, worker nodes, and ingress traffic.
@@ -19,7 +17,7 @@ This separation allows network functions to expose stable interfaces for 3GPP re
 
 ---
 
-## VPC Architecture
+## Architecture
 
 <img width="5559" height="4600" alt="VPC Architecture" src="https://github.com/user-attachments/assets/ca953fea-361b-40f3-81e0-9b701c1b6fb3" />
 
