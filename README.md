@@ -1,5 +1,8 @@
 # 5G Platform AWS
 
+<img width="3508" height="2481" alt="Logos_triangle" src="https://github.com/user-attachments/assets/2624e385-1d6e-4ab8-a70b-daa0fef469b7" />
+
+
 **AWS platform environment for the 5G Cloud Labs integration laboratory.**
 
 Part of the **5G Cloud Labs** project.
