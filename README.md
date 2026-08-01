@@ -117,8 +117,10 @@ Additional use cases and operational tooling may be integrated into the laborato
           User
 
              │
+             ▼
       Provision Platform
              │
+             ▼
       OpenTofu + CLI
              │
              ▼
@@ -139,6 +141,7 @@ Additional use cases and operational tooling may be integrated into the laborato
 ```
 
 The Network Deployment Agent provides a natural language interface for deploying and provisioning network components after the platform environment has been provisioned and validated. Depending on the requested operation, the agent may deploy individual components directly or invoke automation workflows that coordinate multiple deployment and provisioning tasks.
+
 ---
 
 ## Repository Structure
