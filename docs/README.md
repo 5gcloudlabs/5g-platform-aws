@@ -4,15 +4,16 @@ Reference documentation for the [5G Cloud Labs](https://5gcloudlabs.ai) **AWS pl
 
 This repository is a **platform environment** — used to integrate and evaluate automation and AI use cases against a reproducible 5G network environment. Many contributions begin in dedicated use case repositories and are validated here through end-to-end evaluation. Deploying the full laboratory is not required for all contributors.
 
-Running the full laboratory on AWS costs approximately **USD 3.50–4.00 per hour** in AWS usage, or **~USD 4.50 per hour** including applicable taxes (~16.6%). See [Cost](./installation-instructions/00%20infrastructure.md#cost) in the infrastructure installation guide for details.
+Running the full laboratory on AWS costs approximately **USD 3.50–4.00 per hour** in AWS usage, or **~USD 4.50 per hour** including applicable taxes (~16.6%), based on the **`eu-central-1`** reference deployment; prices in other AWS regions may vary. See [Cost](./installation-instructions/00%20infrastructure.md#cost) in the infrastructure installation guide for details.
 
 ## Guides
 
 | Guide | Description |
 |-------|-------------|
+| [Architecture & Design Guide](./arch/architecture-and-design-guide.md) | End-to-end architecture, design principles, and implementation |
 | [Infrastructure installation](./installation-instructions/00%20infrastructure.md) | Platform provisioning, prerequisites, cost estimate, and bootstrap validation |
 | [Network deployment](./installation-instructions/01%20network-deployment.md) | Network component deployment and validation via the Network Deployment Agent |
-| [Architecture](./arch/) | Platform and network design |
+| [Architecture diagrams](./arch/) | Visual reference for individual layers |
 | [Teardown](./installation-instructions/terminate.md) | Resource cleanup |
 
 ## Repository layout

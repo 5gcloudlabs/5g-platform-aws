@@ -2,6 +2,8 @@
 
 Diagrams for the AWS **platform environment**. They describe infrastructure and networking design for end-to-end evaluation of automation and AI use cases against realistic 5G network scenarios.
 
+For the full narrative (principles, layers, implementation, and lifecycle), see the [Architecture & Design Guide](./architecture-and-design-guide.md).
+
 Operational deployment on a running platform is via the [Network Deployment Agent](../installation-instructions/01%20network-deployment.md).
 
 | Document | Topic |
